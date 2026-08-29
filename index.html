@@ -184,7 +184,7 @@
 const SUPABASE_URL = "https://ynheajnfawmzojbevkxx.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_l6REEz3n6TuhbQQvFL5qsg_slAosazK";
 
-const supabase = (SUPABASE_URL.includes("TU-PROYECTO"))
+const supabaseClient = (SUPABASE_URL.includes("TU-PROYECTO"))
   ? null
   : window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -335,9 +335,9 @@ document.getElementById('chatInput').addEventListener('keydown', function(e){
 
 /* ---------- Historial anónimo real, en Supabase ---------- */
 async function saveAnonymousQuery(question, answer, sources){
-  if(!supabase) return; // Supabase no configurado todavía
+  if(!supabaseClient) return; // Supabase no configurado todavía
   try{
-    await supabase.from('consultas').insert({
+    await supabaseClient.from('consultas').insert({
       question,
       answer_preview: answer.slice(0,180),
       sources: (sources||[]).join(', ')
@@ -347,9 +347,9 @@ async function saveAnonymousQuery(question, answer, sources){
 }
 
 async function refreshStats(){
-  if(!supabase){ document.getElementById('statConsultas').textContent = '0'; return; }
+  if(!supabaseClient){ document.getElementById('statConsultas').textContent = '0'; return; }
   try{
-    const { count, error } = await supabase.from('consultas').select('*', { count: 'exact', head: true });
+    const { count, error } = await supabaseClient.from('consultas').select('*', { count: 'exact', head: true });
     if(error) throw error;
     document.getElementById('statConsultas').textContent = count ?? 0;
   }catch(e){ document.getElementById('statConsultas').textContent = '0'; }
@@ -357,13 +357,13 @@ async function refreshStats(){
 
 async function loadFAQ(){
   const faqEl = document.getElementById('faqList');
-  if(!supabase){
+  if(!supabaseClient){
     faqEl.innerHTML = '<p class="empty-note">Conecta Supabase para ver las preguntas frecuentes reales.</p>';
     return;
   }
   faqEl.innerHTML = '<p class="empty-note">Cargando…</p>';
   try{
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
       .from('consultas')
       .select('question, answer_preview, created_at')
       .order('created_at', { ascending:false })
