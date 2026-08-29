@@ -28,6 +28,7 @@ CÓMO USARLO (paso a paso, para principiantes):
 
 import json
 import os
+import shutil
 import sys
 
 try:
@@ -40,6 +41,7 @@ DOCS_FOLDER = "documentos_originales"
 CONFIG_FILE = "instituciones_config.json"
 OUTPUT_ROOT = "knowledge_base.json"
 OUTPUT_FUNCTION = os.path.join("netlify", "functions", "knowledge_base.json")
+PUBLIC_DOCS_FOLDER = "documentos"  # carpeta pública: aquí quedan los PDF descargables del sitio
 
 
 def extract_text(path):
@@ -60,6 +62,8 @@ def main():
     with open(CONFIG_FILE, encoding="utf-8") as f:
         config = json.load(f)
 
+    os.makedirs(PUBLIC_DOCS_FOLDER, exist_ok=True)
+
     kb = []
     for entry in config:
         pdf_path = os.path.join(DOCS_FOLDER, entry["source_file"])
@@ -74,6 +78,15 @@ def main():
                 item["full_text"] = entry.get("desc", "")
                 item["status"] = "error"
                 print(f"✘ {entry['nombre']}: error al leer el PDF ({e})")
+
+            # Copia el PDF a la carpeta pública para que quede descargable desde el sitio
+            try:
+                public_name = entry["source_file"]
+                shutil.copyfile(pdf_path, os.path.join(PUBLIC_DOCS_FOLDER, public_name))
+                item["pdf_file"] = f"{PUBLIC_DOCS_FOLDER}/{public_name}"
+                print(f"   → copiado a {PUBLIC_DOCS_FOLDER}/{public_name} (descargable)")
+            except Exception as e:
+                print(f"   ⚠ no se pudo copiar el PDF a '{PUBLIC_DOCS_FOLDER}/': {e}")
         else:
             item["full_text"] = entry.get("desc", "")
             item["status"] = "pendiente"
@@ -87,7 +100,8 @@ def main():
     with open(OUTPUT_FUNCTION, "w", encoding="utf-8") as f:
         json.dump(kb, f, ensure_ascii=False, indent=2)
 
-    print(f"\nListo. Se actualizaron:\n - {OUTPUT_ROOT}\n - {OUTPUT_FUNCTION}")
+    print(f"\nListo. Se actualizaron:\n - {OUTPUT_ROOT}\n - {OUTPUT_FUNCTION}\n - carpeta '{PUBLIC_DOCS_FOLDER}/' con los PDF descargables")
+    print("No olvides subir también la carpeta 'documentos/' a GitHub para que los links de descarga funcionen.")
     total_chars = sum(len(k["full_text"]) for k in kb)
     print(f"Tamaño total de la base de conocimiento: {total_chars:,} caracteres")
     if total_chars > 600000:
