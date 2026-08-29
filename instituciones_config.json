@@ -1,0 +1,106 @@
+[
+  {
+    "id": "colmed",
+    "nombre": "Colegio Médico de Chile A.G.",
+    "tag": "Gremial · Médicos",
+    "year": "2022",
+    "desc": "Código de Ética del Colegio Médico: deberes generales, relación médico-paciente, secreto profesional, publicidad, investigación científica, relaciones con la industria y sanciones ante Tribunales de Ética.",
+    "source_file": "codigo-de-etica_FINAL-2022-2.pdf"
+  },
+  {
+    "id": "isp",
+    "nombre": "Instituto de Salud Pública de Chile (ISP)",
+    "tag": "Institución pública",
+    "year": "2018",
+    "desc": "Código de Ética Institucional: compromisos entre la institución y sus funcionarios, conflictos de interés, confidencialidad, relación con proveedores y usuarios, mecanismos de consulta y denuncia.",
+    "source_file": "isp---etica.pdf"
+  },
+  {
+    "id": "enferm",
+    "nombre": "Colegio de Enfermeras de Chile",
+    "tag": "Gremial · Enfermería",
+    "year": "2008",
+    "desc": "Código de Ética estructurado en 4 áreas: la enfermera y las personas, el ejercicio profesional, la profesión, y la relación con otro personal de salud.",
+    "source_file": "colegio-de-enfermeras-1---etica.pdf"
+  },
+  {
+    "id": "qfb",
+    "nombre": "Colegio de Químicos Farmacéuticos y Bioquímicos de Chile A.G.",
+    "tag": "Gremial · Farmacia",
+    "year": "2019",
+    "desc": "Normas sobre relaciones entre colegas, con el Colegio y en la administración de recursos, incluyendo el manejo de incentivos de venta de productos.",
+    "source_file": "Codigo_Etica_040920193bc.pdf"
+  },
+  {
+    "id": "fenpof",
+    "nombre": "FENPOF Chile (Federación de Enfermedades Poco Frecuentes)",
+    "tag": "Organización de pacientes",
+    "year": "—",
+    "desc": "Código Ético y normas de relacionamiento interno entre organizaciones de pacientes: respeto, trato digno, transparencia y prevención de discriminación o maltrato.",
+    "source_file": "codigo-etico-y-normas-de-relacionamiento-interno-de-fenpof-chile.pdf"
+  },
+  {
+    "id": "asocimed",
+    "nombre": "Asociación de Sociedades Científicas Médicas de Chile (ASOCIMED)",
+    "tag": "Sociedades científicas",
+    "year": "2023",
+    "desc": "Código de Ética de las Sociedades Científicas Médicas: estándares aplicables a la actividad científica y gremial de las sociedades médicas del país.",
+    "source_file": "CODIGOETICA2023.pdf"
+  },
+  {
+    "id": "adimec",
+    "nombre": "ADIMEC A.G. (Industria de dispositivos médicos)",
+    "tag": "Industria · Dispositivos médicos",
+    "year": "2022",
+    "desc": "Código de Conducta y Ética para la relación entre la industria de tecnología médica y los profesionales de salud: regalos, eventos, becas, consultorías y donaciones.",
+    "source_file": "Co_digoEtica2022AdimecAGok.pdf"
+  },
+  {
+    "id": "laboratorios",
+    "nombre": "Cámara Nacional de Laboratorios",
+    "tag": "Industria farmacéutica",
+    "year": "2019",
+    "desc": "Código de Ética y Buenas Prácticas para asociados de la industria farmacéutica: competencia profesional, comercial e integridad en las relaciones de negocio.",
+    "source_file": "Código_de_Ética_2019.pdf"
+  },
+  {
+    "id": "cif",
+    "nombre": "Cámara de la Industria Farmacéutica (CIF)",
+    "tag": "Industria farmacéutica",
+    "year": "2022",
+    "desc": "Código de buenas prácticas de la industria farmacéutica sobre promoción e interacción con profesionales de la salud.",
+    "source_file": "nuevo_codigo_de_buenas_practicas_cif_202212.pdf"
+  },
+  {
+    "id": "achago",
+    "nombre": "ACHAGO (Asociación Chilena de organizaciones vinculadas a salud gineco-obstétrica)",
+    "tag": "Sociedad científica",
+    "year": "—",
+    "desc": "Código de ética aplicable al ejercicio profesional en su área.",
+    "source_file": "achagoetica.pdf"
+  },
+  {
+    "id": "ckch",
+    "nombre": "Colegio de Kinesiólogos de Chile",
+    "tag": "Gremial · Kinesiología",
+    "year": "—",
+    "desc": "Código de ética del ejercicio profesional de la kinesiología en Chile.",
+    "source_file": "ADJ2Codigo_Etica_Ckch.pdf"
+  },
+  {
+    "id": "otros_intl",
+    "nombre": "Principios internacionales de referencia (KL / MC Principles)",
+    "tag": "Referencia complementaria",
+    "year": "2022",
+    "desc": "Principios internacionales de relacionamiento e interacción de la industria de salud, usados como referencia complementaria a los códigos nacionales.",
+    "source_file": "22_smewg53_028a_KLPrinciples.pdf / 028b_MC-Principles.pdf"
+  },
+  {
+    "id": "estandares",
+    "nombre": "Estándares éticos recomendados",
+    "tag": "Referencia complementaria",
+    "year": "—",
+    "desc": "Estándares éticos recomendados de referencia general para instituciones de salud.",
+    "source_file": "estandares-eticos-recomendados.pdf"
+  }
+]
