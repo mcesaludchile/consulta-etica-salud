@@ -25,26 +25,47 @@ BASE DE CONOCIMIENTO:
 ${docs}`;
 }
 
+const JSON_HEADERS = {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
+
 exports.handler = async function (event) {
+  // Preflight CORS (algunos navegadores lo envían antes del POST real)
+  if (event.httpMethod === "OPTIONS") {
+    return { statusCode: 204, headers: JSON_HEADERS, body: "" };
+  }
+
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
+    return { statusCode: 405, headers: JSON_HEADERS, body: JSON.stringify({ error: "Method Not Allowed" }) };
   }
 
   let messages;
   try {
-    const body = JSON.parse(event.body || "{}");
-    messages = body.messages;
+    // Netlify a veces entrega el body codificado en base64: hay que decodificarlo primero.
+    const rawBody = event.isBase64Encoded
+      ? Buffer.from(event.body || "", "base64").toString("utf8")
+      : (event.body || "{}");
+    const parsed = JSON.parse(rawBody);
+    messages = parsed.messages;
     if (!Array.isArray(messages) || messages.length === 0) {
-      throw new Error("messages vacío");
+      throw new Error("El campo 'messages' está vacío o no es una lista.");
     }
   } catch (e) {
-    return { statusCode: 400, body: JSON.stringify({ error: "Solicitud inválida" }) };
+    return {
+      statusCode: 400,
+      headers: JSON_HEADERS,
+      body: JSON.stringify({ error: "Solicitud inválida al leer el body", detail: String(e) }),
+    };
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return {
       statusCode: 500,
+      headers: JSON_HEADERS,
       body: JSON.stringify({ error: "Falta configurar ANTHROPIC_API_KEY en Netlify." }),
     };
   }
@@ -68,7 +89,8 @@ exports.handler = async function (event) {
     const data = await resp.json();
 
     if (!resp.ok) {
-      return { statusCode: resp.status, body: JSON.stringify({ error: data }) };
+      // Devolvemos el error real de Anthropic para poder depurarlo desde el navegador.
+      return { statusCode: resp.status, headers: JSON_HEADERS, body: JSON.stringify({ error: data }) };
     }
 
     const textBlocks = (data.content || [])
@@ -78,10 +100,10 @@ exports.handler = async function (event) {
 
     return {
       statusCode: 200,
-      headers: { "Content-Type": "application/json" },
+      headers: JSON_HEADERS,
       body: JSON.stringify({ answer }),
     };
   } catch (err) {
-    return { statusCode: 500, body: JSON.stringify({ error: String(err) }) };
+    return { statusCode: 500, headers: JSON_HEADERS, body: JSON.stringify({ error: String(err) }) };
   }
 };
