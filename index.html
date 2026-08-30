@@ -63,9 +63,11 @@
   .inst-desc{font-size:13.5px;margin:10px 0 0;color:var(--ink-soft);}
   .inst-year{font-family:var(--serif);font-size:11px;color:var(--gold);border:1px solid var(--gold-soft);padding:3px 8px;border-radius:20px;flex-shrink:0;}
   .inst-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;flex-wrap:wrap;}
+  .inst-links{display:flex;gap:8px;flex-wrap:wrap;}
   .status-pill{font-size:9.5px;text-transform:uppercase;font-weight:700;padding:2px 8px;border-radius:20px;display:inline-block;margin-top:0;}
-  .download-link{font-size:12px;font-weight:600;color:var(--teal);text-decoration:none;border:1px solid var(--teal);border-radius:20px;padding:5px 12px;white-space:nowrap;}
-  .download-link:active{background:var(--teal-soft);}
+  .download-link,.site-link{font-size:12px;font-weight:600;text-decoration:none;border-radius:20px;padding:5px 12px;white-space:nowrap;border:1px solid var(--teal);color:var(--teal);}
+  .site-link{border-color:var(--gold);color:var(--gold);}
+  .download-link:active,.site-link:active{background:var(--teal-soft);}
   .status-completo{background:#DFF3E3;color:#1F7A3C;}
   .status-resumen{background:#FCEFD0;color:#8A6412;}
   .status-pendiente,.status-parcial{background:#F4E1DF;color:#9B4444;}
@@ -237,7 +239,10 @@ function renderInstituciones(){
       <p class="inst-desc">${i.desc}</p>
       <div class="inst-bottom">
         <span class="status-pill status-${i.status}">${labelStatus(i.status)}</span>
-        ${i.pdf_file ? `<a class="download-link" href="${encodeURI(i.pdf_file)}" download target="_blank" rel="noopener">⬇ Descargar PDF</a>` : ''}
+        <div class="inst-links">
+          ${i.website ? `<a class="site-link" href="${i.website}" target="_blank" rel="noopener">🌐 Sitio oficial</a>` : ''}
+          ${i.pdf_file ? `<a class="download-link" href="${encodeURI(i.pdf_file)}" download target="_blank" rel="noopener">⬇ Descargar PDF</a>` : ''}
+        </div>
       </div>
     </div>
   `).join('');
