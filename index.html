@@ -87,6 +87,7 @@
   .nav-btn.active{color:var(--teal);}
   .faq-item{border-bottom:1px solid var(--line);padding:12px 0;font-size:13px;color:var(--ink-soft);}
   .faq-item b{color:var(--ink);display:block;font-size:13.5px;margin-bottom:3px;}
+  .stat-error{margin-top:8px;font-size:11.5px;color:#9B4444;}
   .empty-note{font-size:12.5px;color:var(--ink-soft);font-style:italic;}
 </style>
 </head>
@@ -110,6 +111,7 @@
       <div class="stat-card"><span class="stat-num" id="statConsultas">—</span><span class="stat-label">Consultas registradas</span></div>
       <div class="stat-card"><span class="stat-num">100%</span><span class="stat-label">Anónimo</span></div>
     </div>
+    <p class="stat-error" id="statError" hidden></p>
     <hr class="divider">
     <div class="section-label">Cómo funciona</div>
     <div class="principle"><h3>1. Preguntas en lenguaje simple</h3><p>Escribe tu duda como se la contarías a alguien: "¿mi médico puede negarse a atenderme?", "¿la enfermera puede compartir mi información?"</p></div>
@@ -190,7 +192,8 @@
 const SUPABASE_URL = "https://ynheajnfawmzojbevkxx.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_l6REEz3n6TuhbQQvFL5qsg_slAosazK";
 
-const supabaseClient = (SUPABASE_URL.includes("TU-PROYECTO"))
+// Si la librería de Supabase no cargó, el resto del sitio sigue funcionando sin contador.
+const supabaseClient = (SUPABASE_URL.includes("TU-PROYECTO") || !window.supabase)
   ? null
   : window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -349,25 +352,45 @@ document.getElementById('chatInput').addEventListener('keydown', function(e){
 });
 
 /* ---------- Historial anónimo real, en Supabase ---------- */
+// Supabase no lanza errores: los devuelve en { error }. Hay que revisarlos.
 async function saveAnonymousQuery(question, answer, sources){
-  if(!supabaseClient) return; // Supabase no configurado todavía
+  if(!supabaseClient){ mostrarErrorContador({ message: 'Supabase no está configurado o su librería no cargó' }); return; }
   try{
-    await supabaseClient.from('consultas').insert({
+    const { error } = await supabaseClient.from('consultas').insert({
       question,
       answer_preview: answer.slice(0,180),
       sources: (sources||[]).join(', ')
     });
+    if(error) throw error;
     refreshStats();
-  }catch(e){ console.error('No se pudo guardar el historial anónimo', e); }
+  }catch(e){ mostrarErrorContador(e, 'no se pudo guardar la consulta'); }
 }
 
 async function refreshStats(){
-  if(!supabaseClient){ document.getElementById('statConsultas').textContent = '0'; return; }
+  if(!supabaseClient){ document.getElementById('statConsultas').textContent = '—'; return; }
   try{
     const { count, error } = await supabaseClient.from('consultas').select('*', { count: 'exact', head: true });
     if(error) throw error;
     document.getElementById('statConsultas').textContent = count ?? 0;
-  }catch(e){ document.getElementById('statConsultas').textContent = '0'; }
+    document.getElementById('statError').hidden = true;
+  }catch(e){
+    document.getElementById('statConsultas').textContent = '—';
+    mostrarErrorContador(e, 'no se pudo leer el contador');
+  }
+}
+
+// Muestra bajo el contador un motivo corto, para encontrar la causa sin consola.
+function mostrarErrorContador(e, accion){
+  console.error('Contador de consultas:', e);
+  const msg = String(e?.message || e?.code || e || '');
+  let motivo = msg;
+  if(/does not exist|could not find the table|PGRST205|42P01/i.test(msg + (e?.code||''))) motivo = "la tabla 'consultas' no existe en Supabase";
+  else if(/row-level security|42501/i.test(msg + (e?.code||''))) motivo = 'falta el permiso para guardar o leer (políticas RLS de la tabla)';
+  else if(/api key|jwt|401/i.test(msg)) motivo = 'la clave de Supabase no es válida';
+  else if(/failed to fetch|network|load failed/i.test(msg)) motivo = 'no se pudo conectar con Supabase (¿proyecto pausado?)';
+  const el = document.getElementById('statError');
+  el.textContent = `Contador: ${accion ? accion + ' — ' : ''}${motivo}`;
+  el.hidden = false;
 }
 
 async function loadFAQ(){
