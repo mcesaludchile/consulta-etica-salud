@@ -44,6 +44,7 @@
   .msg.bot .msg-bubble{background:var(--paper-raised);border:1px solid var(--line);border-bottom-left-radius:4px;}
   .msg.bot .msg-bubble p{color:var(--ink);margin:0 0 8px;}
   .msg.bot .msg-bubble p:last-child{margin-bottom:0;}
+  .error-detail{margin-top:8px;font-size:12px;color:#9B4444;}
   .sources{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;}
   .source-tag{font-size:10.5px;background:var(--gold-soft);color:#7a5a1a;padding:4px 9px;border-radius:20px;font-weight:600;border:1px solid #e7d4a3;}
   .typing{display:flex;gap:4px;padding:4px 0;}
@@ -304,11 +305,14 @@ async function sendMessage(){
       headers:{"Content-Type":"application/json"},
       body: JSON.stringify({ messages: chatHistory })
     });
-    const data = await resp.json();
+    const data = await resp.json().catch(() => ({}));
     removeTyping();
 
     if(!resp.ok){
-      addMsg('bot', "El servicio de consulta no está disponible en este momento. Intenta más tarde o usa el formulario de Contacto.");
+      // El "detalle" ayuda a encontrar la causa (saldo, clave, etc.); nunca incluye la clave.
+      const detalle = data.detalle || data.errorMessage || `respuesta inesperada del servidor (código ${resp.status})`;
+      addMsg('bot', "El servicio de consulta no está disponible en este momento. Intenta más tarde o usa el formulario de Contacto."
+        + `<div class="error-detail">Detalle técnico: ${escapeHtml(detalle)}</div>`);
       console.error(data);
       return;
     }
