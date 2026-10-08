@@ -30,7 +30,7 @@ Colegio Médico, Colegio de Enfermeras, Colegio de Químicos Farmacéuticos y Bi
 - Error 500 por falta de saldo en la cuenta de la API de Anthropic.
 
 ## Pendientes
-- Revisar el sitio oficial de CANALAB y completar el de Estándares éticos recomendados (sigue en `null`) en `instituciones_config.json`.
+- Ninguno por ahora. Sitios oficiales de las 14 instituciones confirmados por Vicente (octubre 2026).
 
 ## Cómo trabajar conmigo (Vicente)
 - No tengo experiencia programando. Explícame todo paso a paso, en español, con listas numeradas y diciendo exactamente qué botón apretar y dónde está en la pantalla.
