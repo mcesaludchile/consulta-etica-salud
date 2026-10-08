@@ -5,24 +5,17 @@
     "tag": "Gremial · Médicos",
     "year": "2022",
     "desc": "Código de Ética del Colegio Médico: deberes generales, relación médico-paciente, secreto profesional, publicidad, investigación científica, relaciones con la industria y sanciones ante Tribunales de Ética.",
+    "doc_md": "Colegio Médico de Chile A.G.",
     "source_file": "codigo-de-etica_FINAL-2022-2.pdf",
     "website": "https://www.colegiomedico.cl/"
   },
   {
-    "id": "isp",
-    "nombre": "Instituto de Salud Pública de Chile (ISP)",
-    "tag": "Institución pública",
-    "year": "2018",
-    "desc": "Código de Ética Institucional: compromisos entre la institución y sus funcionarios, conflictos de interés, confidencialidad, relación con proveedores y usuarios, mecanismos de consulta y denuncia.",
-    "source_file": "isp---etica.pdf",
-    "website": "https://www.ispch.gob.cl/"
-  },
-  {
     "id": "enferm",
-    "nombre": "Colegio de Enfermeras de Chile",
+    "nombre": "Colegio de Enfermeras de Chile A.G.",
     "tag": "Gremial · Enfermería",
     "year": "2008",
     "desc": "Código de Ética estructurado en 4 áreas: la enfermera y las personas, el ejercicio profesional, la profesión, y la relación con otro personal de salud.",
+    "doc_md": "Colegio de Enfermeras de Chile A.G.",
     "source_file": "colegio-de-enfermeras-1---etica.pdf",
     "website": "https://colegiodeenfermeras.cl/"
   },
@@ -30,64 +23,11 @@
     "id": "qfb",
     "nombre": "Colegio de Químicos Farmacéuticos y Bioquímicos de Chile A.G.",
     "tag": "Gremial · Farmacia",
-    "year": "2019",
+    "year": "2015",
     "desc": "Normas sobre relaciones entre colegas, con el Colegio y en la administración de recursos, incluyendo el manejo de incentivos de venta de productos.",
+    "doc_md": "Colegio de Químicos Farmacéuticos y Bioquímicos de Chile A.G.",
     "source_file": "Codigo_Etica_040920193bc.pdf",
     "website": "https://colegiofarmaceutico.cl/"
-  },
-  {
-    "id": "fenpof",
-    "nombre": "FENPOF Chile (Federación de Enfermedades Poco Frecuentes)",
-    "tag": "Organización de pacientes",
-    "year": "—",
-    "desc": "Código Ético y normas de relacionamiento interno entre organizaciones de pacientes: respeto, trato digno, transparencia y prevención de discriminación o maltrato.",
-    "source_file": "codigo-etico-y-normas-de-relacionamiento-interno-de-fenpof-chile.pdf",
-    "website": "https://fenpof.cl/"
-  },
-  {
-    "id": "asocimed",
-    "nombre": "Asociación de Sociedades Científicas Médicas de Chile (ASOCIMED)",
-    "tag": "Sociedades científicas",
-    "year": "2023",
-    "desc": "Código de Ética de las Sociedades Científicas Médicas: estándares aplicables a la actividad científica y gremial de las sociedades médicas del país.",
-    "source_file": "CODIGOETICA2023.pdf",
-    "website": "https://asocimed.cl/"
-  },
-  {
-    "id": "adimec",
-    "nombre": "ADIMEC A.G. (Industria de dispositivos médicos)",
-    "tag": "Industria · Dispositivos médicos",
-    "year": "2022",
-    "desc": "Código de Conducta y Ética para la relación entre la industria de tecnología médica y los profesionales de salud: regalos, eventos, becas, consultorías y donaciones.",
-    "source_file": "Co_digoEtica2022AdimecAGok.pdf",
-    "website": "https://www.adimech.cl/"
-  },
-  {
-    "id": "laboratorios",
-    "nombre": "Cámara Nacional de Laboratorios",
-    "tag": "Industria farmacéutica",
-    "year": "2019",
-    "desc": "Código de Ética y Buenas Prácticas para asociados de la industria farmacéutica: competencia profesional, comercial e integridad en las relaciones de negocio.",
-    "source_file": "Código_de_Ética_2019.pdf",
-    "website": "https://cnlaboratorios.cl/"
-  },
-  {
-    "id": "cif",
-    "nombre": "Cámara de la Industria Farmacéutica (CIF)",
-    "tag": "Industria farmacéutica",
-    "year": "2022",
-    "desc": "Código de buenas prácticas de la industria farmacéutica sobre promoción e interacción con profesionales de la salud.",
-    "source_file": "nuevo_codigo_de_buenas_practicas_cif_202212.pdf",
-    "website": "https://cifchile.cl/"
-  },
-  {
-    "id": "achago",
-    "nombre": "ACHAGO (Asociación Chilena de organizaciones vinculadas a salud gineco-obstétrica)",
-    "tag": "Sociedad científica",
-    "year": "—",
-    "desc": "Código de ética aplicable al ejercicio profesional en su área.",
-    "source_file": "achagoetica.pdf",
-    "website": null
   },
   {
     "id": "ckch",
@@ -95,25 +35,108 @@
     "tag": "Gremial · Kinesiología",
     "year": "—",
     "desc": "Código de ética del ejercicio profesional de la kinesiología en Chile.",
+    "doc_md": "Colegio de Kinesiólogos de Chile",
     "source_file": "ADJ2Codigo_Etica_Ckch.pdf",
     "website": "https://www.ckch.cl/"
   },
   {
-    "id": "otros_intl",
-    "nombre": "Principios internacionales de referencia (KL / MC Principles)",
-    "tag": "Referencia complementaria",
+    "id": "asocimed",
+    "nombre": "Asociación de Sociedades Científicas Médicas de Chile (ASOCIMED)",
+    "tag": "Sociedades científicas",
+    "year": "2023",
+    "desc": "Código de Ética de las Sociedades Científicas Médicas: estándares aplicables a la actividad científica y gremial de las sociedades médicas del país.",
+    "doc_md": "ASOCIMED — Asociación de Sociedades Científicas Médicas de Chile",
+    "source_file": "CODIGOETICA2023.pdf",
+    "website": "https://asocimed.cl/"
+  },
+  {
+    "id": "isp",
+    "nombre": "Instituto de Salud Pública de Chile (ISP)",
+    "tag": "Institución pública",
+    "year": "2018",
+    "desc": "Código de Ética Institucional: compromisos entre la institución y sus funcionarios, conflictos de interés, confidencialidad, relación con proveedores y usuarios, mecanismos de consulta y denuncia.",
+    "doc_md": "Instituto de Salud Pública de Chile (ISP)",
+    "source_file": "isp---etica.pdf",
+    "website": "https://www.ispch.gob.cl/"
+  },
+  {
+    "id": "laboratorios",
+    "nombre": "Cámara Nacional de Laboratorios (CANALAB)",
+    "tag": "Industria farmacéutica",
+    "year": "2019",
+    "desc": "Código de Ética y Buenas Prácticas para asociados de la industria farmacéutica: competencia profesional, comercial e integridad en las relaciones de negocio.",
+    "doc_md": "Cámara Nacional de Laboratorios (CANALAB)",
+    "source_file": "Código_de_Ética_2019.pdf",
+    "website": "https://cnlaboratorios.cl/"
+  },
+  {
+    "id": "cif",
+    "nombre": "Cámara de la Innovación Farmacéutica (CIF Chile)",
+    "tag": "Industria farmacéutica",
     "year": "2022",
-    "desc": "Principios internacionales de relacionamiento e interacción de la industria de salud, usados como referencia complementaria a los códigos nacionales.",
-    "source_file": "22_smewg53_028a_KLPrinciples.pdf / 028b_MC-Principles.pdf",
-    "website": "https://businessethics.apec.org/"
+    "desc": "Código de buenas prácticas de la industria farmacéutica sobre promoción e interacción con profesionales de la salud.",
+    "doc_md": "Cámara de la Innovación Farmacéutica (CIF Chile)",
+    "source_file": "nuevo_codigo_de_buenas_practicas_cif_202212.pdf",
+    "website": "https://cifchile.cl/"
+  },
+  {
+    "id": "adimec",
+    "nombre": "ADIMECH A.G. (Asociación Gremial de Dispositivos Médicos de Chile)",
+    "tag": "Industria · Dispositivos médicos",
+    "year": "2022",
+    "desc": "Código de Conducta y Ética para la relación entre la industria de tecnología médica y los profesionales de salud: regalos, eventos, becas, consultorías y donaciones.",
+    "doc_md": "ADIMECH — Asociación Gremial de Dispositivos Médicos de Chile A.G.",
+    "source_file": "Co_digoEtica2022AdimecAGok.pdf",
+    "website": "https://www.adimech.cl/"
+  },
+  {
+    "id": "fenpof",
+    "nombre": "FENPOF Chile (Federación de Enfermedades Poco Frecuentes)",
+    "tag": "Organización de pacientes",
+    "year": "—",
+    "desc": "Código Ético y normas de relacionamiento interno entre organizaciones de pacientes: respeto, trato digno, transparencia y prevención de discriminación o maltrato.",
+    "doc_md": "FENPOF Chile — Federación de Enfermedades Poco Frecuentes",
+    "source_file": "codigo-etico-y-normas-de-relacionamiento-interno-de-fenpof-chile.pdf",
+    "website": "https://fenpof.cl/"
+  },
+  {
+    "id": "achago",
+    "nombre": "ACHAGO (Asociación Chilena de Agrupaciones de Pacientes Oncológicos)",
+    "tag": "Organización de pacientes",
+    "year": "—",
+    "desc": "Manual de Buenas Prácticas para las agrupaciones de pacientes con cáncer que forman parte de ACHAGO: cómo trabajar juntas, con respeto y transparencia, para mejorar la calidad de vida de las personas con cáncer.",
+    "doc_md": "ACHAGO — Asociación Chilena de Agrupaciones de Pacientes Oncológicos",
+    "source_file": "achagoetica.pdf",
+    "website": "https://www.achago.cl/"
   },
   {
     "id": "estandares",
-    "nombre": "Estándares éticos recomendados",
+    "nombre": "Estándares éticos recomendados (Marco de Consenso Ético APEC — Chile)",
     "tag": "Referencia complementaria",
-    "year": "—",
-    "desc": "Estándares éticos recomendados de referencia general para instituciones de salud.",
+    "year": "2019",
+    "desc": "Reglas de adhesión voluntaria para la relación entre las asociaciones de pacientes y la industria de la salud: transparencia, independencia de las agrupaciones y apoyos económicos.",
+    "doc_md": "Marco de Consenso Ético APEC — Chile",
     "source_file": "estandares-eticos-recomendados.pdf",
     "website": null
+  },
+  {
+    "id": "apec_kl",
+    "nombre": "APEC — Principios de Kuala Lumpur (tecnología médica)",
+    "tag": "Referencia complementaria",
+    "year": "2021",
+    "desc": "Principios internacionales para los códigos de ética de las empresas de tecnología y dispositivos médicos. Texto original en inglés; se usan como referencia complementaria.",
+    "doc_md": "APEC — Principios de Kuala Lumpur (tecnología médica)",
+    "source_file": "22_smewg53_028a_KL-Principles.pdf",
+    "website": "https://businessethics.apec.org/"
+  },
+  {
+    "id": "apec_mc",
+    "nombre": "APEC — Principios de Ciudad de México (sector biofarmacéutico)",
+    "tag": "Referencia complementaria",
+    "year": "2021",
+    "desc": "Principios internacionales para los códigos de ética de las empresas farmacéuticas y biotecnológicas. Texto original en inglés; se usan como referencia complementaria.",
+    "doc_md": "APEC — Principios de Ciudad de México (sector biofarmacéutico)",
+    "source_file": "028b_MC-Principles.pdf",
+    "website": "https://businessethics.apec.org/"
   }
 ]
