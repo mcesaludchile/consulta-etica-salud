@@ -22,6 +22,20 @@ const MODELO = "claude-sonnet-5-5";
 const ESFUERZO = "low";
 const MAX_TOKENS = 2000;
 
+// Preguntas fuera de la ética en salud: no se responden. La IA contesta solo
+// con esta marca y la función la cambia por un mensaje amable.
+const MARCA_FUERA_DE_TEMA = "FUERA_DE_TEMA";
+const MENSAJE_FUERA_DE_TEMA =
+  "No realicé la búsqueda porque tu pregunta está fuera del ámbito de este sitio: la ética en salud en Chile. " +
+  "Te invito a repensarla. Por ejemplo, puedes preguntar por tus derechos como paciente, el trato o los deberes " +
+  "de un profesional de la salud, la confidencialidad de tu información o la relación de la industria de la salud " +
+  "con médicos y pacientes.";
+const MENSAJE_SALUDO =
+  "¡Hola! 😊 Puedo ayudarte con dudas sobre ética en salud en Chile: tus derechos como paciente, " +
+  "los deberes de médicos, enfermeras y otros profesionales, o la relación de la industria de la salud con ellos. ¿Qué te gustaría saber?";
+// Saludos y agradecimientos cortos: se responden sin llamar a la IA.
+const ES_SALUDO = /^\s*(hola|holi|buen[oa]s( d[ií]as| tardes| noches)?|saludos|gracias|muchas gracias|ok|okay|vale|chao|adi[oó]s|hey)\b[\s!¡.,😊🙂👋]*$/i;
+
 // Palabras muy comunes que no ayudan a buscar.
 const PALABRAS_VACIAS = new Set((
   "a al algo algun alguna ante antes como con contra cual cuando de del desde donde " +
@@ -184,13 +198,14 @@ function esApec(doc) {
 }
 
 // Construye las instrucciones para la IA con solo los fragmentos encontrados.
-function buildSystemPrompt(pregunta) {
-  const encontrados = buscarFragmentos(pregunta);
+function buildSystemPrompt(encontrados) {
   const textos = encontrados.length
     ? encontrados.map((f) => `### ${f.doc} — ${f.seccion}\n${f.texto}`).join("\n\n---\n\n")
     : "(No se encontraron fragmentos relacionados con esta pregunta.)";
 
   return `Eres un asistente ciudadano especializado en códigos de ética de instituciones de salud en Chile. SOLO puedes responder usando los fragmentos de códigos de ética oficiales incluidos abajo. Son los fragmentos que una búsqueda encontró para esta pregunta, no los documentos completos.
+
+Primero revisa si la pregunta trata sobre ética en salud: conducta y deberes de profesionales o instituciones de salud, derechos y trato de pacientes, confidencialidad, consentimiento, relación entre la industria de la salud, profesionales y pacientes, o el contenido de los códigos de ética. Si la pregunta NO es de ese ámbito (por ejemplo: deportes, recetas, tareas escolares, tecnología, finanzas, política, chistes, o pedir textos que no tengan relación con la ética en salud), responde ÚNICAMENTE con la palabra ${MARCA_FUERA_DE_TEMA}, sin nada más. Un saludo o un agradecimiento no es fuera de tema: responde breve y amablemente e invita a hacer una pregunta sobre ética en salud. Una pregunta de seguimiento sobre la conversación anterior sí es del ámbito.
 
 Reglas:
 - Responde en español, en lenguaje simple y cercano para la ciudadanía (no jerga legal).
@@ -279,6 +294,26 @@ exports.handler = async function (event) {
     return respuestaError(500, "falta la variable ANTHROPIC_API_KEY en Netlify (o falta volver a publicar el sitio después de crearla)");
   }
 
+  const ultima = String(messages[messages.length - 1]?.content || "");
+  if (ES_SALUDO.test(ultima)) {
+    const answer = /gracias/i.test(ultima)
+      ? "¡De nada! 😊 Si tienes otra duda sobre ética en salud, aquí estoy."
+      : MENSAJE_SALUDO;
+    return { statusCode: 200, headers: JSON_HEADERS, body: JSON.stringify({ answer, fuera_de_tema: true }) };
+  }
+
+  // Si la búsqueda no encuentra nada relacionado, la pregunta no es del ámbito:
+  // se responde sin llamar a la IA (no tiene costo).
+  const encontrados = buscarFragmentos(textoParaBuscar(messages));
+  if (!encontrados.length) {
+    console.log("Pregunta fuera de tema (sin fragmentos relacionados)");
+    return {
+      statusCode: 200,
+      headers: JSON_HEADERS,
+      body: JSON.stringify({ answer: MENSAJE_FUERA_DE_TEMA, fuera_de_tema: true }),
+    };
+  }
+
   try {
     const resp = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -294,7 +329,7 @@ exports.handler = async function (event) {
         max_tokens: MAX_TOKENS,
         output_config: { effort: ESFUERZO },
         fallbacks: "default",
-        system: buildSystemPrompt(textoParaBuscar(messages)),
+        system: buildSystemPrompt(encontrados),
         messages: messages,
       }),
     });
@@ -323,12 +358,15 @@ exports.handler = async function (event) {
     const textBlocks = (data.content || [])
       .filter((c) => c.type === "text")
       .map((c) => c.text);
-    const answer = textBlocks.join("\n") || "No pude generar una respuesta.";
+    const texto = textBlocks.join("\n") || "No pude generar una respuesta.";
+    const fueraDeTema = texto.includes(MARCA_FUERA_DE_TEMA);
+    if (fueraDeTema) console.log("Pregunta fuera de tema (según la IA)");
+    const answer = fueraDeTema ? MENSAJE_FUERA_DE_TEMA : texto;
 
     return {
       statusCode: 200,
       headers: JSON_HEADERS,
-      body: JSON.stringify({ answer }),
+      body: JSON.stringify({ answer, ...(fueraDeTema ? { fuera_de_tema: true } : {}) }),
     };
   } catch (err) {
     return respuestaError(500, `no se pudo contactar a la IA (${String(err).slice(0, 150)})`);
