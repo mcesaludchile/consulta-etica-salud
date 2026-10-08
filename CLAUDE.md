@@ -16,7 +16,7 @@ Aplicación de una sola página (single-page), pensada primero para celulares, c
 - **Backend:** función serverless de Netlify (`chat.js`) que llama a la API de Anthropic. La API key está en una variable de entorno secreta de Netlify. Nunca escribir claves en el código.
 - **Base de datos:** Supabase, tabla `consultas` con políticas RLS, para registrar consultas anónimas y contadores. En el código el cliente se llama `supabaseClient` (no `supabase`, porque choca con la librería del CDN).
 - **Base de conocimiento del chat:** `codigos-de-etica-salud-chile.md`, con el texto completo y ordenado de los 14 documentos. Es la única fuente del chat. `preparar_fragmentos.js` lo divide en fragmentos (por institución y sección) y genera `netlify/functions/fragmentos.json`; Netlify lo ejecuta solo en cada publicación. En cada pregunta, `chat.js` busca por palabras clave y envía a la IA solo los fragmentos más relacionados (máx. ~12.000 caracteres) y los últimos 7 mensajes, no los documentos completos. Para corregir o agregar texto, editar el `.md` (respetando los títulos `## N. Institución` y `### Sección`).
-- **Sección Instituciones:** lee `knowledge_base.json` (raíz), generado por `build_kb.py` a partir de `instituciones_config.json` y los PDF de `documentos_originales/`; los PDF descargables quedan en `documentos/`. El chat ya no usa los PDF.
+- **Sección Instituciones:** lee `knowledge_base.json` (raíz), que también genera `preparar_fragmentos.js` a partir de `instituciones_config.json`: estado "completo" si el texto de la institución está en el `.md` (campo `doc_md` = título `## N. ...` del `.md`, sin el número) y botón de descarga si el PDF (`source_file`) está en `documentos/`. No editar `knowledge_base.json` a mano: editar `instituciones_config.json`. El chat no usa los PDF.
 - **Configuración:** `netlify.toml`.
 - **Hosting:** Netlify, conectado a GitHub (cada cambio subido a GitHub se publica solo).
 
@@ -30,8 +30,7 @@ Colegio Médico, Colegio de Enfermeras, Colegio de Químicos Farmacéuticos y Bi
 - Error 500 por falta de saldo en la cuenta de la API de Anthropic.
 
 ## Pendientes
-- Completar URLs oficiales que siguen en `null`: FENPOF, Cámara Nacional de Laboratorios, CIF, ACHAGO y los documentos internacionales.
-- Botones de descarga de PDF en la sección Instituciones: el código ya existe, pero el `knowledge_base.json` de la raíz está desactualizado (sin `pdf_file`). Regenerarlo con `build_kb.py`. Corregir antes en `instituciones_config.json` el nombre del PDF de Kuala Lumpur (`22_smewg53_028a_KL-Principles.pdf`, con guion).
+- Revisar los sitios oficiales (`website` en `instituciones_config.json`) de FENPOF, CANALAB, CIF, ACHAGO y APEC, y completar el de Estándares éticos recomendados (sigue en `null`).
 
 ## Cómo trabajar conmigo (Vicente)
 - No tengo experiencia programando. Explícame todo paso a paso, en español, con listas numeradas y diciendo exactamente qué botón apretar y dónde está en la pantalla.
