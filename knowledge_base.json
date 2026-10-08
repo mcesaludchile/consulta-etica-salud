@@ -105,7 +105,7 @@
     "tag": "Organización de pacientes",
     "year": "—",
     "desc": "Manual de Buenas Prácticas para las agrupaciones de pacientes con cáncer que forman parte de ACHAGO: cómo trabajar juntas, con respeto y transparencia, para mejorar la calidad de vida de las personas con cáncer.",
-    "website": "https://www.achago.cl/",
+    "website": "https://www.linkedin.com/company/achago/",
     "status": "completo",
     "pdf_file": "documentos/achagoetica.pdf"
   },
@@ -115,7 +115,7 @@
     "tag": "Referencia complementaria",
     "year": "2019",
     "desc": "Reglas de adhesión voluntaria para la relación entre las asociaciones de pacientes y la industria de la salud: transparencia, independencia de las agrupaciones y apoyos económicos.",
-    "website": null,
+    "website": "https://www.subrei.gob.cl/ejes-de-trabajo/cer/anticorrupci%C3%B3n-e-integridad/mesa-de-marco-de-consenso-%C3%A9tico-para-el-sector-de-la-salud",
     "status": "completo",
     "pdf_file": "documentos/estandares-eticos-recomendados.pdf"
   },
@@ -125,7 +125,7 @@
     "tag": "Referencia complementaria",
     "year": "2021",
     "desc": "Principios internacionales para los códigos de ética de las empresas de tecnología y dispositivos médicos. Texto original en inglés; se usan como referencia complementaria.",
-    "website": "https://businessethics.apec.org/",
+    "website": "https://mcprinciples.apec.org/",
     "status": "completo",
     "pdf_file": "documentos/22_smewg53_028a_KL-Principles.pdf"
   },
@@ -135,7 +135,7 @@
     "tag": "Referencia complementaria",
     "year": "2021",
     "desc": "Principios internacionales para los códigos de ética de las empresas farmacéuticas y biotecnológicas. Texto original en inglés; se usan como referencia complementaria.",
-    "website": "https://businessethics.apec.org/",
+    "website": "https://mcprinciples.apec.org/",
     "status": "completo",
     "pdf_file": "documentos/028b_MC-Principles.pdf"
   }

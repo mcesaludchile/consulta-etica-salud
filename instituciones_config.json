@@ -107,7 +107,7 @@
     "desc": "Manual de Buenas Prácticas para las agrupaciones de pacientes con cáncer que forman parte de ACHAGO: cómo trabajar juntas, con respeto y transparencia, para mejorar la calidad de vida de las personas con cáncer.",
     "doc_md": "ACHAGO — Asociación Chilena de Agrupaciones de Pacientes Oncológicos",
     "source_file": "achagoetica.pdf",
-    "website": "https://www.achago.cl/"
+    "website": "https://www.linkedin.com/company/achago/"
   },
   {
     "id": "estandares",
@@ -117,7 +117,7 @@
     "desc": "Reglas de adhesión voluntaria para la relación entre las asociaciones de pacientes y la industria de la salud: transparencia, independencia de las agrupaciones y apoyos económicos.",
     "doc_md": "Marco de Consenso Ético APEC — Chile",
     "source_file": "estandares-eticos-recomendados.pdf",
-    "website": null
+    "website": "https://www.subrei.gob.cl/ejes-de-trabajo/cer/anticorrupci%C3%B3n-e-integridad/mesa-de-marco-de-consenso-%C3%A9tico-para-el-sector-de-la-salud"
   },
   {
     "id": "apec_kl",
@@ -127,7 +127,7 @@
     "desc": "Principios internacionales para los códigos de ética de las empresas de tecnología y dispositivos médicos. Texto original en inglés; se usan como referencia complementaria.",
     "doc_md": "APEC — Principios de Kuala Lumpur (tecnología médica)",
     "source_file": "22_smewg53_028a_KL-Principles.pdf",
-    "website": "https://businessethics.apec.org/"
+    "website": "https://mcprinciples.apec.org/"
   },
   {
     "id": "apec_mc",
@@ -137,6 +137,6 @@
     "desc": "Principios internacionales para los códigos de ética de las empresas farmacéuticas y biotecnológicas. Texto original en inglés; se usan como referencia complementaria.",
     "doc_md": "APEC — Principios de Ciudad de México (sector biofarmacéutico)",
     "source_file": "028b_MC-Principles.pdf",
-    "website": "https://businessethics.apec.org/"
+    "website": "https://mcprinciples.apec.org/"
   }
 ]
