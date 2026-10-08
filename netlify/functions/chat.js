@@ -12,6 +12,13 @@ const MAX_POR_INSTITUCION = 3;  // para que aparezcan varias instituciones (6 si
 const MAX_CARACTERES = 12000;   // tope de texto de referencia por pregunta
 const MAX_MENSAJES_HISTORIAL = 7; // últimos mensajes de la conversación que se envían
 
+// Modelo de IA. Con esfuerzo "low" casi no "piensa" antes de responder preguntas
+// simples (más rápido y barato). max_tokens incluye ese pensamiento, por eso
+// tiene margen; solo se cobra lo que realmente se usa.
+const MODELO = "claude-sonnet-5-5";
+const ESFUERZO = "low";
+const MAX_TOKENS = 2000;
+
 // Palabras muy comunes que no ayudan a buscar.
 const PALABRAS_VACIAS = new Set((
   "a al algo algun alguna ante antes como con contra cual cuando de del desde donde " +
@@ -221,10 +228,14 @@ exports.handler = async function (event) {
         "Content-Type": "application/json",
         "x-api-key": apiKey,
         "anthropic-version": "2023-06-01",
+        // Si el modelo rechaza la consulta por seguridad, Anthropic la reintenta con otro modelo.
+        "anthropic-beta": "server-side-fallback-2026-07-01",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-6",
-        max_tokens: 700,
+        model: MODELO,
+        max_tokens: MAX_TOKENS,
+        output_config: { effort: ESFUERZO },
+        fallbacks: "default",
         system: buildSystemPrompt(textoParaBuscar(messages)),
         messages: messages,
       }),
@@ -234,6 +245,18 @@ exports.handler = async function (event) {
 
     if (!resp.ok) {
       return respuestaError(resp.status, explicarErrorAnthropic(resp.status, data), JSON.stringify(data));
+    }
+
+    // El modelo puede negarse a responder por sus filtros de seguridad.
+    if (data.stop_reason === "refusal") {
+      console.log("Consulta rechazada por la IA:", JSON.stringify(data.stop_details));
+      return {
+        statusCode: 200,
+        headers: JSON_HEADERS,
+        body: JSON.stringify({
+          answer: "No puedo responder esa consulta. Intenta reformularla, o usa el formulario de Contacto del sitio.",
+        }),
+      };
     }
 
     // Queda en el registro de Netlify: sirve para ver cuánto texto se envía por consulta.
