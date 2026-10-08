@@ -331,7 +331,8 @@ async function sendMessage(){
     addMsg('bot', formatAnswer(displayText), sources);
     chatHistory.push({role:'assistant', content:answer});
 
-    saveAnonymousQuery(text, displayText, sources);
+    // Las preguntas fuera de la ética en salud no se guardan ni cuentan.
+    if(!data.fuera_de_tema) saveAnonymousQuery(text, displayText, sources);
   }catch(err){
     removeTyping();
     addMsg('bot', "Hubo un problema de conexión. Intenta nuevamente en unos segundos.");
