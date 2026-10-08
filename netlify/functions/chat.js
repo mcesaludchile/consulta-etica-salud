@@ -160,6 +160,27 @@ const JSON_HEADERS = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
+// Responde con un error: lo anota en el registro de Netlify (Cloud compute →
+// Functions → chat) y envía a la página un "detalle" corto en español,
+// que el chat muestra debajo del mensaje de error. Nunca incluye la clave.
+function respuestaError(statusCode, detalle, extra) {
+  console.error(`Error ${statusCode}: ${detalle}`, extra ?? "");
+  return { statusCode, headers: JSON_HEADERS, body: JSON.stringify({ error: detalle, detalle }) };
+}
+
+// Traduce los errores más comunes de la API de Anthropic.
+function explicarErrorAnthropic(status, data) {
+  const tipo = data?.error?.type || "";
+  const mensaje = data?.error?.message || "";
+  if (/credit balance/i.test(mensaje)) return "saldo insuficiente en la cuenta de Anthropic (cargar créditos en console.anthropic.com → Billing)";
+  if (tipo === "authentication_error") return "la clave ANTHROPIC_API_KEY no es válida (revisarla en Netlify y en console.anthropic.com → API Keys)";
+  if (tipo === "permission_error") return "la clave ANTHROPIC_API_KEY no tiene permiso para usar este modelo";
+  if (tipo === "not_found_error") return "el modelo de IA configurado no existe o no está disponible";
+  if (tipo === "rate_limit_error") return "se superó el límite de consultas por minuto de Anthropic; intentar en un momento";
+  if (tipo === "overloaded_error") return "la IA está saturada en este momento; intentar en unos minutos";
+  return `error ${status} de Anthropic${tipo ? ` (${tipo})` : ""}: ${mensaje.slice(0, 200)}`;
+}
+
 exports.handler = async function (event) {
   // Preflight CORS (algunos navegadores lo envían antes del POST real)
   if (event.httpMethod === "OPTIONS") {
@@ -185,20 +206,12 @@ exports.handler = async function (event) {
     messages = messages.slice(-MAX_MENSAJES_HISTORIAL);
     while (messages.length && messages[0].role !== "user") messages.shift();
   } catch (e) {
-    return {
-      statusCode: 400,
-      headers: JSON_HEADERS,
-      body: JSON.stringify({ error: "Solicitud inválida al leer el body", detail: String(e) }),
-    };
+    return respuestaError(400, `solicitud inválida (${String(e).slice(0, 150)})`);
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    return {
-      statusCode: 500,
-      headers: JSON_HEADERS,
-      body: JSON.stringify({ error: "Falta configurar ANTHROPIC_API_KEY en Netlify." }),
-    };
+    return respuestaError(500, "falta la variable ANTHROPIC_API_KEY en Netlify (o falta volver a publicar el sitio después de crearla)");
   }
 
   try {
@@ -217,12 +230,14 @@ exports.handler = async function (event) {
       }),
     });
 
-    const data = await resp.json();
+    const data = await resp.json().catch(() => null);
 
     if (!resp.ok) {
-      // Devolvemos el error real de Anthropic para poder depurarlo desde el navegador.
-      return { statusCode: resp.status, headers: JSON_HEADERS, body: JSON.stringify({ error: data }) };
+      return respuestaError(resp.status, explicarErrorAnthropic(resp.status, data), JSON.stringify(data));
     }
+
+    // Queda en el registro de Netlify: sirve para ver cuánto texto se envía por consulta.
+    console.log(`Consulta respondida: ${data.usage?.input_tokens} tokens de entrada, ${data.usage?.output_tokens} de salida`);
 
     const textBlocks = (data.content || [])
       .filter((c) => c.type === "text")
@@ -235,6 +250,6 @@ exports.handler = async function (event) {
       body: JSON.stringify({ answer }),
     };
   } catch (err) {
-    return { statusCode: 500, headers: JSON_HEADERS, body: JSON.stringify({ error: String(err) }) };
+    return respuestaError(500, `no se pudo contactar a la IA (${String(err).slice(0, 150)})`);
   }
 };
