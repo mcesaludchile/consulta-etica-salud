@@ -1,39 +1,40 @@
 # Ética en Salud Chile — Contexto del proyecto
 
 ## Qué es
-Sitio web ciudadano, en español, que reúne los códigos de ética de instituciones del
-ecosistema de salud chileno y permite consultarlos con IA. Público: ciudadanía general.
-Todo texto del sitio debe usar lenguaje simple, sin jerga legal ni técnica.
+Sitio web ciudadano, en español, que reúne los códigos de ética de instituciones del ecosistema de salud en Chile y permite consultarlos con IA. El público son personas comunes: todo el texto del sitio debe estar en lenguaje simple y cotidiano, sin jerga legal ni técnica.
 
-## Sobre quien trabaja aquí
-Vicente no es programador. Explica cada paso en español, en lenguaje simple, con
-listas numeradas e indicando exactamente qué botón o pantalla usar. Antes de cambios
-grandes, explica qué vas a hacer y pide confirmación. Usa Windows (Python con `py -m pip`).
+## Secciones del sitio
+Aplicación de una sola página (single-page), pensada primero para celulares, con cinco secciones:
+1. **Inicio**
+2. **Consultar** — chat con IA que responde dudas basándose SOLO en los documentos validados.
+3. **Instituciones** — qué instituciones tienen código de ética disponible, con enlace oficial y botón de descarga del PDF.
+4. **Contexto** — por qué es importante conocer los códigos de ética y contar con esta herramienta.
+5. **Contacto** — formulario que llega a vastorga05@gmail.com.
 
 ## Arquitectura
-- `index.html`: app de una sola página, mobile-first. Secciones: Inicio, Consultar,
-  Instituciones, Contexto, Contacto.
-- `netlify/functions/chat.js`: función serverless que llama a la API de Anthropic.
-  La clave va SOLO en variables de entorno de Netlify (`ANTHROPIC_API_KEY`). Nunca en el código.
-- Supabase: registro anónimo de consultas y contadores (tabla `consultas`, con RLS).
-  El cliente se llama `supabaseClient` (no `supabase`, choca con la librería del CDN).
-- `build_kb.py`: extrae texto de los PDF en `documentos/` y genera `knowledge_base.json`.
-- `netlify.toml`: configuración de despliegue. Hosting en Netlify, código en GitHub;
-  cada push a GitHub publica automáticamente.
+- **Frontend:** HTML + JavaScript en un solo archivo, mobile-first.
+- **Backend:** función serverless de Netlify (`chat.js`) que llama a la API de Anthropic. La API key está en una variable de entorno secreta de Netlify. Nunca escribir claves en el código.
+- **Base de datos:** Supabase, tabla `consultas` con políticas RLS, para registrar consultas anónimas y contadores. En el código el cliente se llama `supabaseClient` (no `supabase`, porque choca con la librería del CDN).
+- **Base de conocimiento del chat:** `codigos-de-etica-salud-chile.md`, con el texto completo y ordenado de los 14 documentos. Es la única fuente del chat. `preparar_fragmentos.js` lo divide en fragmentos (por institución y sección) y genera `netlify/functions/fragmentos.json`; Netlify lo ejecuta solo en cada publicación. En cada pregunta, `chat.js` busca por palabras clave y envía a la IA solo los fragmentos más relacionados (máx. ~12.000 caracteres) y los últimos 7 mensajes, no los documentos completos. Para corregir o agregar texto, editar el `.md` (respetando los títulos `## N. Institución` y `### Sección`).
+- **Sección Instituciones:** lee `knowledge_base.json` (raíz), generado por `build_kb.py` a partir de `instituciones_config.json` y los PDF de `documentos_originales/`; los PDF descargables quedan en `documentos/`. El chat ya no usa los PDF.
+- **Configuración:** `netlify.toml`.
+- **Hosting:** Netlify, conectado a GitHub (cada cambio subido a GitHub se publica solo).
 
-## Reglas de la IA de consulta
-- Responder solo con base en los documentos validados de `knowledge_base.json`.
-- Citar institución y documento de origen. Si no está en los documentos, decirlo.
-- No dar diagnósticos ni consejo médico o legal individual; orientar a la institución pertinente.
+## Instituciones incluidas
+Colegio Médico, Colegio de Enfermeras, Colegio de Químicos Farmacéuticos y Bioquímicos, Colegio de Kinesiólogos, ASOCIMED, ISP, Cámara Nacional de Laboratorios (CANALAB), CIF, ADIMECH, FENPOF, ACHAGO, Estándares éticos recomendados (Marco de Consenso APEC Chile), y los Principios APEC de Kuala Lumpur y de Ciudad de México.
 
-## Errores ya resueltos (no reintroducir)
-- No usar `window.storage` (solo existe en artifacts de Claude).
-- Netlify puede enviar el body en base64: decodificar si `event.isBase64Encoded`.
-- Errores 500 por saldo de créditos de la API: revisar consola de Anthropic.
+## Problemas ya resueltos (no repetir)
+- `window.storage` no funciona fuera de claude.ai: no usarlo.
+- Choque de nombre de variable con Supabase → usar `supabaseClient`.
+- Netlify a veces envía el cuerpo de la petición en base64: decodificar antes de leer el JSON (causaba error 400).
+- Error 500 por falta de saldo en la cuenta de la API de Anthropic.
 
 ## Pendientes
-1. Completar URLs oficiales que siguen en `null`: FENPOF, Cámara Nacional de
-   Laboratorios, CIF, ACHAGO y documentos internacionales.
-2. Subir la carpeta `documentos/` con los PDF.
-3. Ejecutar `build_kb.py` para regenerar `knowledge_base.json`.
-4. Botones de descarga de PDF por institución en la sección Instituciones.
+- Completar URLs oficiales que siguen en `null`: FENPOF, Cámara Nacional de Laboratorios, CIF, ACHAGO y los documentos internacionales.
+- Botones de descarga de PDF en la sección Instituciones: el código ya existe, pero el `knowledge_base.json` de la raíz está desactualizado (sin `pdf_file`). Regenerarlo con `build_kb.py`. Corregir antes en `instituciones_config.json` el nombre del PDF de Kuala Lumpur (`22_smewg53_028a_KL-Principles.pdf`, con guion).
+
+## Cómo trabajar conmigo (Vicente)
+- No tengo experiencia programando. Explícame todo paso a paso, en español, con listas numeradas y diciendo exactamente qué botón apretar y dónde está en la pantalla.
+- Antes de cambiar archivos, cuéntame en palabras simples qué vas a hacer y por qué.
+- Uso Windows. Para Python uso `py -m pip`.
+- Después de cada cambio, dime cómo probarlo y cómo subirlo a GitHub.

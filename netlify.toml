@@ -1,6 +1,8 @@
 [build]
   publish = "."
   functions = "netlify/functions"
+  # Divide codigos-de-etica-salud-chile.md en fragmentos para el chat
+  command = "node preparar_fragmentos.js"
 
 [[redirects]]
   from = "/api/chat"

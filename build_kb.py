@@ -1,9 +1,12 @@
 """
 build_kb.py
 -----------
-Este script arma (o actualiza) knowledge_base.json con el TEXTO COMPLETO
-de tus documentos PDF originales, para que el asistente de IA pueda citar
-artículos exactos en vez de solo resúmenes.
+Este script arma (o actualiza) knowledge_base.json, que usa la sección
+Instituciones del sitio, y copia los PDF a la carpeta documentos/ para
+que se puedan descargar.
+
+OJO: el chat de IA ya NO usa este archivo. El chat usa
+codigos-de-etica-salud-chile.md (ver preparar_fragmentos.js).
 
 CÓMO USARLO (paso a paso, para principiantes):
 
@@ -21,7 +24,6 @@ CÓMO USARLO (paso a paso, para principiantes):
        python3 build_kb.py
 7. Esto genera/actualiza:
        knowledge_base.json               (para la sección Instituciones)
-       netlify/functions/knowledge_base.json  (para el chat de IA)
 8. Sube estos archivos junto al resto del sitio a GitHub y Netlify
    volverá a desplegar automáticamente.
 """
@@ -40,7 +42,6 @@ except ImportError:
 DOCS_FOLDER = "documentos_originales"
 CONFIG_FILE = "instituciones_config.json"
 OUTPUT_ROOT = "knowledge_base.json"
-OUTPUT_FUNCTION = os.path.join("netlify", "functions", "knowledge_base.json")
 PUBLIC_DOCS_FOLDER = "documentos"  # carpeta pública: aquí quedan los PDF descargables del sitio
 
 
@@ -96,18 +97,8 @@ def main():
     with open(OUTPUT_ROOT, "w", encoding="utf-8") as f:
         json.dump(kb, f, ensure_ascii=False, indent=2)
 
-    os.makedirs(os.path.dirname(OUTPUT_FUNCTION), exist_ok=True)
-    with open(OUTPUT_FUNCTION, "w", encoding="utf-8") as f:
-        json.dump(kb, f, ensure_ascii=False, indent=2)
-
-    print(f"\nListo. Se actualizaron:\n - {OUTPUT_ROOT}\n - {OUTPUT_FUNCTION}\n - carpeta '{PUBLIC_DOCS_FOLDER}/' con los PDF descargables")
+    print(f"\nListo. Se actualizaron:\n - {OUTPUT_ROOT}\n - carpeta '{PUBLIC_DOCS_FOLDER}/' con los PDF descargables")
     print("No olvides subir también la carpeta 'documentos/' a GitHub para que los links de descarga funcionen.")
-    total_chars = sum(len(k["full_text"]) for k in kb)
-    print(f"Tamaño total de la base de conocimiento: {total_chars:,} caracteres")
-    if total_chars > 600000:
-        print("⚠ Aviso: la base es grande; si el chat responde lento o falla, "
-              "considera dividir cada documento en secciones y solo enviar las "
-              "más relevantes (búsqueda por palabra clave) en vez de todo el texto.")
 
 
 if __name__ == "__main__":
