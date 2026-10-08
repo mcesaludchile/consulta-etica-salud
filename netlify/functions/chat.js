@@ -7,9 +7,12 @@
 // fragmentos más relacionados, no el texto completo (más rápido y barato).
 const { resumen, fragmentos } = require("./fragmentos.json");
 
-const MAX_FRAGMENTOS = 8;
-const MAX_POR_INSTITUCION = 3;  // para que aparezcan varias instituciones (6 si la pregunta nombra una)
-const MAX_CARACTERES = 12000;   // tope de texto de referencia por pregunta
+const MAX_FRAGMENTOS = 10;
+const MAX_POR_INSTITUCION = 2;  // para sumar varios códigos distintos (4 si la pregunta nombra una institución)
+const MAX_APEC = 2;             // espacios reservados para referentes APEC (máx. 1 por documento APEC)
+const MINIMO_APEC = 0.35;       // APEC entra solo si su puntaje es al menos 35 % del mejor código chileno
+const PESO_SINONIMO = 0.5;      // las palabras agregadas por SINONIMOS pesan la mitad que las de la pregunta
+const MAX_CARACTERES = 14000;   // tope de texto de referencia por pregunta
 const MAX_MENSAJES_HISTORIAL = 7; // últimos mensajes de la conversación que se envían
 
 // Modelo de IA. Con esfuerzo "low" casi no "piensa" antes de responder preguntas
@@ -29,10 +32,11 @@ const PALABRAS_VACIAS = new Set((
   "the of and to in for is are be or by on with that this as"
 ).split(" "));
 
-// Palabras cotidianas -> cómo lo dicen los códigos de ética.
+// Palabras cotidianas -> cómo lo dicen los códigos de ética. Las palabras en
+// inglés sirven para encontrar los Principios APEC, que están en ese idioma.
 const SINONIMOS = {
-  confidencial: "secreto profesional confidencialidad",
-  privacidad: "secreto profesional confidencialidad",
+  confidencial: "secreto profesional confidencialidad privacy confidential",
+  privacidad: "secreto profesional confidencialidad privacy",
   contar: "secreto profesional revelar",
   diagnostico: "secreto informacion",
   ficha: "ficha clinica registro",
@@ -43,12 +47,35 @@ const SINONIMOS = {
   opinion: "interconsulta colega cambiar medico",
   negarse: "rechazar atender abstenerse conciencia",
   atenderme: "atender atencion paciente",
-  regalo: "obsequio regalos beneficio",
-  regalar: "obsequio regalos beneficio",
-  viaje: "hospitalidad congreso evento",
-  dinero: "pago financiamiento donacion aporte",
-  publicidad: "publicidad anuncio promocion",
+  regalo: "obsequio regalos beneficio gift gifts",
+  regalar: "obsequio regalos beneficio gift gifts",
+  obsequio: "regalo gift gifts",
+  viaje: "hospitalidad congreso evento travel hospitality",
+  hospitalidad: "hospitality travel meals",
+  comida: "hospitalidad meal meals",
+  almuerzo: "hospitalidad meal meals",
+  cena: "hospitalidad meal meals entertainment",
+  dinero: "pago financiamiento donacion aporte payment",
+  pago: "honorario payment remuneration",
+  donacion: "aporte donation donations grant",
+  beca: "becas grant grants educational",
+  congreso: "evento educacion event events educational",
+  muestra: "muestras sample samples",
+  publicidad: "publicidad anuncio promocion promotion promotional advertising",
+  promocion: "publicidad promotion promotional",
   consentimiento: "consentimiento informado autorizacion",
+  conflicto: "interes conflict interest",
+  transparencia: "transparency transparent disclosure",
+  investigacion: "estudio clinico research clinical trial",
+  consultor: "asesor consultant consultants consulting",
+  asesoria: "asesor consultant consulting",
+  industria: "empresa laboratorio industry company companies",
+  laboratorio: "industria empresa company pharmaceutical biopharmaceutical",
+  dispositivo: "tecnologia medical technology device",
+  agrupacion: "asociacion organizacion patient organization organizations",
+  organizacion: "asociacion agrupacion patient organization organizations",
+  soborno: "corrupcion bribery bribe integrity",
+  integridad: "integrity accountability",
 };
 
 // Pasa un texto a "raíces" simples: sin tildes, en minúsculas y recortadas,
@@ -89,41 +116,71 @@ const SINONIMOS_RAICES = new Map(
 );
 
 function buscarFragmentos(pregunta) {
-  const propias = raices(pregunta);
-  const palabras = [...new Set([...propias, ...propias.flatMap((p) => SINONIMOS_RAICES.get(p) || [])])];
+  const propias = [...new Set(raices(pregunta))];
+  // Peso de cada palabra a buscar: 1 si está en la pregunta, PESO_SINONIMO si es un sinónimo.
+  const pesos = new Map(propias.map((p) => [p, 1]));
+  for (const p of propias) {
+    for (const s of SINONIMOS_RAICES.get(p) || []) if (!pesos.has(s)) pesos.set(s, PESO_SINONIMO);
+  }
   const docsMencionados = new Set(
-    palabras.flatMap((p) => (docsPorPalabra.get(p)?.length === 1 ? docsPorPalabra.get(p) : []))
+    propias.flatMap((p) => (docsPorPalabra.get(p)?.length === 1 ? docsPorPalabra.get(p) : []))
   );
 
   const N = indice.length;
   const puntajes = indice.map(({ frecuencia, largo }, i) => {
     let puntaje = 0;
-    for (const p of palabras) {
+    for (const [p, peso] of pesos) {
       const tf = frecuencia.get(p);
       if (!tf) continue;
       const df = enCuantos.get(p);
       const idf = Math.log(1 + (N - df + 0.5) / (df + 0.5));
-      puntaje += idf * (tf * 2.2) / (tf + 1.2 * (0.25 + 0.75 * largo / largoPromedio));
+      puntaje += peso * idf * (tf * 2.2) / (tf + 1.2 * (0.25 + 0.75 * largo / largoPromedio));
     }
     if (docsMencionados.has(fragmentos[i].doc)) puntaje *= 1.6;
     if (fragmentos[i].apendice) puntaje *= 0.4; // material de apoyo: solo si no hay algo mejor
     return { i, puntaje };
   });
 
-  const elegidos = [];
+  const ordenados = puntajes.filter((p) => p.puntaje > 0).sort((a, b) => b.puntaje - a.puntaje);
   const porInstitucion = new Map();
   let total = 0;
-  for (const { i, puntaje } of puntajes.sort((a, b) => b.puntaje - a.puntaje)) {
-    if (puntaje <= 0 || elegidos.length >= MAX_FRAGMENTOS) break;
-    const { doc, texto } = fragmentos[i];
-    const tope = docsMencionados.has(doc) ? MAX_POR_INSTITUCION * 2 : MAX_POR_INSTITUCION;
-    if ((porInstitucion.get(doc) || 0) >= tope) continue;
-    if (total + texto.length > MAX_CARACTERES) continue;
-    elegidos.push(fragmentos[i]);
-    porInstitucion.set(doc, (porInstitucion.get(doc) || 0) + 1);
-    total += texto.length;
-  }
-  return elegidos;
+  const tomar = (lista, cupo, tope) => {
+    const elegidos = [];
+    for (const { i } of lista) {
+      if (elegidos.length >= cupo) break;
+      const { doc, texto } = fragmentos[i];
+      const maximo = docsMencionados.has(doc) ? tope * 2 : tope;
+      if ((porInstitucion.get(doc) || 0) >= maximo) continue;
+      if (total + texto.length > MAX_CARACTERES) continue;
+      elegidos.push(fragmentos[i]);
+      porInstitucion.set(doc, (porInstitucion.get(doc) || 0) + 1);
+      total += texto.length;
+    }
+    return elegidos;
+  };
+
+  // 1) Si la pregunta nombra una institución, sus fragmentos van primero.
+  const mencionados = tomar(ordenados.filter(({ i }) => docsMencionados.has(fragmentos[i].doc)), 4, 2);
+  // 2) Espacios para referentes APEC, solo si están realmente relacionados con la pregunta.
+  const mejorChileno = ordenados.find(({ i }) => !esApec(fragmentos[i].doc))?.puntaje || 0;
+  const apec = tomar(
+    ordenados.filter(({ i, puntaje }) => esApec(fragmentos[i].doc) && puntaje >= mejorChileno * MINIMO_APEC),
+    MAX_APEC,
+    1
+  );
+  // 3) El resto, con los demás códigos chilenos, variando la institución.
+  const chilenos = tomar(
+    ordenados.filter(({ i }) => !esApec(fragmentos[i].doc)),
+    MAX_FRAGMENTOS - mencionados.length - apec.length,
+    MAX_POR_INSTITUCION
+  );
+  const apecFinal = apec.filter((f) => !mencionados.includes(f));
+  return [...mencionados.filter((f) => !esApec(f.doc)), ...chilenos, ...mencionados.filter((f) => esApec(f.doc)), ...apecFinal];
+}
+
+// Marco de Consenso Ético APEC — Chile y Principios APEC (Kuala Lumpur, Ciudad de México).
+function esApec(doc) {
+  return /APEC/.test(doc);
 }
 
 // Construye las instrucciones para la IA con solo los fragmentos encontrados.
@@ -137,13 +194,14 @@ function buildSystemPrompt(pregunta) {
 
 Reglas:
 - Responde en español, en lenguaje simple y cercano para la ciudadanía (no jerga legal).
-- SIEMPRE indica al final entre corchetes de qué institución(es) proviene la información, así: [Fuente: Colegio Médico de Chile A.G.].
+- Suma referencias de distintos códigos: si fragmentos de varias instituciones tratan el tema, menciona qué dice cada una (por ejemplo, "El Colegio Médico señala… y el Colegio de Enfermeras también…"), y destaca en qué coinciden o se diferencian. Usa solo fragmentos que de verdad respondan la pregunta.
+- Si hay fragmentos de APEC (Marco de Consenso Ético APEC — Chile, Principios de Kuala Lumpur o de Ciudad de México) relacionados con la pregunta, agrega al final un párrafo breve que empiece con "Referente internacional (APEC):" y explique en español qué recomiendan. Los Principios de Kuala Lumpur y de Ciudad de México están en inglés: tradúcelos y explícalos en palabras simples.
+- SIEMPRE indica al final, entre corchetes, todas las instituciones y documentos que usaste, separados por comas, así: [Fuente: Colegio Médico de Chile A.G., Colegio de Enfermeras de Chile A.G., APEC — Principios de Kuala Lumpur].
 - Si citas un artículo, indica su número tal como aparece en el fragmento.
 - No inventes artículos, números o citas textuales que no estén en los fragmentos.
 - Si los fragmentos no responden la pregunta, dilo explícitamente, sugiere reformularla con otras palabras o usar el formulario de contacto del sitio.
-- Los Principios APEC están en inglés: si los usas, explícalos en español.
 - No des diagnósticos ni consejo médico o legal individual; orienta a la institución que corresponda. Si la duda es una urgencia médica o legal, recomienda ayuda profesional o de emergencia inmediata.
-- Sé breve: máximo 4-5 oraciones, salvo que se pida más detalle.
+- Sé claro y ordenado: hasta 2 párrafos cortos más el párrafo de APEC si corresponde, salvo que se pida más detalle.
 
 DOCUMENTOS DISPONIBLES:
 ${resumen}
