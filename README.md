@@ -11,7 +11,8 @@ netlify/functions/fragmentos.json → fragmentos del .md que usa el chat
 instituciones_config.json         → lista editable de instituciones (nombre, descripción, sitio, PDF)
 knowledge_base.json               → lista de la sección "Instituciones" (se genera sola, no editar)
 documentos/                       → PDF que se pueden descargar desde el sitio
-supabase_setup.sql                → crea la tabla del registro histórico anónimo
+supabase_setup.sql                → crea la tabla del registro histórico anónimo (proyecto nuevo)
+supabase_faq_privacidad.sql       → filtro de preguntas frecuentes (para una tabla ya existente)
 ```
 
 ## Antes de publicar
@@ -20,6 +21,6 @@ supabase_setup.sql                → crea la tabla del registro histórico anó
 2. Crea tu proyecto en Supabase y corre `supabase_setup.sql`.
 3. Pega tu URL y "anon key" de Supabase en `index.html` (busca `SUPABASE_URL`).
 4. Sube todo a GitHub y conéctalo a Netlify.
-5. En Netlify, agrega la variable de entorno `ANTHROPIC_API_KEY`.
+5. En Netlify, agrega las variables de entorno `ANTHROPIC_API_KEY` y `SUPABASE_SECRET_KEY`.
 
 Sigue la guía paso a paso completa que te dio Claude en el chat para el detalle de cada punto.

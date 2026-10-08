@@ -22,6 +22,61 @@ const MODELO = "claude-sonnet-5-5";
 const ESFUERZO = "low";
 const MAX_TOKENS = 2000;
 
+// Registro de consultas en Supabase. La función las guarda con la clave secreta
+// (variable SUPABASE_SECRET_KEY en Netlify); el sitio no puede leer la tabla,
+// solo la vista "faq_publica" con las consultas marcadas como publicables.
+const SUPABASE_URL = process.env.SUPABASE_URL || "https://ynheajnfawmzojbevkxx.supabase.co";
+
+// La IA agrega al final de cada respuesta esta marca, que se quita antes de
+// mostrarla: SI = la pregunta es de ética en salud y no identifica a nadie.
+const MARCA_PUBLICABLE = /\[\s*PUBLICABLE\s*:\s*(S[IÍ]|NO)\s*\]/gi;
+
+// Revisión adicional, sin IA, de datos que identifican a una persona.
+const DATOS_PERSONALES = [
+  [/\b\d{1,2}\.?\d{3}\.?\d{3}\s*-\s*[\dkK]\b/, "RUT"],
+  [/[\w.+-]+@[\w-]+\.[\w.]+/, "correo electrónico"],
+  [/(\+?56\s*)?\b9\s*\d{4}\s*\d{4}\b|\b\d{8,}\b/, "teléfono u otro número largo"],
+  [/\b(?:[Dd]r|[Dd]ra|[Dd]octora?|[Ee]nfermer[oa]|[Ss]r|[Ss]ra|[Ss]eñora?|[Dd]on|[Dd]oña|[Kk]ine|[Mm]atr[oó]na?|[Pp]aciente)\.?\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+/, "nombre de una persona"],
+  [/\b(?:[Mm]e llamo|[Mm]i nombre es)\s+[A-ZÁÉÍÓÚÑa-záéíóúñ]+/, "nombre de una persona"],
+];
+
+function revisarDatosPersonales(texto) {
+  const encontrado = DATOS_PERSONALES.find(([regla]) => regla.test(texto));
+  return encontrado ? encontrado[1] : null;
+}
+
+// Guarda la consulta (nunca la borra). Si falla, solo se anota en el registro:
+// la respuesta al usuario no se ve afectada.
+async function guardarConsulta({ pregunta, respuesta, fuentes, publicable, motivo }) {
+  const clave = process.env.SUPABASE_SECRET_KEY;
+  if (!clave) {
+    console.error("No se guardó la consulta: falta la variable SUPABASE_SECRET_KEY en Netlify");
+    return;
+  }
+  try {
+    const resp = await fetch(`${SUPABASE_URL}/rest/v1/consultas`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: clave,
+        // Las claves antiguas (service_role) son JWT y también van en Authorization.
+        ...(clave.startsWith("eyJ") ? { Authorization: `Bearer ${clave}` } : {}),
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify({
+        question: pregunta.slice(0, 1000),
+        answer_preview: respuesta.slice(0, 180),
+        sources: fuentes.join(", "),
+        publicable,
+        motivo_no_publica: publicable ? null : motivo,
+      }),
+    });
+    if (!resp.ok) console.error(`No se guardó la consulta en Supabase (${resp.status}):`, await resp.text());
+  } catch (err) {
+    console.error("No se guardó la consulta en Supabase:", String(err));
+  }
+}
+
 // Preguntas fuera de la ética en salud: no se responden. La IA contesta solo
 // con esta marca y la función la cambia por un mensaje amable.
 const MARCA_FUERA_DE_TEMA = "FUERA_DE_TEMA";
@@ -217,6 +272,9 @@ Reglas:
 - Si los fragmentos no responden la pregunta, dilo explícitamente, sugiere reformularla con otras palabras o usar el formulario de contacto del sitio.
 - No des diagnósticos ni consejo médico o legal individual; orienta a la institución que corresponda. Si la duda es una urgencia médica o legal, recomienda ayuda profesional o de emergencia inmediata.
 - Sé claro y ordenado: hasta 2 párrafos cortos más el párrafo de APEC si corresponde, salvo que se pida más detalle.
+- Después de la fuente, en la última línea, agrega SIEMPRE una de estas marcas (se usa para decidir si la pregunta se muestra como pregunta frecuente en el sitio, y el usuario no la ve):
+  [PUBLICABLE: SI] si la última pregunta es de ética en salud y NO contiene nombres de personas, RUT, teléfonos, correos, direcciones ni detalles que permitan identificar a alguien (por ejemplo, el nombre de un médico, de un paciente o de un familiar, o un caso tan específico que se reconozca a la persona).
+  [PUBLICABLE: NO] en cualquier otro caso. Los nombres de instituciones (Colegio Médico, ISP, un hospital o clínica mencionado de forma general) no son datos personales.
 
 DOCUMENTOS DISPONIBLES:
 ${resumen}
@@ -358,10 +416,35 @@ exports.handler = async function (event) {
     const textBlocks = (data.content || [])
       .filter((c) => c.type === "text")
       .map((c) => c.text);
-    const texto = textBlocks.join("\n") || "No pude generar una respuesta.";
-    const fueraDeTema = texto.includes(MARCA_FUERA_DE_TEMA);
+    const textoIA = textBlocks.join("\n") || "No pude generar una respuesta.";
+    const fueraDeTema = textoIA.includes(MARCA_FUERA_DE_TEMA);
     if (fueraDeTema) console.log("Pregunta fuera de tema (según la IA)");
+
+    // Marca de publicación: se lee y se quita del texto que ve el usuario.
+    const marcas = [...textoIA.matchAll(MARCA_PUBLICABLE)].map((m) => m[1].toUpperCase());
+    const texto = textoIA.replace(MARCA_PUBLICABLE, "").trim();
     const answer = fueraDeTema ? MENSAJE_FUERA_DE_TEMA : texto;
+
+    if (!fueraDeTema) {
+      const pregunta = String(messages[messages.length - 1].content);
+      const datoPersonal = revisarDatosPersonales(pregunta);
+      const marcaIA = marcas[marcas.length - 1];
+      const motivo = datoPersonal
+        ? `contiene datos personales (${datoPersonal})`
+        : marcaIA === "NO"
+          ? "la IA la marcó como no publicable (datos personales o fuera del ámbito)"
+          : !marcaIA
+            ? "la IA no indicó si es publicable"
+            : null;
+      const fuente = answer.match(/\[Fuente:\s*([^\]]+)\]/i);
+      await guardarConsulta({
+        pregunta,
+        respuesta: answer.replace(/\[Fuente:[^\]]*\]/i, "").trim(),
+        fuentes: fuente ? fuente[1].split(",").map((f) => f.trim()) : [],
+        publicable: !motivo,
+        motivo,
+      });
+    }
 
     return {
       statusCode: 200,

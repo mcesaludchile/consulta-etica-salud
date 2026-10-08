@@ -331,8 +331,8 @@ async function sendMessage(){
     addMsg('bot', formatAnswer(displayText), sources);
     chatHistory.push({role:'assistant', content:answer});
 
-    // Las preguntas fuera de la ética en salud no se guardan ni cuentan.
-    if(!data.fuera_de_tema) saveAnonymousQuery(text, displayText, sources);
+    // La función del chat ya guardó la consulta en Supabase (las fuera de tema no se guardan).
+    if(!data.fuera_de_tema) refreshStats();
   }catch(err){
     removeTyping();
     addMsg('bot', "Hubo un problema de conexión. Intenta nuevamente en unos segundos.");
@@ -352,25 +352,14 @@ document.getElementById('chatInput').addEventListener('keydown', function(e){
   if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); sendMessage(); }
 });
 
-/* ---------- Historial anónimo real, en Supabase ---------- */
-// Supabase no lanza errores: los devuelve en { error }. Hay que revisarlos.
-async function saveAnonymousQuery(question, answer, sources){
-  if(!supabaseClient){ mostrarErrorContador({ message: 'Supabase no está configurado o su librería no cargó' }); return; }
-  try{
-    const { error } = await supabaseClient.from('consultas').insert({
-      question,
-      answer_preview: answer.slice(0,180),
-      sources: (sources||[]).join(', ')
-    });
-    if(error) throw error;
-    refreshStats();
-  }catch(e){ mostrarErrorContador(e, 'no se pudo guardar la consulta'); }
-}
-
+/* ---------- Historial anónimo real, en Supabase ----------
+   La función del chat guarda cada consulta (con la clave secreta, en Netlify).
+   La página solo puede leer el contador (contar_consultas) y la vista
+   faq_publica, que trae únicamente las consultas pertinentes y sin datos personales. */
 async function refreshStats(){
   if(!supabaseClient){ document.getElementById('statConsultas').textContent = '—'; return; }
   try{
-    const { count, error } = await supabaseClient.from('consultas').select('*', { count: 'exact', head: true });
+    const { data: count, error } = await supabaseClient.rpc('contar_consultas');
     if(error) throw error;
     document.getElementById('statConsultas').textContent = count ?? 0;
     document.getElementById('statError').hidden = true;
@@ -385,7 +374,8 @@ function mostrarErrorContador(e, accion){
   console.error('Contador de consultas:', e);
   const msg = String(e?.message || e?.code || e || '');
   let motivo = msg;
-  if(/does not exist|could not find the table|PGRST205|42P01/i.test(msg + (e?.code||''))) motivo = "la tabla 'consultas' no existe en Supabase";
+  if(/PGRST202|could not find the function|faq_publica/i.test(msg + (e?.code||''))) motivo = "falta ejecutar supabase_faq_privacidad.sql en Supabase";
+  else if(/does not exist|could not find the table|PGRST205|42P01/i.test(msg + (e?.code||''))) motivo = "la tabla 'consultas' no existe en Supabase";
   else if(/row-level security|42501/i.test(msg + (e?.code||''))) motivo = 'falta el permiso para guardar o leer (políticas RLS de la tabla)';
   else if(/api key|jwt|401/i.test(msg)) motivo = 'la clave de Supabase no es válida';
   else if(/failed to fetch|network|load failed/i.test(msg)) motivo = 'no se pudo conectar con Supabase (¿proyecto pausado?)';
@@ -403,7 +393,7 @@ async function loadFAQ(){
   faqEl.innerHTML = '<p class="empty-note">Cargando…</p>';
   try{
     const { data, error } = await supabaseClient
-      .from('consultas')
+      .from('faq_publica')   // solo consultas pertinentes y sin datos personales
       .select('question, answer_preview, created_at')
       .order('created_at', { ascending:false })
       .limit(8);
