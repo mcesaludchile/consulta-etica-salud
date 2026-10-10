@@ -161,24 +161,22 @@
     <div class="hero-eyebrow">Escríbenos</div>
     <h1 style="font-size:22px;">Contacto</h1>
     <p>¿Tu duda no quedó resuelta, quieres sugerir un código de ética faltante o comentar algo sobre esta herramienta? Escríbenos.</p>
-    <!-- Netlify Forms: Netlify detecta este formulario al publicar y guarda los
-         mensajes en Netlify → Forms (y avisa por correo si se configura). -->
-    <form id="contactForm" name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return sendContact(event)">
-      <input type="hidden" name="form-name" value="contacto">
-      <p hidden><label>No llenar este campo: <input name="bot-field"></label></p>
+    <!-- Web3Forms (web3forms.com): envía cada mensaje al correo del proyecto. -->
+    <form id="contactForm" onsubmit="return sendContact(event)">
+      <input type="checkbox" name="botcheck" id="cBotcheck" style="display:none" tabindex="-1" autocomplete="off">
       <label>Nombre (opcional)</label>
-      <input type="text" id="cName" name="nombre" placeholder="Tu nombre">
+      <input type="text" id="cName" placeholder="Tu nombre">
       <label>Correo electrónico</label>
-      <input type="email" id="cEmail" name="correo" required placeholder="Para poder responderte">
+      <input type="email" id="cEmail" required placeholder="Para poder responderte">
       <label>Asunto</label>
-      <select id="cSubject" name="asunto">
+      <select id="cSubject">
         <option>Duda no resuelta por la consulta IA</option>
         <option>Sugerir un código de ética faltante</option>
         <option>Reportar un error</option>
         <option>Comentario general</option>
       </select>
       <label>Mensaje</label>
-      <textarea class="form-field" id="cMessage" name="mensaje" required></textarea>
+      <textarea class="form-field" id="cMessage" required></textarea>
       <button class="send-btn" id="contactBtn" type="submit">Enviar mensaje</button>
       <p class="form-status" id="contactStatus" role="status" hidden></p>
     </form>
@@ -419,7 +417,11 @@ async function loadFAQ(){
 }
 
 /* ---------- CONTACTO ---------- */
-// Envía el formulario a Netlify Forms sin salir de la página.
+// Envía el formulario con Web3Forms sin salir de la página. Esta clave no es
+// secreta: Web3Forms la entrega para usarla en la página y solo sirve para
+// enviar mensajes al correo registrado (no permite leerlos).
+const WEB3FORMS_ACCESS_KEY = "3c00bdf0-2a24-4334-a51e-ae913d9aa134";
+
 async function sendContact(e){
   e.preventDefault();
   const form = document.getElementById('contactForm');
@@ -429,12 +431,23 @@ async function sendContact(e){
   btn.textContent = 'Enviando…';
   status.hidden = true;
   try{
-    const resp = await fetch('/', {
+    const asunto = document.getElementById('cSubject').value;
+    const resp = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(form)).toString()
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: `[Ética en Salud Chile] ${asunto}`,
+        from_name: 'Ética en Salud Chile — formulario de contacto',
+        name: document.getElementById('cName').value || 'Anónimo',
+        email: document.getElementById('cEmail').value,
+        asunto,
+        message: document.getElementById('cMessage').value,
+        botcheck: document.getElementById('cBotcheck').checked
+      })
     });
-    if(!resp.ok) throw new Error('código ' + resp.status);
+    const data = await resp.json().catch(() => ({}));
+    if(!resp.ok || !data.success) throw new Error(data.message || ('código ' + resp.status));
     form.reset();
     status.className = 'form-status ok';
     status.textContent = '¡Gracias! Recibimos tu mensaje y te responderemos al correo que indicaste.';
