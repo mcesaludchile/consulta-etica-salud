@@ -34,7 +34,8 @@
   .stat-label{font-size:10.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.4px;}
   .divider{border:none;border-top:1px solid var(--line);margin:26px 0;}
   .section-label{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;}
-  .chat-wrap{display:flex;flex-direction:column;height:calc(100vh - 130px);}
+  /* Altura de respaldo; ajustarAlturaChat() la corrige con lo que realmente se ve. */
+  .chat-wrap{display:flex;flex-direction:column;height:calc(100vh - 160px);height:calc(100dvh - 160px);min-height:260px;}
   .disclaimer{background:var(--teal-soft);border:1px solid #C9DEDB;border-radius:var(--radius);padding:12px 14px;font-size:12.5px;color:#204b48;margin-bottom:14px;}
   .chat-log{flex:1;overflow-y:auto;padding-bottom:10px;}
   .msg{margin-bottom:16px;max-width:92%;}
@@ -232,6 +233,7 @@ function goTo(screen){
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active', b.dataset.screen===screen));
   window.scrollTo(0,0);
   if(screen==='contexto') loadFAQ();
+  if(screen==='consultar') ajustarAlturaChat();
 }
 
 /* ---------- INSTITUCIONES render ---------- */
@@ -263,6 +265,23 @@ function labelStatus(s){
 }
 
 /* ---------- CHAT ---------- */
+// El chat ocupa justo la parte visible de la pantalla (sin la barra del
+// navegador ni la barra inferior del sitio), para que la caja de texto se vea
+// sin desplazarse. Se recalcula al girar el celular o al abrir el teclado.
+function ajustarAlturaChat(){
+  const wrap = document.querySelector('.chat-wrap');
+  if(!wrap || !document.getElementById('screen-consultar').classList.contains('active')) return;
+  const visible = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  const arriba = wrap.getBoundingClientRect().top + window.scrollY;
+  const nav = document.querySelector('.bottom-nav').offsetHeight;
+  const abajo = Math.max(nav, parseFloat(getComputedStyle(document.body).paddingBottom) || 0);
+  const pantalla = document.getElementById('screen-consultar');
+  const relleno = parseFloat(getComputedStyle(pantalla).paddingBottom) || 0;
+  wrap.style.height = Math.max(260, Math.floor(visible - arriba - abajo - relleno)) + 'px';
+}
+window.addEventListener('resize', ajustarAlturaChat);
+window.addEventListener('orientationchange', ajustarAlturaChat);
+if(window.visualViewport) window.visualViewport.addEventListener('resize', ajustarAlturaChat);
 const chatLog = document.getElementById('chatLog');
 let chatHistory = [];
 
