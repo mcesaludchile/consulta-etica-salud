@@ -9,7 +9,7 @@ Aplicación de una sola página (single-page), pensada primero para celulares, c
 2. **Consultar** — chat con IA que responde dudas basándose SOLO en los documentos validados.
 3. **Instituciones** — qué instituciones tienen código de ética disponible, con enlace oficial y botón de descarga del PDF.
 4. **Contexto** — por qué es importante conocer los códigos de ética y contar con esta herramienta.
-5. **Contacto** — formulario que llega a vastorga05@gmail.com.
+5. **Contacto** — formulario que se envía directo con Netlify Forms (formulario `contacto` en `index.html`, enviado con `fetch` sin salir de la página). Los mensajes quedan en Netlify → Forms y llegan por correo a vastorga05@gmail.com mediante una notificación configurada en Netlify. El correo no aparece en el sitio.
 
 ## Arquitectura
 - **Frontend:** HTML + JavaScript en un solo archivo, mobile-first.

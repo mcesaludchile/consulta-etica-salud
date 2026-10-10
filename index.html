@@ -79,6 +79,10 @@
   input[type=text],input[type=email],textarea.form-field,select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-family:var(--sans);font-size:14.5px;background:var(--paper-raised);color:var(--ink);}
   textarea.form-field{resize:vertical;min-height:100px;}
   .form-note{font-size:11.5px;color:var(--ink-soft);margin-top:4px;}
+  .form-status{margin-top:12px;font-size:13.5px;padding:10px 12px;border-radius:10px;}
+  .form-status.ok{background:#DFF3E3;color:#1F7A3C;}
+  .form-status.error{background:#F4E1DF;color:#9B4444;}
+  .send-btn:disabled{opacity:.6;cursor:default;}
   .send-btn{margin-top:20px;width:100%;background:var(--gold);color:#fff;border:none;border-radius:var(--radius);padding:15px;font-size:15px;font-weight:600;cursor:pointer;}
   .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:560px;background:#fff;border-top:1px solid var(--line);display:flex;z-index:30;padding-bottom:env(safe-area-inset-bottom);}
   .nav-btn{flex:1;background:none;border:none;padding:10px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;color:var(--ink-soft);font-family:var(--sans);}
@@ -157,22 +161,26 @@
     <div class="hero-eyebrow">Escríbenos</div>
     <h1 style="font-size:22px;">Contacto</h1>
     <p>¿Tu duda no quedó resuelta, quieres sugerir un código de ética faltante o comentar algo sobre esta herramienta? Escríbenos.</p>
-    <form id="contactForm" onsubmit="return sendContact(event)">
+    <!-- Netlify Forms: Netlify detecta este formulario al publicar y guarda los
+         mensajes en Netlify → Forms (y avisa por correo si se configura). -->
+    <form id="contactForm" name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return sendContact(event)">
+      <input type="hidden" name="form-name" value="contacto">
+      <p hidden><label>No llenar este campo: <input name="bot-field"></label></p>
       <label>Nombre (opcional)</label>
-      <input type="text" id="cName" placeholder="Tu nombre">
+      <input type="text" id="cName" name="nombre" placeholder="Tu nombre">
       <label>Correo electrónico</label>
-      <input type="email" id="cEmail" required placeholder="tucorreo@ejemplo.com">
+      <input type="email" id="cEmail" name="correo" required placeholder="Para poder responderte">
       <label>Asunto</label>
-      <select id="cSubject">
+      <select id="cSubject" name="asunto">
         <option>Duda no resuelta por la consulta IA</option>
         <option>Sugerir un código de ética faltante</option>
         <option>Reportar un error</option>
         <option>Comentario general</option>
       </select>
       <label>Mensaje</label>
-      <textarea class="form-field" id="cMessage" required placeholder="Cuéntanos en qué podemos ayudarte..."></textarea>
-      <p class="form-note">Se abrirá tu app de correo con el mensaje dirigido a vastorga05@gmail.com.</p>
-      <button class="send-btn" type="submit">Enviar mensaje</button>
+      <textarea class="form-field" id="cMessage" name="mensaje" required></textarea>
+      <button class="send-btn" id="contactBtn" type="submit">Enviar mensaje</button>
+      <p class="form-status" id="contactStatus" role="status" hidden></p>
     </form>
   </section>
 
@@ -411,15 +419,34 @@ async function loadFAQ(){
 }
 
 /* ---------- CONTACTO ---------- */
-function sendContact(e){
+// Envía el formulario a Netlify Forms sin salir de la página.
+async function sendContact(e){
   e.preventDefault();
-  const name = document.getElementById('cName').value || 'Anónimo';
-  const email = document.getElementById('cEmail').value;
-  const subject = document.getElementById('cSubject').value;
-  const message = document.getElementById('cMessage').value;
-  const body = `Nombre: ${name}\nCorreo: ${email}\n\n${message}`;
-  const mailto = `mailto:vastorga05@gmail.com?subject=${encodeURIComponent('[Ética Salud Chile] '+subject)}&body=${encodeURIComponent(body)}`;
-  window.location.href = mailto;
+  const form = document.getElementById('contactForm');
+  const btn = document.getElementById('contactBtn');
+  const status = document.getElementById('contactStatus');
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+  status.hidden = true;
+  try{
+    const resp = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    });
+    if(!resp.ok) throw new Error('código ' + resp.status);
+    form.reset();
+    status.className = 'form-status ok';
+    status.textContent = '¡Gracias! Recibimos tu mensaje y te responderemos al correo que indicaste.';
+  }catch(err){
+    console.error('No se pudo enviar el formulario de contacto', err);
+    status.className = 'form-status error';
+    status.textContent = 'No pudimos enviar tu mensaje en este momento. Por favor, inténtalo de nuevo en unos minutos.';
+  }finally{
+    status.hidden = false;
+    btn.disabled = false;
+    btn.textContent = 'Enviar mensaje';
+  }
   return false;
 }
 
