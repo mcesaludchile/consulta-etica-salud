@@ -120,6 +120,16 @@
     "website": "https://www.subrei.gob.cl/ejes-de-trabajo/cer/anticorrupci%C3%B3n-e-integridad/mesa-de-marco-de-consenso-%C3%A9tico-para-el-sector-de-la-salud"
   },
   {
+    "id": "asoc_pacientes",
+    "nombre": "Asociaciones de Pacientes",
+    "tag": "Organización de pacientes",
+    "year": "2025",
+    "desc": "Decálogo para el Relacionamiento Ético con Organizaciones de Pacientes: 10 principios para que las relaciones con la industria y otras instituciones respeten la voz, la autonomía, la privacidad y la participación real de los pacientes.",
+    "doc_md": "Asociaciones de Pacientes",
+    "source_file": "decalogo-para-el-relacionamiento-etico.pdf",
+    "website": "https://www.subrei.gob.cl/ejes-de-trabajo/cer/anticorrupci%C3%B3n-e-integridad/mesa-de-marco-de-consenso-%C3%A9tico-para-el-sector-de-la-salud"
+  },
+  {
     "id": "apec_kl",
     "nombre": "APEC — Principios de Kuala Lumpur (tecnología médica)",
     "tag": "Referencia complementaria",

@@ -5,7 +5,7 @@
 index.html                        → el sitio web (frontend)
 netlify.toml                      → configuración de despliegue en Netlify
 netlify/functions/chat.js         → función segura que llama a la IA (guarda la API key)
-codigos-de-etica-salud-chile.md   → texto de los 14 códigos: la fuente que usa el chat
+codigos-de-etica-salud-chile.md   → texto de los 15 códigos: la fuente que usa el chat
 preparar_fragmentos.js            → arma fragmentos.json y knowledge_base.json (Netlify lo ejecuta solo)
 netlify/functions/fragmentos.json → fragmentos del .md que usa el chat
 instituciones_config.json         → lista editable de instituciones (nombre, descripción, sitio, PDF)
