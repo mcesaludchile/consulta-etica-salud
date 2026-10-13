@@ -31,11 +31,12 @@ Este archivo reúne, en un solo lugar, el texto íntegro de los códigos de éti
 10. [FENPOF Chile — Federación de Enfermedades Poco Frecuentes — Código Ético y Normas de Relacionamiento Interno](#10-fenpof-chile--federación-de-enfermedades-poco-frecuentes)
 11. [ACHAGO — Asociación Chilena de Agrupaciones de Pacientes Oncológicos — Manual de Buenas Prácticas](#11-achago--asociación-chilena-de-agrupaciones-de-pacientes-oncológicos)
 12. [Marco de Consenso Ético APEC — Chile — Estándares éticos recomendados para regular la relación entre las asociaciones de pacientes y la industria de la salud](#12-marco-de-consenso-ético-apec--chile)
+13. [Asociaciones de Pacientes — Decálogo para el Relacionamiento Ético con Organizaciones de Pacientes](#13-asociaciones-de-pacientes)
 
 **Referentes internacionales (APEC)**
 
-13. [APEC — Principios de Kuala Lumpur (tecnología médica) — The Kuala Lumpur Principles for Codes of Ethics in the Medical Technology Sector](#13-apec--principios-de-kuala-lumpur-tecnología-médica)
-14. [APEC — Principios de Ciudad de México (sector biofarmacéutico) — The Mexico City Principles for Codes of Ethics in the Biopharmaceutical Sector](#14-apec--principios-de-ciudad-de-méxico-sector-biofarmacéutico)
+14. [APEC — Principios de Kuala Lumpur (tecnología médica) — The Kuala Lumpur Principles for Codes of Ethics in the Medical Technology Sector](#14-apec--principios-de-kuala-lumpur-tecnología-médica)
+15. [APEC — Principios de Ciudad de México (sector biofarmacéutico) — The Mexico City Principles for Codes of Ethics in the Biopharmaceutical Sector](#15-apec--principios-de-ciudad-de-méxico-sector-biofarmacéutico)
 
 ## Resumen de documentos
 
@@ -53,8 +54,9 @@ Este archivo reúne, en un solo lugar, el texto íntegro de los códigos de éti
 | 10 | FENPOF Chile — Federación de Enfermedades Poco Frecuentes | Código Ético y Normas de Relacionamiento Interno | Sin fecha indicada en el documento | Organizaciones, representantes y personas que integran la Federación |
 | 11 | ACHAGO — Asociación Chilena de Agrupaciones de Pacientes Oncológicos | Manual de Buenas Prácticas | Sin fecha indicada en el documento | Agrupaciones de pacientes oncológicos miembros |
 | 12 | Marco de Consenso Ético APEC — Chile | Estándares éticos recomendados para regular la relación entre las asociaciones de pacientes y la industria de la salud | Elaborado bajo el Marco de Consenso firmado por Chile en 2019 | Asociaciones de pacientes e industria de la salud adherentes |
-| 13 | APEC — Principios de Kuala Lumpur (tecnología médica) | The Kuala Lumpur Principles for Codes of Ethics in the Medical Technology Sector | Versión original 2011, actualizada 2021 | Sector de tecnologías médicas / dispositivos médicos |
-| 14 | APEC — Principios de Ciudad de México (sector biofarmacéutico) | The Mexico City Principles for Codes of Ethics in the Biopharmaceutical Sector | Versión original 2011, actualizada 2021 | Sector biofarmacéutico |
+| 13 | Asociaciones de Pacientes (Mesa del Marco de Consenso Ético — sector pacientes) | Decálogo para el Relacionamiento Ético con Organizaciones de Pacientes | 2025 | Organizaciones de pacientes y quienes se relacionan con ellas |
+| 14 | APEC — Principios de Kuala Lumpur (tecnología médica) | The Kuala Lumpur Principles for Codes of Ethics in the Medical Technology Sector | Versión original 2011, actualizada 2021 | Sector de tecnologías médicas / dispositivos médicos |
+| 15 | APEC — Principios de Ciudad de México (sector biofarmacéutico) | The Mexico City Principles for Codes of Ethics in the Biopharmaceutical Sector | Versión original 2011, actualizada 2021 | Sector biofarmacéutico |
 
 ---
 
@@ -4674,11 +4676,114 @@ XVI. Los Adherentes se comprometen a incorporar en sus organizaciones instancias
 
 ---
 
+## 13. Asociaciones de Pacientes
+
+- **Documento:** Decálogo para el Relacionamiento Ético con Organizaciones de Pacientes
+- **Fecha / versión:** 2025
+- **Tipo:** Decálogo de principios éticos
+- **Elaborado por:** Mesa del Marco de Consenso Ético para el sector de la salud — Sector pacientes
+- **A quién aplica:** Organizaciones de pacientes y los actores que se relacionan con ellas (industria de la salud, entidades gremiales, académicas, científicas y organismos públicos)
+- **Archivo fuente:** `decalogo-para-el-relacionamiento-etico.pdf`
+
+### INTRODUCCIÓN
+
+Como organizaciones de pacientes, sabemos que no basta con estar presentes: queremos ser parte activa de las decisiones que nos afectan, y contribuir a construir relaciones más justas, transparentes y horizontales en el ecosistema de salud. Este decálogo nace desde ahí: desde la convicción de que podemos —y debemos— transformar la manera en que nos vinculamos con otros actores, promoviendo relaciones que se basen en la confianza, el respeto mutuo y la corresponsabilidad.
+
+Este trabajo se enmarca en un esfuerzo mayor que Chile ha venido impulsando desde 2019, a través del Marco de Consenso Ético (MCE): una iniciativa de colaboración multisectorial inspirada en el trabajo del Foro de Cooperación Económica Asia-Pacífico (APEC) sobre ética empresarial en salud. De dicho foro surgen los Principios de Kuala Lumpur (para el sector de dispositivos médicos) y los Principios de Ciudad de México (para el sector biofarmacéutico), que han sido pilares fundamentales de esta propuesta.
+
+En Chile, el MCE se formalizó mediante un acuerdo suscrito el 10 de septiembre de 2019 por representantes de asociaciones de pacientes, organizaciones de la sociedad civil, entidades gremiales, académicas, científicas y organismos públicos del sector salud. Desde entonces, una mesa de trabajo multisectorial —que hoy reúne a más de veinte entidades— ha promovido una cultura de integridad, transparencia y diálogo, dando origen a los Estándares Éticos Recomendados para regular la relación entre organizaciones de pacientes y la industria de la salud.
+
+Este decálogo recoge todos estos marcos de referencia, junto con la resolución de la 77ª Asamblea Mundial de la Salud de la OMS sobre participación social, pero va más allá: incorpora también nuestras propias experiencias, inquietudes, aprendizajes y prácticas concretas. Es una herramienta viva, construida desde la voz de quienes vivimos con una condición de salud, y que busca orientar —de manera clara y práctica— los principios mínimos para establecer relaciones éticas, sostenibles y legítimas.
+
+Este documento es también un compromiso. Un compromiso con la mejora continua, con la colaboración intersectorial, y con el derecho de todas las personas a participar en la construcción de un sistema de salud más justo, más humano y más centrado en las necesidades reales de quienes lo habitan.
+
+### PRINCIPIO 1: RECONOCER QUE LAS NECESIDADES Y VOCES DE LOS PACIENTES DEBEN SER EL EJE DE TODA RELACIÓN ÉTICA
+
+Las relaciones deben partir de la experiencia de vida y la voz activa de quienes viven con una condición de salud.
+
+Las relaciones éticas deben construirse reconociendo a los pacientes, sus familias y cuidadores como actores activos, con derecho a participar en todas las etapas del proceso de toma de decisiones. Su experiencia de vida no solo enriquece, sino que debe guiar cualquier colaboración en salud. La legitimidad de estas relaciones surge del respeto por las necesidades reales y por la voz de quienes viven cotidianamente con la enfermedad.
+
+Referencias: CDMX, Principio “Healthcare and Patient Focus” (pág. 1); KL, “Patient First” (pág. 2); WHA77, Preámbulo, párrs. PP2 y PP3 (pág. 1); WHA77.
+
+### PRINCIPIO 2: RESGUARDAR LA EQUIDAD, LA INCLUSIÓN Y LA DIVERSIDAD EN LAS RELACIONES
+
+Ninguna voz debe quedar fuera por razones de origen, salud, género, edad u otros factores.
+
+Las relaciones éticas deben asegurar la participación justa y significativa de todas las personas, reconociendo y valorando la diversidad de condiciones de salud, orígenes, géneros, edades, territorios y trayectorias de vida. Es fundamental eliminar las barreras que limitan la participación —como la ubicación geográfica, la situación económica o la edad— y garantizar espacios accesibles e inclusivos.
+
+Referencias: WHA77, párr. PP14 (pág. 4) y OP.1 (pág. 4); CDMX, XVI (A) (pág. 9).
+
+### PRINCIPIO 3: ASEGURAR LA PARTICIPACIÓN SIGNIFICATIVA EN TODAS LAS ETAPAS DEL CICLO DE DECISIONES
+
+La participación debe tener influencia real y darse en distintas etapas.
+
+Las relaciones éticas deben permitir que las organizaciones de pacientes se involucren de manera activa e incidente en las distintas etapas del ciclo de decisiones —desde la identificación de necesidades hasta la evaluación de resultados. Esta participación debe promover el diálogo bidireccional y la colaboración genuina, lo que requiere de condiciones que hagan posible su involucramiento efectivo.
+
+Referencias: WHA77, Preámbulo, párrs. PP2 y PP3 (pág. 1) y OP.1 (pág. 4).
+
+### PRINCIPIO 4: RESGUARDAR LA AUTONOMÍA E INDEPENDENCIA ORGANIZACIONAL
+
+Las decisiones deben responder a la misión de la organización y no a presiones externas.
+
+Las decisiones de las organizaciones deben mantenerse libres de presiones o condicionamientos, especialmente en lo que respecta a su misión, prioridades estratégicas y voz pública. La autonomía organizacional es un pilar esencial para su legitimidad y rol social. Factores como las asimetrías de poder o la dependencia financiera pueden ponerla en riesgo, por lo que resulta necesario contar con mecanismos internos claros y sostenibles —como protocolos éticos o reglas de relacionamiento— que protejan su independencia y fortalezcan la confianza en su labor.
+
+Referencias: WHA77, Preámbulo (pág. 3); CDMX, Principio “Independence” y Sección XVI (B) (págs. 9 – 10); KL, Principio “Integrity” (pág. 1).
+
+### PRINCIPIO 5: PROMOVER LA SOSTENIBILIDAD Y EL FINANCIAMIENTO ÉTICO DE LA PARTICIPACIÓN
+
+Una participación autónoma requiere diversidad de fuentes y capacidades fortalecidas.
+
+La participación significativa y sostenida requiere el desarrollo de capacidades, acceso a herramientas y asignación de recursos suficientes y éticamente gestionados. Es fundamental promover fuentes de financiamiento públicas y privadas diversas, evitando la dependencia exclusiva de un solo actor, para fortalecer la autonomía y contribuir a relaciones más equilibradas y transparentes. Apoyar la generación de recursos propios y el acceso equitativo a fondos permite a las organizaciones sostener su labor con independencia y proyección.
+
+Referencias: WHA77, párr. PP12 (pág. 3) y OP.1 y OP.2 (págs. 4 – 5); CDMX, Sección VII (C) (pág. 6), y Sección XVI (B) (pág. 9); KL, Sección “Industry Codes” (5) (pág. 2); EER.
+
+### PRINCIPIO 6: ESTABLECER LÍMITES ÉTICOS Y RESPETUOSOS CON TERCEROS
+
+Ninguna relación debe imponer intereses ajenos ni limitar la voz propia.
+
+Las relaciones deben basarse en el respeto mutuo, la confianza y la colaboración con metas compartidas. Es indispensable rechazar cualquier forma de exclusividad, control editorial o imposición de intereses ajenos a la misión de las organizaciones. Establecer límites explícitos protege su identidad, independencia y legitimidad, asegurando que sus acciones respondan fielmente a las necesidades y convicciones de las comunidades que representan.
+
+Referencias: WHA77, párr. PP13 y PP15 (pág. 4); CDMX, Preámbulo (12) (pág. 2) y Sección XVI (B) (pág. 9); Sección “Industry Codes” (5) (pág. 2).
+
+### PRINCIPIO 7: FORMALIZAR ACUERDOS CON TRANSPARENCIA Y TRAZABILIDAD
+
+Toda colaboración debe quedar por escrito, ser verificable y rendir cuentas claras.
+
+Toda colaboración debe respaldarse con documentos escritos que detallen objetivos, recursos, responsabilidades y condiciones. Estos acuerdos deben ser accesibles y verificables, fortaleciendo la confianza entre las partes. La rendición de cuentas debe ir más allá del aspecto financiero, incluyendo también el impacto social mediante indicadores de calidad y resultados. Para esto, es clave fortalecer las capacidades de las organizaciones, promoviendo formación en gestión, evaluación y buenas prácticas éticas.
+
+Referencias: WHA77, párr. PP5 (pág. 2); CDMX, Sección XVI (C) (pág. 10).
+
+### PRINCIPIO 8: PREVENIR Y GESTIONAR PROACTIVAMENTE LOS CONFLICTOS DE INTERÉS
+
+Detectar y abordar conflictos protege la integridad y la confianza.
+
+Prevenir y gestionar los conflictos de interés es esencial para proteger la integridad, autonomía y credibilidad de las organizaciones. Todo posible conflicto —institucional o personal— debe ser identificado, declarado y abordado responsablemente. Contar con normativas y procedimientos claros ayuda a reducir riesgos y a garantizar que las decisiones respondan siempre al interés de los pacientes y sus comunidades.
+
+Referencias: WHA77, párr. PP13 y PP15 (pág. 4); CDMX, Sección XVI (págs. 9 – 10).
+
+### PRINCIPIO 9: PROTEGER LA PRIVACIDAD Y EL USO ÉTICO DE LA INFORMACIÓN
+
+La información personal debe tratarse con el mayor estándar ético y legal.
+
+La información personal de pacientes y comunidades debe resguardarse con los más altos estándares éticos y legales. No debe ser compartida sin consentimiento informado, ni utilizada como moneda de cambio. La privacidad es esencial para generar confianza y participación segura, y exige un compromiso institucional permanente para evitar cualquier forma de vulneración o uso indebido.
+
+Referencias: CDMX, Preámbulo (14) (pág. 4) y Sección XVII (A) (pág. 10); KL, Sección “Principles of practice and governance” (7) (pág. 3).
+
+### PRINCIPIO 10: FOMENTAR LA INTEGRIDAD, LA EVALUACIÓN Y LA MEJORA CONTINUA
+
+Evaluar y aprender en conjunto fortalece el impacto y la calidad de las relaciones.
+
+Las organizaciones deben fomentar relaciones basadas en la integridad, la corresponsabilidad y el aprendizaje compartido. Incorporar mecanismos de monitoreo, evaluación y mejora continua permite revisar el impacto de las colaboraciones, fortalecer la gestión y adaptarse a nuevos desafíos. Esta práctica consolida a las organizaciones como actores sociales responsables y comprometidos con el bienestar de las comunidades que representan.
+
+Referencias: CDMX, Preámbulo y Sección XII (pág. 8); KL, Sección “Principles of practice and governance” (5 y 6) (pág. 3).
+
+---
+
 # Parte: Referentes internacionales (APEC)
 
 ---
 
-## 13. APEC — Principios de Kuala Lumpur (tecnología médica)
+## 14. APEC — Principios de Kuala Lumpur (tecnología médica)
 
 - **Documento:** The Kuala Lumpur Principles for Codes of Ethics in the Medical Technology Sector
 - **Fecha / versión:** Versión original 2011, actualizada 2021
@@ -4842,7 +4947,7 @@ Therefore, it is recommended that key stakeholders undertake the following activ
 
 ---
 
-## 14. APEC — Principios de Ciudad de México (sector biofarmacéutico)
+## 15. APEC — Principios de Ciudad de México (sector biofarmacéutico)
 
 - **Documento:** The Mexico City Principles for Codes of Ethics in the Biopharmaceutical Sector
 - **Fecha / versión:** Versión original 2011, actualizada 2021
