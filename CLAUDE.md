@@ -30,7 +30,7 @@ Colegio Médico, Colegio de Enfermeras, Colegio de Químicos Farmacéuticos y Bi
 - Error 500 por falta de saldo en la cuenta de la API de Anthropic.
 
 ## Pendientes
-- Confirmar el sitio oficial de "Asociaciones de Pacientes": hoy usa la página de la Mesa del Marco de Consenso Ético en subrei.gob.cl (los otros 14 los confirmó Vicente en octubre 2026).
+- Ninguno por ahora. Sitios oficiales de las 15 instituciones confirmados por Vicente (octubre 2026); "Asociaciones de Pacientes" usa la página de la Mesa del Marco de Consenso Ético en subrei.gob.cl.
 
 ## Cómo trabajar conmigo (Vicente)
 - No tengo experiencia programando. Explícame todo paso a paso, en español, con listas numeradas y diciendo exactamente qué botón apretar y dónde está en la pantalla.
