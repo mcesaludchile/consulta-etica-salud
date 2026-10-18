@@ -56,6 +56,11 @@
   .chat-input-row textarea{flex:1;resize:none;border:1px solid var(--line);border-radius:20px;padding:11px 16px;font-family:var(--sans);font-size:14.5px;max-height:90px;background:var(--paper-raised);}
   .chat-input-row button{background:var(--teal);color:#fff;border:none;border-radius:50%;width:44px;height:44px;flex-shrink:0;font-size:17px;cursor:pointer;}
   .chat-input-row button:disabled{opacity:.4;}
+  .perfil-box{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+  .perfil-label{font-size:12.5px;font-weight:600;color:var(--ink);white-space:nowrap;margin:0;}
+  .perfil-box select{flex:1;min-width:0;padding:8px 10px;font-size:13.5px;border-radius:20px;}
+  .perfil-box select.sin-elegir{color:var(--ink-soft);}
+  .perfil-box.falta select{outline:2px solid var(--gold);outline-offset:2px;}
   .quick-qs{display:flex;gap:8px;overflow-x:auto;padding:2px 0 14px;}
   .quick-q{flex-shrink:0;background:var(--paper-raised);border:1px solid var(--line);border-radius:20px;padding:8px 13px;font-size:12.5px;color:var(--ink-soft);white-space:nowrap;cursor:pointer;}
   .inst-card{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:12px;}
@@ -130,6 +135,10 @@
   <section class="screen" id="screen-consultar">
     <div class="chat-wrap">
       <div class="disclaimer">Respuestas generadas por IA a partir de los códigos de ética cargados. No sustituye asesoría profesional. Tu consulta se guarda de forma <b>anónima</b> para mejorar esta herramienta.</div>
+      <div class="perfil-box">
+        <label class="perfil-label" for="perfilSelect">¿Quién pregunta?</label>
+        <select id="perfilSelect" onchange="elegirPerfil(this.value)"></select>
+      </div>
       <div class="quick-qs" id="quickQs"></div>
       <div class="chat-log" id="chatLog"></div>
       <div class="chat-input-row">
@@ -264,6 +273,46 @@ function labelStatus(s){
   return {completo:'Texto completo cargado', resumen:'Resumen cargado', pendiente:'Pendiente de carga', parcial:'Carga parcial'}[s] || s;
 }
 
+/* ---------- PERFIL DE QUIEN PREGUNTA ----------
+   Se envía con cada consulta; chat.js usa como fuente principal los códigos
+   propios del perfil y ajusta el lenguaje (simple para paciente y ciudadano). */
+const PERFILES = [
+  { id:'profesional', texto:'Profesional de la salud' },
+  { id:'industria',   texto:'Industria farmacéutica o de dispositivos médicos' },
+  { id:'paciente',    texto:'Paciente' },
+  { id:'ciudadano',   texto:'Ciudadano/a' },
+  { id:'funcionario', texto:'Funcionario/a público/a' },
+];
+let perfilActual = null;
+try{ perfilActual = localStorage.getItem('perfil'); }catch(e){}
+if(!PERFILES.some(p => p.id === perfilActual)) perfilActual = null;
+
+function renderPerfiles(){
+  const sel = document.getElementById('perfilSelect');
+  sel.innerHTML = `<option value="" disabled${perfilActual?'':' selected'}>Elige tu perfil…</option>` +
+    PERFILES.map(p => `<option value="${p.id}"${p.id===perfilActual?' selected':''}>${p.texto}</option>`).join('');
+  sel.classList.toggle('sin-elegir', !perfilActual);
+  const input = document.getElementById('chatInput');
+  input.placeholder = perfilActual ? 'Escribe tu duda...' : 'Primero elige tu perfil ↑';
+}
+function elegirPerfil(id){
+  const cambio = perfilActual && perfilActual !== id;
+  perfilActual = id;
+  try{ localStorage.setItem('perfil', id); }catch(e){}
+  document.querySelector('.perfil-box').classList.remove('falta');
+  renderPerfiles();
+  if(cambio){
+    const p = PERFILES.find(x => x.id === id);
+    addMsg('bot', formatAnswer(`Perfil cambiado a: ${p.texto}. Tus próximas respuestas se adaptarán a este perfil.`));
+  }
+}
+function pedirPerfil(){
+  const caja = document.querySelector('.perfil-box');
+  caja.classList.add('falta');
+  caja.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  document.getElementById('perfilSelect').focus();
+}
+
 /* ---------- CHAT ---------- */
 // El chat ocupa justo la parte visible de la pantalla (sin la barra del
 // navegador ni la barra inferior del sitio), para que la caja de texto se vea
@@ -291,6 +340,7 @@ function renderQuickQs(){
   ).join('');
 }
 function askQuick(el){
+  if(!perfilActual){ pedirPerfil(); return; }
   document.getElementById('chatInput').value = el.textContent;
   sendMessage();
 }
@@ -318,6 +368,7 @@ async function sendMessage(){
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
   if(!text) return;
+  if(!perfilActual){ pedirPerfil(); return; }
   const sendBtn = document.getElementById('sendBtn');
   input.value = '';
   sendBtn.disabled = true;
@@ -331,7 +382,7 @@ async function sendMessage(){
     const resp = await fetch("/.netlify/functions/chat", {
       method:"POST",
       headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({ messages: chatHistory })
+      body: JSON.stringify({ messages: chatHistory, perfil: perfilActual })
     });
     const data = await resp.json().catch(() => ({}));
     removeTyping();
@@ -485,6 +536,7 @@ async function sendContact(e){
 /* ---------- INIT ---------- */
 loadInstituciones();
 renderQuickQs();
+renderPerfiles();
 refreshStats();
 addMsg('bot', formatAnswer('Hola 👋 Soy tu asistente de consulta ciudadana sobre ética en salud en Chile. Pregúntame lo que necesites saber sobre tus derechos frente a médicos, enfermeras, farmacéuticos u otras instituciones de salud.'));
 </script>
