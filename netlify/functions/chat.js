@@ -11,7 +11,59 @@ const MAX_FRAGMENTOS = 10;
 const MAX_POR_INSTITUCION = 2;  // para sumar varios códigos distintos (4 si la pregunta nombra una institución)
 const MAX_APEC = 2;             // espacios reservados para referentes APEC (máx. 1 por documento APEC)
 const MINIMO_APEC = 0.35;       // APEC entra solo si su puntaje es al menos 35 % del mejor código chileno
-const PESO_SINONIMO = 0.5;      // las palabras agregadas por SINONIMOS pesan la mitad que las de la pregunta
+const PESO_SINONIMO = 0.5;
+const MAX_PERFIL = 4;           // fragmentos reservados para los códigos propios del perfil de quien pregunta
+const BONO_PERFIL = 1.4;        // los códigos del perfil pesan más en la búsqueda
+
+// Perfil de quien pregunta (lo elige en la sección Consultar). "docs" son los
+// títulos "## N. ..." del .md que se usan como fuente principal para ese perfil;
+// los demás códigos se usan como complemento. "simple" = sin palabras técnicas.
+const PERFILES = {
+  profesional: {
+    nombre: "profesional de la salud",
+    simple: false,
+    docs: [
+      "Colegio Médico de Chile A.G.",
+      "Colegio de Enfermeras de Chile A.G.",
+      "Colegio de Químicos Farmacéuticos y Bioquímicos de Chile A.G.",
+      "Colegio de Kinesiólogos de Chile",
+      "ASOCIMED — Asociación de Sociedades Científicas Médicas de Chile",
+    ],
+  },
+  industria: {
+    nombre: "persona que trabaja en la industria farmacéutica o de dispositivos médicos",
+    simple: false,
+    docs: [
+      "Cámara Nacional de Laboratorios (CANALAB)",
+      "Cámara de la Innovación Farmacéutica (CIF Chile)",
+      "ADIMECH — Asociación Gremial de Dispositivos Médicos de Chile A.G.",
+      "Marco de Consenso Ético APEC — Chile",
+      "APEC — Principios de Kuala Lumpur (tecnología médica)",
+      "APEC — Principios de Ciudad de México (sector biofarmacéutico)",
+    ],
+  },
+  paciente: {
+    nombre: "paciente (o familiar o cuidador de un paciente)",
+    simple: true,
+    docs: [
+      "Asociaciones de Pacientes",
+      "FENPOF Chile — Federación de Enfermedades Poco Frecuentes",
+      "ACHAGO — Asociación Chilena de Agrupaciones de Pacientes Oncológicos",
+      "Marco de Consenso Ético APEC — Chile",
+    ],
+  },
+  ciudadano: {
+    nombre: "ciudadano o ciudadana",
+    simple: true,
+    docs: [], // sin código propio: se usan todos por igual
+  },
+  funcionario: {
+    nombre: "funcionario o funcionaria pública",
+    simple: false,
+    docs: ["Instituto de Salud Pública de Chile (ISP)", "Marco de Consenso Ético APEC — Chile"],
+  },
+};
+const PERFIL_POR_DEFECTO = "ciudadano";      // las palabras agregadas por SINONIMOS pesan la mitad que las de la pregunta
 const MAX_CARACTERES = 14000;   // tope de texto de referencia por pregunta
 const MAX_MENSAJES_HISTORIAL = 7; // últimos mensajes de la conversación que se envían
 
@@ -184,7 +236,8 @@ const SINONIMOS_RAICES = new Map(
   Object.entries(SINONIMOS).map(([palabra, extra]) => [raices(palabra)[0], raices(extra)])
 );
 
-function buscarFragmentos(pregunta) {
+function buscarFragmentos(pregunta, perfil = PERFILES[PERFIL_POR_DEFECTO]) {
+  const docsPerfil = new Set(perfil.docs);
   const propias = [...new Set(raices(pregunta))];
   // Peso de cada palabra a buscar: 1 si está en la pregunta, PESO_SINONIMO si es un sinónimo.
   const pesos = new Map(propias.map((p) => [p, 1]));
@@ -206,28 +259,34 @@ function buscarFragmentos(pregunta) {
       puntaje += peso * idf * (tf * 2.2) / (tf + 1.2 * (0.25 + 0.75 * largo / largoPromedio));
     }
     if (docsMencionados.has(fragmentos[i].doc)) puntaje *= 1.6;
+    if (docsPerfil.has(fragmentos[i].doc)) puntaje *= BONO_PERFIL;
     if (fragmentos[i].apendice) puntaje *= 0.4; // material de apoyo: solo si no hay algo mejor
     return { i, puntaje };
   });
 
   const ordenados = puntajes.filter((p) => p.puntaje > 0).sort((a, b) => b.puntaje - a.puntaje);
   const porInstitucion = new Map();
+  const yaElegidos = new Set();
   let total = 0;
   const tomar = (lista, cupo, tope) => {
     const elegidos = [];
     for (const { i } of lista) {
       if (elegidos.length >= cupo) break;
+      if (yaElegidos.has(i)) continue;
       const { doc, texto } = fragmentos[i];
       const maximo = docsMencionados.has(doc) ? tope * 2 : tope;
       if ((porInstitucion.get(doc) || 0) >= maximo) continue;
       if (total + texto.length > MAX_CARACTERES) continue;
       elegidos.push(fragmentos[i]);
+      yaElegidos.add(i);
       porInstitucion.set(doc, (porInstitucion.get(doc) || 0) + 1);
       total += texto.length;
     }
     return elegidos;
   };
 
+  // 0) Los códigos propios del perfil de quien pregunta son la fuente principal.
+  const delPerfil = tomar(ordenados.filter(({ i }) => docsPerfil.has(fragmentos[i].doc)), MAX_PERFIL, 2);
   // 1) Si la pregunta nombra una institución, sus fragmentos van primero.
   const mencionados = tomar(ordenados.filter(({ i }) => docsMencionados.has(fragmentos[i].doc)), 4, 2);
   // 2) Espacios para referentes APEC, solo si están realmente relacionados con la pregunta.
@@ -237,14 +296,27 @@ function buscarFragmentos(pregunta) {
     MAX_APEC,
     1
   );
-  // 3) El resto, con los demás códigos chilenos, variando la institución.
-  const chilenos = tomar(
-    ordenados.filter(({ i }) => !esApec(fragmentos[i].doc)),
-    MAX_FRAGMENTOS - mencionados.length - apec.length,
+  // 3) El resto, con los demás códigos chilenos, variando la institución. Se
+  //    reservan algunos lugares para códigos fuera del perfil, para no dejarlos de lado.
+  let libres = MAX_FRAGMENTOS - delPerfil.length - mencionados.length - apec.length;
+  const otros = tomar(
+    ordenados.filter(({ i }) => !esApec(fragmentos[i].doc) && !docsPerfil.has(fragmentos[i].doc)),
+    Math.min(3, libres),
     MAX_POR_INSTITUCION
   );
+  libres -= otros.length;
+  const chilenos = [
+    ...otros,
+    ...tomar(ordenados.filter(({ i }) => !esApec(fragmentos[i].doc)), libres, MAX_POR_INSTITUCION),
+  ];
   const apecFinal = apec.filter((f) => !mencionados.includes(f));
-  return [...mencionados.filter((f) => !esApec(f.doc)), ...chilenos, ...mencionados.filter((f) => esApec(f.doc)), ...apecFinal];
+  return [
+    ...delPerfil,
+    ...mencionados.filter((f) => !esApec(f.doc)),
+    ...chilenos,
+    ...mencionados.filter((f) => esApec(f.doc)),
+    ...apecFinal,
+  ];
 }
 
 // Marco de Consenso Ético APEC — Chile y Principios APEC (Kuala Lumpur, Ciudad de México).
@@ -253,20 +325,32 @@ function esApec(doc) {
 }
 
 // Construye las instrucciones para la IA con solo los fragmentos encontrados.
-function buildSystemPrompt(encontrados) {
+function buildSystemPrompt(encontrados, perfil = PERFILES[PERFIL_POR_DEFECTO]) {
+  const docsPerfil = new Set(perfil.docs);
   const textos = encontrados.length
-    ? encontrados.map((f) => `### ${f.doc} — ${f.seccion}\n${f.texto}`).join("\n\n---\n\n")
+    ? encontrados
+        .map((f) => `### ${docsPerfil.has(f.doc) ? "[CÓDIGO DEL PERFIL] " : ""}${f.doc} — ${f.seccion}\n${f.texto}`)
+        .join("\n\n---\n\n")
     : "(No se encontraron fragmentos relacionados con esta pregunta.)";
+
+  const reglaPerfil = perfil.docs.length
+    ? `- Quien pregunta es ${perfil.nombre}. Usa como fuente PRINCIPAL los códigos propios de su perfil (${perfil.docs.join("; ")}), marcados como [CÓDIGO DEL PERFIL] en los fragmentos: empieza por lo que dicen ellos. Luego complementa con lo que dicen los demás códigos, sin dejarlos de lado. Si los códigos de su perfil no tratan el tema, dilo brevemente y responde con los demás.`
+    : `- Quien pregunta es ${perfil.nombre}, sin un código de ética propio: usa todos los códigos por igual, priorizando lo que le sirve a una persona común (sus derechos y cómo debe tratarla cada profesional o institución).`;
+  const reglaLenguaje = perfil.simple
+    ? "- Usa palabras simples y cotidianas, sin términos técnicos, médicos ni legales. Si un término es inevitable, explícalo en pocas palabras. Escribe como le explicarías a un vecino."
+    : `- Quien pregunta conoce el sector: puedes usar los términos técnicos propios de su área y citar artículos o secciones con precisión, manteniendo un estilo claro y ordenado. Enfoca la respuesta en lo que debe hacer o tener en cuenta en su rol de ${perfil.nombre}.`;
 
   return `Eres un asistente ciudadano especializado en códigos de ética de instituciones de salud en Chile. SOLO puedes responder usando los fragmentos de códigos de ética oficiales incluidos abajo. Son los fragmentos que una búsqueda encontró para esta pregunta, no los documentos completos.
 
 Primero revisa si la pregunta trata sobre ética en salud: conducta y deberes de profesionales o instituciones de salud, derechos y trato de pacientes, confidencialidad, consentimiento, relación entre la industria de la salud, profesionales y pacientes, o el contenido de los códigos de ética. Si la pregunta NO es de ese ámbito (por ejemplo: deportes, recetas, tareas escolares, tecnología, finanzas, política, chistes, o pedir textos que no tengan relación con la ética en salud), responde ÚNICAMENTE con la palabra ${MARCA_FUERA_DE_TEMA}, sin nada más. Un saludo o un agradecimiento no es fuera de tema: responde breve y amablemente e invita a hacer una pregunta sobre ética en salud. Una pregunta de seguimiento sobre la conversación anterior sí es del ámbito.
 
 Reglas:
-- Responde en español, en lenguaje simple y cercano para la ciudadanía (no jerga legal).
+- Responde en español.
+${reglaPerfil}
+${reglaLenguaje}
 - Suma referencias de distintos códigos: si fragmentos de varias instituciones tratan el tema, menciona qué dice cada una (por ejemplo, "El Colegio Médico señala… y el Colegio de Enfermeras también…"), y destaca en qué coinciden o se diferencian. Usa solo fragmentos que de verdad respondan la pregunta.
 - Si hay fragmentos de APEC (Marco de Consenso Ético APEC — Chile, Principios de Kuala Lumpur o de Ciudad de México) relacionados con la pregunta, agrega al final un párrafo breve que empiece con "Referente internacional (APEC):" y explique en español qué recomiendan. Los Principios de Kuala Lumpur y de Ciudad de México están en inglés: tradúcelos y explícalos en palabras simples.
-- SIEMPRE indica al final, entre corchetes, todas las instituciones y documentos que usaste, separados por comas, así: [Fuente: Colegio Médico de Chile A.G., Colegio de Enfermeras de Chile A.G., APEC — Principios de Kuala Lumpur].
+- SIEMPRE, en todas las respuestas, indica al final, entre corchetes, todas las instituciones y documentos que usaste, separados por comas, así: [Fuente: Colegio Médico de Chile A.G., Colegio de Enfermeras de Chile A.G., APEC — Principios de Kuala Lumpur].
 - Si citas un artículo, indica su número tal como aparece en el fragmento.
 - No inventes artículos, números o citas textuales que no estén en los fragmentos.
 - Si los fragmentos no responden la pregunta, dilo explícitamente, sugiere reformularla con otras palabras o usar el formulario de contacto del sitio.
@@ -330,6 +414,7 @@ exports.handler = async function (event) {
   }
 
   let messages;
+  let perfilElegido = PERFILES[PERFIL_POR_DEFECTO];
   try {
     // Netlify a veces entrega el body codificado en base64: hay que decodificarlo primero.
     const rawBody = event.isBase64Encoded
@@ -337,6 +422,7 @@ exports.handler = async function (event) {
       : (event.body || "{}");
     const parsed = JSON.parse(rawBody);
     messages = parsed.messages;
+    perfilElegido = PERFILES[parsed.perfil] || PERFILES[PERFIL_POR_DEFECTO];
     if (!Array.isArray(messages) || messages.length === 0) {
       throw new Error("El campo 'messages' está vacío o no es una lista.");
     }
@@ -362,7 +448,7 @@ exports.handler = async function (event) {
 
   // Si la búsqueda no encuentra nada relacionado, la pregunta no es del ámbito:
   // se responde sin llamar a la IA (no tiene costo).
-  const encontrados = buscarFragmentos(textoParaBuscar(messages));
+  const encontrados = buscarFragmentos(textoParaBuscar(messages), perfilElegido);
   if (!encontrados.length) {
     console.log("Pregunta fuera de tema (sin fragmentos relacionados)");
     return {
@@ -387,7 +473,7 @@ exports.handler = async function (event) {
         max_tokens: MAX_TOKENS,
         output_config: { effort: ESFUERZO },
         fallbacks: "default",
-        system: buildSystemPrompt(encontrados),
+        system: buildSystemPrompt(encontrados, perfilElegido),
         messages: messages,
       }),
     });
