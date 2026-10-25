@@ -1,13 +1,16 @@
 -- Ejecuta esto en Supabase → SQL Editor → New query → Run
--- (solo para un proyecto nuevo; si la tabla ya existe, usa supabase_faq_privacidad.sql)
+-- (solo para un proyecto nuevo; si la tabla ya existe, usa supabase_faq_privacidad.sql
+--  y después supabase_faq_apoyos.sql)
 
 create table consultas (
   id bigint generated always as identity primary key,
   question text not null,
-  answer_preview text,
+  answer_preview text,                        -- resumen (primeros 180 caracteres)
+  respuesta text,                             -- respuesta completa
   sources text,
   publicable boolean not null default false,  -- se muestra en "Preguntas frecuentes"
   motivo_no_publica text,                     -- por qué no se muestra (si aplica)
+  apoyos integer not null default 0,          -- cuántas visitas marcaron "De acuerdo"
   created_at timestamptz default now()
 );
 
@@ -18,7 +21,8 @@ alter table consultas enable row level security;
 
 -- Lo único que el sitio puede leer: consultas pertinentes y sin datos personales.
 create view faq_publica as
-  select question, answer_preview, created_at
+  select question, answer_preview, created_at,
+         id, coalesce(respuesta, answer_preview) as respuesta, apoyos, sources
   from consultas
   where publicable;
 
@@ -36,3 +40,19 @@ as $$ select count(*) from consultas $$;
 
 revoke all on function contar_consultas() from public;
 grant execute on function contar_consultas() to anon, authenticated;
+
+-- Botón "De acuerdo" de las preguntas frecuentes: suma (o quita) un apoyo.
+create function apoyar_consulta(consulta_id bigint, sumar boolean default true)
+returns integer
+language sql
+security definer
+set search_path = public
+as $$
+  update consultas
+  set apoyos = greatest(apoyos + case when sumar then 1 else -1 end, 0)
+  where id = consulta_id and publicable
+  returning apoyos
+$$;
+
+revoke all on function apoyar_consulta(bigint, boolean) from public;
+grant execute on function apoyar_consulta(bigint, boolean) to anon, authenticated;

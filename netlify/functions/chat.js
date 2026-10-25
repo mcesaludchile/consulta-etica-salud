@@ -105,8 +105,16 @@ async function guardarConsulta({ pregunta, respuesta, fuentes, publicable, motiv
     console.error("No se guardó la consulta: falta la variable SUPABASE_SECRET_KEY en Netlify");
     return;
   }
-  try {
-    const resp = await fetch(`${SUPABASE_URL}/rest/v1/consultas`, {
+  const fila = {
+    question: pregunta.slice(0, 1000),
+    answer_preview: respuesta.slice(0, 180),
+    respuesta: respuesta.slice(0, 6000),
+    sources: fuentes.join(", "),
+    publicable,
+    motivo_no_publica: publicable ? null : motivo,
+  };
+  const insertar = (datos) =>
+    fetch(`${SUPABASE_URL}/rest/v1/consultas`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -115,15 +123,20 @@ async function guardarConsulta({ pregunta, respuesta, fuentes, publicable, motiv
         ...(clave.startsWith("eyJ") ? { Authorization: `Bearer ${clave}` } : {}),
         Prefer: "return=minimal",
       },
-      body: JSON.stringify({
-        question: pregunta.slice(0, 1000),
-        answer_preview: respuesta.slice(0, 180),
-        sources: fuentes.join(", "),
-        publicable,
-        motivo_no_publica: publicable ? null : motivo,
-      }),
+      body: JSON.stringify(datos),
     });
-    if (!resp.ok) console.error(`No se guardó la consulta en Supabase (${resp.status}):`, await resp.text());
+  try {
+    let resp = await insertar(fila);
+    let detalle = resp.ok ? "" : await resp.text();
+    // Si aún no se ejecuta supabase_faq_apoyos.sql, la columna "respuesta" no
+    // existe: se guarda igual, sin la respuesta completa.
+    if (!resp.ok && /respuesta/.test(detalle)) {
+      console.error("Falta ejecutar supabase_faq_apoyos.sql: se guarda sin la respuesta completa");
+      const { respuesta: _omitida, ...sinRespuesta } = fila;
+      resp = await insertar(sinRespuesta);
+      detalle = resp.ok ? "" : await resp.text();
+    }
+    if (!resp.ok) console.error(`No se guardó la consulta en Supabase (${resp.status}):`, detalle);
   } catch (err) {
     console.error("No se guardó la consulta en Supabase:", String(err));
   }

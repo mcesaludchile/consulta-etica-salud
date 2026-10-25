@@ -97,6 +97,17 @@
   .nav-btn.active{color:var(--teal);}
   .faq-item{border-bottom:1px solid var(--line);padding:12px 0;font-size:13px;color:var(--ink-soft);}
   .faq-item b{color:var(--ink);display:block;font-size:13.5px;margin-bottom:3px;}
+  .faq-resp p{margin:0 0 6px;font-size:13px;}
+  .faq-item.contraida .faq-resp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+  .faq-item.contraida .faq-resp p{display:inline;margin:0;}
+  .faq-item.contraida .faq-resp p+p::before{content:" ";}
+  .faq-fuente{font-size:11.5px;color:var(--teal);margin-top:6px;}
+  .faq-item.contraida .faq-fuente{display:none;}
+  .faq-acciones{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;}
+  .faq-ver{background:none;border:none;padding:4px 0;color:var(--teal);font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--sans);}
+  .faq-apoyo{background:var(--paper-raised);border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:12.5px;color:var(--ink);cursor:pointer;font-family:var(--sans);white-space:nowrap;}
+  .faq-apoyo.marcado{background:var(--teal-soft);border-color:var(--teal);color:var(--teal);font-weight:600;}
+  .faq-apoyo:disabled{opacity:.6;cursor:default;}
   .stat-error{margin-top:8px;font-size:11.5px;color:#9B4444;}
   .empty-note{font-size:12.5px;color:var(--ink-soft);font-style:italic;}
 </style>
@@ -460,6 +471,16 @@ function mostrarErrorContador(e, accion){
   el.hidden = false;
 }
 
+// Preguntas frecuentes: ordenadas por "De acuerdo" (y luego las más nuevas).
+// Cada respuesta se muestra contraída y se puede ampliar para leerla completa.
+let FAQ_DATOS = [];
+function apoyosMarcados(){
+  try{ return new Set(JSON.parse(localStorage.getItem('faqApoyos') || '[]')); }catch(e){ return new Set(); }
+}
+function guardarApoyosMarcados(set){
+  try{ localStorage.setItem('faqApoyos', JSON.stringify([...set])); }catch(e){}
+}
+
 async function loadFAQ(){
   const faqEl = document.getElementById('faqList');
   if(!supabaseClient){
@@ -468,21 +489,83 @@ async function loadFAQ(){
   }
   faqEl.innerHTML = '<p class="empty-note">Cargando…</p>';
   try{
-    const { data, error } = await supabaseClient
+    let { data, error } = await supabaseClient
       .from('faq_publica')   // solo consultas pertinentes y sin datos personales
-      .select('question, answer_preview, created_at')
+      .select('id, question, respuesta, sources, apoyos, created_at')
+      .order('apoyos', { ascending:false })
       .order('created_at', { ascending:false })
-      .limit(8);
-    if(error) throw error;
+      .limit(10);
+    if(error){
+      // Si aún no se ejecuta supabase_faq_apoyos.sql, se muestra la lista simple.
+      console.error('Preguntas frecuentes sin apoyos (¿falta supabase_faq_apoyos.sql?):', error);
+      ({ data, error } = await supabaseClient
+        .from('faq_publica')
+        .select('question, answer_preview, created_at')
+        .order('created_at', { ascending:false })
+        .limit(10));
+      if(error) throw error;
+      data = data.map(it => ({ ...it, respuesta: it.answer_preview }));
+    }
     if(!data.length){
       faqEl.innerHTML = '<p class="empty-note">Aún no hay consultas registradas. ¡Sé el primero en preguntar!</p>';
       return;
     }
-    faqEl.innerHTML = data.map(it => `
-      <div class="faq-item"><b>${escapeHtml(it.question)}</b>${escapeHtml((it.answer_preview||'').slice(0,140))}${(it.answer_preview||'').length>140?'…':''}</div>
-    `).join('');
+    FAQ_DATOS = data;
+    renderFAQ();
   }catch(e){
     faqEl.innerHTML = '<p class="empty-note">No se pudo cargar el historial en este momento.</p>';
+  }
+}
+
+function renderFAQ(){
+  const marcados = apoyosMarcados();
+  document.getElementById('faqList').innerHTML = FAQ_DATOS.map((it, n) => {
+    const resp = it.respuesta || '';
+    const larga = resp.length > 160 || /\n/.test(resp.trim());
+    const conApoyo = it.id != null && it.apoyos != null;
+    const marcado = conApoyo && marcados.has(it.id);
+    return `
+      <div class="faq-item contraida" id="faq-${n}">
+        <b>${escapeHtml(it.question)}</b>
+        <div class="faq-resp">${formatAnswer(resp)}</div>
+        ${it.sources ? `<div class="faq-fuente">Fuente: ${escapeHtml(it.sources)}</div>` : ''}
+        <div class="faq-acciones">
+          ${larga || it.sources ? `<button type="button" class="faq-ver" onclick="alternarFAQ(${n})" aria-expanded="false">Ver respuesta completa ▾</button>` : '<span></span>'}
+          ${conApoyo ? `<button type="button" class="faq-apoyo${marcado?' marcado':''}" onclick="apoyarFAQ(${n}, this)" aria-pressed="${marcado}">👍 De acuerdo · ${it.apoyos}</button>` : ''}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function alternarFAQ(n){
+  const item = document.getElementById('faq-' + n);
+  const abierta = item.classList.toggle('contraida') === false;
+  const btn = item.querySelector('.faq-ver');
+  btn.textContent = abierta ? 'Ver menos ▴' : 'Ver respuesta completa ▾';
+  btn.setAttribute('aria-expanded', abierta);
+}
+
+// Cada navegador puede marcar "De acuerdo" una vez por respuesta (y quitarlo).
+async function apoyarFAQ(n, btn){
+  const it = FAQ_DATOS[n];
+  const marcados = apoyosMarcados();
+  const sumar = !marcados.has(it.id);
+  btn.disabled = true;
+  try{
+    const { data, error } = await supabaseClient.rpc('apoyar_consulta', { consulta_id: it.id, sumar });
+    if(error) throw error;
+    if(typeof data === 'number') it.apoyos = data;
+    if(sumar) marcados.add(it.id); else marcados.delete(it.id);
+    guardarApoyosMarcados(marcados);
+    btn.classList.toggle('marcado', sumar);
+    btn.setAttribute('aria-pressed', sumar);
+    btn.textContent = `👍 De acuerdo · ${it.apoyos}`;
+  }catch(e){
+    console.error('No se pudo registrar el "De acuerdo"', e);
+    btn.textContent = 'No se pudo registrar, intenta de nuevo';
+    setTimeout(() => { btn.textContent = `👍 De acuerdo · ${it.apoyos}`; }, 2500);
+  }finally{
+    btn.disabled = false;
   }
 }
 
