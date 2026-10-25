@@ -6,6 +6,8 @@
 --      con publicable = false y el motivo.
 --   2. Quita el acceso público directo a la tabla: desde ahora solo la función
 --      del chat (en Netlify, con la clave secreta) guarda consultas.
+--      (Después, supabase_faq_seguridad.sql permite a los visitantes leer solo
+--      las consultas publicables, para que la vista no use permisos de administrador.)
 --   3. Crea "faq_publica": la única vista que el sitio puede leer, con solo las
 --      consultas publicables (pertinentes y sin datos personales).
 --   4. Crea "contar_consultas()" para el contador del inicio.
