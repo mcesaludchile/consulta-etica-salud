@@ -103,11 +103,13 @@
   .faq-item.contraida .faq-resp p+p::before{content:" ";}
   .faq-fuente{font-size:11.5px;color:var(--teal);margin-top:6px;}
   .faq-item.contraida .faq-fuente{display:none;}
-  .faq-acciones{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;}
-  .faq-ver{background:none;border:none;padding:4px 0;color:var(--teal);font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--sans);}
+  .faq-acciones{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:8px;}
+  .faq-ver{white-space:nowrap;background:none;border:none;padding:4px 0;color:var(--teal);font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--sans);}
   .faq-apoyo{background:var(--paper-raised);border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:12.5px;color:var(--ink);cursor:pointer;font-family:var(--sans);white-space:nowrap;}
   .faq-apoyo.marcado{background:var(--teal-soft);border-color:var(--teal);color:var(--teal);font-weight:600;}
   .faq-apoyo:disabled{opacity:.6;cursor:default;}
+  .faq-votos{display:flex;gap:6px;margin-left:auto;}
+  .faq-apoyo.desacuerdo.marcado{background:#F4E1DF;border-color:#9B4444;color:#9B4444;}
   .stat-error{margin-top:8px;font-size:11.5px;color:#9B4444;}
   .empty-note{font-size:12.5px;color:var(--ink-soft);font-style:italic;}
 </style>
@@ -471,15 +473,30 @@ function mostrarErrorContador(e, accion){
   el.hidden = false;
 }
 
-// Preguntas frecuentes: ordenadas por "De acuerdo" (y luego las más nuevas).
-// Cada respuesta se muestra contraída y se puede ampliar para leerla completa.
+// Preguntas frecuentes: ordenadas por puntaje ("De acuerdo" menos "En
+// desacuerdo") y luego las más nuevas. Cada respuesta se muestra contraída y se
+// puede ampliar para leerla completa.
 let FAQ_DATOS = [];
-function apoyosMarcados(){
-  try{ return new Set(JSON.parse(localStorage.getItem('faqApoyos') || '[]')); }catch(e){ return new Set(); }
+const VOTOS = {
+  apoyo:      { clave:'faqApoyos',      campo:'apoyos',      rpc:'apoyar_consulta' },
+  desacuerdo: { clave:'faqDesacuerdos', campo:'desacuerdos', rpc:'desacuerdo_consulta' },
+};
+function votosMarcados(tipo){
+  try{ return new Set(JSON.parse(localStorage.getItem(VOTOS[tipo].clave) || '[]')); }catch(e){ return new Set(); }
 }
-function guardarApoyosMarcados(set){
-  try{ localStorage.setItem('faqApoyos', JSON.stringify([...set])); }catch(e){}
+function guardarVotosMarcados(tipo, set){
+  try{ localStorage.setItem(VOTOS[tipo].clave, JSON.stringify([...set])); }catch(e){}
 }
+
+// Consultas de la más completa a la más simple: si aún no se ejecutó algún SQL
+// (supabase_faq_desacuerdos.sql o supabase_faq_apoyos.sql), se usa la siguiente.
+const CONSULTAS_FAQ = [
+  q => q.select('id, question, respuesta, sources, apoyos, desacuerdos, puntaje, created_at')
+        .order('puntaje', { ascending:false }).order('created_at', { ascending:false }),
+  q => q.select('id, question, respuesta, sources, apoyos, created_at')
+        .order('apoyos', { ascending:false }).order('created_at', { ascending:false }),
+  q => q.select('question, answer_preview, created_at').order('created_at', { ascending:false }),
+];
 
 async function loadFAQ(){
   const faqEl = document.getElementById('faqList');
@@ -489,23 +506,15 @@ async function loadFAQ(){
   }
   faqEl.innerHTML = '<p class="empty-note">Cargando…</p>';
   try{
-    let { data, error } = await supabaseClient
-      .from('faq_publica')   // solo consultas pertinentes y sin datos personales
-      .select('id, question, respuesta, sources, apoyos, created_at')
-      .order('apoyos', { ascending:false })
-      .order('created_at', { ascending:false })
-      .limit(10);
-    if(error){
-      // Si aún no se ejecuta supabase_faq_apoyos.sql, se muestra la lista simple.
-      console.error('Preguntas frecuentes sin apoyos (¿falta supabase_faq_apoyos.sql?):', error);
-      ({ data, error } = await supabaseClient
-        .from('faq_publica')
-        .select('question, answer_preview, created_at')
-        .order('created_at', { ascending:false })
-        .limit(10));
-      if(error) throw error;
-      data = data.map(it => ({ ...it, respuesta: it.answer_preview }));
+    let data = null, error = null;
+    for(const consulta of CONSULTAS_FAQ){
+      // faq_publica: solo consultas pertinentes y sin datos personales
+      ({ data, error } = await consulta(supabaseClient.from('faq_publica')).limit(10));
+      if(!error) break;
+      console.error('Preguntas frecuentes: se usa una versión más simple (¿falta un SQL en Supabase?):', error);
     }
+    if(error) throw error;
+    data = data.map(it => ({ ...it, respuesta: it.respuesta ?? it.answer_preview }));
     if(!data.length){
       faqEl.innerHTML = '<p class="empty-note">Aún no hay consultas registradas. ¡Sé el primero en preguntar!</p>';
       return;
@@ -517,13 +526,20 @@ async function loadFAQ(){
   }
 }
 
+function botonesVoto(it, n){
+  if(it.id == null || it.apoyos == null) return '';
+  const apoyo = votosMarcados('apoyo').has(it.id);
+  const desacuerdo = votosMarcados('desacuerdo').has(it.id);
+  return `<span class="faq-votos">
+      <button type="button" class="faq-apoyo${apoyo?' marcado':''}" onclick="votarFAQ(${n}, 'apoyo')" aria-pressed="${apoyo}">👍 De acuerdo · ${it.apoyos}</button>
+      ${it.desacuerdos != null ? `<button type="button" class="faq-apoyo desacuerdo${desacuerdo?' marcado':''}" onclick="votarFAQ(${n}, 'desacuerdo')" aria-pressed="${desacuerdo}">👎 En desacuerdo · ${it.desacuerdos}</button>` : ''}
+    </span>`;
+}
+
 function renderFAQ(){
-  const marcados = apoyosMarcados();
   document.getElementById('faqList').innerHTML = FAQ_DATOS.map((it, n) => {
     const resp = it.respuesta || '';
     const larga = resp.length > 160 || /\n/.test(resp.trim());
-    const conApoyo = it.id != null && it.apoyos != null;
-    const marcado = conApoyo && marcados.has(it.id);
     return `
       <div class="faq-item contraida" id="faq-${n}">
         <b>${escapeHtml(it.question)}</b>
@@ -531,7 +547,7 @@ function renderFAQ(){
         ${it.sources ? `<div class="faq-fuente">Fuente: ${escapeHtml(it.sources)}</div>` : ''}
         <div class="faq-acciones">
           ${larga || it.sources ? `<button type="button" class="faq-ver" onclick="alternarFAQ(${n})" aria-expanded="false">Ver respuesta completa ▾</button>` : '<span></span>'}
-          ${conApoyo ? `<button type="button" class="faq-apoyo${marcado?' marcado':''}" onclick="apoyarFAQ(${n}, this)" aria-pressed="${marcado}">👍 De acuerdo · ${it.apoyos}</button>` : ''}
+          ${botonesVoto(it, n)}
         </div>
       </div>`;
   }).join('');
@@ -545,27 +561,38 @@ function alternarFAQ(n){
   btn.setAttribute('aria-expanded', abierta);
 }
 
-// Cada navegador puede marcar "De acuerdo" una vez por respuesta (y quitarlo).
-async function apoyarFAQ(n, btn){
+// Cada navegador tiene un solo voto por respuesta: "De acuerdo" o "En
+// desacuerdo". Marcar uno quita el otro; tocar de nuevo el mismo lo retira.
+async function votarFAQ(n, tipo){
   const it = FAQ_DATOS[n];
-  const marcados = apoyosMarcados();
+  const otro = tipo === 'apoyo' ? 'desacuerdo' : 'apoyo';
+  const marcados = votosMarcados(tipo);
+  const marcadosOtro = votosMarcados(otro);
   const sumar = !marcados.has(it.id);
-  btn.disabled = true;
+  const contenedor = document.querySelector(`#faq-${n} .faq-votos`);
+  contenedor.querySelectorAll('button').forEach(b => b.disabled = true);
   try{
-    const { data, error } = await supabaseClient.rpc('apoyar_consulta', { consulta_id: it.id, sumar });
+    if(sumar && marcadosOtro.has(it.id)){
+      const r = await supabaseClient.rpc(VOTOS[otro].rpc, { consulta_id: it.id, sumar: false });
+      if(r.error) throw r.error;
+      if(typeof r.data === 'number') it[VOTOS[otro].campo] = r.data;
+      marcadosOtro.delete(it.id);
+      guardarVotosMarcados(otro, marcadosOtro);
+    }
+    const { data, error } = await supabaseClient.rpc(VOTOS[tipo].rpc, { consulta_id: it.id, sumar });
     if(error) throw error;
-    if(typeof data === 'number') it.apoyos = data;
+    if(typeof data === 'number') it[VOTOS[tipo].campo] = data;
     if(sumar) marcados.add(it.id); else marcados.delete(it.id);
-    guardarApoyosMarcados(marcados);
-    btn.classList.toggle('marcado', sumar);
-    btn.setAttribute('aria-pressed', sumar);
-    btn.textContent = `👍 De acuerdo · ${it.apoyos}`;
+    guardarVotosMarcados(tipo, marcados);
+    contenedor.outerHTML = botonesVoto(it, n);
   }catch(e){
-    console.error('No se pudo registrar el "De acuerdo"', e);
-    btn.textContent = 'No se pudo registrar, intenta de nuevo';
-    setTimeout(() => { btn.textContent = `👍 De acuerdo · ${it.apoyos}`; }, 2500);
-  }finally{
-    btn.disabled = false;
+    console.error('No se pudo registrar el voto', e);
+    contenedor.querySelectorAll('button').forEach(b => b.disabled = false);
+    const aviso = document.createElement('div');
+    aviso.className = 'faq-fuente';
+    aviso.textContent = 'No se pudo registrar tu voto, intenta de nuevo.';
+    contenedor.parentElement.after(aviso);
+    setTimeout(() => aviso.remove(), 3000);
   }
 }
 
