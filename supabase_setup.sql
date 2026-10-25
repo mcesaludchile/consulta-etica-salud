@@ -1,6 +1,6 @@
 -- Ejecuta esto en Supabase → SQL Editor → New query → Run
 -- (solo para un proyecto nuevo; si la tabla ya existe, usa supabase_faq_privacidad.sql
---  y después supabase_faq_apoyos.sql y supabase_faq_desacuerdos.sql)
+--  y después supabase_faq_apoyos.sql, supabase_faq_desacuerdos.sql y supabase_faq_seguridad.sql)
 
 create table consultas (
   id bigint generated always as identity primary key,
@@ -16,12 +16,19 @@ create table consultas (
 );
 
 -- Activa seguridad a nivel de fila (obligatorio en Supabase).
--- Sin políticas: nadie con la clave pública puede leer ni escribir la tabla.
--- Solo la función del chat (Netlify, clave secreta SUPABASE_SECRET_KEY) guarda consultas.
+-- La clave pública solo puede LEER consultas publicables (política de abajo);
+-- no puede escribir, cambiar ni borrar. Solo la función del chat (Netlify,
+-- clave secreta SUPABASE_SECRET_KEY) guarda consultas.
 alter table consultas enable row level security;
 
--- Lo único que el sitio puede leer: consultas pertinentes y sin datos personales.
-create view faq_publica as
+create policy "Leer solo consultas publicables"
+on consultas for select
+to anon, authenticated
+using (publicable);
+
+-- Lo que el sitio lee: consultas pertinentes y sin datos personales.
+-- security_invoker: la vista usa los permisos de quien consulta (y la política de arriba).
+create view faq_publica with (security_invoker = true) as
   select question, answer_preview, created_at,
          id, coalesce(respuesta, answer_preview) as respuesta, apoyos, sources,
          desacuerdos, apoyos - desacuerdos as puntaje
