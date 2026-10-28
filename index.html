@@ -118,9 +118,11 @@
   .send-btn:disabled{opacity:.6;cursor:default;}
   .send-btn{margin-top:20px;width:100%;background:var(--gold);color:#fff;border:none;border-radius:var(--radius);padding:15px;font-size:15px;font-weight:600;cursor:pointer;}
   .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:560px;background:#fff;border-top:1px solid var(--line);display:flex;z-index:30;padding-bottom:env(safe-area-inset-bottom);}
-  .nav-btn{flex:1;background:none;border:none;padding:10px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;color:var(--ink-soft);font-family:var(--sans);}
+  .nav-btn{flex:1 1 auto;min-width:0;min-height:52px;background:none;border:none;padding:10px 2px 8px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;color:var(--ink-soft);font-family:var(--sans);}
   .nav-btn .ic{font-size:19px;line-height:1;}
-  .nav-btn .lb{font-size:10px;font-weight:600;}
+  .nav-btn .lb{font-size:10px;font-weight:600;white-space:nowrap;}
+  /* Celulares muy angostos: seis botones deben caber sin salirse de la pantalla */
+  @media (max-width:350px){ .nav-btn{padding:10px 0 8px;} .nav-btn .lb{font-size:9px;} .stat-card{min-width:0;padding:12px 6px;} .stat-label{font-size:9.5px;letter-spacing:0;} }
   .nav-btn.active{color:var(--teal);}
   .faq-item{border-bottom:1px solid var(--line);padding:12px 0;font-size:13px;color:var(--ink-soft);}
   .faq-item b{color:var(--ink);display:block;font-size:13.5px;margin-bottom:3px;}
@@ -139,6 +141,138 @@
   .faq-apoyo.desacuerdo.marcado{background:#F4E1DF;border-color:#9B4444;color:#9B4444;}
   .stat-error{margin-top:8px;font-size:11.5px;color:#9B4444;}
   .empty-note{font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Sección Aprende (Centro de Aprendizaje) ---------- */
+  #screen-aprende .disclaimer a{color:#204b48;font-weight:600;}
+  .ap-progreso{margin:4px 0 14px;}
+  .ap-progreso-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+  .ap-progreso-total{font-size:12px;color:var(--ink-soft);}
+  .ap-temas{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;}
+  .ap-progreso .section-label{color:#7a5a12;}
+  .ap-tema{display:flex;flex-direction:column;align-items:flex-start;gap:1px;min-height:44px;min-width:0;text-align:left;background:var(--paper-raised);border:1px solid var(--line);border-radius:12px;padding:7px 8px;cursor:pointer;font-family:var(--sans);color:var(--ink);}
+  .ap-tema.activo{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal) inset;}
+  .ap-tema.listo{background:var(--gold-soft);border-color:#e7d4a3;}
+  .ap-tema-ic{font-size:17px;line-height:1;}
+  .ap-tema-nombre{font-size:12px;font-weight:600;line-height:1.25;}
+  .ap-tema-avance{font-size:10.5px;color:var(--ink-soft);}
+  .ap-reiniciar{margin-top:8px;min-height:44px;background:none;border:none;padding:6px 0;color:var(--teal);font-size:12.5px;font-weight:600;text-decoration:underline;cursor:pointer;font-family:var(--sans);}
+  .ap-tabs{display:flex;border-bottom:1px solid var(--line);margin:4px 0 10px;}
+  .ap-tabs[hidden],.ap-chips[hidden],.ap-progreso[hidden]{display:none;}
+  .ap-tabs [role="tab"]{flex:1;min-height:44px;background:none;border:none;border-bottom:3px solid transparent;font-family:var(--sans);font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;padding:8px 2px;}
+  .ap-tabs [role="tab"][aria-selected="true"]{color:var(--teal);border-bottom-color:var(--teal);}
+  .ap-chips,.ap-az{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:thin;}
+  .ap-chip{flex-shrink:0;min-height:44px;background:var(--paper-raised);border:1px solid var(--line);border-radius:22px;padding:0 14px;font-size:12.5px;color:var(--ink-soft);white-space:nowrap;cursor:pointer;font-family:var(--sans);}
+  .ap-chip[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:600;}
+  .ap-card{display:flex;flex-direction:column;align-items:flex-start;gap:5px;width:100%;text-align:left;background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--radius);padding:14px;margin-bottom:10px;cursor:pointer;font-family:var(--sans);color:var(--ink);}
+  .ap-card:hover{border-color:var(--teal);}
+  .ap-card-titulo{font-family:var(--serif);font-size:16px;font-weight:600;line-height:1.3;}
+  .ap-card-texto{font-size:13px;color:var(--ink-soft);line-height:1.45;}
+  .ap-etiqueta{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--teal);}
+  .ap-meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11.5px;color:var(--ink-soft);}
+  .ap-ok{color:#1F7A3C;font-weight:700;}
+  .ap-visor h2.ap-visor-titulo{font-size:20px;line-height:1.25;margin:4px 0 10px;}
+  .ap-volver{min-height:44px;background:none;border:none;padding:0;color:var(--teal);font-size:13.5px;font-weight:600;cursor:pointer;font-family:var(--sans);display:block;}
+  .ap-barra{height:8px;background:var(--line);border-radius:8px;overflow:hidden;}
+  .ap-barra span{display:block;height:100%;background:var(--teal);border-radius:8px;transition:width .25s ease;}
+  .ap-paso-num{font-size:11.5px;margin:6px 0 10px;}
+  .ap-tarjeta{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:12px;}
+  .ap-tarjeta p{font-size:14.5px;color:var(--ink);}
+  .ap-paso-titulo{font-size:17px;line-height:1.3;outline:none;}
+  .ap-tipo,.ap-ficticia{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;border-radius:20px;padding:3px 9px;margin-bottom:8px;}
+  .ap-tipo{background:var(--teal-soft);color:#204b48;}
+  .ap-ficticia{background:var(--gold-soft);color:#6b4e12;}
+  .ap-simple{background:var(--teal-soft);border-left:4px solid var(--teal);border-radius:10px;padding:10px 12px;font-size:14px;color:#1d4542;line-height:1.5;}
+  .ap-simple b{display:block;font-size:11px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:2px;}
+  .ap-nota-legal{font-size:12px !important;color:var(--ink-soft) !important;margin:12px 0 0;}
+  .ap-opciones{display:flex;flex-direction:column;gap:8px;margin-top:6px;}
+  .ap-opcion{min-height:44px;text-align:left;background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;font-size:14px;line-height:1.4;color:var(--ink);cursor:pointer;font-family:var(--sans);}
+  .ap-opcion:hover:not(:disabled){border-color:var(--teal);}
+  .ap-opcion:disabled{cursor:default;opacity:.75;}
+  .ap-opcion.correcta{border-color:#1F7A3C;background:#DFF3E3;opacity:1;}
+  .ap-opcion.incorrecta{border-color:#9B4444;background:#F4E1DF;opacity:1;}
+  .ap-retro-caja{margin-top:12px;border-radius:12px;padding:12px 13px;}
+  .ap-retro-caja.bien{background:#DFF3E3;color:#17592c;}
+  .ap-retro-caja.mal{background:#FBEDEB;color:#7d3434;}
+  .ap-retro-caja p{font-size:13.5px !important;color:inherit !important;margin:6px 0 0;}
+  .ap-fuente{font-size:12px !important;color:var(--teal) !important;}
+  .ap-retro-caja .ap-fuente{color:inherit !important;font-style:italic;}
+  .ap-nav{display:flex;gap:10px;}
+  .ap-btn{display:block;width:100%;min-height:44px;text-align:center;text-decoration:none;background:var(--ink);color:#fff;border:none;border-radius:12px;padding:12px 14px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:var(--sans);}
+  .ap-btn.secundario{background:var(--paper-raised);color:var(--ink);border:1px solid var(--line);}
+  .ap-btn:disabled{opacity:.45;cursor:default;}
+  .ap-ayuda{font-size:11.5px;text-align:center;margin-top:8px;}
+  .ap-fin{text-align:center;}
+  .ap-fin-ic{font-size:34px;display:block;margin-bottom:6px;}
+  .ap-sub{font-size:12.5px;margin:12px 0 6px;}
+  .ap-relacionados{display:flex;flex-wrap:wrap;gap:6px;}
+  .ap-acciones-fin{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+  .ap-term{background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:underline dotted var(--teal);text-decoration-thickness:2px;text-underline-offset:3px;cursor:help;}
+  .ap-term-chip{min-height:44px;padding:0 12px;border:1px dashed var(--teal);border-radius:20px;text-decoration:none;color:var(--teal);font-size:13px;font-weight:600;cursor:pointer;}
+  .ap-escenario{background:var(--paper-raised);border-left:4px solid var(--gold);border-radius:10px;padding:12px 14px;margin:6px 0 12px;}
+  .ap-escenario p{font-size:14px;color:var(--ink);}
+  .ap-escenario p:last-child{margin-bottom:0;}
+  .ap-historia{border-left:2px solid var(--line);padding:2px 0 2px 12px;margin:0 0 12px 4px;scroll-margin-top:90px;}
+  .ap-historia-p{font-size:12.5px;margin:0 0 2px;}
+  .ap-historia-r{font-size:13.5px;color:var(--ink);margin:0 0 6px;}
+  .ap-comentario{background:var(--teal-soft);border-radius:10px;padding:9px 11px;}
+  .ap-comentario p{font-size:13px;color:#1d4542;margin:0 0 6px;}
+  .ap-comentario p:last-child{margin:0;}
+  .ap-desenlace.adecuado{border-color:#1F7A3C;}
+  .ap-desenlace.riesgoso{border-color:#9B4444;}
+  .ap-desenlace.mejorable{border-color:var(--gold);}
+  .ap-desenlace.adecuado .ap-tipo{background:#DFF3E3;color:#17592c;}
+  .ap-desenlace.riesgoso .ap-tipo{background:#F4E1DF;color:#7d3434;}
+  .ap-desenlace.mejorable .ap-tipo{background:var(--gold-soft);color:#6b4e12;}
+  .ap-consecuencias{padding-left:18px;margin:0;}
+  .ap-consecuencias li{font-size:13.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:6px;}
+  .ap-codigos{margin:14px 0 4px;}
+  .ap-codigos h3{font-size:16px;}
+  .ap-codigo{border-left:3px solid var(--gold);padding:2px 0 2px 12px;margin-bottom:12px;}
+  .ap-codigo b{display:block;font-size:13.5px;color:var(--ink);}
+  .ap-codigo-doc{display:block;font-size:11.5px;color:var(--teal);margin-bottom:3px;}
+  .ap-codigo p{font-size:13.5px;margin:0;}
+  .ap-video{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:12px;}
+  .ap-video-marco{aspect-ratio:16/9;background:var(--ink);}
+  .ap-video-marco iframe,.ap-video-marco video{width:100%;height:100%;border:0;display:block;}
+  .ap-video-portada{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:none;background:linear-gradient(135deg,#1B2A3D,#2F6F6B);background-size:cover;background-position:center;color:#fff;font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;}
+  .ap-video-pronto{cursor:default;}
+  .ap-pronto-ic{font-size:30px;}
+  .ap-play{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:22px;padding-left:4px;}
+  .ap-video-info{padding:12px 14px;}
+  .ap-video-info h3{font-size:16px;margin:2px 0 4px;}
+  .ap-transcripcion{margin-top:6px;}
+  .ap-transcripcion summary{min-height:44px;display:flex;align-items:center;font-size:13px;font-weight:600;color:var(--teal);cursor:pointer;}
+  .ap-transcripcion p{font-size:13.5px;}
+  .ap-label{margin-top:2px;}
+  .ap-buscar{width:100%;min-height:44px;border:1px solid var(--line);border-radius:22px;padding:10px 16px;font-family:var(--sans);font-size:15px;background:var(--paper-raised);color:var(--ink);}
+  .ap-az{margin-top:8px;padding-bottom:6px;}
+  .ap-letra{flex-shrink:0;width:44px;height:44px;background:var(--paper-raised);border:1px solid var(--line);border-radius:10px;font-size:13.5px;font-weight:600;color:var(--teal);cursor:pointer;font-family:var(--sans);}
+  .ap-letra:disabled{color:#b9b6ab;cursor:default;}
+  .ap-glos-letra{font-size:18px;color:var(--teal);border-bottom:1px solid var(--line);padding-bottom:4px;margin:14px 0 8px;scroll-margin-top:90px;}
+  .ap-glos{background:var(--paper-raised);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px;scroll-margin-top:90px;outline:none;transition:box-shadow .3s;}
+  .ap-glos.resaltado{box-shadow:0 0 0 3px var(--teal);}
+  .ap-glos h4{font-family:var(--serif);font-size:15.5px;margin:0 0 4px;color:var(--ink);}
+  .ap-glos p{font-size:13.5px;margin:0 0 6px;}
+  .ap-glos-temas{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px;}
+  .ap-glos-temas span{font-size:10.5px;background:var(--teal-soft);color:#204b48;border-radius:20px;padding:2px 8px;}
+  .ap-ejemplo{font-size:13px !important;}
+  .ap-ver{font-size:12.5px !important;}
+  .ap-ver a{display:inline-block;padding:6px 0;}
+  .ap-copiar{min-height:44px;background:none;border:none;padding:0;color:var(--teal);font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--sans);}
+  .ap-dialogo{position:fixed;inset:0;z-index:50;background:rgba(27,42,61,.45);display:flex;align-items:flex-end;justify-content:center;}
+  .ap-dialogo[hidden]{display:none;}
+  .ap-dialogo-caja{width:100%;max-width:560px;max-height:80vh;overflow-y:auto;background:var(--paper-raised);border-radius:18px 18px 0 0;padding:16px 18px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -6px 24px rgba(0,0,0,.18);}
+  .ap-dialogo-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+  .ap-dialogo-top h3{font-size:18px;margin:8px 0 6px;}
+  .ap-dialogo-top button{flex-shrink:0;width:44px;height:44px;border:none;background:var(--paper);border-radius:50%;font-size:16px;cursor:pointer;color:var(--ink);}
+  .ap-dialogo-caja p{font-size:14px;color:var(--ink);}
+  @media (min-width:600px){ .ap-dialogo{align-items:center;} .ap-dialogo-caja{border-radius:18px;max-width:440px;} }
+  body.ap-sin-scroll{overflow:hidden;}
+  #screen-aprende :focus-visible,#apDialogo :focus-visible{outline:3px solid var(--teal);outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){
+    .screen.active{animation:none;}
+    .ap-barra span,.ap-glos{transition:none;}
+  }
 </style>
 </head>
 <body>
@@ -187,6 +321,22 @@
         <button id="sendBtn" onclick="sendMessage()">➤</button>
       </div>
     </div>
+  </section>
+
+  <section class="screen" id="screen-aprende">
+    <div class="hero-eyebrow">Centro de aprendizaje</div>
+    <h1 style="font-size:22px;">Aprende ética en salud en pocos minutos</h1>
+    <p>Cursos breves, videos, casos prácticos y un glosario en lenguaje simple, basados en los códigos de ética de este sitio.</p>
+    <div class="disclaimer">Este contenido es educativo y no reemplaza asesoría legal ni médica. Para tu caso particular, usa <a href="#" onclick="goTo('consultar');return false;">Consultar</a> o contacta a la institución correspondiente.</div>
+    <div class="ap-progreso" id="apProgreso"></div>
+    <div class="ap-tabs" id="apTabs" role="tablist" aria-label="Contenido de Aprende">
+      <button type="button" role="tab" id="apTab-cursos" data-accion="tab" data-tab="cursos" aria-controls="apPanel" aria-selected="true">Cursos</button>
+      <button type="button" role="tab" id="apTab-videos" data-accion="tab" data-tab="videos" aria-controls="apPanel" aria-selected="false" tabindex="-1">Videos</button>
+      <button type="button" role="tab" id="apTab-casos" data-accion="tab" data-tab="casos" aria-controls="apPanel" aria-selected="false" tabindex="-1">Casos</button>
+      <button type="button" role="tab" id="apTab-glosario" data-accion="tab" data-tab="glosario" aria-controls="apPanel" aria-selected="false" tabindex="-1">Glosario</button>
+    </div>
+    <div class="ap-chips" id="apChips" role="group" aria-label="Filtrar por tema"></div>
+    <div id="apPanel" role="tabpanel" aria-labelledby="apTab-cursos"></div>
   </section>
 
   <section class="screen" id="screen-instituciones">
@@ -342,10 +492,22 @@
   <nav class="bottom-nav">
     <button class="nav-btn active" data-screen="inicio" onclick="goTo('inicio')"><span class="ic">⌂</span><span class="lb">Inicio</span></button>
     <button class="nav-btn" data-screen="consultar" onclick="goTo('consultar')"><span class="ic">💬</span><span class="lb">Consultar</span></button>
+    <button class="nav-btn" data-screen="aprende" onclick="goTo('aprende')"><span class="ic">🎓</span><span class="lb">Aprende</span></button>
     <button class="nav-btn" data-screen="instituciones" onclick="goTo('instituciones')"><span class="ic">🏛</span><span class="lb">Instituciones</span></button>
     <button class="nav-btn" data-screen="contexto" onclick="goTo('contexto')"><span class="ic">◈</span><span class="lb">Contexto</span></button>
     <button class="nav-btn" data-screen="contacto" onclick="goTo('contacto')"><span class="ic">✉</span><span class="lb">Contacto</span></button>
   </nav>
+
+  <!-- Ventana pequeña con la definición de un término del glosario (sección Aprende) -->
+  <div class="ap-dialogo" id="apDialogo" hidden>
+    <div class="ap-dialogo-caja" role="dialog" aria-modal="true" aria-labelledby="apDialogoTitulo">
+      <div class="ap-dialogo-top">
+        <h3 id="apDialogoTitulo"></h3>
+        <button type="button" id="apDialogoCerrar" aria-label="Cerrar">✕</button>
+      </div>
+      <div id="apDialogoCuerpo"></div>
+    </div>
+  </div>
 
 <script>
 /* =========================================================================
@@ -391,6 +553,9 @@ function goTo(screen){
   window.scrollTo(0,0);
   if(screen==='contexto') loadFAQ();
   if(screen==='consultar') ajustarAlturaChat();
+  if(screen==='aprende' && window.abrirAprende) abrirAprende();
+  // Los enlaces directos (#glosario/..., #aprende) solo valen dentro de Aprende
+  if(screen!=='aprende' && /^#(glosario|aprende)/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search);
 }
 
 /* ---------- INSTITUCIONES render ---------- */
@@ -785,5 +950,6 @@ renderPerfiles();
 refreshStats();
 addMsg('bot', formatAnswer('Hola 👋 Soy tu asistente de consulta ciudadana sobre ética en salud en Chile. Pregúntame lo que necesites saber sobre tus derechos frente a médicos, enfermeras, farmacéuticos u otras instituciones de salud.'));
 </script>
+<script src="js/aprendizaje.js"></script>
 </body>
 </html>

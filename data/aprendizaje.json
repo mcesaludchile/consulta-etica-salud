@@ -1,0 +1,2752 @@
+{
+  "version": "1.0",
+  "actualizado": "2026-10-28",
+  "temas": [
+    {
+      "id": "integridad",
+      "nombre": "Integridad",
+      "icono": "🧭",
+      "descripcion": "Actuar con honestidad y poner el bienestar del paciente por delante de cualquier interés personal."
+    },
+    {
+      "id": "transparencia",
+      "nombre": "Transparencia",
+      "icono": "🔎",
+      "descripcion": "Qué información tienes derecho a conocer y por qué importa saber quién financia qué."
+    },
+    {
+      "id": "compliance",
+      "nombre": "Compliance",
+      "icono": "✅",
+      "descripcion": "Cómo las instituciones se organizan para cumplir las leyes y sus compromisos éticos."
+    },
+    {
+      "id": "proteccion-datos",
+      "nombre": "Protección de datos",
+      "icono": "🔒",
+      "descripcion": "Por qué tus datos de salud son sensibles y quién puede ver tu ficha clínica."
+    },
+    {
+      "id": "ia-salud",
+      "nombre": "IA en salud",
+      "icono": "🤖",
+      "descripcion": "Qué es la inteligencia artificial, cómo se usa en salud y qué riesgos tiene."
+    },
+    {
+      "id": "pacientes",
+      "nombre": "Relacionamiento con pacientes",
+      "nombre_corto": "Pacientes",
+      "icono": "🤝",
+      "descripcion": "Tus derechos y deberes como paciente, y cómo decidir informado."
+    }
+  ],
+  "cursos": [
+    {
+      "id": "curso-integridad-1",
+      "tema": "integridad",
+      "titulo": "¿Qué es la integridad en salud?",
+      "duracion_min": 4,
+      "objetivo": "Al terminar sabrás qué significa actuar con integridad en salud y cómo reconocerla en situaciones del día a día.",
+      "pantallas": [
+        {
+          "tipo": "concepto",
+          "titulo": "Hacer lo correcto, también cuando nadie mira",
+          "texto": "Actuar con {{integridad|integridad}} significa ser honesto, coherente y justo en todo lo que haces, no solo cuando alguien está mirando. En salud esto importa mucho, porque las personas confían su cuerpo, su información y a veces su vida a otras personas.\n\nLos códigos de ética lo dicen de distintas formas. El Colegio Médico pide al médico obrar «siempre con honradez y buena fe» y no hacer certificaciones falsas. Los Principios APEC de Kuala Lumpur definen la integridad como tratar a todos de manera transparente, honesta, veraz y justa.",
+          "en_simple": "Integridad es ser la misma persona honesta en público y en privado."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "El paciente primero",
+          "texto": "La integridad en salud tiene un centro claro: el bienestar del paciente. ADIMECH, la asociación de empresas de dispositivos médicos, lo llama «los pacientes en el centro»: la salud y el bienestar de quienes usan sus productos son la primera prioridad.\n\nEsto vale para todos: profesionales, empresas, funcionarios públicos y organizaciones de pacientes. Cuando una decisión se toma por comodidad, dinero o presión, y no por el bien del paciente, la integridad se rompe.",
+          "en_simple": "Una decisión íntegra se pregunta primero: ¿esto es lo mejor para el paciente?"
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Integridad en el servicio público",
+          "texto": "En los servicios públicos, la integridad se llama también {{probidad|probidad}}. El Código de Ética del ISP la explica así: ejercer la función pública de manera honesta, poniendo el interés general por sobre el particular. Lo contrario a la probidad es la {{corrupcion|corrupción}}.\n\nAlgunos compromisos que menciona el ISP: usar los bienes de la institución solo para fines institucionales, no recibir regalos y declarar a tiempo cualquier {{conflicto-de-interes|conflicto de interés}}.",
+          "en_simple": "Probidad es usar un cargo público para servir a todos, no para beneficio propio."
+        },
+        {
+          "tipo": "ejemplo",
+          "texto": "Rosa es técnica en enfermería en un hospital de Punta Arenas. Al final de un turno largo, nota que anotó mal la hora en que dio un medicamento. Nadie se dio cuenta. Podría dejarlo así, pero avisa a su jefatura y corrige el registro.\n\nEse gesto pequeño es integridad. El Código del Colegio de Enfermeras pide actuar frente a errores que puedan perjudicar a las personas e informar a quien corresponde. Reconocer un error a tiempo protege al paciente y al equipo.",
+          "en_simple": "Reconocer y corregir un error también es actuar con integridad."
+        }
+      ],
+      "situaciones": [
+        {
+          "enunciado": "Matías es químico farmacéutico en la farmacia de un consultorio de Valparaíso. Un vecino le pide que le «adelante» un medicamento que necesita receta, porque su consulta médica es recién la próxima semana.",
+          "opciones": [
+            {
+              "texto": "Explicarle con amabilidad que necesita la receta y orientarlo para conseguir una hora antes.",
+              "correcta": true,
+              "explicacion": "Cumple la norma, cuida la salud del vecino y le ofrece una alternativa real. El código de su colegio pide obrar con honradez y comunicar los riesgos de una terapia."
+            },
+            {
+              "texto": "Entregárselo por esta vez, porque lo conoce y confía en él.",
+              "correcta": false,
+              "explicacion": "Aunque la intención sea buena, saltarse la receta puede poner en riesgo la salud del vecino. La confianza personal no reemplaza la indicación de un profesional."
+            },
+            {
+              "texto": "Vendérselo, pero sin registrar la venta.",
+              "correcta": false,
+              "explicacion": "Esto suma un segundo problema: ocultar información. La integridad también exige registros honestos."
+            }
+          ],
+          "fuente": {
+            "institucion": "Colegio de Químicos Farmacéuticos y Bioquímicos de Chile",
+            "documento": "Código de Ética",
+            "referencia": "Arts. 7 y 15"
+          }
+        },
+        {
+          "enunciado": "La jefatura de Paula, funcionaria de un servicio público en Talca, le pide firmar un informe que dice que una inspección ya se hizo, aunque todavía no se realiza. «Es solo un trámite», le dice.",
+          "opciones": [
+            {
+              "texto": "Firmarlo para no tener problemas.",
+              "correcta": false,
+              "explicacion": "Firmar algo falso no es un trámite: es faltar a la verdad, aunque lo pida una jefatura. Puede perjudicar a quienes confían en ese informe."
+            },
+            {
+              "texto": "Explicar con respeto que solo puede firmar cuando la inspección se haya hecho y, si insisten, consultar al encargado de ética.",
+              "correcta": true,
+              "explicacion": "El Código del ISP pide actuar con probidad y ofrece un mecanismo de consultas y denuncias ante el encargado de ética institucional."
+            },
+            {
+              "texto": "Firmarlo y hacer la inspección después.",
+              "correcta": false,
+              "explicacion": "Aunque se haga después, el documento era falso cuando se firmó. Lo escrito debe coincidir con lo que ocurrió."
+            }
+          ],
+          "fuente": {
+            "institucion": "Instituto de Salud Pública (ISP)",
+            "documento": "Código de Ética",
+            "referencia": "Valores (probidad) y 4. Mecanismo para realizar consultas y denuncias"
+          }
+        }
+      ],
+      "terminos_relacionados": [
+        "integridad",
+        "probidad",
+        "corrupcion",
+        "conflicto-de-interes"
+      ]
+    },
+    {
+      "id": "curso-integridad-2",
+      "tema": "integridad",
+      "titulo": "Conflictos de interés en el día a día",
+      "duracion_min": 5,
+      "objetivo": "Al terminar sabrás reconocer un conflicto de interés y qué hacer cuando aparece.",
+      "pantallas": [
+        {
+          "tipo": "concepto",
+          "titulo": "¿Qué es un conflicto de interés?",
+          "texto": "Un {{conflicto-de-interes|conflicto de interés}} ocurre cuando un interés personal (dinero, amistad, familia, un favor) podría influir en una decisión que debería tomarse pensando solo en el paciente o en el bien común.\n\nEl ISP lo define como situaciones, reales o aparentes, en que un asunto privado puede influir indebidamente en el ejercicio de las funciones. Y agrega algo importante: los conflictos de interés no son un problema en sí mismos; lo que corresponde es transparentarlos a tiempo.",
+          "en_simple": "Tener un conflicto de interés no es malo; ocultarlo sí lo es."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "La regla de oro: declarar y apartarse",
+          "texto": "Cuando aparece un conflicto de interés, la mayoría de los códigos piden dos cosas: declararlo a tiempo y, si corresponde, no participar en la decisión.\n\nEl ISP pide informarlo por escrito a la jefatura. ASOCIMED pide a los médicos una {{declaracion-de-intereses|declaración de sus vínculos}} con empresas antes de cada presentación. El Decálogo de las organizaciones de pacientes pide identificar, declarar y abordar todo posible conflicto, institucional o personal.",
+          "en_simple": "Si algo personal podría influir en tu decisión, dilo y deja que otra persona decida."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Regalos e invitaciones",
+          "texto": "Una forma común de conflicto de interés son los {{regalo|regalos}}. El Colegio Médico permite solo donaciones modestas que no limiten la {{independencia-profesional|independencia profesional}}, y considera una falta aceptar viajes turísticos pagados por empresas. ADIMECH prohíbe, como regla general, regalar a profesionales de la salud dinero, gift cards, licores, entradas o aparatos electrónicos.\n\nLa idea de fondo es simple: un regalo crea una sensación de deuda, aunque no lo notemos.",
+          "en_simple": "Un regalo valioso puede inclinar una decisión sin que nos demos cuenta."
+        },
+        {
+          "tipo": "ejemplo",
+          "texto": "Francisco es kinesiólogo en un hospital de Rancagua y, además, socio de un centro de rehabilitación privado. Le piden opinar sobre a qué centros derivar a los pacientes que necesitan terapia.\n\nLo íntegro es contar que es socio de uno de esos centros y no participar en esa decisión. Así, los pacientes pueden confiar en que la derivación se hizo pensando en ellos."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Qué puedes hacer tú",
+          "texto": "Si trabajas en salud: pregúntate si alguien podría pensar que tu decisión está influida. Si la respuesta es sí, decláralo.\n\nSi eres paciente: puedes preguntar con respeto por qué te recomiendan un producto o un centro en particular, y si hay otras alternativas.",
+          "en_simple": "Ante la duda, transparentar siempre es mejor que callar."
+        }
+      ],
+      "situaciones": [
+        {
+          "enunciado": "Valentina, médica en un consultorio de Temuco, recibe una invitación de un laboratorio: un congreso de un día en Santiago y, después, tres días con todo pagado en un hotel en la playa.",
+          "opciones": [
+            {
+              "texto": "Aceptar todo: es una buena oportunidad para descansar.",
+              "correcta": false,
+              "explicacion": "El Colegio Médico señala que infringe la ética aceptar financiamiento de actividades ajenas a la medicina, como viajes con fines turísticos."
+            },
+            {
+              "texto": "Evaluar solo el congreso, si es científico y su institución lo permite, y rechazar los días de playa.",
+              "correcta": true,
+              "explicacion": "El Colegio Médico permite invitaciones a congresos cuando no limitan la independencia profesional, pero no los viajes turísticos."
+            },
+            {
+              "texto": "Aceptar todo, pero no contárselo a nadie.",
+              "correcta": false,
+              "explicacion": "Ocultarlo agrava el problema. La transparencia es central para manejar un conflicto de interés."
+            }
+          ],
+          "fuente": {
+            "institucion": "Colegio Médico de Chile",
+            "documento": "Código de Ética",
+            "referencia": "Arts. 54 y 55"
+          }
+        },
+        {
+          "enunciado": "Jorge integra el directorio de una agrupación de pacientes en Concepción. Una empresa ofrece financiar todo el presupuesto anual de la agrupación, con la condición de que solo hablen bien de su medicamento.",
+          "opciones": [
+            {
+              "texto": "Aceptar: sin ese dinero la agrupación no puede funcionar.",
+              "correcta": false,
+              "explicacion": "Se entiende la necesidad, pero aceptar esa condición compromete la voz de la agrupación, y los pacientes podrían recibir información sesgada."
+            },
+            {
+              "texto": "Rechazar la condición, buscar varias fuentes de financiamiento y dejar todo acuerdo por escrito.",
+              "correcta": true,
+              "explicacion": "Los Estándares del Marco de Consenso prohíben exigir exclusividad o condicionar el apoyo, y el Decálogo recomienda no depender de un solo financista."
+            },
+            {
+              "texto": "Aceptar y no informar a los socios.",
+              "correcta": false,
+              "explicacion": "Ocultar el acuerdo rompe la confianza de los socios. Toda colaboración debe ser transparente y verificable."
+            }
+          ],
+          "fuente": {
+            "institucion": "Marco de Consenso Ético APEC — Chile",
+            "documento": "Estándares éticos recomendados",
+            "referencia": "Puntos V y XIV"
+          }
+        }
+      ],
+      "terminos_relacionados": [
+        "conflicto-de-interes",
+        "declaracion-de-intereses",
+        "regalo",
+        "independencia-profesional"
+      ]
+    },
+    {
+      "id": "curso-transparencia-1",
+      "tema": "transparencia",
+      "titulo": "¿Qué información tienes derecho a conocer?",
+      "duracion_min": 4,
+      "objetivo": "Al terminar sabrás qué información puedes pedir sobre tu atención y sobre las instituciones públicas de salud.",
+      "pantallas": [
+        {
+          "tipo": "concepto",
+          "titulo": "Transparencia: poder ver lo que te afecta",
+          "texto": "{{transparencia|Transparencia}} significa que la información importante está disponible y se entrega de forma clara. En salud tiene dos caras: la información sobre tu propia atención y la información sobre cómo funcionan las instituciones.\n\nEl Código de Ética del ISP define la transparencia como el derecho de la ciudadanía a conocer y acceder a la información sobre las actuaciones y decisiones de las instituciones públicas.",
+          "en_simple": "Transparencia es que puedas ver y entender lo que te afecta."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Información sobre tu atención",
+          "texto": "El Código del Colegio Médico pide al médico informar al paciente de manera veraz y en lenguaje comprensible: quién lo atiende, su diagnóstico, las alternativas de tratamiento, sus riesgos y beneficios, y el pronóstico. También debe respetar si el paciente prefiere no saber o que se informe a otra persona.\n\nLa Ley 20.584, de derechos y deberes de los pacientes, también reconoce tu derecho a recibir información clara y oportuna sobre tu atención.",
+          "en_simple": "Tienes derecho a entender tu diagnóstico y tus opciones, en palabras simples.",
+          "referencias_legales": [
+            "ley-20584"
+          ],
+          "verificar": true
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Información sobre las instituciones públicas",
+          "texto": "Los hospitales públicos, el ISP y otros organismos del Estado deben publicar información sobre su funcionamiento. Además, cualquier persona puede pedirles información, gracias a la Ley 20.285 de acceso a la información pública, conocida como Ley de Transparencia.\n\nEsto permite, por ejemplo, conocer cómo se usan los recursos públicos y {{rendicion-de-cuentas|pedir cuentas}}. No sirve para obtener datos personales de otros pacientes: esa información está protegida.",
+          "en_simple": "Puedes pedir información a los organismos públicos, pero no los datos privados de otras personas.",
+          "referencias_legales": [
+            "ley-20285"
+          ],
+          "verificar": true
+        },
+        {
+          "tipo": "ejemplo",
+          "texto": "Doña Patricia, de 61 años, vive en Coyhaique. Su médico le propone una cirugía de cadera. Antes de aceptar, ella pregunta: ¿qué pasa si no me opero?, ¿cuánto dura la recuperación?, ¿hay otras alternativas?\n\nEl médico responde con calma y le entrega un documento para leer en casa. Doña Patricia decide con información y no con miedo. Eso es transparencia en la práctica, y es la base del {{consentimiento-informado|consentimiento informado}}."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Qué puedes hacer tú",
+          "texto": "Antes de una consulta, anota tus preguntas. Durante la consulta, pide que te expliquen con palabras simples y, si lo necesitas, que te lo entreguen por escrito.\n\nSi quieres información de un organismo público, búscala en su sitio web o haz una solicitud por sus canales de transparencia.",
+          "en_simple": "Preguntar es parte de cuidarte, no una molestia."
+        }
+      ],
+      "situaciones": [
+        {
+          "enunciado": "Aylin, de 19 años, sale de una consulta en Calama sin entender bien su diagnóstico. El médico usó muchas palabras técnicas y ella sintió vergüenza de preguntar.",
+          "opciones": [
+            {
+              "texto": "No hacer nada: el médico sabe lo que hace.",
+              "correcta": false,
+              "explicacion": "Confiar en el profesional está bien, pero entender tu diagnóstico es tu derecho y te ayuda a cuidarte mejor."
+            },
+            {
+              "texto": "Volver a preguntar o pedir que le expliquen con palabras simples, anotando sus dudas.",
+              "correcta": true,
+              "explicacion": "El Colegio Médico pide informar de manera veraz y en lenguaje comprensible. Preguntar no es una molestia: es parte de la atención."
+            },
+            {
+              "texto": "Buscar el diagnóstico en redes sociales y seguir lo que digan.",
+              "correcta": false,
+              "explicacion": "Las redes pueden tener información incorrecta. Lo mejor es aclarar las dudas con el equipo que te atiende."
+            }
+          ],
+          "fuente": {
+            "institucion": "Colegio Médico de Chile",
+            "documento": "Código de Ética",
+            "referencia": "Art. 24"
+          }
+        },
+        {
+          "enunciado": "Luis quiere saber cuántas personas esperan una cirugía en el hospital público de su ciudad.",
+          "opciones": [
+            {
+              "texto": "Hacer una solicitud de información al hospital, por sus canales de transparencia.",
+              "correcta": true,
+              "explicacion": "Los organismos públicos deben responder estas solicitudes, siempre que no se pidan datos personales de otras personas. El ISP, por ejemplo, señala que la información se pide mediante la ley de transparencia."
+            },
+            {
+              "texto": "Pedirle a un funcionario conocido la lista con los nombres de los pacientes.",
+              "correcta": false,
+              "explicacion": "Los nombres de otros pacientes son información protegida. Una lista así no debe compartirse."
+            },
+            {
+              "texto": "Asumir que esa información es secreta.",
+              "correcta": false,
+              "explicacion": "La información sobre el funcionamiento de un organismo público, en general, se puede solicitar."
+            }
+          ],
+          "fuente": {
+            "institucion": "Instituto de Salud Pública (ISP)",
+            "documento": "Código de Ética",
+            "referencia": "3.2.4 Uso correcto de la información reservada"
+          }
+        }
+      ],
+      "terminos_relacionados": [
+        "transparencia",
+        "rendicion-de-cuentas",
+        "consentimiento-informado"
+      ]
+    },
+    {
+      "id": "curso-transparencia-2",
+      "tema": "transparencia",
+      "titulo": "Transparencia en precios y en la relación con la industria",
+      "duracion_min": 5,
+      "objetivo": "Al terminar sabrás qué preguntar sobre costos y por qué importa conocer los vínculos entre profesionales y empresas.",
+      "pantallas": [
+        {
+          "tipo": "concepto",
+          "titulo": "Conocer el costo antes",
+          "texto": "Saber cuánto costará una atención te permite decidir con tranquilidad. El Código del Colegio Médico recomienda que el médico informe sus honorarios por adelantado, y le pide entregar toda la información que el paciente solicite sobre honorarios y costo del tratamiento. Tampoco puede negarse a dar recibo.\n\nEl mismo código considera falta cobrar por prestaciones no realizadas y cobrar o pagar por derivar pacientes.",
+          "en_simple": "Puedes preguntar cuánto costará tu atención antes de aceptarla."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "¿Por qué importan los vínculos con empresas?",
+          "texto": "Laboratorios y empresas de dispositivos médicos se relacionan con profesionales: financian congresos, investigaciones o charlas. Eso puede ser útil, pero también puede influir en lo que se recomienda.\n\nPor eso existe la {{declaracion-de-intereses|declaración de intereses}}. ASOCIMED pide a los médicos declarar, antes de cada presentación, sus vínculos comerciales, viajes u obsequios recibidos. ADIMECH pide cumplir la normativa sobre publicidad de {{transferencia-de-valor|transferencias de valor}}.",
+          "en_simple": "Saber quién financia algo te ayuda a evaluar lo que te dicen."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Publicidad responsable y lobby",
+          "texto": "La {{publicidad-responsable|publicidad en salud}} debe ser veraz. CANALAB pide que la publicidad de medicamentos evite toda declaración que pueda inducir a error, y el Colegio Médico considera falta que un médico haga publicidad de medicamentos o exámenes.\n\nCuando una empresa busca influir en una decisión de una autoridad, eso se llama {{lobby|lobby}}. En Chile, la Ley 20.730 obliga a registrar esas reuniones, y CANALAB pide a sus empresas cumplirla.",
+          "en_simple": "La publicidad no debe engañar y las reuniones de lobby deben quedar registradas.",
+          "referencias_legales": [
+            "ley-20730"
+          ],
+          "verificar": true
+        },
+        {
+          "tipo": "ejemplo",
+          "texto": "Fernanda, de Arica, ve en redes sociales el video de un profesional que recomienda con entusiasmo una crema «milagrosa». Al final aparece un código de descuento.\n\nAntes de comprar, Fernanda se pregunta: ¿esta persona recibe dinero por recomendarla?, ¿hay evidencia de que funcione? Hacerse esas preguntas es una forma de exigir transparencia."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Qué puedes hacer tú",
+          "texto": "Antes de una atención, pregunta cuánto costará y si hay alternativas. Pide siempre tu boleta o recibo.\n\nCuando veas una recomendación en redes o en una charla, fíjate si se informa quién la financia. Y si un aviso de salud promete resultados milagrosos, desconfía y consulta con un profesional.",
+          "en_simple": "Pregunta el precio antes, pide recibo y fíjate en quién financia lo que ves."
+        }
+      ],
+      "situaciones": [
+        {
+          "enunciado": "Benjamín necesita un examen de imagen. En la consulta le dicen que debe hacérselo en un centro específico y le entregan una tarjeta. Él se pregunta si el médico recibe algo por derivarlo.",
+          "opciones": [
+            {
+              "texto": "Preguntar con respeto si puede hacerse el examen en otro centro y cuánto costaría.",
+              "correcta": true,
+              "explicacion": "Tienes derecho a conocer tus opciones y costos. Además, el Colegio Médico considera falta cobrar o pagar por derivar pacientes o recibir comisiones por exámenes."
+            },
+            {
+              "texto": "Ir donde le dicen sin preguntar.",
+              "correcta": false,
+              "explicacion": "Puede que sea una buena recomendación, pero preguntar no es desconfiar: te ayuda a decidir con información."
+            },
+            {
+              "texto": "Acusar al médico en redes sociales.",
+              "correcta": false,
+              "explicacion": "Sin información, una acusación pública puede ser injusta. Si tienes dudas fundadas, existen canales formales."
+            }
+          ],
+          "fuente": {
+            "institucion": "Colegio Médico de Chile",
+            "documento": "Código de Ética",
+            "referencia": "Arts. 43 y 46"
+          }
+        },
+        {
+          "enunciado": "Una sociedad científica organiza una charla abierta sobre diabetes. La expositora recibe honorarios de un laboratorio que fabrica uno de los tratamientos que va a mencionar.",
+          "opciones": [
+            {
+              "texto": "Que no diga nada: su conocimiento es lo importante.",
+              "correcta": false,
+              "explicacion": "Su conocimiento puede ser excelente, pero el público merece conocer ese vínculo para evaluar lo que escucha."
+            },
+            {
+              "texto": "Que lo declare al inicio de la charla.",
+              "correcta": true,
+              "explicacion": "ASOCIMED pide declarar antes de cada presentación los vínculos comerciales, y que las actividades de las sociedades científicas incluyan la declaración de conflictos de interés."
+            },
+            {
+              "texto": "Cancelar la charla.",
+              "correcta": false,
+              "explicacion": "No es necesario: tener un vínculo no impide exponer. Lo que corresponde es transparentarlo."
+            }
+          ],
+          "fuente": {
+            "institucion": "ASOCIMED",
+            "documento": "Código de Ética de las Sociedades Científicas Médicas de Chile",
+            "referencia": "Capítulo II"
+          }
+        }
+      ],
+      "terminos_relacionados": [
+        "declaracion-de-intereses",
+        "transferencia-de-valor",
+        "publicidad-responsable",
+        "lobby"
+      ]
+    },
+    {
+      "id": "curso-compliance-1",
+      "tema": "compliance",
+      "titulo": "¿Qué es compliance y por qué existe?",
+      "duracion_min": 4,
+      "objetivo": "Al terminar sabrás qué es compliance, para qué sirve y cómo se nota en una institución de salud.",
+      "pantallas": [
+        {
+          "tipo": "concepto",
+          "titulo": "Compliance, en simple",
+          "texto": "{{compliance|Compliance}} es una palabra en inglés que significa «cumplimiento». En una empresa o institución, es el conjunto de reglas, controles y personas que ayudan a que todos cumplan las leyes y los compromisos éticos.\n\nNo se trata solo de evitar multas. Se trata de prevenir problemas antes de que ocurran y de construir una cultura donde hacer lo correcto sea lo normal.",
+          "en_simple": "Compliance es organizarse para cumplir las reglas todos los días, no solo cuando hay un problema."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Cómo se ve en la práctica",
+          "texto": "El Código de ADIMECH es un buen ejemplo. Pide a cada empresa: designar a un ejecutivo responsable de supervisar el cumplimiento, tener políticas internas claras, capacitar a sus trabajadores, crear controles y auditorías, y ofrecer procedimientos seguros para plantear dudas o inquietudes. ADIMECH tiene, además, un Comité de Compliance.\n\nMuchas empresas también revisan con cuidado a sus socios y proveedores antes de trabajar con ellos. Eso se llama {{debida-diligencia|debida diligencia}}.",
+          "en_simple": "Un buen sistema tiene responsables, reglas claras, capacitación, controles y canales de consulta."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Lo que dice la ley",
+          "texto": "En Chile, las empresas pueden ser responsables penalmente por ciertos delitos cometidos en su beneficio (Ley 20.393), y la Ley 21.595 de delitos económicos amplió esa lista.\n\nPor eso muchas empresas tienen un {{modelo-de-prevencion-de-delitos|modelo de prevención de delitos}}: un plan para identificar riesgos y evitar, por ejemplo, que alguien ofrezca un {{soborno|soborno}} para ganar una venta.",
+          "en_simple": "La ley empuja a las empresas a prevenir delitos, no solo a reaccionar cuando ocurren.",
+          "referencias_legales": [
+            "ley-20393",
+            "ley-21595"
+          ],
+          "verificar": true
+        },
+        {
+          "tipo": "ejemplo",
+          "texto": "Ignacio trabaja en ventas en una empresa ficticia de dispositivos médicos en Concepción. Un cliente de un hospital le insinúa que, si le regala un computador, la compra saldría más rápido.\n\nIgnacio recuerda la capacitación de su empresa: ese tipo de regalos está prohibido. Rechaza la oferta con respeto e informa al encargado de cumplimiento. Así funciona el compliance en el día a día."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Qué puedes hacer tú",
+          "texto": "Si trabajas en una institución de salud, averigua tres cosas: dónde está el código de conducta, quién es la persona encargada de cumplimiento y cómo se hacen las consultas o denuncias.\n\nY ante una situación dudosa, consulta antes de actuar. Preguntar a tiempo evita muchos problemas.",
+          "en_simple": "Conoce tu código, a la persona encargada y el canal de consultas."
+        }
+      ],
+      "situaciones": [
+        {
+          "enunciado": "En su primera semana en una empresa del área de la salud, Camila recibe el {{codigo-de-conducta|código de conducta}} y una invitación a una capacitación sobre él.",
+          "opciones": [
+            {
+              "texto": "Archivarlo: esas cosas son solo para los gerentes.",
+              "correcta": false,
+              "explicacion": "Los códigos aplican a todas las personas de la empresa. ADIMECH, por ejemplo, señala que su código está dirigido a todos los trabajadores, cualquiera sea su cargo."
+            },
+            {
+              "texto": "Leerlo, ir a la capacitación y anotar dónde consultar si tiene dudas.",
+              "correcta": true,
+              "explicacion": "Conocer las reglas desde el inicio te ayuda a decidir bien y a saber a quién acudir."
+            },
+            {
+              "texto": "Ir a la capacitación solo si es obligatoria.",
+              "correcta": false,
+              "explicacion": "Aunque no lo sea, la capacitación es una herramienta para ti: te prepara para situaciones difíciles."
+            }
+          ],
+          "fuente": {
+            "institucion": "ADIMECH",
+            "documento": "Código de Conducta y Ética",
+            "referencia": "Alcance y cumplimiento del Código"
+          }
+        },
+        {
+          "enunciado": "Un proveedor le ofrece a Rodrigo, encargado de compras de una clínica ficticia en La Serena, un viaje familiar si elige sus productos.",
+          "opciones": [
+            {
+              "texto": "Aceptar si los productos son buenos de todas formas.",
+              "correcta": false,
+              "explicacion": "Aunque el producto sea bueno, el viaje influye en la decisión y perjudica a otros proveedores. Es una ventaja indebida."
+            },
+            {
+              "texto": "Rechazarlo y reportarlo por el canal que tenga la clínica.",
+              "correcta": true,
+              "explicacion": "Ofrecer beneficios a cambio de una compra puede ser un soborno. Los Principios de Kuala Lumpur prohíben regalos y entretenimiento a profesionales de la salud, incluidos quienes compran productos."
+            },
+            {
+              "texto": "Aceptar, pero pedir que no lo cuenten.",
+              "correcta": false,
+              "explicacion": "Pedir secreto es una señal clara de que algo no está bien."
+            }
+          ],
+          "fuente": {
+            "institucion": "APEC",
+            "documento": "Principios de Kuala Lumpur (tecnología médica)",
+            "referencia": "Regalos y definición de profesionales de la salud"
+          }
+        }
+      ],
+      "terminos_relacionados": [
+        "compliance",
+        "debida-diligencia",
+        "modelo-de-prevencion-de-delitos",
+        "soborno",
+        "codigo-de-conducta"
+      ]
+    },
+    {
+      "id": "curso-compliance-2",
+      "tema": "compliance",
+      "titulo": "Canales de denuncia: cómo funcionan y qué te protege",
+      "duracion_min": 5,
+      "objetivo": "Al terminar sabrás qué es un canal de denuncia, cómo usarlo y qué protecciones existen.",
+      "pantallas": [
+        {
+          "tipo": "concepto",
+          "titulo": "¿Qué es un canal de denuncia?",
+          "texto": "Un {{canal-de-denuncia|canal de denuncia}} es una vía formal para informar algo que parece incorrecto: un fraude, un acoso o un riesgo para pacientes. Puede ser un correo, un formulario o una persona encargada.\n\nCANALAB pide a sus empresas establecer canales de denuncia para que sus trabajadores informen situaciones irregulares. El ISP tiene un encargado de ética institucional que recibe consultas y denuncias de sus funcionarios.",
+          "en_simple": "Un canal de denuncia es una puerta segura para avisar que algo anda mal."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Cómo hacer una buena denuncia",
+          "texto": "Una denuncia útil describe hechos, no rumores: qué pasó, cuándo, dónde y quiénes participaron. Si tienes documentos o testigos, menciónalos.\n\nEl Código del Colegio Médico señala que las denuncias ante sus tribunales de ética se hacen «en forma objetiva y discreta». Es decir: con hechos y sin exponer a las personas públicamente antes de que se investigue.",
+          "en_simple": "Cuenta hechos concretos, con respeto y por el canal formal."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Lo que te protege",
+          "texto": "Quien denuncia de buena fe no debería sufrir una {{represalia|represalia}}: un despido, un traslado o un mal trato por haber hablado. Por eso muchos canales permiten mantener en reserva la identidad del {{denunciante|denunciante}}. El ISP, por ejemplo, señala que la identificación de quien denuncia será estrictamente confidencial.\n\nSi sufres una represalia, eso también se puede denunciar, ante la misma institución o ante la autoridad que corresponda.",
+          "en_simple": "Denunciar de buena fe no debería costarte el trabajo ni la tranquilidad."
+        },
+        {
+          "tipo": "ejemplo",
+          "texto": "Javiera es auxiliar de aseo en una clínica ficticia de Puerto Montt. Ve que se botan restos de medicamentos en un basurero común, lo que puede ser peligroso.\n\nLe da miedo hablar, pero usa el formulario de denuncias de la clínica y describe lo que vio y cuándo. Una semana después, la clínica capacita al equipo y cambia el procedimiento. Su aviso protegió a todos."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Qué puedes hacer tú",
+          "texto": "Antes de denunciar, anota los hechos con fechas, lugares y personas involucradas. Guarda los documentos que tengas.\n\nUsa el canal formal de tu institución y pregunta si tu identidad puede quedar en reserva. Si sientes que te tratan peor por haber denunciado, regístralo y repórtalo también.",
+          "en_simple": "Anota, guarda respaldos, usa el canal formal y reporta cualquier represalia."
+        }
+      ],
+      "situaciones": [
+        {
+          "enunciado": "Sebastián, técnico de laboratorio en Antofagasta, escucha en el casino que un colega estaría alterando resultados de exámenes. No lo ha visto con sus propios ojos.",
+          "opciones": [
+            {
+              "texto": "Contarlo en el grupo de WhatsApp del trabajo para alertar a todos.",
+              "correcta": false,
+              "explicacion": "Difundir un rumor puede dañar a una persona inocente y entorpecer una investigación. La discreción es parte de una denuncia responsable."
+            },
+            {
+              "texto": "Informarlo por el canal formal, aclarando qué sabe y qué no ha visto directamente.",
+              "correcta": true,
+              "explicacion": "Así la institución puede investigar con cuidado. El Colegio Médico, por ejemplo, pide denunciar en forma objetiva y discreta."
+            },
+            {
+              "texto": "No hacer nada porque no está seguro.",
+              "correcta": false,
+              "explicacion": "Si el riesgo para los pacientes es real, callar puede causar daño. Puedes informar dejando claro que es algo que escuchaste."
+            }
+          ],
+          "fuente": {
+            "institucion": "Colegio Médico de Chile",
+            "documento": "Código de Ética",
+            "referencia": "Art. 63"
+          }
+        },
+        {
+          "enunciado": "Después de denunciar un caso de acoso laboral, a Carolina le cambian el turno sin explicación y la dejan fuera de las reuniones.",
+          "opciones": [
+            {
+              "texto": "Aguantar: es el precio de haber hablado.",
+              "correcta": false,
+              "explicacion": "No debería haber un precio por denunciar de buena fe. Lo que describe puede ser una represalia."
+            },
+            {
+              "texto": "Anotar lo que ocurre y reportarlo como posible represalia al canal de denuncia o a la autoridad que corresponda.",
+              "correcta": true,
+              "explicacion": "Las represalias también son faltas. El ISP, por ejemplo, rechaza el acoso laboral y cuenta con un procedimiento interno de denuncia."
+            },
+            {
+              "texto": "Retirar la denuncia para que todo vuelva a la normalidad.",
+              "correcta": false,
+              "explicacion": "Retirarla no garantiza que el trato mejore y deja sin resolver el problema original."
+            }
+          ],
+          "fuente": {
+            "institucion": "Instituto de Salud Pública (ISP)",
+            "documento": "Código de Ética",
+            "referencia": "3.1.3 Respeto a la dignidad"
+          }
+        }
+      ],
+      "terminos_relacionados": [
+        "canal-de-denuncia",
+        "denunciante",
+        "represalia"
+      ]
+    },
+    {
+      "id": "curso-datos-1",
+      "tema": "proteccion-datos",
+      "titulo": "Tus datos de salud son sensibles",
+      "duracion_min": 4,
+      "objetivo": "Al terminar sabrás por qué los datos de salud requieren un cuidado especial y cómo protegerlos.",
+      "pantallas": [
+        {
+          "tipo": "concepto",
+          "titulo": "Datos personales y datos sensibles",
+          "texto": "Un {{dato-personal|dato personal}} es cualquier información que permite identificarte: tu nombre, tu RUT, tu dirección o tu teléfono. Algunos son más delicados y se llaman {{dato-sensible|datos sensibles}}: por ejemplo, tu estado de salud, tu vida sexual o tus creencias.\n\nEn Chile, la Ley 19.628 ya considera sensibles los datos sobre salud. La nueva Ley 21.719 refuerza esa protección y crea una agencia encargada de fiscalizarla.",
+          "en_simple": "Tu información de salud es de las más delicadas que existen.",
+          "referencias_legales": [
+            "ley-19628",
+            "ley-21719"
+          ],
+          "verificar": true
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Lo que piden los códigos",
+          "texto": "Los códigos de ética protegen esta información desde hace mucho. El Colegio Médico prohíbe participar en bancos de datos de salud donde no esté garantizada la confidencialidad. El Colegio de Químicos Farmacéuticos agrega la prohibición de vender datos a terceros, salvo para fines estadísticos.\n\nEl Decálogo de las organizaciones de pacientes es muy claro: la información personal no debe compartirse sin {{consentimiento|consentimiento}} ni usarse «como moneda de cambio».",
+          "en_simple": "Nadie debería usar o vender tus datos de salud sin tu permiso."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "¿Cuándo se pueden usar?",
+          "texto": "Tus datos se usan para atenderte: el equipo de salud necesita conocerlos. Para otros fines, como investigaciones o estadísticas, lo correcto es pedir tu consentimiento o usar datos anonimizados.\n\nLa {{anonimizacion|anonimización}} borra todo lo que permita saber de quién son los datos. Los Estándares del Marco de Consenso solo aceptan que se comparta información de pacientes con la industria si es agregada y no permite distinguir a cada persona.",
+          "en_simple": "Fuera de tu atención, tus datos solo deberían usarse con tu permiso o sin que se sepa que son tuyos."
+        },
+        {
+          "tipo": "ejemplo",
+          "texto": "Don Hernán, de 72 años, vive en Chillán. Recibe la llamada de una supuesta farmacia que conoce su diagnóstico y le ofrece un tratamiento «especial».\n\nÉl se pregunta cómo obtuvieron ese dato. Decide no entregar más información y consultar en su centro de salud. Hizo bien: nadie debería contactarte usando tus datos de salud sin tu autorización."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Qué puedes hacer tú",
+          "texto": "Antes de aceptar las condiciones de una aplicación de salud, revisa qué datos pide y con quién los comparte.\n\nNo entregues tu diagnóstico ni tu RUT por teléfono a quien no conoces. Y si alguien te contacta usando tus datos de salud sin tu permiso, pregunta de dónde los obtuvo y consulta en tu centro de salud.",
+          "en_simple": "Lee antes de aceptar y no entregues tus datos de salud a desconocidos."
+        }
+      ],
+      "situaciones": [
+        {
+          "enunciado": "Una aplicación gratuita para controlar la presión arterial le pide a Natalia aceptar que sus datos se compartan «con socios comerciales».",
+          "opciones": [
+            {
+              "texto": "Aceptar sin leer: todas las aplicaciones piden lo mismo.",
+              "correcta": false,
+              "explicacion": "Aceptar sin leer puede significar que tus datos de salud terminen en manos de empresas que no conoces."
+            },
+            {
+              "texto": "Leer para qué se usarán sus datos y buscar otra opción si no está de acuerdo.",
+              "correcta": true,
+              "explicacion": "El consentimiento debe ser informado: tienes derecho a saber para qué se usarán tus datos y a decir que no."
+            },
+            {
+              "texto": "Inventar datos para que la aplicación no sepa la verdad.",
+              "correcta": false,
+              "explicacion": "Así la aplicación pierde utilidad para tu salud, y el problema de fondo sigue: no sabes qué hacen con tu información."
+            }
+          ],
+          "fuente": {
+            "institucion": "Mesa del Marco de Consenso Ético — sector pacientes",
+            "documento": "Decálogo para el Relacionamiento Ético con Organizaciones de Pacientes",
+            "referencia": "Principio 9"
+          }
+        },
+        {
+          "enunciado": "Una agrupación de pacientes recibe una oferta: una empresa le donará dinero a cambio de la lista con nombres y diagnósticos de sus socios.",
+          "opciones": [
+            {
+              "texto": "Aceptar, porque la donación ayudará a todos los socios.",
+              "correcta": false,
+              "explicacion": "La información de los socios no puede usarse como pago. Entregarla traiciona su confianza."
+            },
+            {
+              "texto": "Rechazar la condición: la información de los socios no se entrega.",
+              "correcta": true,
+              "explicacion": "Los Estándares del Marco de Consenso señalan que la información de los pacientes no puede ser en ningún caso una contraprestación para la industria."
+            },
+            {
+              "texto": "Entregar solo los diagnósticos, sin los nombres.",
+              "correcta": false,
+              "explicacion": "Aun sin nombres, otros datos pueden permitir identificar a las personas. Y la regla de fondo es que la información no se usa para pagar apoyos."
+            }
+          ],
+          "fuente": {
+            "institucion": "Marco de Consenso Ético APEC — Chile",
+            "documento": "Estándares éticos recomendados",
+            "referencia": "Punto XV"
+          }
+        }
+      ],
+      "terminos_relacionados": [
+        "dato-personal",
+        "dato-sensible",
+        "consentimiento",
+        "anonimizacion"
+      ]
+    },
+    {
+      "id": "curso-datos-2",
+      "tema": "proteccion-datos",
+      "titulo": "Ficha clínica: ¿quién puede verla?",
+      "duracion_min": 5,
+      "objetivo": "Al terminar sabrás qué es la ficha clínica, quién puede verla y cómo se protege lo que cuentas en una atención.",
+      "pantallas": [
+        {
+          "tipo": "concepto",
+          "titulo": "¿Qué es la ficha clínica?",
+          "texto": "La {{ficha-clinica|ficha clínica}} es el registro de tu historia de salud: consultas, diagnósticos, exámenes, tratamientos y procedimientos. Puede estar en papel o en un sistema computacional.\n\nSirve para que el equipo de salud te atienda bien y de forma continua. Por eso debe ser completa y verídica. Y como contiene datos sensibles, debe guardarse con mucho cuidado.",
+          "en_simple": "La ficha clínica es tu historia de salud por escrito, y es reservada."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Quién puede verla",
+          "texto": "La Ley 20.584 establece que la ficha clínica es reservada. Pueden acceder a ella tú, las personas que participan en tu atención y, en los casos que la ley señala, otras personas: por ejemplo, alguien con tu autorización ante notario o un tribunal.\n\nTus familiares, tu empleador o un funcionario del hospital que no te atiende no pueden revisarla por curiosidad o interés.",
+          "en_simple": "Mirar una ficha sin ser parte de la atención es una falta, aunque sea por curiosidad.",
+          "referencias_legales": [
+            "ley-20584"
+          ],
+          "verificar": true
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "El secreto profesional",
+          "texto": "Los códigos de ética van en la misma línea. El {{secreto-profesional|secreto profesional}} obliga a guardar reserva de todo lo que se sabe de ti por tu atención, incluso tu nombre, y aun después de terminada la atención.\n\nEl Colegio Médico pide que los colaboradores también mantengan la {{confidencialidad|confidencialidad}}. Los colegios de Enfermeras y de Kinesiólogos también exigen guardar el secreto profesional. La información solo se revela con tu autorización escrita o en casos excepcionales, como una orden judicial.",
+          "en_simple": "Lo que cuentas en una atención de salud se queda en la atención."
+        },
+        {
+          "tipo": "ejemplo",
+          "texto": "Martina trabaja en la admisión de un hospital ficticio en Los Ángeles. Su tía le pide que «le eche una mirada» a la ficha de una vecina que estuvo hospitalizada.\n\nMartina le explica que no puede: no participa en la atención de esa persona y la ficha es reservada. Su tía se molesta un poco, pero entiende. Martina protegió a la vecina y también su propio trabajo."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Qué puedes hacer tú",
+          "texto": "Puedes pedir una copia de tu ficha clínica en el establecimiento donde te atiendes. Si crees que alguien la revisó sin motivo, pregunta en el establecimiento y presenta un reclamo.\n\nSi trabajas en salud, abre solo las fichas de las personas que atiendes y nunca compartas información clínica por redes sociales o grupos de mensajería.",
+          "en_simple": "Tu ficha es tuya: puedes pedirla y reclamar si alguien la usa mal.",
+          "referencias_legales": [
+            "ley-20584"
+          ],
+          "verificar": true
+        }
+      ],
+      "situaciones": [
+        {
+          "enunciado": "En una reunión clínica, un equipo quiere presentar el caso de un paciente muy particular para aprender de él.",
+          "opciones": [
+            {
+              "texto": "Mostrar la ficha completa, con nombre y foto, porque son todos profesionales.",
+              "correcta": false,
+              "explicacion": "Aunque sean profesionales, no todos participan en esa atención. Mostrar la identidad sin necesidad expone al paciente."
+            },
+            {
+              "texto": "Presentar el caso sin datos que permitan identificar al paciente o, si es imprescindible, con su consentimiento escrito.",
+              "correcta": true,
+              "explicacion": "El Colegio Médico pide que los pacientes mencionados en reuniones clínicas permanezcan en el anonimato, salvo consentimiento escrito."
+            },
+            {
+              "texto": "No presentar nunca casos reales.",
+              "correcta": false,
+              "explicacion": "Aprender de casos reales es valioso. La clave es proteger la identidad del paciente."
+            }
+          ],
+          "fuente": {
+            "institucion": "Colegio Médico de Chile",
+            "documento": "Código de Ética",
+            "referencia": "Art. 34"
+          }
+        },
+        {
+          "enunciado": "La empresa donde trabaja Diego le pide a su médico tratante una copia de su ficha clínica para «evaluar su licencia».",
+          "opciones": [
+            {
+              "texto": "El médico debe entregarla porque la pide el empleador.",
+              "correcta": false,
+              "explicacion": "El empleador no está entre quienes pueden acceder a la ficha sin autorización del paciente."
+            },
+            {
+              "texto": "El médico solo puede entregar información con una autorización escrita y específica de Diego.",
+              "correcta": true,
+              "explicacion": "El Colegio Médico exige una autorización escrita del paciente que precise qué información se entrega y a quién, y no acepta autorizaciones genéricas."
+            },
+            {
+              "texto": "El médico puede entregar solo el diagnóstico.",
+              "correcta": false,
+              "explicacion": "El diagnóstico también está protegido por el secreto profesional. Se necesita la autorización de Diego."
+            }
+          ],
+          "fuente": {
+            "institucion": "Colegio Médico de Chile",
+            "documento": "Código de Ética",
+            "referencia": "Arts. 37 y 38"
+          }
+        }
+      ],
+      "terminos_relacionados": [
+        "ficha-clinica",
+        "secreto-profesional",
+        "confidencialidad"
+      ]
+    },
+    {
+      "id": "curso-ia-1",
+      "tema": "ia-salud",
+      "titulo": "¿Qué es la IA y cómo se usa en salud?",
+      "duracion_min": 4,
+      "objetivo": "Al terminar sabrás qué es la inteligencia artificial, cómo se usa en salud y qué preguntas hacerte frente a ella.",
+      "pantallas": [
+        {
+          "tipo": "concepto",
+          "titulo": "¿Qué es la inteligencia artificial?",
+          "texto": "La {{inteligencia-artificial|inteligencia artificial}} (IA) son programas computacionales que aprenden patrones a partir de muchos ejemplos y luego los usan para hacer predicciones, clasificar información o escribir textos.\n\nFuncionan con {{algoritmo|algoritmos}}: instrucciones paso a paso. Lo que la IA «sabe» depende de los {{datos-de-entrenamiento|datos con que fue entrenada}}. Si esos datos son incompletos, sus respuestas también lo serán.",
+          "en_simple": "La IA aprende de ejemplos: es tan buena como los datos con que aprendió."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Usos en salud",
+          "texto": "La IA ya se usa en salud de muchas formas: ayuda a leer radiografías, ordena listas de espera, recuerda controles a los pacientes, traduce documentos o responde preguntas, como el chat de este sitio.\n\nBien usada, puede ahorrar tiempo y detectar cosas que una persona pasaría por alto. Pero no reemplaza el juicio de un profesional ni la conversación con el paciente: necesita {{supervision-humana|supervisión humana}}.",
+          "en_simple": "La IA es una herramienta de apoyo; las decisiones de salud las toman personas."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Los códigos de ética y la tecnología",
+          "texto": "Los códigos de este sitio no hablan directamente de IA, pero sus principios aplican. El Colegio de Enfermeras pide usar avances tecnológicos compatibles con la seguridad, la dignidad y los derechos de las personas. El Colegio Médico pide independencia frente a las empresas, incluidas las aplicaciones de salud, y prohíbe participar en bancos de datos sin confidencialidad garantizada.\n\nEn Chile se tramita un proyecto de ley para regular la IA. Mientras tanto, rigen las normas sobre datos personales y derechos de los pacientes.",
+          "en_simple": "Aunque la IA sea nueva, las reglas éticas de siempre se le aplican.",
+          "referencias_legales": [
+            "proyecto-ia",
+            "ley-19628",
+            "ley-20584"
+          ],
+          "verificar": true
+        },
+        {
+          "tipo": "ejemplo",
+          "texto": "Gloria, de 58 años, vive en Ovalle y tiene diabetes. En su centro de salud le cuentan que un programa analiza fotos de su ojo para detectar daño, y que un especialista revisa los casos dudosos.\n\nGloria pregunta si sus fotos se guardan y quién las ve. Le explican cómo se protegen. Así, ella entiende la herramienta y confía en el resultado."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Qué puedes hacer tú",
+          "texto": "Si en tu atención se usa IA, puedes preguntar para qué sirve, quién revisa sus resultados y cómo se protegen tus datos.\n\nSi usas un chat de IA para informarte, tómalo como un punto de partida: contrasta lo que dice con un profesional y con fuentes oficiales.",
+          "en_simple": "Pregunta cómo se usa la IA en tu atención y verifica lo que te diga un chat."
+        }
+      ],
+      "situaciones": [
+        {
+          "enunciado": "Antes de una consulta, Tomás usa un chat de IA que le dice que su dolor de cabeza «probablemente no es nada».",
+          "opciones": [
+            {
+              "texto": "Cancelar la consulta, porque la IA ya respondió.",
+              "correcta": false,
+              "explicacion": "La IA no te examinó ni conoce tu historia completa. Puede equivocarse, incluso sonando muy segura."
+            },
+            {
+              "texto": "Ir a la consulta y comentar lo que leyó, para conversarlo con el profesional.",
+              "correcta": true,
+              "explicacion": "La IA puede ayudarte a preparar preguntas, pero el diagnóstico corresponde a un profesional que te evalúe."
+            },
+            {
+              "texto": "Pedirle a la IA una receta.",
+              "correcta": false,
+              "explicacion": "Una IA no puede recetarte. Automedicarte con lo que diga un chat puede ser peligroso."
+            }
+          ],
+          "fuente": null
+        },
+        {
+          "enunciado": "Un centro de salud ficticio quiere usar una aplicación de IA gratuita para transcribir las consultas. La aplicación guarda las grabaciones en servidores de la empresa y no explica cómo las usa.",
+          "opciones": [
+            {
+              "texto": "Usarla de inmediato: es gratis y ahorra tiempo.",
+              "correcta": false,
+              "explicacion": "Lo gratis puede tener un costo oculto: tus datos. Sin saber cómo se protegen las grabaciones, se arriesga la confidencialidad de los pacientes."
+            },
+            {
+              "texto": "Evaluar antes cómo se guardan y usan los datos, e informar a los pacientes.",
+              "correcta": true,
+              "explicacion": "El Colegio Médico prohíbe participar en bancos de datos de salud sin confidencialidad garantizada. Revisar antes protege a pacientes y profesionales."
+            },
+            {
+              "texto": "Usarla solo con los pacientes que no se quejan.",
+              "correcta": false,
+              "explicacion": "La confidencialidad protege a todos los pacientes, se quejen o no."
+            }
+          ],
+          "fuente": {
+            "institucion": "Colegio Médico de Chile",
+            "documento": "Código de Ética",
+            "referencia": "Art. 35"
+          }
+        }
+      ],
+      "terminos_relacionados": [
+        "inteligencia-artificial",
+        "algoritmo",
+        "datos-de-entrenamiento",
+        "supervision-humana"
+      ]
+    },
+    {
+      "id": "curso-ia-2",
+      "tema": "ia-salud",
+      "titulo": "Riesgos de la IA: sesgos, errores y quién responde",
+      "duracion_min": 5,
+      "objetivo": "Al terminar sabrás reconocer los principales riesgos de la IA en salud y por qué siempre debe haber una persona responsable.",
+      "pantallas": [
+        {
+          "tipo": "concepto",
+          "titulo": "Sesgos",
+          "texto": "Un {{sesgo|sesgo}} es una inclinación que hace que un sistema trate peor a algunos grupos. Si una IA aprendió sobre todo con datos de hombres jóvenes de Santiago, puede funcionar peor con mujeres mayores, con personas de pueblos originarios o con personas de regiones.\n\nEl Decálogo de las organizaciones de pacientes pide resguardar la equidad y que ninguna voz quede fuera por su origen, edad, género o territorio. Esa misma idea vale para la tecnología.",
+          "en_simple": "Una IA puede ser injusta si aprendió solo de algunas personas."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Errores que suenan seguros",
+          "texto": "La IA puede equivocarse. Un error muy común en los chats es la {{alucinacion-de-ia|«alucinación»}}: la IA inventa datos, citas o artículos que no existen, pero los presenta con total seguridad.\n\nPor eso el chat de este sitio responde solo con los códigos de ética cargados y muestra la fuente. Aun así, conviene revisar siempre el documento original.",
+          "en_simple": "Que una IA suene segura no significa que tenga razón."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "¿Quién responde?",
+          "texto": "Una máquina no tiene responsabilidad ética: responden las personas e instituciones que deciden usarla. Por eso es clave la {{supervision-humana|supervisión humana}}: que una persona capacitada revise y pueda corregir lo que la IA propone.\n\nTambién importa la {{explicabilidad|explicabilidad}}: poder entender por qué la IA sugiere algo. El Colegio Médico pide usar todos los medios técnicos al alcance para una atención óptima. Una herramienta de IA puede ser uno de ellos, pero no reemplaza el juicio profesional.",
+          "en_simple": "La IA puede sugerir; una persona debe decidir y responder."
+        },
+        {
+          "tipo": "ejemplo",
+          "texto": "Un hospital ficticio de Valdivia prueba una IA para ordenar la lista de espera. Después de unos meses, el equipo nota que las personas de zonas rurales quedan casi siempre al final.\n\nRevisan el sistema y descubren que la IA usaba la cantidad de consultas anteriores como señal de gravedad, y en zonas rurales la gente consulta menos porque vive lejos. Corrigen el criterio. La supervisión humana detectó el sesgo."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Qué puedes hacer tú",
+          "texto": "Desconfía de las respuestas de IA que no muestran su fuente. Si una herramienta de IA te afecta, pregunta quién la supervisa.\n\nSi trabajas en salud y notas que una herramienta falla con ciertos grupos, infórmalo por los canales formales.",
+          "en_simple": "Pide la fuente, pregunta quién supervisa y avisa si notas un sesgo."
+        }
+      ],
+      "situaciones": [
+        {
+          "enunciado": "Un sistema de IA recomienda no hospitalizar a don Arturo, de 80 años. La médica de turno, por su experiencia, cree que sí lo necesita.",
+          "opciones": [
+            {
+              "texto": "Seguir a la IA, porque se equivoca menos que las personas.",
+              "correcta": false,
+              "explicacion": "La IA puede ser útil, pero no lo sabe todo. Ignorar el juicio clínico puede poner en riesgo al paciente."
+            },
+            {
+              "texto": "Evaluar al paciente, decidir según su juicio clínico y registrar por qué se apartó de la sugerencia.",
+              "correcta": true,
+              "explicacion": "La IA es un apoyo; la decisión es profesional. Registrar el porqué ayuda a mejorar el sistema y a dar cuenta de lo decidido."
+            },
+            {
+              "texto": "Pedirle a don Arturo que elija entre la IA y la médica.",
+              "correcta": false,
+              "explicacion": "Al paciente hay que informarle y escucharlo, pero no corresponde traspasarle una diferencia técnica sin orientación."
+            }
+          ],
+          "fuente": null
+        },
+        {
+          "enunciado": "Una paciente pregunta al chat de IA de una clínica qué dosis de un medicamento tomar, y el chat le entrega una cifra con mucha seguridad.",
+          "opciones": [
+            {
+              "texto": "Tomar esa dosis, porque es el chat oficial de la clínica.",
+              "correcta": false,
+              "explicacion": "Aunque sea un canal oficial, una IA puede alucinar. Las dosis deben confirmarse con un profesional o con la receta."
+            },
+            {
+              "texto": "Confirmar la dosis con su receta o con un químico farmacéutico antes de tomarla.",
+              "correcta": true,
+              "explicacion": "Verificar con una persona capacitada es la mejor protección frente a un error de la IA."
+            },
+            {
+              "texto": "Tomar la mitad, por si acaso.",
+              "correcta": false,
+              "explicacion": "Cambiar la dosis por cuenta propia también puede ser riesgoso. Lo seguro es confirmar."
+            }
+          ],
+          "fuente": null
+        }
+      ],
+      "terminos_relacionados": [
+        "sesgo",
+        "alucinacion-de-ia",
+        "supervision-humana",
+        "explicabilidad"
+      ]
+    },
+    {
+      "id": "curso-pacientes-1",
+      "tema": "pacientes",
+      "titulo": "Derechos y deberes de los pacientes",
+      "duracion_min": 5,
+      "objetivo": "Al terminar conocerás tus principales derechos y deberes al atenderte en salud.",
+      "pantallas": [
+        {
+          "tipo": "concepto",
+          "titulo": "Una ley para los pacientes",
+          "texto": "En Chile, la Ley 20.584 regula los derechos y deberes de las personas en su atención de salud. Aplica en el sector público y en el privado.\n\nEntre tus derechos están: recibir un {{trato-digno|trato digno}}, estar acompañado, recibir información clara, que tu ficha clínica sea reservada, decidir sobre tu tratamiento y presentar un {{reclamo|reclamo}}.",
+          "en_simple": "Tus derechos como paciente valen en consultorios, hospitales y clínicas.",
+          "referencias_legales": [
+            "ley-20584"
+          ],
+          "verificar": true
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Trato digno y compañía",
+          "texto": "Trato digno significa que te atiendan con respeto y amabilidad, que te llamen por tu nombre, que cuiden tu privacidad y que te hablen en un lenguaje que entiendas. El Colegio de Enfermeras pide respetar los derechos humanos, valores, costumbres y creencias de las personas.\n\nTambién tienes derecho al {{acompanamiento|acompañamiento}} de familiares o personas de confianza, según las normas del establecimiento, y a recibir asistencia espiritual si lo deseas.",
+          "en_simple": "Mereces respeto, privacidad y compañía durante tu atención.",
+          "referencias_legales": [
+            "ley-20584"
+          ],
+          "verificar": true
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "También hay deberes",
+          "texto": "La misma ley establece deberes para los pacientes: tratar con respeto al personal de salud, cuidar las instalaciones, entregar información veraz sobre tu salud y respetar las normas del establecimiento.\n\nCumplir estos deberes ayuda a que todos reciban una mejor atención. Como dice el Colegio Médico, la atención se da en una relación de confianza y respeto, que garantice la libertad y {{autonomia|autonomía}} de ambos.",
+          "en_simple": "Una buena atención se construye con respeto de ambos lados.",
+          "referencias_legales": [
+            "ley-20584"
+          ],
+          "verificar": true
+        },
+        {
+          "tipo": "ejemplo",
+          "texto": "Don Jorge, de 68 años, vive en Temuco y en casa habla mapudungun con su familia. En el hospital pide que su hija lo acompañe para ayudarle a entender las indicaciones.\n\nEl equipo lo permite y se toma el tiempo de explicar. Don Jorge, por su parte, avisa que toma remedios de hierbas, un dato útil para su tratamiento. Derechos y deberes funcionando juntos."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Qué puedes hacer tú",
+          "texto": "Conoce la oficina de atención al usuario de tu centro de salud: ahí puedes hacer consultas, sugerencias y reclamos.\n\nLleva tus exámenes y una lista de los medicamentos que tomas. Si algo no te queda claro, pide que te lo expliquen otra vez. Y si te sientes mal tratado, dilo con calma y deja registro por escrito.",
+          "en_simple": "Infórmate, lleva tus antecedentes y usa los canales formales cuando algo falle."
+        }
+      ],
+      "situaciones": [
+        {
+          "enunciado": "Mientras espera en la urgencia, a Soledad le hablan de mala forma y comentan su diagnóstico en voz alta, frente a otras personas.",
+          "opciones": [
+            {
+              "texto": "No decir nada, porque en la urgencia siempre es así.",
+              "correcta": false,
+              "explicacion": "Aunque haya mucho trabajo, el trato digno y la privacidad son derechos. Señalarlo ayuda a mejorar."
+            },
+            {
+              "texto": "Pedir con calma más privacidad y, si no mejora, dejar un reclamo en la oficina de atención al usuario.",
+              "correcta": true,
+              "explicacion": "Tienes derecho a un trato digno y a la reserva de tu información, y a reclamar si no se respetan. Los códigos piden respeto y secreto profesional."
+            },
+            {
+              "texto": "Gritarle al personal para que entiendan.",
+              "correcta": false,
+              "explicacion": "Tu molestia es comprensible, pero tratar con respeto al personal también es un deber, y gritar suele empeorar la situación."
+            }
+          ],
+          "fuente": {
+            "institucion": "Colegio de Enfermeras de Chile",
+            "documento": "Código de Ética",
+            "referencia": "Puntos 1.3 y 1.5"
+          }
+        },
+        {
+          "enunciado": "Raúl lleva semanas esperando un resultado y nadie le explica por qué. Quiere reclamar, pero no sabe cómo.",
+          "opciones": [
+            {
+              "texto": "Presentar un reclamo por escrito en el establecimiento y, si la respuesta no lo deja conforme, recurrir a la Superintendencia de Salud.",
+              "correcta": true,
+              "explicacion": "Reclamar es un derecho. Primero se presenta en el establecimiento; si no hay solución, se puede acudir a la Superintendencia de Salud."
+            },
+            {
+              "texto": "Publicar los nombres de los funcionarios en redes sociales.",
+              "correcta": false,
+              "explicacion": "Exponer a personas en redes puede ser injusto y no resuelve el problema. Los canales formales dejan registro y obligan a responder."
+            },
+            {
+              "texto": "Esperar sin hacer nada.",
+              "correcta": false,
+              "explicacion": "Tu salud puede depender de ese resultado. Preguntar y reclamar a tiempo es tu derecho."
+            }
+          ],
+          "fuente": {
+            "institucion": "Legislación chilena",
+            "documento": "Ley 20.584",
+            "referencia": "Derecho a reclamo",
+            "verificar": true
+          }
+        }
+      ],
+      "terminos_relacionados": [
+        "trato-digno",
+        "acompanamiento",
+        "reclamo",
+        "autonomia"
+      ]
+    },
+    {
+      "id": "curso-pacientes-2",
+      "tema": "pacientes",
+      "titulo": "Consentimiento informado, en simple",
+      "duracion_min": 4,
+      "objetivo": "Al terminar sabrás qué es el consentimiento informado y cómo ejercerlo.",
+      "pantallas": [
+        {
+          "tipo": "concepto",
+          "titulo": "¿Qué es el consentimiento informado?",
+          "texto": "El {{consentimiento-informado|consentimiento informado}} es tu acuerdo para recibir una atención, después de haber entendido de qué se trata. No es solo firmar un papel: es una conversación.\n\nEl Colegio Médico señala que toda atención médica debe contar con el consentimiento del paciente. Si un procedimiento tiene riesgos importantes, el médico debe darte información adicional sobre beneficios y riesgos para obtener un consentimiento específico.",
+          "en_simple": "Consentir es decir que sí sabiendo a qué dices que sí."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Qué te deben explicar",
+          "texto": "Antes de decidir, debes entender qué te van a hacer y para qué, qué beneficios y riesgos tiene, qué alternativas existen y qué pasa si no lo haces.\n\nEl Colegio de Enfermeras pide verificar que el paciente y su familia reciban información suficiente para aceptar o rechazar los cuidados. Si algo no se entiende, puedes pedir que lo expliquen de nuevo o, cuando la situación lo permita, llevarte el documento para leerlo con calma.",
+          "en_simple": "Si no entendiste, todavía no es momento de firmar."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "También puedes decir que no",
+          "texto": "La {{autonomia|autonomía}} es tu derecho a decidir sobre tu cuerpo. El Colegio Médico pide respetar el derecho del paciente a rechazar, total o parcialmente, un examen o tratamiento, explicándole las consecuencias. Y el médico no debe abandonarlo por eso.\n\nHay excepciones: en una urgencia impostergable, o si la persona no puede decidir y no hay familiares, el equipo actúa para proteger su vida. En niños y adolescentes, su opinión debe considerarse según su edad y madurez.",
+          "en_simple": "Tienes derecho a decir que no, y a seguir recibiendo cuidados."
+        },
+        {
+          "tipo": "ejemplo",
+          "texto": "Camila, de 32 años, vive en Antofagasta y le indican una endoscopía. Le entregan un formulario de consentimiento. Antes de firmar, pregunta si necesitará anestesia y si debe ir acompañada.\n\nLa enfermera le responde y le explica los riesgos poco frecuentes. Camila firma tranquila: sabe lo que va a pasar y por qué."
+        },
+        {
+          "tipo": "concepto",
+          "titulo": "Qué puedes hacer tú",
+          "texto": "Antes de firmar un consentimiento, hazte tres preguntas: ¿sé qué me van a hacer?, ¿conozco los riesgos y las alternativas?, ¿sé qué pasa si no lo hago? Si alguna respuesta es «no», pide más información antes de firmar.\n\nTambién puedes pedir una {{segunda-opinion|segunda opinión}} antes de decidir. El Colegio Médico exige entregar tus informes clínicos cuando decides consultar a otro médico.",
+          "en_simple": "Firma solo cuando puedas responder: qué, para qué, con qué riesgos y qué alternativas."
+        }
+      ],
+      "situaciones": [
+        {
+          "enunciado": "Justo antes de un procedimiento, le pasan a Andrés un formulario largo y le dicen: «Firme aquí, es solo un trámite».",
+          "opciones": [
+            {
+              "texto": "Firmar rápido para no atrasar al equipo.",
+              "correcta": false,
+              "explicacion": "Entender lo que firmas no es un atraso: es tu derecho. Un consentimiento sin información no es un verdadero consentimiento."
+            },
+            {
+              "texto": "Pedir que le expliquen brevemente lo principal antes de firmar.",
+              "correcta": true,
+              "explicacion": "El Colegio Médico exige informar de manera veraz y comprensible, y pide un consentimiento específico en procedimientos de riesgo."
+            },
+            {
+              "texto": "Negarse a firmar sin preguntar nada.",
+              "correcta": false,
+              "explicacion": "Puedes negarte, pero conviene primero entender: quizás el procedimiento es importante para tu salud."
+            }
+          ],
+          "fuente": {
+            "institucion": "Colegio Médico de Chile",
+            "documento": "Código de Ética",
+            "referencia": "Arts. 24 y 25"
+          }
+        },
+        {
+          "enunciado": "Doña Olga, de 85 años, decide no seguir con la quimioterapia después de conversarlo con su familia. Su médico no está de acuerdo.",
+          "opciones": [
+            {
+              "texto": "El médico debe convencerla como sea.",
+              "correcta": false,
+              "explicacion": "Insistir sin respetar su decisión pasa por alto su autonomía. Puede volver a informarle, pero no presionarla."
+            },
+            {
+              "texto": "El médico respeta su decisión, le explica las consecuencias y sigue acompañándola con cuidados.",
+              "correcta": true,
+              "explicacion": "El Colegio Médico pide respetar el rechazo de un tratamiento, informar sus consecuencias y no abandonar al paciente."
+            },
+            {
+              "texto": "El médico deja de atenderla porque no siguió sus indicaciones.",
+              "correcta": false,
+              "explicacion": "Rechazar un tratamiento no significa perder la atención. El Colegio Médico pide no abandonar al enfermo."
+            }
+          ],
+          "fuente": {
+            "institucion": "Colegio Médico de Chile",
+            "documento": "Código de Ética",
+            "referencia": "Art. 28"
+          }
+        }
+      ],
+      "terminos_relacionados": [
+        "consentimiento-informado",
+        "autonomia",
+        "segunda-opinion"
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "id": "video-integridad",
+      "tema": "integridad",
+      "titulo": "¿Por qué importa que tu médico no tenga conflictos de interés?",
+      "duracion_seg": 120,
+      "url_embed": null,
+      "miniatura": null,
+      "guion": "[0:00–0:10 · Gancho] (Imagen sugerida: Primer plano de una receta sobre un escritorio.)\n¿Te has preguntado por qué tu médico te recetó ese remedio y no otro? Casi siempre, la respuesta es simple: porque es lo mejor para ti. Pero ¿y si hubiera algo más?\n\n[0:10–1:15 · Idea central] (Imagen sugerida: Íconos simples: regalo, avión, apretón de manos.)\nEse «algo más» se llama conflicto de interés: cuando un interés personal, como un regalo, un viaje o un negocio, podría influir en una decisión que debería pensar solo en tu salud. Tener un conflicto de interés no convierte a nadie en mala persona. Lo importante es reconocerlo, declararlo y, si corresponde, dar un paso al costado. Los códigos de ética de Chile se lo toman en serio. El Colegio Médico permite a los médicos aceptar solo donaciones modestas de las empresas, y considera una falta aceptar viajes turísticos pagados por ellas. ADIMECH, la asociación de empresas de dispositivos médicos, prohíbe como regla general hacer regalos a profesionales de la salud: nada de dinero, gift cards, licores ni aparatos electrónicos. Y no se trata de desconfiar de todos los profesionales: se trata de que las reglas sean claras para que la confianza tenga una base sólida.\n\n[1:15–1:45 · Ejemplo cotidiano] (Imagen sugerida: Ilustración de una médica revisando una invitación.)\nImagina a Valentina, médica de un consultorio. Un laboratorio la invita a un congreso y, de paso, a tres días en la playa con todo pagado. Valentina va al congreso, porque le sirve para su trabajo, pero rechaza la playa. Así, cuando receta, sus pacientes pueden confiar en que piensa en ellos y no en devolver un favor.\n\n[1:45–2:00 · Cierre] (Imagen sugerida: Pantalla del sitio con la sección Consultar.)\nLa próxima vez que tengas dudas sobre una recomendación, pregunta con respeto: ¿hay otras alternativas?, ¿por qué esta? Es tu derecho. ¿Quieres saber qué dicen los códigos sobre regalos o conflictos de interés? Entra a Consultar y pregúntalo con tus palabras.",
+      "transcripcion": "¿Te has preguntado por qué tu médico te recetó ese remedio y no otro? Casi siempre, la respuesta es simple: porque es lo mejor para ti. Pero ¿y si hubiera algo más?\n\nEse «algo más» se llama conflicto de interés: cuando un interés personal, como un regalo, un viaje o un negocio, podría influir en una decisión que debería pensar solo en tu salud. Tener un conflicto de interés no convierte a nadie en mala persona. Lo importante es reconocerlo, declararlo y, si corresponde, dar un paso al costado. Los códigos de ética de Chile se lo toman en serio. El Colegio Médico permite a los médicos aceptar solo donaciones modestas de las empresas, y considera una falta aceptar viajes turísticos pagados por ellas. ADIMECH, la asociación de empresas de dispositivos médicos, prohíbe como regla general hacer regalos a profesionales de la salud: nada de dinero, gift cards, licores ni aparatos electrónicos. Y no se trata de desconfiar de todos los profesionales: se trata de que las reglas sean claras para que la confianza tenga una base sólida.\n\nImagina a Valentina, médica de un consultorio. Un laboratorio la invita a un congreso y, de paso, a tres días en la playa con todo pagado. Valentina va al congreso, porque le sirve para su trabajo, pero rechaza la playa. Así, cuando receta, sus pacientes pueden confiar en que piensa en ellos y no en devolver un favor.\n\nLa próxima vez que tengas dudas sobre una recomendación, pregunta con respeto: ¿hay otras alternativas?, ¿por qué esta? Es tu derecho. ¿Quieres saber qué dicen los códigos sobre regalos o conflictos de interés? Entra a Consultar y pregúntalo con tus palabras.",
+      "subtitulos_vtt": null,
+      "referencias_legales": [],
+      "verificar": false
+    },
+    {
+      "id": "video-transparencia",
+      "tema": "transparencia",
+      "titulo": "Lo que tienes derecho a saber",
+      "duracion_seg": 120,
+      "url_embed": null,
+      "miniatura": null,
+      "guion": "[0:00–0:10 · Gancho] (Imagen sugerida: Persona saliendo de una consulta con cara de duda.)\n¿Alguna vez saliste de una consulta sin entender bien qué tenías? No eres la única persona. Y tienes derecho a entender.\n\n[0:10–1:15 · Idea central] (Imagen sugerida: Lista animada: diagnóstico, alternativas, riesgos, costos.)\nLa transparencia en salud significa que la información importante está disponible y se explica de forma clara. Empieza por tu propia atención: quién te atiende, cuál es tu diagnóstico, qué alternativas tienes, qué riesgos y beneficios tienen y cuánto costará. El Código del Colegio Médico pide a los médicos informar de manera veraz y en lenguaje comprensible, y entregar la información que el paciente pida sobre honorarios y costos. La Ley 20.584, de derechos y deberes de los pacientes, también reconoce tu derecho a recibir información clara. Pero la transparencia va más allá de la consulta. Los hospitales y servicios públicos deben publicar información sobre cómo funcionan, y cualquier persona puede pedirles datos gracias a la Ley de Transparencia. Y cuando un profesional da una charla financiada por una empresa, lo correcto es que lo diga al comienzo. Saber quién financia una recomendación no la invalida, pero te ayuda a evaluarla con más información.\n\n[1:15–1:45 · Ejemplo cotidiano] (Imagen sugerida: Ilustración de una señora mayor conversando con su médico.)\nPiensa en doña Patricia, que vive en Coyhaique. Le proponen una cirugía de cadera. Antes de decir que sí, pregunta: ¿qué pasa si no me opero?, ¿cuánto dura la recuperación?, ¿cuánto me costará? Su médico le responde con calma y le entrega un documento para leer en casa. Doña Patricia decide informada y tranquila.\n\n[1:45–2:00 · Cierre] (Imagen sugerida: Libreta con preguntas anotadas.)\nPreguntar no es desconfiar: es cuidarte. Anota tus dudas antes de la consulta y pide que te expliquen con palabras simples. ¿Tienes una pregunta concreta? Escríbela en Consultar y revisa lo que dicen los códigos de ética.",
+      "transcripcion": "¿Alguna vez saliste de una consulta sin entender bien qué tenías? No eres la única persona. Y tienes derecho a entender.\n\nLa transparencia en salud significa que la información importante está disponible y se explica de forma clara. Empieza por tu propia atención: quién te atiende, cuál es tu diagnóstico, qué alternativas tienes, qué riesgos y beneficios tienen y cuánto costará. El Código del Colegio Médico pide a los médicos informar de manera veraz y en lenguaje comprensible, y entregar la información que el paciente pida sobre honorarios y costos. La Ley 20.584, de derechos y deberes de los pacientes, también reconoce tu derecho a recibir información clara. Pero la transparencia va más allá de la consulta. Los hospitales y servicios públicos deben publicar información sobre cómo funcionan, y cualquier persona puede pedirles datos gracias a la Ley de Transparencia. Y cuando un profesional da una charla financiada por una empresa, lo correcto es que lo diga al comienzo. Saber quién financia una recomendación no la invalida, pero te ayuda a evaluarla con más información.\n\nPiensa en doña Patricia, que vive en Coyhaique. Le proponen una cirugía de cadera. Antes de decir que sí, pregunta: ¿qué pasa si no me opero?, ¿cuánto dura la recuperación?, ¿cuánto me costará? Su médico le responde con calma y le entrega un documento para leer en casa. Doña Patricia decide informada y tranquila.\n\nPreguntar no es desconfiar: es cuidarte. Anota tus dudas antes de la consulta y pide que te expliquen con palabras simples. ¿Tienes una pregunta concreta? Escríbela en Consultar y revisa lo que dicen los códigos de ética.",
+      "subtitulos_vtt": null,
+      "referencias_legales": [
+        "ley-20584",
+        "ley-20285"
+      ],
+      "verificar": true
+    },
+    {
+      "id": "video-compliance",
+      "tema": "compliance",
+      "titulo": "Compliance explicado en 2 minutos",
+      "duracion_seg": 120,
+      "url_embed": null,
+      "miniatura": null,
+      "guion": "[0:00–0:10 · Gancho] (Imagen sugerida: La palabra «compliance» escrita en una pizarra.)\nCompliance. Suena a palabra de oficina, ¿cierto? Pero tiene que ver con algo muy cotidiano: hacer lo correcto, incluso cuando es más fácil no hacerlo.\n\n[0:10–1:15 · Idea central] (Imagen sugerida: Cinco íconos que aparecen uno a uno.)\nCompliance significa cumplimiento. En una empresa o institución de salud, es el conjunto de reglas, controles y personas que ayudan a que todos cumplan las leyes y los compromisos éticos. Tiene cinco piezas básicas: alguien responsable de supervisar; un código de conducta claro; capacitación para todo el personal; controles para detectar problemas a tiempo; y canales seguros para hacer consultas y denuncias. El código de ADIMECH, de las empresas de dispositivos médicos, pide exactamente eso a sus empresas. ¿Por qué importa? Porque en salud un soborno, un dato manipulado o un producto mal promocionado pueden dañar a pacientes reales. Además, en Chile las empresas pueden responder penalmente por algunos delitos, y por eso muchas tienen un modelo de prevención de delitos. Un buen sistema de compliance no espera a que algo salga mal: identifica riesgos antes, por ejemplo, revisando con cuidado a los proveedores y a los intermediarios con los que trabaja.\n\n[1:15–1:45 · Ejemplo cotidiano] (Imagen sugerida: Ilustración de un vendedor que rechaza un regalo.)\nIgnacio vende equipos médicos. Un cliente le insinúa que, si le regala un computador, la compra saldría más rápido. Ignacio recuerda su capacitación, rechaza la oferta con amabilidad e informa al encargado de cumplimiento de su empresa. Nadie salió perjudicado, y el hospital compró por las razones correctas.\n\n[1:45–2:00 · Cierre] (Imagen sugerida: Pantalla del sitio con la sección Consultar.)\nCompliance no es desconfianza: es cuidar a los pacientes, a los trabajadores y a la institución. Si trabajas en salud, pregunta dónde está el código de conducta de tu lugar de trabajo y cómo funciona su canal de denuncia. Y si tienes dudas sobre una situación, revísala en Consultar.",
+      "transcripcion": "Compliance. Suena a palabra de oficina, ¿cierto? Pero tiene que ver con algo muy cotidiano: hacer lo correcto, incluso cuando es más fácil no hacerlo.\n\nCompliance significa cumplimiento. En una empresa o institución de salud, es el conjunto de reglas, controles y personas que ayudan a que todos cumplan las leyes y los compromisos éticos. Tiene cinco piezas básicas: alguien responsable de supervisar; un código de conducta claro; capacitación para todo el personal; controles para detectar problemas a tiempo; y canales seguros para hacer consultas y denuncias. El código de ADIMECH, de las empresas de dispositivos médicos, pide exactamente eso a sus empresas. ¿Por qué importa? Porque en salud un soborno, un dato manipulado o un producto mal promocionado pueden dañar a pacientes reales. Además, en Chile las empresas pueden responder penalmente por algunos delitos, y por eso muchas tienen un modelo de prevención de delitos. Un buen sistema de compliance no espera a que algo salga mal: identifica riesgos antes, por ejemplo, revisando con cuidado a los proveedores y a los intermediarios con los que trabaja.\n\nIgnacio vende equipos médicos. Un cliente le insinúa que, si le regala un computador, la compra saldría más rápido. Ignacio recuerda su capacitación, rechaza la oferta con amabilidad e informa al encargado de cumplimiento de su empresa. Nadie salió perjudicado, y el hospital compró por las razones correctas.\n\nCompliance no es desconfianza: es cuidar a los pacientes, a los trabajadores y a la institución. Si trabajas en salud, pregunta dónde está el código de conducta de tu lugar de trabajo y cómo funciona su canal de denuncia. Y si tienes dudas sobre una situación, revísala en Consultar.",
+      "subtitulos_vtt": null,
+      "referencias_legales": [
+        "ley-20393",
+        "ley-21595"
+      ],
+      "verificar": true
+    },
+    {
+      "id": "video-datos",
+      "tema": "proteccion-datos",
+      "titulo": "¿Quién puede ver tu ficha clínica?",
+      "duracion_seg": 120,
+      "url_embed": null,
+      "miniatura": null,
+      "guion": "[0:00–0:10 · Gancho] (Imagen sugerida: Carpeta con un candado.)\nTu ficha clínica guarda algunas de las cosas más privadas de tu vida. ¿Sabes quién puede leerla?\n\n[0:10–1:15 · Idea central] (Imagen sugerida: Esquema: tú, tu equipo de salud y, aparte, quienes la ley autoriza.)\nLa ficha clínica es el registro de tu historia de salud: consultas, diagnósticos, exámenes y tratamientos. Sirve para que el equipo que te atiende tenga la información completa. Pero es reservada. Según la Ley 20.584, pueden acceder a ella tú, quienes participan en tu atención y, en los casos que la ley indica, otras personas, como alguien con tu autorización ante notario o un tribunal. Tu jefe no puede pedirla. Un funcionario que no te atiende no puede revisarla por curiosidad. Los códigos de ética van en la misma línea. El Colegio Médico dice que el secreto profesional incluye hasta tu nombre y sigue vigente incluso después de terminada la atención. Y solo con tu autorización escrita y específica se puede revelar esa información. Hay excepciones muy específicas, como las enfermedades que la ley obliga a notificar o una orden de un tribunal. Fuera de esos casos, lo que cuentas en una consulta se queda ahí.\n\n[1:15–1:45 · Ejemplo cotidiano] (Imagen sugerida: Ilustración de una funcionaria en un mesón de admisión.)\nMartina trabaja en la admisión de un hospital. Su tía le pide que mire la ficha de una vecina que estuvo hospitalizada. Martina le explica, con cariño, que no puede: no participa en la atención de esa persona y esa información no le pertenece. Protegió a la vecina, y también su propio trabajo.\n\n[1:45–2:00 · Cierre] (Imagen sugerida: Celular con una aplicación pidiendo permisos.)\nSi crees que alguien revisó tu ficha sin motivo, puedes preguntar en el establecimiento y presentar un reclamo. Cuida también tus datos fuera del hospital: lee antes de aceptar que una aplicación comparta tu información. ¿Quieres saber más? Pregunta en Consultar.",
+      "transcripcion": "Tu ficha clínica guarda algunas de las cosas más privadas de tu vida. ¿Sabes quién puede leerla?\n\nLa ficha clínica es el registro de tu historia de salud: consultas, diagnósticos, exámenes y tratamientos. Sirve para que el equipo que te atiende tenga la información completa. Pero es reservada. Según la Ley 20.584, pueden acceder a ella tú, quienes participan en tu atención y, en los casos que la ley indica, otras personas, como alguien con tu autorización ante notario o un tribunal. Tu jefe no puede pedirla. Un funcionario que no te atiende no puede revisarla por curiosidad. Los códigos de ética van en la misma línea. El Colegio Médico dice que el secreto profesional incluye hasta tu nombre y sigue vigente incluso después de terminada la atención. Y solo con tu autorización escrita y específica se puede revelar esa información. Hay excepciones muy específicas, como las enfermedades que la ley obliga a notificar o una orden de un tribunal. Fuera de esos casos, lo que cuentas en una consulta se queda ahí.\n\nMartina trabaja en la admisión de un hospital. Su tía le pide que mire la ficha de una vecina que estuvo hospitalizada. Martina le explica, con cariño, que no puede: no participa en la atención de esa persona y esa información no le pertenece. Protegió a la vecina, y también su propio trabajo.\n\nSi crees que alguien revisó tu ficha sin motivo, puedes preguntar en el establecimiento y presentar un reclamo. Cuida también tus datos fuera del hospital: lee antes de aceptar que una aplicación comparta tu información. ¿Quieres saber más? Pregunta en Consultar.",
+      "subtitulos_vtt": null,
+      "referencias_legales": [
+        "ley-20584"
+      ],
+      "verificar": true
+    },
+    {
+      "id": "video-ia",
+      "tema": "ia-salud",
+      "titulo": "Cuando una máquina ayuda a tu médico",
+      "duracion_seg": 120,
+      "url_embed": null,
+      "miniatura": null,
+      "guion": "[0:00–0:10 · Gancho] (Imagen sugerida: Radiografía en una pantalla con marcas de colores.)\nQuizás tu próximo examen lo revise primero un programa de inteligencia artificial. ¿Eso es bueno o malo?\n\n[0:10–1:15 · Idea central] (Imagen sugerida: Íconos: balanza (sesgo), signo de pregunta (error), persona (supervisión).)\nLa inteligencia artificial, o IA, son programas que aprenden de muchísimos ejemplos para reconocer patrones. En salud ya ayuda a leer imágenes, ordenar listas de espera o responder preguntas. Bien usada, ahorra tiempo y puede detectar cosas que una persona pasaría por alto. Pero tiene riesgos. Puede tener sesgos: si aprendió con datos de solo algunos grupos, puede funcionar peor con otros, como personas mayores o de zonas rurales. Puede equivocarse con total seguridad, e incluso inventar información: a eso se le llama alucinación. Y una máquina no responde éticamente: responden las personas e instituciones que la usan. Por eso la clave es la supervisión humana. La IA puede sugerir, pero un profesional debe revisar, decidir y explicarte. También importa la explicabilidad, es decir, poder entender por qué la herramienta sugiere algo. Y tus datos de salud, que la IA usa para aprender o para responder, siguen siendo datos sensibles y deben protegerse.\n\n[1:15–1:45 · Ejemplo cotidiano] (Imagen sugerida: Ilustración de una señora en su centro de salud.)\nGloria tiene diabetes. En su centro de salud, un programa analiza fotos de su ojo y un especialista revisa los casos dudosos. Ella pregunta quién ve sus fotos y cómo se guardan. Le responden con claridad. Gloria entiende cómo funciona la herramienta y confía en el resultado.\n\n[1:45–2:00 · Cierre] (Imagen sugerida: Pantalla del sitio con la sección Consultar.)\nTienes derecho a preguntar si en tu atención se usa IA, para qué sirve y quién revisa sus resultados. Los principios éticos de siempre se aplican: tu bienestar primero y tu información protegida. En Chile se discute una ley sobre IA; mientras tanto, rigen tus derechos como paciente. Y si tienes dudas, pregunta en Consultar.",
+      "transcripcion": "Quizás tu próximo examen lo revise primero un programa de inteligencia artificial. ¿Eso es bueno o malo?\n\nLa inteligencia artificial, o IA, son programas que aprenden de muchísimos ejemplos para reconocer patrones. En salud ya ayuda a leer imágenes, ordenar listas de espera o responder preguntas. Bien usada, ahorra tiempo y puede detectar cosas que una persona pasaría por alto. Pero tiene riesgos. Puede tener sesgos: si aprendió con datos de solo algunos grupos, puede funcionar peor con otros, como personas mayores o de zonas rurales. Puede equivocarse con total seguridad, e incluso inventar información: a eso se le llama alucinación. Y una máquina no responde éticamente: responden las personas e instituciones que la usan. Por eso la clave es la supervisión humana. La IA puede sugerir, pero un profesional debe revisar, decidir y explicarte. También importa la explicabilidad, es decir, poder entender por qué la herramienta sugiere algo. Y tus datos de salud, que la IA usa para aprender o para responder, siguen siendo datos sensibles y deben protegerse.\n\nGloria tiene diabetes. En su centro de salud, un programa analiza fotos de su ojo y un especialista revisa los casos dudosos. Ella pregunta quién ve sus fotos y cómo se guardan. Le responden con claridad. Gloria entiende cómo funciona la herramienta y confía en el resultado.\n\nTienes derecho a preguntar si en tu atención se usa IA, para qué sirve y quién revisa sus resultados. Los principios éticos de siempre se aplican: tu bienestar primero y tu información protegida. En Chile se discute una ley sobre IA; mientras tanto, rigen tus derechos como paciente. Y si tienes dudas, pregunta en Consultar.",
+      "subtitulos_vtt": null,
+      "referencias_legales": [
+        "proyecto-ia"
+      ],
+      "verificar": true
+    },
+    {
+      "id": "video-pacientes",
+      "tema": "pacientes",
+      "titulo": "Tus derechos como paciente",
+      "duracion_seg": 120,
+      "url_embed": null,
+      "miniatura": null,
+      "guion": "[0:00–0:10 · Gancho] (Imagen sugerida: Sala de espera de un consultorio.)\nCuando estás enfermo o asustado, es fácil olvidar algo importante: como paciente, tienes derechos.\n\n[0:10–1:20 · Idea central] (Imagen sugerida: Lista animada con los derechos principales.)\nEn Chile, la Ley 20.584 reconoce los derechos y deberes de las personas en su atención de salud, en el sector público y en el privado. Tienes derecho a un trato digno: que te atiendan con respeto, te llamen por tu nombre y cuiden tu privacidad. A estar acompañado por familiares o amigos, según las normas del lugar. A recibir información clara sobre tu diagnóstico y tratamiento. A que tu ficha clínica sea reservada. A decidir: aceptar o rechazar un tratamiento después de entenderlo, lo que se llama consentimiento informado. Y a reclamar si algo no funciona. También puedes pedir otra opinión: el Código del Colegio Médico obliga a entregar tus informes clínicos si decides consultar a otro médico. Y hay deberes: tratar con respeto al personal, entregar información veraz y cuidar las instalaciones. Recuerda: estos derechos valen en un consultorio, en un hospital y en una clínica privada. Y conocerlos no es para pelear con el equipo de salud, sino para conversar mejor y decidir con confianza.\n\n[1:20–1:45 · Ejemplo cotidiano] (Imagen sugerida: Ilustración de un hombre mayor acompañado por su hija.)\nDon Jorge, de 68 años, pide que su hija lo acompañe para entender las indicaciones. El equipo lo permite y le explica con calma. Él, a su vez, cuenta que toma remedios de hierbas, un dato útil para su tratamiento. Derechos y deberes, juntos.\n\n[1:45–2:00 · Cierre] (Imagen sugerida: Pantalla del sitio con la sección Consultar.)\nSi sientes que no se respetaron tus derechos, primero conversa con el equipo y, si no basta, presenta un reclamo en el establecimiento. ¿Tienes una duda sobre tu caso? Escríbela en Consultar y revisa lo que dicen los códigos de ética.",
+      "transcripcion": "Cuando estás enfermo o asustado, es fácil olvidar algo importante: como paciente, tienes derechos.\n\nEn Chile, la Ley 20.584 reconoce los derechos y deberes de las personas en su atención de salud, en el sector público y en el privado. Tienes derecho a un trato digno: que te atiendan con respeto, te llamen por tu nombre y cuiden tu privacidad. A estar acompañado por familiares o amigos, según las normas del lugar. A recibir información clara sobre tu diagnóstico y tratamiento. A que tu ficha clínica sea reservada. A decidir: aceptar o rechazar un tratamiento después de entenderlo, lo que se llama consentimiento informado. Y a reclamar si algo no funciona. También puedes pedir otra opinión: el Código del Colegio Médico obliga a entregar tus informes clínicos si decides consultar a otro médico. Y hay deberes: tratar con respeto al personal, entregar información veraz y cuidar las instalaciones. Recuerda: estos derechos valen en un consultorio, en un hospital y en una clínica privada. Y conocerlos no es para pelear con el equipo de salud, sino para conversar mejor y decidir con confianza.\n\nDon Jorge, de 68 años, pide que su hija lo acompañe para entender las indicaciones. El equipo lo permite y le explica con calma. Él, a su vez, cuenta que toma remedios de hierbas, un dato útil para su tratamiento. Derechos y deberes, juntos.\n\nSi sientes que no se respetaron tus derechos, primero conversa con el equipo y, si no basta, presenta un reclamo en el establecimiento. ¿Tienes una duda sobre tu caso? Escríbela en Consultar y revisa lo que dicen los códigos de ética.",
+      "subtitulos_vtt": null,
+      "referencias_legales": [
+        "ley-20584"
+      ],
+      "verificar": true
+    }
+  ],
+  "casos": [
+    {
+      "id": "caso-integridad-1",
+      "tema": "integridad",
+      "titulo": "El viaje que ofreció un proveedor",
+      "nivel": "básico",
+      "resumen": "Una jefa de laboratorio recibe una invitación a un viaje justo antes de decidir una compra.",
+      "escenario": "Daniela es tecnóloga médica y jefa del laboratorio clínico de un hospital público en Talca. Este año, el hospital debe elegir qué equipos de análisis comprará.\n\nUna semana antes de la evaluación, un representante de la empresa ficticia «Analytica Sur» la llama: «Queremos invitarla a conocer nuestra fábrica en Brasil. Pasajes, hotel y un fin de semana libre, todo pagado. También puede llevar a su pareja».",
+      "pasos": [
+        {
+          "id": "p1",
+          "pregunta": "¿Qué debería hacer Daniela?",
+          "opciones": [
+            {
+              "texto": "Aceptar: conocer la fábrica le servirá para evaluar mejor.",
+              "siguiente": "p2a",
+              "comentario": "Conocer un producto puede ser útil, pero el fin de semana libre y la invitación a su pareja no tienen relación con su trabajo. Y llega justo antes de una decisión de compra."
+            },
+            {
+              "texto": "Agradecer, rechazar la invitación e informar a su jefatura.",
+              "siguiente": "fin-a",
+              "comentario": "Rechazar con amabilidad e informar deja registro y protege a Daniela y al proceso."
+            },
+            {
+              "texto": "Decir que lo pensará y no contárselo a nadie.",
+              "siguiente": "p2b",
+              "comentario": "Guardar silencio la deja en una posición incómoda: cualquier decisión posterior podría parecer influida."
+            }
+          ]
+        },
+        {
+          "id": "p2a",
+          "pregunta": "Daniela ya aceptó. Al volver, le toca evaluar los equipos. ¿Qué hace ahora?",
+          "opciones": [
+            {
+              "texto": "Declarar el viaje y pedir no participar en esta evaluación.",
+              "siguiente": "fin-b",
+              "comentario": "Tarde, pero bien: declarar y apartarse permite que otras personas decidan sin dudas."
+            },
+            {
+              "texto": "Evaluar igual, convencida de que el viaje no la influye.",
+              "siguiente": "fin-c",
+              "comentario": "Muchas personas creen que un regalo no las influye, pero la influencia suele ser silenciosa. Y nadie más sabe del viaje."
+            }
+          ]
+        },
+        {
+          "id": "p2b",
+          "pregunta": "La empresa vuelve a llamar para confirmar. ¿Qué hace Daniela?",
+          "opciones": [
+            {
+              "texto": "Rechazar ahora e informar lo ocurrido a su jefatura.",
+              "siguiente": "fin-a",
+              "comentario": "Bien: todavía estaba a tiempo de cortar la situación y dejar registro."
+            },
+            {
+              "texto": "Aceptar sin decir nada: ya pasó tiempo.",
+              "siguiente": "fin-c",
+              "comentario": "Aceptar y no declararlo justo antes de una compra pone en riesgo todo el proceso."
+            }
+          ]
+        }
+      ],
+      "desenlaces": [
+        {
+          "id": "fin-a",
+          "tipo": "adecuado",
+          "titulo": "Un proceso limpio",
+          "texto": "La evaluación se hace con criterios técnicos, y la empresa que gana lo hace por la calidad de sus equipos.",
+          "consecuencias": {
+            "paciente": "Los pacientes reciben exámenes hechos con equipos elegidos por su calidad.",
+            "profesional": "Daniela mantiene su independencia y la confianza de su equipo.",
+            "institucion": "El hospital puede demostrar que su compra fue transparente."
+          }
+        },
+        {
+          "id": "fin-b",
+          "tipo": "mejorable",
+          "titulo": "Un error corregido a tiempo",
+          "texto": "Daniela declaró el viaje y otra persona evaluó los equipos. El proceso siguió, aunque algunos colegas quedaron con dudas.",
+          "consecuencias": {
+            "paciente": "La compra se decide por criterios técnicos.",
+            "profesional": "Daniela pasa un momento incómodo, pero su transparencia la protege.",
+            "institucion": "El hospital revisa sus reglas sobre invitaciones de proveedores."
+          }
+        },
+        {
+          "id": "fin-c",
+          "tipo": "riesgoso",
+          "titulo": "Una decisión bajo sospecha",
+          "texto": "Meses después, otro proveedor reclama y se conoce el viaje. Aunque el equipo elegido fuera bueno, la compra queda bajo sospecha y se abre una investigación.",
+          "consecuencias": {
+            "paciente": "Si la compra se anula, los exámenes pueden retrasarse.",
+            "profesional": "Daniela enfrenta un sumario administrativo y pierde la confianza de su equipo.",
+            "institucion": "El hospital pierde tiempo, dinero y credibilidad."
+          }
+        }
+      ],
+      "que_dicen_los_codigos": [
+        {
+          "institucion": "Instituto de Salud Pública (ISP)",
+          "documento": "Código de Ética",
+          "referencia": "3.3.1",
+          "resumen": "Si alguien ofrece un regalo, se rechaza agradeciendo la gentileza, se explican los motivos y se informa a la jefatura directa."
+        },
+        {
+          "institucion": "Instituto de Salud Pública (ISP)",
+          "documento": "Código de Ética",
+          "referencia": "3.2.3",
+          "resumen": "Los {{conflicto-de-interes|conflictos de interés}} no son un problema en sí mismos, pero deben transparentarse por escrito y a tiempo a la jefatura."
+        },
+        {
+          "institucion": "APEC",
+          "documento": "Principios de Kuala Lumpur (tecnología médica)",
+          "referencia": "Regalos",
+          "resumen": "Las empresas no deben ofrecer regalos, entretenimiento ni recreación a profesionales de la salud, lo que incluye a quienes compran o recomiendan sus productos."
+        }
+      ],
+      "pregunta_para_ia": "Si un proveedor me invita a un viaje antes de una compra, ¿qué dicen los códigos de ética?"
+    },
+    {
+      "id": "caso-transparencia-1",
+      "tema": "transparencia",
+      "titulo": "El costo que nadie explicó",
+      "nivel": "básico",
+      "resumen": "Una paciente recibe una cuenta mucho más alta de lo esperado, con cobros que no entiende.",
+      "escenario": "Marisol, de 47 años, vive en Rancagua. En una clínica privada ficticia le indican una resonancia y una consulta con un especialista. Nadie le dice cuánto costará.\n\nAl final, recibe una cuenta mucho más alta de lo que esperaba, con cobros que no entiende.",
+      "pasos": [
+        {
+          "id": "p1",
+          "pregunta": "¿Qué puede hacer Marisol?",
+          "opciones": [
+            {
+              "texto": "Pedir una cuenta detallada y una explicación de cada cobro.",
+              "siguiente": "p2",
+              "comentario": "Bien: una cuenta detallada permite revisar qué se cobró y por qué."
+            },
+            {
+              "texto": "Pagar sin preguntar: debe estar correcto.",
+              "siguiente": "fin-b",
+              "comentario": "Pagar sin entender deja dudas sin resolver. Pedir explicaciones es un derecho."
+            },
+            {
+              "texto": "Publicar la cuenta en redes sociales con el nombre del médico.",
+              "siguiente": "fin-c",
+              "comentario": "Se entiende la molestia, pero exponer a personas sin aclarar los hechos puede ser injusto."
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "pregunta": "La clínica le entrega el detalle. Hay un examen que Marisol está segura de que no le hicieron. ¿Qué hace?",
+          "opciones": [
+            {
+              "texto": "Presentar un reclamo por escrito en la clínica, adjuntando la cuenta.",
+              "siguiente": "fin-a",
+              "comentario": "El reclamo por escrito deja registro y obliga a responder."
+            },
+            {
+              "texto": "Pagar igual para evitar problemas.",
+              "siguiente": "fin-b",
+              "comentario": "Pagar un cobro que crees erróneo no resuelve el problema, y puede repetirse con otras personas."
+            }
+          ]
+        }
+      ],
+      "desenlaces": [
+        {
+          "id": "fin-a",
+          "tipo": "adecuado",
+          "titulo": "Información que corrige errores",
+          "texto": "La clínica revisa y reconoce que el examen se cobró por error. Le devuelven el dinero y le explican el resto de la cuenta.",
+          "consecuencias": {
+            "paciente": "Marisol paga solo lo que corresponde y entiende su cuenta.",
+            "profesional": "El equipo aprende a informar los costos antes de cada atención.",
+            "institucion": "La clínica corrige un error en su sistema de cobros y gana confianza."
+          }
+        },
+        {
+          "id": "fin-b",
+          "tipo": "mejorable",
+          "titulo": "Una duda que queda",
+          "texto": "Marisol paga sin saber si los cobros eran correctos. La próxima vez, preguntará antes.",
+          "consecuencias": {
+            "paciente": "Pierde dinero y la tranquilidad de entender su atención.",
+            "profesional": "Nadie se entera de que hubo un problema de información.",
+            "institucion": "El posible error puede repetirse con otros pacientes."
+          }
+        },
+        {
+          "id": "fin-c",
+          "tipo": "riesgoso",
+          "titulo": "Un conflicto público sin solución",
+          "texto": "La publicación se comparte mucho, pero el cobro sigue sin aclararse, y el médico, que no tenía relación con la cuenta, recibe insultos.",
+          "consecuencias": {
+            "paciente": "Marisol no recupera su dinero y queda expuesta en redes.",
+            "profesional": "Un profesional sin responsabilidad en el cobro sufre un daño injusto.",
+            "institucion": "La clínica pierde confianza, pero no tiene un reclamo formal que revisar."
+          }
+        }
+      ],
+      "que_dicen_los_codigos": [
+        {
+          "institucion": "Colegio Médico de Chile",
+          "documento": "Código de Ética",
+          "referencia": "Art. 43",
+          "resumen": "Es recomendable informar los honorarios con anticipación. El médico debe dar toda la información que el paciente pida sobre honorarios y costo del tratamiento, y no puede negarse a entregar recibo."
+        },
+        {
+          "institucion": "Colegio Médico de Chile",
+          "documento": "Código de Ética",
+          "referencia": "Art. 40",
+          "resumen": "Falta gravemente a la ética quien exige el pago de prestaciones no realizadas."
+        }
+      ],
+      "pregunta_para_ia": "Me cobraron un examen que no me hicieron, ¿qué dicen los códigos de ética y qué puedo hacer?"
+    },
+    {
+      "id": "caso-compliance-1",
+      "tema": "compliance",
+      "titulo": "Lo que vio Tomás en la farmacia",
+      "nivel": "intermedio",
+      "resumen": "Un auxiliar de farmacia detecta que se desvían medicamentos y teme hablar.",
+      "escenario": "Tomás tiene 26 años y es auxiliar de farmacia en una cadena ficticia en Iquique. Nota que, al final de cada mes, un compañero registra como «vencidos» medicamentos que en realidad se lleva a otro lugar.\n\nSu supervisor parece saberlo y no dice nada.",
+      "pasos": [
+        {
+          "id": "p1",
+          "pregunta": "¿Qué hace Tomás?",
+          "opciones": [
+            {
+              "texto": "Buscar el canal de denuncia de la empresa y usarlo, describiendo solo lo que vio.",
+              "siguiente": "p2",
+              "comentario": "Bien: el canal formal permite investigar sin exponer a nadie públicamente."
+            },
+            {
+              "texto": "Enfrentar a su compañero delante de todos.",
+              "siguiente": "fin-c",
+              "comentario": "Un enfrentamiento público puede generar un conflicto y alertar a quienes participan, que podrían ocultar pruebas."
+            },
+            {
+              "texto": "No hacer nada: no es su problema.",
+              "siguiente": "fin-b",
+              "comentario": "Es comprensible tener miedo, pero esos medicamentos podrían terminar en manos de personas sin control sanitario."
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "pregunta": "Una semana después, su supervisor le cambia los turnos al peor horario, sin explicación. ¿Qué hace?",
+          "opciones": [
+            {
+              "texto": "Anotar lo que pasa e informarlo al canal de denuncia como posible represalia.",
+              "siguiente": "fin-a",
+              "comentario": "Bien: una {{represalia|represalia}} también es una falta, y debe investigarse."
+            },
+            {
+              "texto": "Renunciar para evitar problemas.",
+              "siguiente": "fin-b",
+              "comentario": "Renunciar es una decisión personal válida, pero la irregularidad podría quedar sin resolver."
+            }
+          ]
+        }
+      ],
+      "desenlaces": [
+        {
+          "id": "fin-a",
+          "tipo": "adecuado",
+          "titulo": "La irregularidad se corrige",
+          "texto": "La empresa investiga, confirma la desviación de medicamentos, aplica medidas y protege a Tomás. Además, refuerza sus controles de inventario.",
+          "consecuencias": {
+            "paciente": "Se evita que medicamentos sin control lleguen a la población.",
+            "profesional": "Tomás conserva su trabajo y su tranquilidad.",
+            "institucion": "La empresa corrige el problema y demuestra que su canal de denuncia funciona."
+          }
+        },
+        {
+          "id": "fin-b",
+          "tipo": "riesgoso",
+          "titulo": "El problema sigue",
+          "texto": "La desviación de medicamentos continúa. Meses después, una fiscalización la descubre y la empresa enfrenta sanciones.",
+          "consecuencias": {
+            "paciente": "Medicamentos sin control pueden haber llegado a personas sin receta.",
+            "profesional": "Tomás queda con la incomodidad de haber sabido y no haber podido actuar.",
+            "institucion": "La empresa enfrenta sanciones y pierde la confianza de sus clientes."
+          }
+        },
+        {
+          "id": "fin-c",
+          "tipo": "mejorable",
+          "titulo": "Una discusión que no resuelve",
+          "texto": "Hay una discusión fuerte en el local. El compañero niega todo y la situación queda en tensión, sin una investigación formal.",
+          "consecuencias": {
+            "paciente": "El riesgo sigue, porque nadie revisó los inventarios.",
+            "profesional": "Tomás queda expuesto y con una mala relación con su equipo.",
+            "institucion": "La empresa no se entera por los canales formales y no puede actuar."
+          }
+        }
+      ],
+      "que_dicen_los_codigos": [
+        {
+          "institucion": "Cámara Nacional de Laboratorios (CANALAB)",
+          "documento": "Código de Ética y Buenas Prácticas",
+          "referencia": "Art. 19, letra h",
+          "resumen": "Las empresas deben establecer {{canal-de-denuncia|canales de denuncia}} adecuados para que sus trabajadores informen situaciones irregulares."
+        },
+        {
+          "institucion": "Colegio de Químicos Farmacéuticos y Bioquímicos de Chile",
+          "documento": "Código de Ética",
+          "referencia": "Art. 44",
+          "resumen": "El profesional debe denunciar cualquier producto o servicio que signifique un engaño o un perjuicio sanitario para la población."
+        },
+        {
+          "institucion": "ADIMECH",
+          "documento": "Código de Conducta y Ética",
+          "referencia": "Cumplimiento del Código",
+          "resumen": "Las empresas deben tener controles internos y procedimientos seguros para que los trabajadores canalicen sus dudas o inquietudes."
+        }
+      ],
+      "pregunta_para_ia": "Vi una irregularidad en mi trabajo en una farmacia, ¿cómo la denuncio y qué me protege según los códigos de ética?"
+    },
+    {
+      "id": "caso-datos-1",
+      "tema": "proteccion-datos",
+      "titulo": "La foto del examen en WhatsApp",
+      "nivel": "básico",
+      "resumen": "Una colega propone compartir la foto del examen de un paciente en el grupo del equipo.",
+      "escenario": "Andrea es técnica en enfermería en un centro de salud familiar ficticio de Curicó. Llega el resultado de un examen muy poco común de un paciente conocido en la comuna.\n\nUna colega le dice: «Sácale una foto y mándala al grupo de WhatsApp del equipo, para que todos aprendamos».",
+      "pasos": [
+        {
+          "id": "p1",
+          "pregunta": "¿Qué hace Andrea?",
+          "opciones": [
+            {
+              "texto": "Sacar la foto y enviarla al grupo.",
+              "siguiente": "p2",
+              "comentario": "Un grupo de WhatsApp no es un canal clínico: los mensajes se pueden reenviar y quedan guardados en muchos teléfonos."
+            },
+            {
+              "texto": "Proponer comentar el caso en la reunión clínica, sin datos que identifiquen al paciente.",
+              "siguiente": "fin-a",
+              "comentario": "Bien: se aprende igual y se protege la identidad del paciente."
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "pregunta": "Una hora después, alguien reenvía la foto a otro grupo, fuera del equipo. ¿Qué hace Andrea?",
+          "opciones": [
+            {
+              "texto": "Avisar de inmediato a su jefatura, pedir que se borre y proponer reglas para el grupo.",
+              "siguiente": "fin-b",
+              "comentario": "Bien: reconocer el error a tiempo ayuda a limitar el daño."
+            },
+            {
+              "texto": "Borrarla de su teléfono y no decir nada.",
+              "siguiente": "fin-c",
+              "comentario": "Borrarla de tu teléfono no la borra de los demás. El paciente sigue expuesto."
+            }
+          ]
+        }
+      ],
+      "desenlaces": [
+        {
+          "id": "fin-a",
+          "tipo": "adecuado",
+          "titulo": "Aprender sin exponer",
+          "texto": "El equipo analiza el caso en la reunión clínica, sin los datos del paciente. Todos aprenden y nadie fuera del equipo se entera.",
+          "consecuencias": {
+            "paciente": "Su información se mantiene reservada.",
+            "profesional": "Andrea y su equipo aprenden sin cometer una falta.",
+            "institucion": "El centro de salud refuerza una buena práctica de confidencialidad."
+          }
+        },
+        {
+          "id": "fin-b",
+          "tipo": "mejorable",
+          "titulo": "Un daño limitado",
+          "texto": "La jefatura pide borrar la foto en ambos grupos, informa al paciente y el equipo acuerda no compartir información clínica por WhatsApp.",
+          "consecuencias": {
+            "paciente": "Su información estuvo expuesta, pero se actuó rápido y con transparencia.",
+            "profesional": "Andrea pasa un mal rato, pero su aviso evitó un daño mayor.",
+            "institucion": "El centro de salud crea una norma clara sobre el uso de mensajería."
+          }
+        },
+        {
+          "id": "fin-c",
+          "tipo": "riesgoso",
+          "titulo": "Una filtración sin control",
+          "texto": "La foto circula por la comuna. El paciente se entera por un vecino y presenta un reclamo.",
+          "consecuencias": {
+            "paciente": "Su diagnóstico queda expuesto y siente que no puede confiar en su centro de salud.",
+            "profesional": "Andrea y su colega enfrentan un sumario por no proteger la confidencialidad.",
+            "institucion": "El centro de salud pierde la confianza de la comunidad."
+          }
+        }
+      ],
+      "que_dicen_los_codigos": [
+        {
+          "institucion": "Colegio Médico de Chile",
+          "documento": "Código de Ética",
+          "referencia": "Art. 32",
+          "resumen": "Se deben tomar todas las medidas necesarias para cuidar la {{confidencialidad|confidencialidad}}, y procurar que los colaboradores la mantengan."
+        },
+        {
+          "institucion": "Colegio Médico de Chile",
+          "documento": "Código de Ética",
+          "referencia": "Art. 34",
+          "resumen": "Los pacientes mencionados en reuniones clínicas deben permanecer en el anonimato, salvo que den su consentimiento por escrito."
+        },
+        {
+          "institucion": "Colegio de Enfermeras de Chile",
+          "documento": "Código de Ética",
+          "referencia": "Punto 1.5",
+          "resumen": "Se debe guardar el {{secreto-profesional|secreto profesional}} de cualquier información confidencial, oral o escrita."
+        }
+      ],
+      "pregunta_para_ia": "¿Un funcionario de salud puede compartir fotos de mis exámenes por WhatsApp?"
+    },
+    {
+      "id": "caso-ia-1",
+      "tema": "ia-salud",
+      "titulo": "La IA que ordena la lista de espera",
+      "nivel": "intermedio",
+      "resumen": "Un enfermero nota que una herramienta de IA deja siempre al final a los pacientes rurales.",
+      "escenario": "El hospital ficticio de Valle Alto, en la Región de Los Ríos, empieza a usar una herramienta de {{inteligencia-artificial|inteligencia artificial}} que ordena la lista de espera para especialistas según la urgencia.\n\nCarlos, enfermero coordinador, nota que los pacientes de sectores rurales aparecen casi siempre al final de la lista.",
+      "pasos": [
+        {
+          "id": "p1",
+          "pregunta": "¿Qué hace Carlos?",
+          "opciones": [
+            {
+              "texto": "Informar a la dirección y pedir que se revise cómo decide la herramienta.",
+              "siguiente": "p2",
+              "comentario": "Bien: detectar un patrón extraño y avisar es justamente la {{supervision-humana|supervisión humana}}."
+            },
+            {
+              "texto": "Confiar en la herramienta: es un sistema moderno y debe tener razón.",
+              "siguiente": "fin-c",
+              "comentario": "Las herramientas pueden tener {{sesgo|sesgos}}. Confiar sin revisar puede dejar atrás a personas sin que nadie lo note."
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "pregunta": "La revisión muestra que la IA usa la cantidad de consultas anteriores como señal de gravedad, y en zonas rurales la gente consulta menos porque vive lejos. ¿Qué se decide?",
+          "opciones": [
+            {
+              "texto": "Corregir el criterio, revisar los casos afectados y que un profesional valide la lista.",
+              "siguiente": "fin-a",
+              "comentario": "Bien: corregir, reparar y mantener a una persona a cargo."
+            },
+            {
+              "texto": "Seguir usándola igual, pero adelantar manualmente a quienes reclamen.",
+              "siguiente": "fin-b",
+              "comentario": "Solo mejora el lugar de quienes reclaman; quienes no saben o no pueden reclamar quedan atrás."
+            }
+          ]
+        }
+      ],
+      "desenlaces": [
+        {
+          "id": "fin-a",
+          "tipo": "adecuado",
+          "titulo": "Una herramienta más justa",
+          "texto": "El hospital corrige el sistema, revisa los casos de los últimos meses y establece que un profesional valide la lista cada semana. Además, informa a la comunidad cómo usa la IA.",
+          "consecuencias": {
+            "paciente": "Las personas de zonas rurales recuperan su lugar según su urgencia real.",
+            "profesional": "Carlos y su equipo ven valorado su criterio.",
+            "institucion": "El hospital usa la tecnología con transparencia y gana confianza."
+          }
+        },
+        {
+          "id": "fin-b",
+          "tipo": "mejorable",
+          "titulo": "Un parche que no alcanza",
+          "texto": "Algunos pacientes que reclaman logran adelantar su atención, pero el problema de fondo sigue.",
+          "consecuencias": {
+            "paciente": "Quienes no reclaman, a menudo los más vulnerables, siguen esperando más de lo debido.",
+            "profesional": "El equipo dedica tiempo a corregir los casos uno por uno.",
+            "institucion": "El hospital mantiene una herramienta injusta y se expone a reclamos."
+          }
+        },
+        {
+          "id": "fin-c",
+          "tipo": "riesgoso",
+          "titulo": "Un sesgo que nadie vio",
+          "texto": "Durante meses, las personas de zonas rurales esperan más. Un paciente empeora mientras espera, y su familia presenta un reclamo.",
+          "consecuencias": {
+            "paciente": "Personas con urgencias reales esperan más de lo necesario.",
+            "profesional": "El equipo descubre tarde un problema que pudo detectar.",
+            "institucion": "El hospital enfrenta reclamos y debe explicar por qué confió sin revisar."
+          }
+        }
+      ],
+      "que_dicen_los_codigos": [
+        {
+          "institucion": "Colegio de Enfermeras de Chile",
+          "documento": "Código de Ética",
+          "referencia": "Punto 2.5",
+          "resumen": "Se debe abogar por el uso de avances científicos y tecnológicos compatibles con la seguridad, la dignidad y los derechos de las personas."
+        },
+        {
+          "institucion": "Colegio Médico de Chile",
+          "documento": "Código de Ética",
+          "referencia": "Art. 22",
+          "resumen": "Es deber comunicar formalmente a las jefaturas las deficiencias del sistema que puedan afectar la adecuada atención de los pacientes."
+        },
+        {
+          "institucion": "Mesa del Marco de Consenso Ético — sector pacientes",
+          "documento": "Decálogo para el Relacionamiento Ético con Organizaciones de Pacientes",
+          "referencia": "Principio 2",
+          "resumen": "Ninguna voz debe quedar fuera por razones de origen, salud, género, edad o territorio. Hay que eliminar barreras como la ubicación geográfica."
+        }
+      ],
+      "pregunta_para_ia": "Si un hospital usa inteligencia artificial para decidir mi atención, ¿qué derechos tengo y qué dicen los códigos de ética?"
+    },
+    {
+      "id": "caso-pacientes-1",
+      "tema": "pacientes",
+      "titulo": "Quiero una segunda opinión",
+      "nivel": "básico",
+      "resumen": "Una paciente quiere consultar a otro especialista y siente presión para no hacerlo.",
+      "escenario": "Ximena, de 39 años, vive en Copiapó. Su traumatólogo le indica una cirugía de rodilla y quiere programarla pronto.\n\nXimena tiene dudas y le gustaría consultar a otro especialista. Cuando lo menciona, el médico le responde: «Si va donde otro, después no me pida que la opere».",
+      "pasos": [
+        {
+          "id": "p1",
+          "pregunta": "¿Qué hace Ximena?",
+          "opciones": [
+            {
+              "texto": "Explicar con calma que quiere estar segura, y pedir una copia de sus exámenes e informes.",
+              "siguiente": "p2",
+              "comentario": "Bien: pedir una {{segunda-opinion|segunda opinión}} es una práctica aceptada, y tus informes son parte de tu atención."
+            },
+            {
+              "texto": "Operarse igual para no molestar al médico.",
+              "siguiente": "fin-b",
+              "comentario": "Decidir por presión, y no por convicción, debilita tu {{autonomia|autonomía}}."
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "pregunta": "El médico se demora en entregar los informes. ¿Qué hace Ximena?",
+          "opciones": [
+            {
+              "texto": "Pedirlos por escrito al establecimiento y, si no responden, presentar un reclamo.",
+              "siguiente": "fin-a",
+              "comentario": "Bien: dejar la solicitud por escrito ayuda a que se cumpla."
+            },
+            {
+              "texto": "Repetir todos los exámenes con el otro especialista.",
+              "siguiente": "fin-c",
+              "comentario": "Es una salida posible, pero significa más gasto y más tiempo por algo a lo que tienes derecho."
+            }
+          ]
+        }
+      ],
+      "desenlaces": [
+        {
+          "id": "fin-a",
+          "tipo": "adecuado",
+          "titulo": "Una decisión informada",
+          "texto": "Ximena recibe sus informes y consulta a otra traumatóloga, que le propone empezar con kinesioterapia. Ximena decide con calma y, si más adelante necesita operarse, sabrá por qué.",
+          "consecuencias": {
+            "paciente": "Ximena decide con información y sin presión.",
+            "profesional": "El primer médico cumple su deber de entregar los informes y la relación sigue siendo respetuosa.",
+            "institucion": "El establecimiento muestra que respeta los derechos de sus pacientes."
+          }
+        },
+        {
+          "id": "fin-b",
+          "tipo": "riesgoso",
+          "titulo": "Una decisión con dudas",
+          "texto": "Ximena se opera con dudas y nerviosismo. La cirugía sale bien, pero ella se queda con la sensación de no haber decidido por sí misma.",
+          "consecuencias": {
+            "paciente": "Su autonomía quedó en segundo plano y su confianza en el médico se debilitó.",
+            "profesional": "El médico perdió la oportunidad de construir una relación de confianza.",
+            "institucion": "Queda la idea de que pedir otra opinión no es bien recibido."
+          }
+        },
+        {
+          "id": "fin-c",
+          "tipo": "mejorable",
+          "titulo": "Más tiempo y más gasto",
+          "texto": "Ximena repite exámenes que ya tenía. Obtiene su segunda opinión, pero con más demora y más gasto.",
+          "consecuencias": {
+            "paciente": "Llega a una decisión informada, pero pagando dos veces.",
+            "profesional": "El primer médico no entregó los informes a tiempo.",
+            "institucion": "El establecimiento pierde la oportunidad de facilitar la continuidad de la atención."
+          }
+        }
+      ],
+      "que_dicen_los_codigos": [
+        {
+          "institucion": "Colegio Médico de Chile",
+          "documento": "Código de Ética",
+          "referencia": "Art. 64",
+          "resumen": "Todo médico debe entregar los informes clínicos que pidan sus colegas cuando el paciente decide cambiar de médico o hacer una interconsulta."
+        },
+        {
+          "institucion": "Colegio Médico de Chile",
+          "documento": "Código de Ética",
+          "referencia": "Art. 17",
+          "resumen": "El médico atiende al paciente en una relación de confianza y respeto que garantice la libertad y autonomía de ambos."
+        },
+        {
+          "institucion": "Colegio Médico de Chile",
+          "documento": "Manual de Ética Médica de la Asociación Médica Mundial (Apéndice II del Código)",
+          "referencia": "Capítulo IV",
+          "resumen": "Reconoce el tradicional derecho del paciente a obtener una segunda opinión."
+        }
+      ],
+      "pregunta_para_ia": "¿Tengo derecho a pedir una segunda opinión y a que me entreguen mis exámenes e informes?"
+    }
+  ],
+  "glosario": [
+    {
+      "id": "etica",
+      "termino": "Ética",
+      "temas": [
+        "integridad"
+      ],
+      "definicion": "Conjunto de normas y valores que orientan cómo actuar con los demás. En salud, guía cómo profesionales, instituciones y empresas deben tratar a los pacientes y tomar decisiones.",
+      "ejemplo": "Un médico explica con honestidad los riesgos de un tratamiento, aunque eso signifique que el paciente lo rechace.",
+      "fuente": {
+        "institucion": "Instituto de Salud Pública (ISP)",
+        "documento": "Código de Ética",
+        "referencia": "7. Glosario"
+      },
+      "ver_tambien": [
+        "integridad",
+        "codigo-de-conducta"
+      ]
+    },
+    {
+      "id": "integridad",
+      "termino": "Integridad",
+      "temas": [
+        "integridad"
+      ],
+      "definicion": "Actuar de forma honesta, coherente y justa en todo momento, también cuando nadie está mirando.",
+      "ejemplo": "Una técnica en enfermería reconoce que anotó mal la hora de un medicamento y corrige el registro.",
+      "fuente": {
+        "institucion": "APEC",
+        "documento": "Principios de Kuala Lumpur",
+        "referencia": "Principio «Integrity»"
+      },
+      "ver_tambien": [
+        "probidad",
+        "etica"
+      ]
+    },
+    {
+      "id": "conflicto-de-interes",
+      "termino": "Conflicto de interés",
+      "temas": [
+        "integridad",
+        "compliance"
+      ],
+      "definicion": "Situación en que un interés personal (dinero, amistad, familia, un favor) podría influir indebidamente en una decisión que debería pensar en el paciente o en el bien común.",
+      "ejemplo": "Un kinesiólogo opina sobre a qué centro derivar pacientes, y es socio de uno de esos centros.",
+      "fuente": {
+        "institucion": "Instituto de Salud Pública (ISP)",
+        "documento": "Código de Ética",
+        "referencia": "7. Glosario y 3.2.3"
+      },
+      "ver_tambien": [
+        "declaracion-de-intereses",
+        "independencia-profesional"
+      ]
+    },
+    {
+      "id": "probidad",
+      "termino": "Probidad",
+      "temas": [
+        "integridad"
+      ],
+      "definicion": "Ejercer una función pública de manera honesta, poniendo el interés general por sobre el particular. Lo contrario a la probidad es la corrupción.",
+      "ejemplo": "Un funcionario no usa el vehículo de su institución para trámites personales.",
+      "fuente": {
+        "institucion": "Instituto de Salud Pública (ISP)",
+        "documento": "Código de Ética",
+        "referencia": "7. Glosario"
+      },
+      "ver_tambien": [
+        "corrupcion",
+        "integridad"
+      ]
+    },
+    {
+      "id": "soborno",
+      "termino": "Soborno (cohecho)",
+      "temas": [
+        "integridad",
+        "compliance"
+      ],
+      "definicion": "Ofrecer, pedir o aceptar dinero, regalos o favores para que alguien haga, omita o pase por alto algo que es parte de su deber.",
+      "ejemplo": "Un vendedor ofrece un viaje a quien decide una compra si elige sus productos.",
+      "fuente": {
+        "institucion": "Instituto de Salud Pública (ISP)",
+        "documento": "Código de Ética",
+        "referencia": "7. Glosario"
+      },
+      "ver_tambien": [
+        "regalo",
+        "corrupcion"
+      ]
+    },
+    {
+      "id": "regalo",
+      "termino": "Regalo u obsequio",
+      "temas": [
+        "integridad"
+      ],
+      "definicion": "Algo de valor que se entrega sin pago. En salud, los regalos de empresas a profesionales están muy limitados, porque pueden crear una sensación de deuda que influye en las decisiones.",
+      "ejemplo": "Según ADIMECH, una empresa no puede regalarle una tablet a un profesional de la salud, pero sí un artículo de escritorio de muy bajo valor.",
+      "fuente": {
+        "institucion": "ADIMECH",
+        "documento": "Código de Conducta y Ética",
+        "referencia": "Artículo Noveno"
+      },
+      "ver_tambien": [
+        "soborno",
+        "conflicto-de-interes"
+      ]
+    },
+    {
+      "id": "independencia-profesional",
+      "termino": "Independencia profesional",
+      "temas": [
+        "integridad"
+      ],
+      "definicion": "Libertad del profesional para decidir según el interés del paciente, sin presiones de empresas, jefaturas u otros intereses.",
+      "ejemplo": "Una médica receta el tratamiento que mejor le sirve al paciente, no el de la empresa que financió su último congreso.",
+      "fuente": {
+        "institucion": "Colegio Médico de Chile",
+        "documento": "Código de Ética",
+        "referencia": "Art. 53"
+      },
+      "ver_tambien": [
+        "conflicto-de-interes",
+        "regalo"
+      ]
+    },
+    {
+      "id": "corrupcion",
+      "termino": "Corrupción",
+      "temas": [
+        "integridad"
+      ],
+      "definicion": "Mal uso del poder para obtener beneficios particulares, ya sean personales, familiares o para amigos. Puede ocurrir en el sector público o en el privado.",
+      "ejemplo": "Alguien adelanta a un conocido en la lista de espera a cambio de un favor.",
+      "fuente": {
+        "institucion": "Instituto de Salud Pública (ISP)",
+        "documento": "Código de Ética",
+        "referencia": "7. Glosario"
+      },
+      "ver_tambien": [
+        "probidad",
+        "soborno",
+        "trafico-de-influencias"
+      ]
+    },
+    {
+      "id": "trafico-de-influencias",
+      "termino": "Tráfico de influencias",
+      "temas": [
+        "integridad"
+      ],
+      "definicion": "Usar la influencia de un cargo para obtener un beneficio indebido o un trato preferencial.",
+      "ejemplo": "Un directivo presiona al equipo para que atiendan primero a un familiar que no tiene urgencia.",
+      "fuente": {
+        "institucion": "Instituto de Salud Pública (ISP)",
+        "documento": "Código de Ética",
+        "referencia": "7. Glosario"
+      },
+      "ver_tambien": [
+        "corrupcion",
+        "probidad"
+      ]
+    },
+    {
+      "id": "transparencia",
+      "termino": "Transparencia",
+      "temas": [
+        "transparencia"
+      ],
+      "definicion": "Que la información importante esté disponible y se entregue de forma clara. En lo público, es el derecho de la ciudadanía a conocer las actuaciones y decisiones de las instituciones.",
+      "ejemplo": "Un hospital público publica cómo usa su presupuesto y cuántas personas esperan cada tipo de atención.",
+      "fuente": {
+        "institucion": "Instituto de Salud Pública (ISP)",
+        "documento": "Código de Ética",
+        "referencia": "7. Glosario"
+      },
+      "ver_tambien": [
+        "rendicion-de-cuentas",
+        "declaracion-de-intereses"
+      ]
+    },
+    {
+      "id": "rendicion-de-cuentas",
+      "termino": "Rendición de cuentas",
+      "temas": [
+        "transparencia",
+        "compliance"
+      ],
+      "definicion": "Explicar y hacerse responsable de lo que se hizo, de cómo se usaron los recursos y de los resultados obtenidos.",
+      "ejemplo": "Una agrupación de pacientes informa a sus socios en qué gastó una donación.",
+      "fuente": {
+        "institucion": "Mesa del Marco de Consenso Ético — sector pacientes",
+        "documento": "Decálogo para el Relacionamiento Ético con Organizaciones de Pacientes",
+        "referencia": "Principio 7"
+      },
+      "ver_tambien": [
+        "transparencia"
+      ]
+    },
+    {
+      "id": "lobby",
+      "termino": "Lobby",
+      "temas": [
+        "transparencia"
+      ],
+      "definicion": "Gestión para influir en decisiones de autoridades a favor de intereses particulares. En Chile, la ley obliga a registrar ciertas reuniones de lobby en un registro público.",
+      "ejemplo": "Una empresa se reúne con una autoridad de salud para presentar su producto, y la reunión queda publicada.",
+      "fuente": {
+        "institucion": "Legislación chilena",
+        "documento": "Ley 20.730",
+        "verificar": true
+      },
+      "ver_tambien": [
+        "transparencia"
+      ]
+    },
+    {
+      "id": "declaracion-de-intereses",
+      "termino": "Declaración de intereses",
+      "temas": [
+        "transparencia",
+        "integridad"
+      ],
+      "definicion": "Aviso o documento en que una persona informa sus vínculos (trabajos, inversiones, financiamientos, regalos) que podrían influir en sus decisiones u opiniones.",
+      "ejemplo": "Una expositora informa, al inicio de su charla, que un laboratorio le paga honorarios.",
+      "fuente": {
+        "institucion": "ASOCIMED",
+        "documento": "Código de Ética de las Sociedades Científicas Médicas de Chile",
+        "referencia": "Capítulo II"
+      },
+      "ver_tambien": [
+        "conflicto-de-interes",
+        "transparencia"
+      ]
+    },
+    {
+      "id": "publicidad-responsable",
+      "termino": "Publicidad responsable",
+      "temas": [
+        "transparencia"
+      ],
+      "definicion": "Publicidad de productos o servicios de salud que es veraz y seria, y que no induce a error ni promete resultados imposibles.",
+      "ejemplo": "Un aviso de un medicamento explica para qué sirve, sin prometer curas milagrosas.",
+      "fuente": {
+        "institucion": "Cámara Nacional de Laboratorios (CANALAB)",
+        "documento": "Código de Ética y Buenas Prácticas",
+        "referencia": "Art. 9"
+      },
+      "ver_tambien": [
+        "transparencia",
+        "lobby"
+      ]
+    },
+    {
+      "id": "transferencia-de-valor",
+      "termino": "Transferencia de valor",
+      "temas": [
+        "transparencia",
+        "compliance"
+      ],
+      "definicion": "Pago o beneficio que una empresa entrega a un profesional o institución de salud, como honorarios, viajes, inscripciones, comidas o donaciones.",
+      "ejemplo": "Una empresa paga la inscripción de una enfermera a un congreso: eso es una transferencia de valor.",
+      "fuente": {
+        "institucion": "ADIMECH",
+        "documento": "Código de Conducta y Ética",
+        "referencia": "Principio de transparencia"
+      },
+      "ver_tambien": [
+        "regalo",
+        "declaracion-de-intereses"
+      ]
+    },
+    {
+      "id": "compliance",
+      "termino": "Compliance",
+      "temas": [
+        "compliance"
+      ],
+      "definicion": "Palabra inglesa que significa «cumplimiento». Conjunto de reglas, controles y personas que ayudan a que una organización cumpla las leyes y sus compromisos éticos.",
+      "ejemplo": "Una empresa capacita a sus vendedores sobre qué regalos están prohibidos.",
+      "fuente": {
+        "institucion": "ADIMECH",
+        "documento": "Código de Conducta y Ética",
+        "referencia": "Comité de Compliance"
+      },
+      "ver_tambien": [
+        "modelo-de-prevencion-de-delitos",
+        "codigo-de-conducta"
+      ]
+    },
+    {
+      "id": "modelo-de-prevencion-de-delitos",
+      "termino": "Modelo de prevención de delitos",
+      "temas": [
+        "compliance"
+      ],
+      "definicion": "Plan de una empresa para identificar riesgos de delitos, como el soborno, y prevenirlos con reglas, controles y una persona encargada.",
+      "ejemplo": "Una distribuidora de insumos médicos exige dos firmas para pagos fuera de lo común y revisa sus contratos con intermediarios.",
+      "fuente": {
+        "institucion": "Legislación chilena",
+        "documento": "Leyes 20.393 y 21.595",
+        "verificar": true
+      },
+      "ver_tambien": [
+        "compliance",
+        "debida-diligencia"
+      ]
+    },
+    {
+      "id": "canal-de-denuncia",
+      "termino": "Canal de denuncia",
+      "temas": [
+        "compliance"
+      ],
+      "definicion": "Vía formal y segura para informar conductas incorrectas, como fraudes, acoso o riesgos para pacientes. Puede ser un formulario, un correo o una persona encargada.",
+      "ejemplo": "Una auxiliar usa el formulario de la clínica para avisar que se botan medicamentos en la basura común.",
+      "fuente": {
+        "institucion": "Cámara Nacional de Laboratorios (CANALAB)",
+        "documento": "Código de Ética y Buenas Prácticas",
+        "referencia": "Art. 19, letra h"
+      },
+      "ver_tambien": [
+        "denunciante",
+        "represalia"
+      ]
+    },
+    {
+      "id": "debida-diligencia",
+      "termino": "Debida diligencia",
+      "temas": [
+        "compliance"
+      ],
+      "definicion": "Revisar con cuidado a una persona o empresa antes de contratarla o asociarse con ella, para evitar riesgos éticos o legales.",
+      "ejemplo": "Antes de contratar a un distribuidor, una empresa verifica que no tenga antecedentes de soborno.",
+      "fuente": null,
+      "ver_tambien": [
+        "compliance",
+        "modelo-de-prevencion-de-delitos"
+      ]
+    },
+    {
+      "id": "codigo-de-conducta",
+      "termino": "Código de conducta (o de ética)",
+      "temas": [
+        "compliance"
+      ],
+      "definicion": "Documento que establece los valores y las conductas esperadas en una organización, y orienta cómo actuar ante dilemas éticos.",
+      "ejemplo": "Todos los documentos reunidos en este sitio son códigos de ética o de conducta.",
+      "fuente": {
+        "institucion": "Instituto de Salud Pública (ISP)",
+        "documento": "Código de Ética",
+        "referencia": "1.2 ¿Qué es un Código de Ética?"
+      },
+      "ver_tambien": [
+        "compliance",
+        "etica"
+      ]
+    },
+    {
+      "id": "represalia",
+      "termino": "Represalia",
+      "temas": [
+        "compliance"
+      ],
+      "definicion": "Castigo o trato injusto contra alguien por haber denunciado o colaborado en una investigación, como un despido, un cambio de turno sin razón o dejarlo de lado.",
+      "ejemplo": "Después de denunciar, a una trabajadora la cambian al peor horario sin explicación.",
+      "fuente": null,
+      "ver_tambien": [
+        "canal-de-denuncia",
+        "denunciante"
+      ]
+    },
+    {
+      "id": "denunciante",
+      "termino": "Denunciante",
+      "temas": [
+        "compliance"
+      ],
+      "definicion": "Persona que informa a las autoridades o a su institución que alguien está haciendo algo antiético o ilegal.",
+      "ejemplo": "Un técnico informa por el canal formal que se estarían alterando resultados de exámenes.",
+      "fuente": {
+        "institucion": "Colegio Médico de Chile",
+        "documento": "Manual de Ética Médica de la AMM (Apéndice II del Código)",
+        "referencia": "Apéndice A, Glosario"
+      },
+      "ver_tambien": [
+        "canal-de-denuncia",
+        "represalia"
+      ]
+    },
+    {
+      "id": "comite-de-etica",
+      "termino": "Comité de ética",
+      "temas": [
+        "compliance",
+        "pacientes"
+      ],
+      "definicion": "Grupo de personas de distintas áreas que analiza dilemas éticos y orienta decisiones. Algunos revisan investigaciones con personas; otros, situaciones difíciles de la atención.",
+      "ejemplo": "Un equipo consulta al comité de ética del hospital ante una decisión difícil al final de la vida.",
+      "fuente": {
+        "institucion": "ASOCIMED",
+        "documento": "Código de Ética de las Sociedades Científicas Médicas de Chile",
+        "referencia": "Capítulo II"
+      },
+      "ver_tambien": [
+        "codigo-de-conducta",
+        "autonomia"
+      ]
+    },
+    {
+      "id": "dato-personal",
+      "termino": "Dato personal",
+      "temas": [
+        "proteccion-datos"
+      ],
+      "definicion": "Cualquier información que permite identificar a una persona, como su nombre, RUT, dirección, teléfono o fotografía.",
+      "ejemplo": "Tu RUT en el registro de un consultorio es un dato personal.",
+      "fuente": {
+        "institucion": "Legislación chilena",
+        "documento": "Leyes 19.628 y 21.719",
+        "verificar": true
+      },
+      "ver_tambien": [
+        "dato-sensible",
+        "anonimizacion"
+      ]
+    },
+    {
+      "id": "dato-sensible",
+      "termino": "Dato sensible",
+      "temas": [
+        "proteccion-datos"
+      ],
+      "definicion": "Dato personal especialmente delicado, como el estado de salud, la vida sexual o las creencias. Su mal uso puede causar discriminación o daño, por eso tiene más protección.",
+      "ejemplo": "Un diagnóstico de VIH es un dato sensible.",
+      "fuente": {
+        "institucion": "Legislación chilena",
+        "documento": "Leyes 19.628 y 21.719",
+        "verificar": true
+      },
+      "ver_tambien": [
+        "dato-personal",
+        "confidencialidad"
+      ]
+    },
+    {
+      "id": "ficha-clinica",
+      "termino": "Ficha clínica",
+      "temas": [
+        "proteccion-datos",
+        "pacientes"
+      ],
+      "definicion": "Registro de tu historia de salud: consultas, diagnósticos, exámenes y tratamientos. Es reservada: solo acceden tú, quienes te atienden y quienes la ley autoriza.",
+      "ejemplo": "Un funcionario de admisión que no te atiende no puede revisar tu ficha.",
+      "fuente": {
+        "institucion": "Legislación chilena",
+        "documento": "Ley 20.584",
+        "verificar": true
+      },
+      "ver_tambien": [
+        "secreto-profesional",
+        "confidencialidad"
+      ]
+    },
+    {
+      "id": "confidencialidad",
+      "termino": "Confidencialidad",
+      "temas": [
+        "proteccion-datos"
+      ],
+      "definicion": "Deber de mantener en reserva la información que se conoce por una atención de salud, y de no compartirla sin autorización.",
+      "ejemplo": "Una enfermera no comenta el diagnóstico de un paciente en el ascensor.",
+      "fuente": {
+        "institucion": "Colegio Médico de Chile",
+        "documento": "Código de Ética",
+        "referencia": "Art. 30"
+      },
+      "ver_tambien": [
+        "secreto-profesional",
+        "ficha-clinica"
+      ]
+    },
+    {
+      "id": "secreto-profesional",
+      "termino": "Secreto profesional",
+      "temas": [
+        "proteccion-datos",
+        "pacientes"
+      ],
+      "definicion": "Obligación de guardar reserva sobre todo lo que se sabe de un paciente por su atención, incluso su nombre, también después de terminada la atención.",
+      "ejemplo": "Un químico farmacéutico no le cuenta a nadie qué medicamentos retira un vecino.",
+      "fuente": {
+        "institucion": "Colegio Médico de Chile",
+        "documento": "Código de Ética",
+        "referencia": "Arts. 29 a 31"
+      },
+      "ver_tambien": [
+        "confidencialidad",
+        "ficha-clinica"
+      ]
+    },
+    {
+      "id": "consentimiento",
+      "termino": "Consentimiento (para usar tus datos)",
+      "temas": [
+        "proteccion-datos"
+      ],
+      "definicion": "Permiso libre, informado y específico que das para que usen tus datos con un fin determinado. También puedes negarte.",
+      "ejemplo": "Una aplicación te pide permiso para compartir tus datos con otras empresas y tú decides no aceptar.",
+      "fuente": {
+        "institucion": "Mesa del Marco de Consenso Ético — sector pacientes",
+        "documento": "Decálogo para el Relacionamiento Ético con Organizaciones de Pacientes",
+        "referencia": "Principio 9"
+      },
+      "ver_tambien": [
+        "consentimiento-informado",
+        "dato-sensible"
+      ]
+    },
+    {
+      "id": "anonimizacion",
+      "termino": "Anonimización",
+      "temas": [
+        "proteccion-datos"
+      ],
+      "definicion": "Proceso que elimina de un conjunto de datos todo lo que permita saber a quién pertenecen, para usarlos en estudios o estadísticas sin exponer a nadie.",
+      "ejemplo": "Un estudio usa edades y diagnósticos, pero sin nombres, RUT ni direcciones.",
+      "fuente": {
+        "institucion": "Colegio Médico de Chile",
+        "documento": "Código de Ética",
+        "referencia": "Art. 34"
+      },
+      "ver_tambien": [
+        "dato-personal",
+        "consentimiento"
+      ]
+    },
+    {
+      "id": "inteligencia-artificial",
+      "termino": "Inteligencia artificial (IA)",
+      "temas": [
+        "ia-salud"
+      ],
+      "definicion": "Programas computacionales que aprenden patrones a partir de muchos ejemplos y los usan para predecir, clasificar o generar textos e imágenes.",
+      "ejemplo": "Un programa que ayuda a detectar señales de daño en fotos del fondo del ojo.",
+      "fuente": null,
+      "ver_tambien": [
+        "algoritmo",
+        "datos-de-entrenamiento"
+      ]
+    },
+    {
+      "id": "algoritmo",
+      "termino": "Algoritmo",
+      "temas": [
+        "ia-salud"
+      ],
+      "definicion": "Conjunto de instrucciones paso a paso que sigue un programa para resolver un problema o tomar una decisión.",
+      "ejemplo": "Un algoritmo ordena una lista de espera según ciertas reglas.",
+      "fuente": null,
+      "ver_tambien": [
+        "inteligencia-artificial",
+        "sesgo"
+      ]
+    },
+    {
+      "id": "sesgo",
+      "termino": "Sesgo (en IA)",
+      "temas": [
+        "ia-salud"
+      ],
+      "definicion": "Inclinación que hace que un sistema funcione peor o trate de forma injusta a algunos grupos, muchas veces porque aprendió con datos que no los representaban bien.",
+      "ejemplo": "Una IA entrenada sobre todo con datos de hombres jóvenes se equivoca más con mujeres mayores.",
+      "fuente": null,
+      "ver_tambien": [
+        "datos-de-entrenamiento",
+        "supervision-humana"
+      ]
+    },
+    {
+      "id": "explicabilidad",
+      "termino": "Explicabilidad",
+      "temas": [
+        "ia-salud"
+      ],
+      "definicion": "Posibilidad de entender por qué un sistema de IA llegó a un resultado o sugerencia, para poder revisarlo y explicárselo al paciente.",
+      "ejemplo": "El sistema muestra qué zonas de la radiografía tomó en cuenta para su sugerencia.",
+      "fuente": null,
+      "ver_tambien": [
+        "supervision-humana",
+        "algoritmo"
+      ]
+    },
+    {
+      "id": "supervision-humana",
+      "termino": "Supervisión humana",
+      "temas": [
+        "ia-salud"
+      ],
+      "definicion": "Que una persona capacitada revise lo que propone un sistema de IA, pueda corregirlo y sea responsable de la decisión final.",
+      "ejemplo": "Un especialista revisa los casos dudosos que marca un programa de IA.",
+      "fuente": null,
+      "ver_tambien": [
+        "explicabilidad",
+        "sesgo"
+      ]
+    },
+    {
+      "id": "alucinacion-de-ia",
+      "termino": "Alucinación de IA",
+      "temas": [
+        "ia-salud"
+      ],
+      "definicion": "Error en que una IA inventa datos, citas o hechos que no existen y los presenta como si fueran ciertos.",
+      "ejemplo": "Un chat cita un artículo de una ley que no existe.",
+      "fuente": null,
+      "ver_tambien": [
+        "supervision-humana",
+        "inteligencia-artificial"
+      ]
+    },
+    {
+      "id": "datos-de-entrenamiento",
+      "termino": "Datos de entrenamiento",
+      "temas": [
+        "ia-salud"
+      ],
+      "definicion": "Ejemplos con los que se enseña a un sistema de IA. De su calidad y variedad depende que el sistema funcione bien para todas las personas.",
+      "ejemplo": "Miles de radiografías ya revisadas por especialistas, usadas para entrenar un programa.",
+      "fuente": null,
+      "ver_tambien": [
+        "sesgo",
+        "inteligencia-artificial"
+      ]
+    },
+    {
+      "id": "consentimiento-informado",
+      "termino": "Consentimiento informado",
+      "temas": [
+        "pacientes"
+      ],
+      "definicion": "Tu acuerdo para recibir una atención después de entender qué se hará, sus beneficios, riesgos y alternativas. Es una conversación, no solo una firma.",
+      "ejemplo": "Antes de una endoscopía, te explican el procedimiento y firmas cuando lo entiendes.",
+      "fuente": {
+        "institucion": "Colegio Médico de Chile",
+        "documento": "Código de Ética",
+        "referencia": "Arts. 24 a 26"
+      },
+      "ver_tambien": [
+        "autonomia",
+        "consentimiento"
+      ]
+    },
+    {
+      "id": "autonomia",
+      "termino": "Autonomía",
+      "temas": [
+        "pacientes"
+      ],
+      "definicion": "Derecho de cada persona a tomar decisiones sobre su cuerpo y su salud, incluido rechazar un tratamiento después de estar informada.",
+      "ejemplo": "Una paciente decide no seguir un tratamiento y su médico respeta su decisión.",
+      "fuente": {
+        "institucion": "Colegio Médico de Chile",
+        "documento": "Código de Ética",
+        "referencia": "Arts. 17 y 28"
+      },
+      "ver_tambien": [
+        "consentimiento-informado",
+        "segunda-opinion"
+      ]
+    },
+    {
+      "id": "trato-digno",
+      "termino": "Trato digno",
+      "temas": [
+        "pacientes"
+      ],
+      "definicion": "Ser atendido con respeto y amabilidad, que te llamen por tu nombre, que cuiden tu privacidad y que te hablen en un lenguaje que entiendas.",
+      "ejemplo": "Te examinan con la cortina cerrada y te explican cada paso.",
+      "fuente": {
+        "institucion": "Legislación chilena",
+        "documento": "Ley 20.584",
+        "verificar": true
+      },
+      "ver_tambien": [
+        "acompanamiento",
+        "reclamo"
+      ]
+    },
+    {
+      "id": "segunda-opinion",
+      "termino": "Segunda opinión",
+      "temas": [
+        "pacientes"
+      ],
+      "definicion": "Consultar a otro profesional sobre un diagnóstico o tratamiento antes de decidir. Es una práctica aceptada, y deben entregarte tus informes para hacerlo.",
+      "ejemplo": "Antes de operarse, una paciente consulta a otra traumatóloga con sus exámenes.",
+      "fuente": {
+        "institucion": "Colegio Médico de Chile",
+        "documento": "Código de Ética",
+        "referencia": "Art. 64"
+      },
+      "ver_tambien": [
+        "autonomia",
+        "consentimiento-informado"
+      ]
+    },
+    {
+      "id": "acompanamiento",
+      "termino": "Acompañamiento",
+      "temas": [
+        "pacientes"
+      ],
+      "definicion": "Derecho a estar acompañado por familiares o personas de confianza durante tu atención, según las normas del establecimiento y tu estado de salud.",
+      "ejemplo": "Un hijo acompaña a su padre mayor para ayudarlo a entender las indicaciones.",
+      "fuente": {
+        "institucion": "Legislación chilena",
+        "documento": "Ley 20.584",
+        "verificar": true
+      },
+      "ver_tambien": [
+        "trato-digno"
+      ]
+    },
+    {
+      "id": "reclamo",
+      "termino": "Reclamo",
+      "temas": [
+        "pacientes"
+      ],
+      "definicion": "Queja formal sobre tu atención. Se presenta primero en el establecimiento; si la respuesta no te deja conforme, puedes recurrir a la Superintendencia de Salud.",
+      "ejemplo": "Una paciente reclama por escrito un cobro que no corresponde.",
+      "fuente": {
+        "institucion": "Legislación chilena",
+        "documento": "Ley 20.584",
+        "verificar": true
+      },
+      "ver_tambien": [
+        "trato-digno",
+        "negligencia"
+      ]
+    },
+    {
+      "id": "organizacion-de-pacientes",
+      "termino": "Organización de pacientes",
+      "temas": [
+        "pacientes"
+      ],
+      "definicion": "Agrupación de pacientes, familiares y cuidadores que defiende sus intereses. Si está constituida legalmente se llama asociación de pacientes; si no, grupo de pacientes.",
+      "ejemplo": "Una agrupación de personas con una enfermedad poco frecuente organiza charlas para nuevos pacientes.",
+      "fuente": {
+        "institucion": "Marco de Consenso Ético APEC — Chile",
+        "documento": "Estándares éticos recomendados",
+        "referencia": "Definiciones 2 y 3"
+      },
+      "ver_tambien": [
+        "conflicto-de-interes",
+        "rendicion-de-cuentas"
+      ]
+    },
+    {
+      "id": "negligencia",
+      "termino": "Negligencia",
+      "temas": [
+        "pacientes"
+      ],
+      "definicion": "Cuando un profesional, teniendo los conocimientos y medios adecuados, no los aplica. Un mal resultado, por sí solo, no siempre significa negligencia.",
+      "ejemplo": "No revisar un examen disponible que mostraba un problema importante.",
+      "fuente": {
+        "institucion": "Colegio Médico de Chile",
+        "documento": "Código de Ética",
+        "referencia": "Art. 22"
+      },
+      "ver_tambien": [
+        "reclamo"
+      ]
+    }
+  ],
+  "referencias_legales": [
+    {
+      "id": "ley-20584",
+      "nombre": "Ley 20.584",
+      "descripcion": "Derechos y deberes de las personas en relación con su atención de salud (2012).",
+      "verificar": true
+    },
+    {
+      "id": "ley-19628",
+      "nombre": "Ley 19.628",
+      "descripcion": "Protección de la vida privada y de los datos personales (1999). Considera sensibles los datos de salud.",
+      "verificar": true
+    },
+    {
+      "id": "ley-21719",
+      "nombre": "Ley 21.719",
+      "descripcion": "Nueva ley de protección de datos personales; crea la Agencia de Protección de Datos Personales. Revisar su entrada en vigencia (prevista para diciembre de 2026).",
+      "verificar": true
+    },
+    {
+      "id": "ley-20285",
+      "nombre": "Ley 20.285",
+      "descripcion": "Acceso a la información pública (\"Ley de Transparencia\", 2008).",
+      "verificar": true
+    },
+    {
+      "id": "ley-20730",
+      "nombre": "Ley 20.730",
+      "descripcion": "Regula el lobby y las gestiones de intereses particulares ante autoridades (2014).",
+      "verificar": true
+    },
+    {
+      "id": "ley-20393",
+      "nombre": "Ley 20.393",
+      "descripcion": "Responsabilidad penal de las personas jurídicas (empresas) por ciertos delitos (2009).",
+      "verificar": true
+    },
+    {
+      "id": "ley-21595",
+      "nombre": "Ley 21.595",
+      "descripcion": "Ley de Delitos Económicos (2023); amplió los delitos por los que pueden responder las empresas.",
+      "verificar": true
+    },
+    {
+      "id": "proyecto-ia",
+      "nombre": "Proyecto de ley sobre inteligencia artificial",
+      "descripcion": "Proyecto que regula los sistemas de IA, en tramitación en el Congreso. Revisar su estado antes de publicar cambios.",
+      "verificar": true
+    }
+  ]
+}
