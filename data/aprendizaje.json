@@ -120,7 +120,7 @@
           "fuente": {
             "institucion": "Instituto de Salud Pública (ISP)",
             "documento": "Código de Ética",
-            "referencia": "Valores (probidad) y 4. Mecanismo para realizar consultas y denuncias"
+            "referencia": "1.3, 7. Glosario (probidad) y 4. Mecanismo para realizar consultas y denuncias"
           }
         }
       ],
@@ -318,7 +318,7 @@
           "fuente": {
             "institucion": "Instituto de Salud Pública (ISP)",
             "documento": "Código de Ética",
-            "referencia": "3.2.4 Uso correcto de la información reservada"
+            "referencia": "3.2.4 Dar un correcto uso a la información reservada de la Institución y confidencialidad"
           }
         }
       ],
@@ -416,7 +416,7 @@
           "fuente": {
             "institucion": "ASOCIMED",
             "documento": "Código de Ética de las Sociedades Científicas Médicas de Chile",
-            "referencia": "Capítulo II"
+            "referencia": "Capítulos II y IV (Decálogo ético)"
           }
         }
       ],
@@ -491,7 +491,7 @@
           "fuente": {
             "institucion": "ADIMECH",
             "documento": "Código de Conducta y Ética",
-            "referencia": "Alcance y cumplimiento del Código"
+            "referencia": "Artículo Segundo: Cumplimiento del Código"
           }
         },
         {
@@ -516,7 +516,7 @@
           "fuente": {
             "institucion": "APEC",
             "documento": "Principios de Kuala Lumpur (tecnología médica)",
-            "referencia": "Regalos y definición de profesionales de la salud"
+            "referencia": "Sección sobre regalos (gifts) y nota 2 (quiénes son profesionales de la salud)"
           }
         }
       ],
@@ -1018,7 +1018,7 @@
         {
           "tipo": "concepto",
           "titulo": "Una ley para los pacientes",
-          "texto": "En Chile, la Ley 20.584 regula los derechos y deberes de las personas en su atención de salud. Aplica en el sector público y en el privado.\n\nEntre tus derechos están: recibir un {{trato-digno|trato digno}}, estar acompañado, recibir información clara, que tu ficha clínica sea reservada, decidir sobre tu tratamiento y presentar un {{reclamo|reclamo}}.",
+          "texto": "En Chile, la Ley 20.584 regula los derechos y deberes de las personas en su atención de salud. Aplica en el sector público y en el privado, y desde 2023 también en la atención a distancia o por telemedicina.\n\nEntre tus derechos están: recibir un {{trato-digno|trato digno}}, estar acompañado, recibir información clara, que tu ficha clínica sea reservada, decidir sobre tu tratamiento y presentar un {{reclamo|reclamo}}.",
           "en_simple": "Tus derechos como paciente valen en consultorios, hospitales y clínicas.",
           "referencias_legales": [
             "ley-20584"
@@ -1088,7 +1088,7 @@
             {
               "texto": "Presentar un reclamo por escrito en el establecimiento y, si la respuesta no lo deja conforme, recurrir a la Superintendencia de Salud.",
               "correcta": true,
-              "explicacion": "Reclamar es un derecho. Primero se presenta en el establecimiento; si no hay solución, se puede acudir a la Superintendencia de Salud."
+              "explicacion": "Reclamar es un derecho. Primero se reclama por escrito en el establecimiento, que tiene un plazo para responder. Si no responde o la respuesta no te deja conforme, puedes acudir a la Superintendencia de Salud, pero hay pocos días hábiles para hacerlo: conviene no dejarlo pasar."
             },
             {
               "texto": "Publicar los nombres de los funcionarios en redes sociales.",
@@ -1417,7 +1417,7 @@
         {
           "institucion": "APEC",
           "documento": "Principios de Kuala Lumpur (tecnología médica)",
-          "referencia": "Regalos",
+          "referencia": "Sección sobre regalos (gifts)",
           "resumen": "Las empresas no deben ofrecer regalos, entretenimiento ni recreación a profesionales de la salud, lo que incluye a quienes compran o recomiendan sus productos."
         }
       ],
@@ -1617,7 +1617,7 @@
         {
           "institucion": "ADIMECH",
           "documento": "Código de Conducta y Ética",
-          "referencia": "Cumplimiento del Código",
+          "referencia": "Artículo Segundo: Cumplimiento del Código",
           "resumen": "Las empresas deben tener controles internos y procedimientos seguros para que los trabajadores canalicen sus dudas o inquietudes."
         }
       ],
@@ -2186,7 +2186,7 @@
       "fuente": {
         "institucion": "ADIMECH",
         "documento": "Código de Conducta y Ética",
-        "referencia": "Principio de transparencia"
+        "referencia": "Artículo Primero, 1.2 Principios (Transparencia)"
       },
       "ver_tambien": [
         "regalo",
@@ -2204,7 +2204,7 @@
       "fuente": {
         "institucion": "ADIMECH",
         "documento": "Código de Conducta y Ética",
-        "referencia": "Comité de Compliance"
+        "referencia": "Artículo Segundo (Comité de Compliance)"
       },
       "ver_tambien": [
         "modelo-de-prevencion-de-delitos",
@@ -2703,50 +2703,62 @@
     {
       "id": "ley-20584",
       "nombre": "Ley 20.584",
-      "descripcion": "Derechos y deberes de las personas en relación con su atención de salud (2012).",
-      "verificar": true
+      "descripcion": "Derechos y deberes de las personas en relación con su atención de salud (2012); desde 2023 (Ley 21.541) incluye la telemedicina. Revisado: art. 5 (trato digno), art. 6 (compañía y asistencia espiritual), art. 13 (ficha clínica reservada; acceso del titular, terceros con poder notarial y tribunales), arts. 33, 35 y 36 (deberes: reglamento interno, cuidar instalaciones, trato respetuoso, informar con veracidad) y el reclamo: primero ante el establecimiento y luego ante la Superintendencia de Salud.",
+      "verificar": true,
+      "revisado": "2026-10-28"
     },
     {
       "id": "ley-19628",
       "nombre": "Ley 19.628",
-      "descripcion": "Protección de la vida privada y de los datos personales (1999). Considera sensibles los datos de salud.",
-      "verificar": true
+      "descripcion": "Protección de la vida privada y de los datos personales (1999). Su art. 2 letra g) considera datos sensibles, entre otros, los estados de salud físicos o psíquicos, la vida sexual y las creencias. Será modificada por la Ley 21.719.",
+      "verificar": true,
+      "revisado": "2026-10-28"
     },
     {
       "id": "ley-21719",
       "nombre": "Ley 21.719",
-      "descripcion": "Nueva ley de protección de datos personales; crea la Agencia de Protección de Datos Personales. Revisar su entrada en vigencia (prevista para diciembre de 2026).",
-      "verificar": true
+      "descripcion": "Nueva ley de protección de datos personales (publicada el 13 de diciembre de 2024); crea la Agencia de Protección de Datos Personales. Entra en vigencia el 1 de diciembre de 2026. Ojo: un proyecto (boletín 18.623-07) propone postergarla al 1 de diciembre de 2027; en octubre de 2026 seguía en primer trámite en el Senado. Si se aprueba, actualizar este texto.",
+      "verificar": true,
+      "revisado": "2026-10-28"
     },
     {
       "id": "ley-20285",
       "nombre": "Ley 20.285",
-      "descripcion": "Acceso a la información pública (\"Ley de Transparencia\", 2008).",
-      "verificar": true
+      "descripcion": "Acceso a la información pública (\"Ley de Transparencia\", 2008): cualquier persona puede pedir información a los organismos del Estado, salvo la que la ley protege, como los datos personales.",
+      "verificar": true,
+      "revisado": "2026-10-28"
     },
     {
       "id": "ley-20730",
       "nombre": "Ley 20.730",
-      "descripcion": "Regula el lobby y las gestiones de intereses particulares ante autoridades (2014).",
-      "verificar": true
+      "descripcion": "Regula el lobby (2014). Las audiencias de lobby con autoridades se registran y se publican en InfoLobby, a cargo del Consejo para la Transparencia.",
+      "verificar": true,
+      "revisado": "2026-10-28"
     },
     {
       "id": "ley-20393",
       "nombre": "Ley 20.393",
-      "descripcion": "Responsabilidad penal de las personas jurídicas (empresas) por ciertos delitos (2009).",
-      "verificar": true
+      "descripcion": "Responsabilidad penal de las personas jurídicas (empresas) por ciertos delitos (2009). Modificada en 2023 por la Ley 21.595.",
+      "verificar": true,
+      "revisado": "2026-10-28"
     },
     {
       "id": "ley-21595",
       "nombre": "Ley 21.595",
-      "descripcion": "Ley de Delitos Económicos (2023); amplió los delitos por los que pueden responder las empresas.",
-      "verificar": true
+      "descripcion": "Ley de Delitos Económicos (2023): amplió los delitos y las empresas que pueden responder penalmente, y reforzó la importancia de un modelo de prevención de delitos adecuado y efectivo.",
+      "verificar": true,
+      "revisado": "2026-10-28"
     },
     {
       "id": "proyecto-ia",
       "nombre": "Proyecto de ley sobre inteligencia artificial",
-      "descripcion": "Proyecto que regula los sistemas de IA, en tramitación en el Congreso. Revisar su estado antes de publicar cambios.",
-      "verificar": true
+      "descripcion": "Proyecto de ley que regula los sistemas de inteligencia artificial (boletín 16.821-19). La Cámara lo aprobó en octubre de 2025; en octubre de 2026 está en segundo trámite en el Senado, y el Gobierno anunció que lo reemplazará por una ley marco. Revisar su estado antes de cambiar el texto.",
+      "verificar": true,
+      "revisado": "2026-10-28"
     }
-  ]
+  ],
+  "revision": {
+    "fecha": "2026-10-28",
+    "nota": "Entrega 2: citas de los códigos revisadas contra codigos-de-etica-salud-chile.md (y el PDF de ADIMECH); referencias legales revisadas en fuentes oficiales (Superintendencia de Salud, ChileAtiende, SUSESO, Cámara de Diputados). Las leyes siguen marcadas \"verificar\": true porque pueden cambiar."
+  }
 }

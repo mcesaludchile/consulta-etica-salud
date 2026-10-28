@@ -31,7 +31,7 @@ Colegio Médico, Colegio de Enfermeras, Colegio de Químicos Farmacéuticos y Bi
 - Error 500 por falta de saldo en la cuenta de la API de Anthropic.
 
 ## Pendientes
-- Sección Aprende, entrega 2 (acordada con Vicente): revisar una a una las citas de los códigos y las referencias legales marcadas `"verificar": true` en `data/aprendizaje.json`. Grabar los 6 videos con los guiones y pegar su enlace en `url_embed`.
+- Sección Aprende: la entrega 2 (revisión de citas y leyes) se hizo en octubre de 2026; el resultado está en `"revision"` y en cada `referencias_legales` (`"revisado"`) de `data/aprendizaje.json`. Queda pendiente: grabar los 6 videos con los guiones y pegar su enlace en `url_embed`. Estar atentos a la postergación de la Ley 21.719 (boletín 18.623-07, en el Senado) y al proyecto de ley de IA (boletín 16.821-19): si cambian, actualizar los textos.
 - Fotos para la sección Marco de Consenso Ético (dejado para después por Vicente): 2 o 3 fotos de la sección Newsletter de SUBREI, presentadas de forma sobria (una ancha al inicio y una o dos pequeñas en "Origen" y "El rol de SUBREI", con el crédito "Foto: SUBREI" y comprimidas). El servidor de SUBREI bloquea los accesos automáticos (403), así que Vicente debe descargarlas y adjuntarlas en el chat.
 - Sitios oficiales de las 15 instituciones confirmados por Vicente (octubre 2026); "Asociaciones de Pacientes" usa la página de la Mesa del Marco de Consenso Ético en subrei.gob.cl.
 
