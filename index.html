@@ -24,6 +24,52 @@
   .seal{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--gold-soft);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:13px;color:var(--gold-soft);flex-shrink:0;}
   .topbar-title{font-family:var(--serif);font-size:15px;letter-spacing:.2px;}
   .topbar-sub{font-size:11px;color:#C9CFD8;margin-top:1px;}
+  .topbar-link{display:inline-block;margin-top:5px;padding:3px 10px;border:1px solid var(--gold);border-radius:20px;background:none;color:var(--gold-soft);font-size:11.5px;font-weight:600;font-family:var(--sans);cursor:pointer;}
+  .topbar-link.activo{background:var(--gold);color:var(--ink);}
+  /* Sección Marco de Consenso Ético */
+  .mce-indice{display:flex;gap:6px;overflow-x:auto;padding:2px 0 4px;margin-top:4px;}
+  .mce-indice a{flex-shrink:0;font-size:12px;color:var(--teal);background:var(--paper-raised);border:1px solid var(--line);border-radius:20px;padding:6px 11px;text-decoration:none;white-space:nowrap;}
+  #screen-mce [id^="mce-"]{scroll-margin-top:110px;}
+  .mce-detalle{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px;margin:6px 0 4px;}
+  .mce-detalle summary{font-size:13px;font-weight:600;color:var(--teal);cursor:pointer;}
+  .mce-detalle p{font-size:13px;margin:10px 0 0;}
+  .mce-nota{font-size:12px;color:var(--ink-soft);font-style:italic;}
+  .mce-diagrama{margin:6px 0 12px;background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--radius);padding:8px;}
+  .mce-diagrama svg{display:block;width:100%;height:auto;font-family:var(--sans);}
+  .d-marco{fill:none;stroke:var(--gold);stroke-width:1.5;stroke-dasharray:5 4;}
+  .d-marco-txt{font-size:9.5px;fill:var(--gold);font-weight:700;}
+  .d-linea{stroke:var(--teal);stroke-width:1.6;opacity:.55;}
+  .d-estado{stroke:var(--gold);stroke-dasharray:4 3;opacity:.9;}
+  .d-nodo rect{fill:var(--paper);stroke:var(--ink);stroke-width:1.2;}
+  .d-nodo text{font-size:11.5px;font-weight:600;fill:var(--ink);}
+  .d-sub{font-size:9px !important;font-weight:400 !important;fill:var(--ink-soft) !important;}
+  .d-centro circle{fill:var(--teal);}
+  .d-centro text{font-size:12.5px;font-weight:700;fill:#fff;}
+  .d-centro .d-sub{fill:#DCEBEA !important;}
+  .d-num circle{fill:#fff;stroke:var(--teal);stroke-width:1.5;}
+  .d-num text{font-size:10.5px;font-weight:700;fill:var(--teal);}
+  .d-num-estado circle{stroke:var(--gold);} .d-num-estado text{fill:var(--gold);}
+  .mce-relaciones{padding-left:22px;margin:0;}
+  .mce-relaciones li{font-size:13.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:8px;}
+  .mce-relaciones li b{color:var(--ink);}
+  .mce-relaciones li span{display:block;font-size:12px;color:var(--teal);}
+  .mce-lista{padding-left:20px;margin:0;}
+  .mce-lista li{font-size:13.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:6px;}
+  .mce-grupo{margin-bottom:12px;}
+  .mce-grupo h3{font-size:14px;margin-bottom:2px;}
+  .mce-grupo p{font-size:13px;margin:0;}
+  .mce-principios{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+  .mce-principios div{background:var(--paper-raised);border:1px solid var(--line);border-radius:12px;padding:10px 11px;font-size:12.5px;color:var(--ink-soft);line-height:1.4;}
+  .mce-principios b{display:block;color:var(--ink);font-size:13px;margin-bottom:3px;}
+  .mce-hitos{list-style:none;padding:0;margin:0;border-left:2px solid var(--line);}
+  .mce-hitos li{position:relative;padding:0 0 14px 16px;font-size:13.5px;color:var(--ink-soft);line-height:1.5;}
+  .mce-hitos li::before{content:"";position:absolute;left:-6px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--teal);}
+  .mce-hitos li.destacado::before{background:var(--gold);width:12px;height:12px;left:-7px;}
+  .mce-hitos li.destacado{color:var(--ink);font-weight:600;}
+  .mce-hitos span{display:block;font-size:11.5px;font-weight:700;color:var(--teal);letter-spacing:.3px;text-transform:uppercase;}
+  .mce-fuentes{padding-left:18px;margin:0 0 6px;}
+  .mce-fuentes li{font-size:13px;margin-bottom:6px;}
+  .mce-fuentes a{color:var(--teal);}
   .hero-eyebrow{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:10px;}
   .hero h1{font-size:28px;line-height:1.2;margin-bottom:14px;}
   .lead{font-size:15.5px;color:var(--ink-soft);}
@@ -121,6 +167,7 @@
     <div>
       <div class="topbar-title">Ética en Salud Chile</div>
       <div class="topbar-sub">Consulta ciudadana basada en códigos oficiales</div>
+      <button type="button" class="topbar-link" data-screen="mce" onclick="goTo('mce')">Marco de Consenso Ético ›</button>
     </div>
   </div>
 
@@ -178,6 +225,158 @@
     <hr class="divider">
     <div class="section-label">Preguntas frecuentes (anónimas)</div>
     <div id="faqList"></div>
+  </section>
+
+  <section class="screen" id="screen-mce">
+    <div class="hero-eyebrow">Colaboración ética en salud</div>
+    <h1 style="font-size:22px;">Marco de Consenso Ético</h1>
+    <p>Es un acuerdo voluntario en el que el Estado, las organizaciones de pacientes, los colegios profesionales, la academia y las empresas de la salud se comprometen a relacionarse de forma ética, transparente y pensando siempre en el bienestar de los pacientes. Su nombre completo es <b>Marco de Consenso de Chile para la Colaboración Ética Multisectorial en los Sectores Farmacéuticos y de Dispositivos Médicos</b>.</p>
+
+    <nav class="mce-indice" aria-label="Contenido de esta sección">
+      <a href="#mce-origen">Origen</a><a href="#mce-objetivos">Objetivos</a><a href="#mce-diagrama">Actores</a><a href="#mce-subrei">SUBREI</a><a href="#mce-integrantes">Integrantes</a><a href="#mce-cdmx">Ciudad de México</a><a href="#mce-kl">Kuala Lumpur</a><a href="#mce-hitos">Línea de tiempo</a><a href="#mce-fuentes">Fuentes</a>
+    </nav>
+
+    <hr class="divider">
+    <div class="section-label" id="mce-origen">Origen: el acuerdo de 2019</div>
+    <p>El 10 de septiembre de 2019, el año en que Chile fue anfitrión del Foro de Cooperación Económica Asia-Pacífico (APEC), representantes de asociaciones de pacientes, la sociedad civil, gremios, la academia, sociedades científicas y organismos públicos firmaron el Marco de Consenso Ético (MCE).</p>
+    <p>La idea viene del trabajo de APEC sobre ética en los negocios, que creó dos guías internacionales: los <b>Principios de Kuala Lumpur</b> (para dispositivos médicos) y los <b>Principios de Ciudad de México</b> (para medicamentos). Chile adaptó esas guías a su realidad con un compromiso firmado por todos los actores del sector.</p>
+    <details class="mce-detalle">
+      <summary>Ver quiénes firmaron en 2019 (18 organizaciones)</summary>
+      <p>Ministerio de Salud · Instituto de Salud Pública (ISP) · Asociación de Sociedades Científicas-Médicas de Chile (ASOCIMED) · Alianza Chilena de Agrupaciones de Pacientes (ACHAP) · Colegio de Enfermeras de Chile · Federación Chilena de Enfermedades Raras (FECHER) · Asociación Gremial de Farmacias Independientes (AFFI) · Asociación Chilena de Agrupaciones Oncológicas (ACHAGO) · Fundación Politopedia · Federación Chilena de Enfermedades Poco Frecuentes (FENPOF) · Asociación de Productores Locales de Medicamentos (PROLMED) · Dueños de Farmacias de Chile (UNFACH) · Cámara de Innovación Farmacéutica (CIF) · Asociación de Proveedores de la Industria de la Salud (APIS) · Cámara Nacional de Laboratorios (CANALAB) · Asociación Gremial de Dispositivos Médicos de Chile (ADIMECH) · Asociación Industrial de Laboratorios Farmacéuticos (ASILFA) · Sociedad Científica de Dispositivos Médicos (SCDM).</p>
+      <p class="mce-nota">Fuente: listado incluido en los "Estándares éticos recomendados" (2021), disponibles en la sección Instituciones.</p>
+    </details>
+
+    <hr class="divider">
+    <div class="section-label" id="mce-objetivos">Objetivos y propósito</div>
+    <div class="principle"><h3>Poner al paciente en el centro</h3><p>Que toda relación entre empresas, profesionales, organizaciones y Estado busque el bienestar de los pacientes y que las decisiones médicas se tomen en su mejor interés.</p></div>
+    <div class="principle"><h3>Más transparencia y menos conflictos de interés</h3><p>Promover una cultura de integridad, transparencia y diálogo, para que regalos, pagos o apoyos no influyan en las decisiones de salud.</p></div>
+    <div class="principle"><h3>Reglas claras y voluntarias</h3><p>Acordar recomendaciones que cada organización adopta por voluntad propia e incorpora en sus códigos de ética, como los Estándares para la relación entre asociaciones de pacientes e industria (2021).</p></div>
+    <div class="principle"><h3>Trabajo conjunto y mejora continua</h3><p>Reunir en una misma mesa a actores que normalmente no conversan, para revisar prácticas, capacitar y fortalecer la confianza en el sistema de salud.</p></div>
+
+    <hr class="divider">
+    <div class="section-label" id="mce-diagrama">Cómo se relacionan los actores</div>
+    <p>El Marco orienta las relaciones entre todos los actores del sistema de salud, con el paciente al centro. Cada número del diagrama se explica más abajo.</p>
+    <figure class="mce-diagrama">
+      <svg viewBox="0 0 340 380" role="img" aria-labelledby="mce-diag-titulo mce-diag-desc">
+        <title id="mce-diag-titulo">Actores del ecosistema de salud en el Marco de Consenso Ético</title>
+        <desc id="mce-diag-desc">Los pacientes están al centro. A su alrededor: el Estado arriba; los laboratorios y los profesionales de la salud; las empresas de dispositivos médicos y las clínicas y hospitales; y las farmacias abajo. Las líneas numeradas muestran sus principales relaciones, explicadas en la lista bajo el diagrama.</desc>
+        <rect class="d-marco" x="4" y="4" width="332" height="372" rx="18"/>
+        <text class="d-marco-txt" x="170" y="368" text-anchor="middle">Marco de Consenso Ético · Mesa coordinada por SUBREI</text>
+        <!-- Relaciones (los números se explican en la lista bajo el diagrama) -->
+        <line class="d-linea" x1="100" y1="110" x2="240" y2="110"/>
+        <line class="d-linea" x1="100" y1="270" x2="240" y2="270"/>
+        <line class="d-linea" x1="170" y1="190" x2="288" y2="110"/>
+        <line class="d-linea" x1="52" y1="110" x2="170" y2="190"/>
+        <line class="d-linea" x1="52" y1="270" x2="170" y2="190"/>
+        <line class="d-linea" x1="170" y1="300" x2="170" y2="190"/>
+        <line class="d-linea" x1="288" y1="270" x2="170" y2="190"/>
+        <line class="d-linea d-estado" x1="170" y1="62" x2="170" y2="150"/>
+        <!-- Actores -->
+        <g class="d-nodo"><rect x="100" y="22" width="140" height="40" rx="10"/><text x="170" y="40" text-anchor="middle">Estado</text><text class="d-sub" x="170" y="54" text-anchor="middle">MINSAL · ISP · CENABAST</text></g>
+        <g class="d-nodo"><rect x="240" y="88" width="96" height="44" rx="10"/><text x="288" y="106" text-anchor="middle">Profesionales</text><text class="d-sub" x="288" y="120" text-anchor="middle">de la salud</text></g>
+        <g class="d-nodo"><rect x="240" y="248" width="96" height="44" rx="10"/><text x="288" y="266" text-anchor="middle">Clínicas y</text><text x="288" y="281" text-anchor="middle">hospitales</text></g>
+        <g class="d-nodo"><rect x="122" y="300" width="96" height="40" rx="10"/><text x="170" y="324" text-anchor="middle">Farmacias</text></g>
+        <g class="d-nodo"><rect x="4" y="88" width="96" height="44" rx="10"/><text x="52" y="106" text-anchor="middle">Laboratorios</text><text class="d-sub" x="52" y="120" text-anchor="middle">medicamentos</text></g>
+        <g class="d-nodo"><rect x="4" y="248" width="96" height="44" rx="10"/><text x="52" y="266" text-anchor="middle">Empresas de</text><text class="d-sub" x="52" y="280" text-anchor="middle">dispositivos médicos</text></g>
+        <g class="d-centro"><circle cx="170" cy="190" r="40"/><text x="170" y="187" text-anchor="middle">Pacientes</text><text class="d-sub" x="170" y="201" text-anchor="middle">al centro</text></g>
+        <!-- Números de las relaciones -->
+        <g class="d-num"><circle cx="236" cy="145" r="10"/><text x="236" y="149" text-anchor="middle">1</text></g>
+        <g class="d-num"><circle cx="122" cy="110" r="10"/><text x="122" y="114" text-anchor="middle">2</text></g>
+        <g class="d-num"><circle cx="122" cy="270" r="10"/><text x="122" y="274" text-anchor="middle">3</text></g>
+        <g class="d-num"><circle cx="104" cy="145" r="10"/><text x="104" y="149" text-anchor="middle">4</text></g>
+        <g class="d-num"><circle cx="104" cy="235" r="10"/><text x="104" y="239" text-anchor="middle">4</text></g>
+        <g class="d-num"><circle cx="170" cy="249" r="10"/><text x="170" y="253" text-anchor="middle">5</text></g>
+        <g class="d-num"><circle cx="236" cy="235" r="10"/><text x="236" y="239" text-anchor="middle">6</text></g>
+        <g class="d-num d-num-estado"><circle cx="170" cy="86" r="10"/><text x="170" y="90" text-anchor="middle">7</text></g>
+      </svg>
+    </figure>
+    <ol class="mce-relaciones">
+      <li><b>Profesionales y pacientes:</b> atención respetuosa, con secreto profesional, consentimiento informado y decisiones tomadas solo en el interés del paciente. <span>Códigos de los colegios profesionales.</span></li>
+      <li><b>Laboratorios y profesionales:</b> información científica veraz sobre medicamentos, sin regalos, viajes ni pagos que influyan en lo que se receta. <span>CANALAB, CIF y Principios de Ciudad de México.</span></li>
+      <li><b>Empresas de dispositivos y clínicas u hospitales:</b> capacitación y tecnología con transparencia, y compras sin incentivos indebidos. <span>ADIMECH y Principios de Kuala Lumpur.</span></li>
+      <li><b>Empresas y organizaciones de pacientes:</b> cualquier apoyo debe quedar por escrito, ser transparente y respetar la independencia de las organizaciones, sin exclusividad. <span>Estándares éticos recomendados (2021) y Decálogo de Asociaciones de Pacientes (2025).</span></li>
+      <li><b>Farmacias y pacientes:</b> entrega de medicamentos y orientación honesta, con resguardo de la información personal. <span>Código del Colegio de Químicos Farmacéuticos y Bioquímicos.</span></li>
+      <li><b>Clínicas, hospitales y pacientes:</b> el lugar donde ocurren las atenciones. El Marco orienta a los profesionales y empresas que trabajan en ellos.</li>
+      <li><b>Estado:</b> regula y fiscaliza (Ministerio de Salud, ISP), compra y distribuye medicamentos para la red pública (CENABAST) y participa en la Mesa. SUBREI coordina el trabajo conjunto.</li>
+    </ol>
+
+    <hr class="divider">
+    <div class="section-label" id="mce-subrei">El rol de SUBREI</div>
+    <p>La <b>Subsecretaría de Relaciones Económicas Internacionales (SUBREI)</b>, del Ministerio de Relaciones Exteriores, coordina la Mesa del Marco de Consenso Ético a través de su División de Conducta Empresarial Responsable. Su rol es articular a todos los sectores:</p>
+    <ul class="mce-lista">
+      <li>Convoca y coordina las reuniones de la Mesa, donde se sientan juntos el Estado, los pacientes, los profesionales, la academia y las empresas.</li>
+      <li>Impulsa los planes de trabajo (2024-2025 y 2025) y hace seguimiento de sus acciones.</li>
+      <li>Organiza conversatorios y capacitaciones abiertas para difundir la ética en salud.</li>
+      <li>Conecta el trabajo chileno con APEC y con los Principios de Kuala Lumpur y de Ciudad de México.</li>
+    </ul>
+
+    <hr class="divider">
+    <div class="section-label" id="mce-integrantes">Integrantes actuales</div>
+    <p>Hoy la Mesa reúne a más de 20 organizaciones. Según la página de SUBREI:</p>
+    <div class="mce-grupo"><h3>Estado</h3><p>Ministerio de Salud (MINSAL) · Instituto de Salud Pública (ISP) · Central de Abastecimiento (CENABAST)</p></div>
+    <div class="mce-grupo"><h3>Profesionales de la salud</h3><p>Colegio Médico (COLMED) · Colegio de Enfermeras · Colegio de Matronas y Matrones (COLMAT) · Colegio de Químicos Farmacéuticos y Bioquímicos · Colegio de Cirujano Dentistas · Colegio de Kinesiólogos · Colegio de Tecnólogos Médicos (COLTO)</p></div>
+    <div class="mce-grupo"><h3>Academia y sociedades científicas</h3><p>ASOCIMED · Asociación de Facultades de Medicina de Chile (ASOFAMECH) · Sociedad Científica de Dispositivos Médicos (SCDM) · CENS</p></div>
+    <div class="mce-grupo"><h3>Pacientes</h3><p>Alianza Chilena de Agrupaciones de Pacientes (ACHAP) · Federación Chilena de Enfermedades Raras (FECHER) · FENPOF Chile · ACHAGO</p></div>
+    <div class="mce-grupo"><h3>Industria de medicamentos</h3><p>Cámara Nacional de Laboratorios (CANALAB) · Cámara de la Innovación Farmacéutica (CIF Chile)</p></div>
+    <div class="mce-grupo"><h3>Dispositivos médicos</h3><p>Asociación Gremial de Dispositivos Médicos de Chile (ADIMECH)</p></div>
+    <div class="mce-grupo"><h3>Farmacias y aseguradoras</h3><p>Asociación Gremial de Farmacias Independientes (AFFI Chile) · Dueños de Farmacias de Chile (UNFACH) · Asociación de Isapres de Chile</p></div>
+    <p class="mce-nota">La lista cambia cuando se suman nuevas organizaciones. Revisa la versión vigente en la página oficial de SUBREI (enlace en Fuentes).</p>
+
+    <hr class="divider">
+    <div class="section-label" id="mce-cdmx">Principios de Ciudad de México</div>
+    <p>Guía de APEC para los códigos de ética del sector de <b>medicamentos</b> (biofarmacéutico). Fue creada en 2011 y actualizada en 2021. Sus seis principios:</p>
+    <div class="mce-principios">
+      <div><b>Foco en la salud y el paciente</b>Todo lo que se hace debe buscar el beneficio de los pacientes.</div>
+      <div><b>Integridad</b>Actuar de forma ética, honesta y respetuosa en todo.</div>
+      <div><b>Independencia</b>Respetar que cada parte decida con autonomía, sin influencias indebidas.</div>
+      <div><b>Propósito legítimo</b>Todo debe ser legal y coherente con el espíritu de estos principios.</div>
+      <div><b>Transparencia</b>Estar dispuestos a mostrar lo que se hace, respetando la información comercial legítima.</div>
+      <div><b>Responsabilidad</b>Hacerse cargo de las propias acciones y relaciones.</div>
+    </div>
+
+    <hr class="divider">
+    <div class="section-label" id="mce-kl">Principios de Kuala Lumpur</div>
+    <p>Guía de APEC para los códigos de ética del sector de <b>dispositivos y tecnologías médicas</b>. Fue redactada en 2011, respaldada por los líderes de APEC en 2012 y modernizada en 2021. Sus siete principios:</p>
+    <div class="mce-principios">
+      <div><b>Los pacientes primero</b>Las empresas deben poner primero la salud y el bienestar de los pacientes que usan sus productos.</div>
+      <div><b>Integridad</b>Tratar a todos con transparencia, honestidad, veracidad y justicia.</div>
+      <div><b>Independencia</b>La relación con las empresas no debe alterar el criterio médico de los profesionales.</div>
+      <div><b>Pertinencia</b>Los acuerdos deben seguir buenas prácticas comerciales, ser exactos y estar libres de corrupción.</div>
+      <div><b>Transparencia</b>Empresas y profesionales deben ser abiertos sobre las relaciones económicas importantes entre ellos.</div>
+      <div><b>Avance</b>Las relaciones deben buscar mejorar la tecnología médica, la innovación y la atención de pacientes.</div>
+      <div><b>Responsabilidad</b>Promover prácticas éticas que protejan la seguridad, los derechos y la privacidad de los pacientes.</div>
+    </div>
+    <p class="mce-nota">Puedes leer ambos documentos completos (en inglés) en la sección Instituciones, o preguntar por ellos en Consultar.</p>
+
+    <hr class="divider">
+    <div class="section-label" id="mce-hitos">Línea de tiempo</div>
+    <ol class="mce-hitos">
+      <li><span>2011</span>APEC crea los Principios de Kuala Lumpur (dispositivos médicos) y de Ciudad de México (medicamentos).</li>
+      <li><span>2012</span>Los líderes de los países de APEC respaldan los Principios de Kuala Lumpur.</li>
+      <li><span>2014</span>Declaración de Nanjing: los países de APEC se proponen duplicar las asociaciones con códigos de ética en estos sectores.</li>
+      <li class="destacado"><span>10 sep 2019</span>Chile, anfitrión de APEC ese año, firma el Marco de Consenso Ético con 18 organizaciones de pacientes, profesionales, academia, industria y Estado.</li>
+      <li><span>2021</span>APEC actualiza los Principios de Kuala Lumpur y de Ciudad de México.</li>
+      <li><span>Jul 2021</span>Se publican los Estándares éticos recomendados para la relación entre asociaciones de pacientes e industria de la salud.</li>
+      <li><span>Oct 2023</span>La Mesa y SUBREI realizan un conversatorio sobre los desafíos de la ética en el sector.</li>
+      <li><span>Mar 2024</span>La Mesa aprueba su Plan de Trabajo 2024-2025, que incluye un decálogo para organizaciones de pacientes. Ese año se suman nuevas organizaciones, como el Colegio de Cirujano Dentistas.</li>
+      <li><span>Abr 2025</span>La Mesa renueva su compromiso con un Plan de Trabajo 2025 de 10 acciones prioritarias.</li>
+      <li><span>Jun 2025</span>Primera capacitación de la Mesa abierta al público.</li>
+      <li><span>2025</span>Se publica el Decálogo para el Relacionamiento Ético con Organizaciones de Pacientes.</li>
+    </ol>
+
+    <hr class="divider">
+    <div class="section-label" id="mce-fuentes">Fuentes oficiales</div>
+    <ul class="mce-fuentes">
+      <li><a href="https://www.subrei.gob.cl/ejes-de-trabajo/cer/anticorrupci%C3%B3n-e-integridad/mesa-de-marco-de-consenso-%C3%A9tico-para-el-sector-de-la-salud" target="_blank" rel="noopener">SUBREI — Mesa de Marco de Consenso Ético para el Sector de la Salud</a></li>
+      <li><a href="https://www.subrei.gob.cl/sala-de-prensa/noticias/detalle-noticias/2021/07/26/actores-de-la-salud-elevan-est%C3%A1ndares-de-transparencia-para-regular-la-relaci%C3%B3n-entre-la-industria-y-los-pacientes" target="_blank" rel="noopener">SUBREI — Estándares de transparencia entre industria y pacientes (julio 2021)</a></li>
+      <li><a href="https://www.subrei.gob.cl/sala-de-prensa/noticias/detalle-noticias/2023/10/19/mesa-del-marco-de-consenso-%C3%A9tico-para-el-sector-salud-y-subrei-realizan-conversatorio-sobre-los-desaf%C3%ADos-para-fortalecer-la-%C3%A9tica-en-el-rubro" target="_blank" rel="noopener">SUBREI — Conversatorio de la Mesa (octubre 2023)</a></li>
+      <li><a href="https://www.subrei.gob.cl/docs/default-source/punto-nacional-de-contacto/plan-de-trabajo-2024-2025.pdf?sfvrsn=4a4dbb82_1" target="_blank" rel="noopener">SUBREI — Plan de Trabajo 2024-2025 (PDF)</a></li>
+      <li><a href="https://www.subrei.gob.cl/sala-de-prensa/noticias/detalle-noticias/2025/04/17/mesa-del-marco-de-consenso-%C3%A9tico-para-el-sector-de-la-salud-renueva-su-compromiso-en-acciones-prioritarias-contenidas-en-el-plan-de-trabajo-2025" target="_blank" rel="noopener">SUBREI — Plan de Trabajo 2025 (abril 2025)</a></li>
+      <li><a href="https://www.subrei.gob.cl/sala-de-prensa/noticias/detalle-noticias/2025/06/05/mesa-del-marco-de-consenso-%C3%A9tico-de-chile-para-el-sector-salud-realiz%C3%B3-capacitaci%C3%B3n-abierta-al-p%C3%BAblico" target="_blank" rel="noopener">SUBREI — Capacitación abierta al público (junio 2025)</a></li>
+      <li><a href="https://mcprinciples.apec.org/" target="_blank" rel="noopener">APEC — Principios de Ciudad de México</a></li>
+      <li><a href="https://klprinciples.apec.org/initiatives/setting-best-practices/kuala-lumpur-principles/" target="_blank" rel="noopener">APEC — Principios de Kuala Lumpur</a></li>
+    </ul>
+    <button class="cta-primary" onclick="goTo('consultar')">Hacer una consulta sobre el Marco →</button>
   </section>
 
   <section class="screen" id="screen-contacto">
@@ -253,6 +452,7 @@ function goTo(screen){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen-'+screen).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active', b.dataset.screen===screen));
+  document.querySelector('.topbar-link').classList.toggle('activo', screen==='mce');
   window.scrollTo(0,0);
   if(screen==='contexto') loadFAQ();
   if(screen==='consultar') ajustarAlturaChat();
