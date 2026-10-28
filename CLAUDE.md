@@ -30,7 +30,8 @@ Colegio Médico, Colegio de Enfermeras, Colegio de Químicos Farmacéuticos y Bi
 - Error 500 por falta de saldo en la cuenta de la API de Anthropic.
 
 ## Pendientes
-- Ninguno por ahora. Sitios oficiales de las 15 instituciones confirmados por Vicente (octubre 2026); "Asociaciones de Pacientes" usa la página de la Mesa del Marco de Consenso Ético en subrei.gob.cl.
+- Fotos para la sección Marco de Consenso Ético (dejado para después por Vicente): 2 o 3 fotos de la sección Newsletter de SUBREI, presentadas de forma sobria (una ancha al inicio y una o dos pequeñas en "Origen" y "El rol de SUBREI", con el crédito "Foto: SUBREI" y comprimidas). El servidor de SUBREI bloquea los accesos automáticos (403), así que Vicente debe descargarlas y adjuntarlas en el chat.
+- Sitios oficiales de las 15 instituciones confirmados por Vicente (octubre 2026); "Asociaciones de Pacientes" usa la página de la Mesa del Marco de Consenso Ético en subrei.gob.cl.
 
 ## Cómo trabajar conmigo (Vicente)
 - No tengo experiencia programando. Explícame todo paso a paso, en español, con listas numeradas y diciendo exactamente qué botón apretar y dónde está en la pantalla.
