@@ -4,7 +4,7 @@
 Sitio web ciudadano, en español, que reúne los códigos de ética de instituciones del ecosistema de salud en Chile y permite consultarlos con IA. El público son personas comunes: todo el texto del sitio debe estar en lenguaje simple y cotidiano, sin jerga legal ni técnica.
 
 ## Secciones del sitio
-Aplicación de una sola página (single-page), pensada primero para celulares, con cinco secciones:
+Aplicación de una sola página (single-page), pensada primero para celulares, con cinco secciones en la barra inferior, más la sección **Marco de Consenso Ético** (`screen-mce`). A esta última se entra con el botón dorado del encabezado, bajo el subtítulo "Consulta ciudadana basada en códigos oficiales". Explica el origen del acuerdo de 2019, sus objetivos, un diagrama SVG de los actores (pacientes al centro y relaciones numeradas), el rol de SUBREI, los integrantes, los Principios de Ciudad de México y de Kuala Lumpur, una línea de tiempo y las fuentes oficiales. Los firmantes de 2019 y los principios salen del `.md`; los integrantes actuales y los hitos salen de las páginas de SUBREI y APEC (octubre 2026). Las secciones de la barra inferior son:
 1. **Inicio**
 2. **Consultar** — chat con IA que responde dudas basándose SOLO en los documentos validados. Antes de preguntar, la persona elige su perfil en "¿Quién pregunta?": profesional de la salud, industria farmacéutica o de dispositivos médicos, paciente, ciudadano/a o funcionario/a público/a. Se guarda en el navegador (`localStorage`) y se envía con cada consulta.
 3. **Instituciones** — qué instituciones tienen código de ética disponible, con enlace oficial y botón de descarga del PDF.
@@ -30,7 +30,8 @@ Colegio Médico, Colegio de Enfermeras, Colegio de Químicos Farmacéuticos y Bi
 - Error 500 por falta de saldo en la cuenta de la API de Anthropic.
 
 ## Pendientes
-- Ninguno por ahora. Sitios oficiales de las 15 instituciones confirmados por Vicente (octubre 2026); "Asociaciones de Pacientes" usa la página de la Mesa del Marco de Consenso Ético en subrei.gob.cl.
+- Fotos para la sección Marco de Consenso Ético (dejado para después por Vicente): 2 o 3 fotos de la sección Newsletter de SUBREI, presentadas de forma sobria (una ancha al inicio y una o dos pequeñas en "Origen" y "El rol de SUBREI", con el crédito "Foto: SUBREI" y comprimidas). El servidor de SUBREI bloquea los accesos automáticos (403), así que Vicente debe descargarlas y adjuntarlas en el chat.
+- Sitios oficiales de las 15 instituciones confirmados por Vicente (octubre 2026); "Asociaciones de Pacientes" usa la página de la Mesa del Marco de Consenso Ético en subrei.gob.cl.
 
 ## Cómo trabajar conmigo (Vicente)
 - No tengo experiencia programando. Explícame todo paso a paso, en español, con listas numeradas y diciendo exactamente qué botón apretar y dónde está en la pantalla.
