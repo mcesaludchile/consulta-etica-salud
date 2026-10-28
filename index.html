@@ -34,25 +34,6 @@
   .mce-detalle summary{font-size:13px;font-weight:600;color:var(--teal);cursor:pointer;}
   .mce-detalle p{font-size:13px;margin:10px 0 0;}
   .mce-nota{font-size:12px;color:var(--ink-soft);font-style:italic;}
-  .mce-diagrama{margin:6px 0 12px;background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--radius);padding:8px;}
-  .mce-diagrama svg{display:block;width:100%;height:auto;font-family:var(--sans);}
-  .d-marco{fill:none;stroke:var(--gold);stroke-width:1.5;stroke-dasharray:5 4;}
-  .d-marco-txt{font-size:9.5px;fill:var(--gold);font-weight:700;}
-  .d-linea{stroke:var(--teal);stroke-width:1.6;opacity:.55;}
-  .d-estado{stroke:var(--gold);stroke-dasharray:4 3;opacity:.9;}
-  .d-nodo rect{fill:var(--paper);stroke:var(--ink);stroke-width:1.2;}
-  .d-nodo text{font-size:11.5px;font-weight:600;fill:var(--ink);}
-  .d-sub{font-size:9px !important;font-weight:400 !important;fill:var(--ink-soft) !important;}
-  .d-centro circle{fill:var(--teal);}
-  .d-centro text{font-size:12.5px;font-weight:700;fill:#fff;}
-  .d-centro .d-sub{fill:#DCEBEA !important;}
-  .d-num circle{fill:#fff;stroke:var(--teal);stroke-width:1.5;}
-  .d-num text{font-size:10.5px;font-weight:700;fill:var(--teal);}
-  .d-num-estado circle{stroke:var(--gold);} .d-num-estado text{fill:var(--gold);}
-  .mce-relaciones{padding-left:22px;margin:0;}
-  .mce-relaciones li{font-size:13.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:8px;}
-  .mce-relaciones li b{color:var(--ink);}
-  .mce-relaciones li span{display:block;font-size:12px;color:var(--teal);}
   .mce-lista{padding-left:20px;margin:0;}
   .mce-lista li{font-size:13.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:6px;}
   .mce-grupo{margin-bottom:12px;}
@@ -233,7 +214,7 @@
     <p>Es un acuerdo voluntario en el que el Estado, las organizaciones de pacientes, los colegios profesionales, la academia y las empresas de la salud se comprometen a relacionarse de forma ética, transparente y pensando siempre en el bienestar de los pacientes. Su nombre completo es <b>Marco de Consenso de Chile para la Colaboración Ética Multisectorial en los Sectores Farmacéuticos y de Dispositivos Médicos</b>.</p>
 
     <nav class="mce-indice" aria-label="Contenido de esta sección">
-      <a href="#mce-origen">Origen</a><a href="#mce-objetivos">Objetivos</a><a href="#mce-diagrama">Actores</a><a href="#mce-subrei">SUBREI</a><a href="#mce-integrantes">Integrantes</a><a href="#mce-cdmx">Ciudad de México</a><a href="#mce-kl">Kuala Lumpur</a><a href="#mce-hitos">Línea de tiempo</a><a href="#mce-fuentes">Fuentes</a>
+      <a href="#mce-origen">Origen</a><a href="#mce-objetivos">Objetivos</a><a href="#mce-subrei">SUBREI</a><a href="#mce-integrantes">Integrantes</a><a href="#mce-cdmx">Ciudad de México</a><a href="#mce-kl">Kuala Lumpur</a><a href="#mce-hitos">Línea de tiempo</a><a href="#mce-fuentes">Fuentes</a>
     </nav>
 
     <hr class="divider">
@@ -248,57 +229,11 @@
 
     <hr class="divider">
     <div class="section-label" id="mce-objetivos">Objetivos y propósito</div>
-    <div class="principle"><h3>Poner al paciente en el centro</h3><p>Que toda relación entre empresas, profesionales, organizaciones y Estado busque el bienestar de los pacientes y que las decisiones médicas se tomen en su mejor interés.</p></div>
+    <div class="principle"><h3>Poner el bienestar del paciente en el centro</h3><p>Que toda relación entre empresas, profesionales, organizaciones y Estado busque el bienestar de los pacientes y que las decisiones médicas se tomen en su mejor interés.</p></div>
     <div class="principle"><h3>Más transparencia y menos conflictos de interés</h3><p>Promover una cultura de integridad, transparencia y diálogo, para que regalos, pagos o apoyos no influyan en las decisiones de salud.</p></div>
     <div class="principle"><h3>Reglas claras y voluntarias</h3><p>Acordar recomendaciones que cada organización adopta por voluntad propia e incorpora en sus códigos de ética, como los Estándares para la relación entre asociaciones de pacientes e industria (2021).</p></div>
     <div class="principle"><h3>Trabajo conjunto y mejora continua</h3><p>Reunir en una misma mesa a actores que normalmente no conversan, para revisar prácticas, capacitar y fortalecer la confianza en el sistema de salud.</p></div>
 
-    <hr class="divider">
-    <div class="section-label" id="mce-diagrama">Cómo se relacionan los actores</div>
-    <p>El Marco orienta las relaciones entre todos los actores del sistema de salud, con el paciente al centro. Cada número del diagrama se explica más abajo.</p>
-    <figure class="mce-diagrama">
-      <svg viewBox="0 0 340 380" role="img" aria-labelledby="mce-diag-titulo mce-diag-desc">
-        <title id="mce-diag-titulo">Actores del ecosistema de salud en el Marco de Consenso Ético</title>
-        <desc id="mce-diag-desc">Los pacientes están al centro. A su alrededor: el Estado arriba; los laboratorios y los profesionales de la salud; las empresas de dispositivos médicos y las clínicas y hospitales; y las farmacias abajo. Las líneas numeradas muestran sus principales relaciones, explicadas en la lista bajo el diagrama.</desc>
-        <rect class="d-marco" x="4" y="4" width="332" height="372" rx="18"/>
-        <text class="d-marco-txt" x="170" y="368" text-anchor="middle">Marco de Consenso Ético · Mesa coordinada por SUBREI</text>
-        <!-- Relaciones (los números se explican en la lista bajo el diagrama) -->
-        <line class="d-linea" x1="100" y1="110" x2="240" y2="110"/>
-        <line class="d-linea" x1="100" y1="270" x2="240" y2="270"/>
-        <line class="d-linea" x1="170" y1="190" x2="288" y2="110"/>
-        <line class="d-linea" x1="52" y1="110" x2="170" y2="190"/>
-        <line class="d-linea" x1="52" y1="270" x2="170" y2="190"/>
-        <line class="d-linea" x1="170" y1="300" x2="170" y2="190"/>
-        <line class="d-linea" x1="288" y1="270" x2="170" y2="190"/>
-        <line class="d-linea d-estado" x1="170" y1="62" x2="170" y2="150"/>
-        <!-- Actores -->
-        <g class="d-nodo"><rect x="100" y="22" width="140" height="40" rx="10"/><text x="170" y="40" text-anchor="middle">Estado</text><text class="d-sub" x="170" y="54" text-anchor="middle">MINSAL · ISP · CENABAST</text></g>
-        <g class="d-nodo"><rect x="240" y="88" width="96" height="44" rx="10"/><text x="288" y="106" text-anchor="middle">Profesionales</text><text class="d-sub" x="288" y="120" text-anchor="middle">de la salud</text></g>
-        <g class="d-nodo"><rect x="240" y="248" width="96" height="44" rx="10"/><text x="288" y="266" text-anchor="middle">Clínicas y</text><text x="288" y="281" text-anchor="middle">hospitales</text></g>
-        <g class="d-nodo"><rect x="122" y="300" width="96" height="40" rx="10"/><text x="170" y="324" text-anchor="middle">Farmacias</text></g>
-        <g class="d-nodo"><rect x="4" y="88" width="96" height="44" rx="10"/><text x="52" y="106" text-anchor="middle">Laboratorios</text><text class="d-sub" x="52" y="120" text-anchor="middle">medicamentos</text></g>
-        <g class="d-nodo"><rect x="4" y="248" width="96" height="44" rx="10"/><text x="52" y="266" text-anchor="middle">Empresas de</text><text class="d-sub" x="52" y="280" text-anchor="middle">dispositivos médicos</text></g>
-        <g class="d-centro"><circle cx="170" cy="190" r="40"/><text x="170" y="187" text-anchor="middle">Pacientes</text><text class="d-sub" x="170" y="201" text-anchor="middle">al centro</text></g>
-        <!-- Números de las relaciones -->
-        <g class="d-num"><circle cx="236" cy="145" r="10"/><text x="236" y="149" text-anchor="middle">1</text></g>
-        <g class="d-num"><circle cx="122" cy="110" r="10"/><text x="122" y="114" text-anchor="middle">2</text></g>
-        <g class="d-num"><circle cx="122" cy="270" r="10"/><text x="122" y="274" text-anchor="middle">3</text></g>
-        <g class="d-num"><circle cx="104" cy="145" r="10"/><text x="104" y="149" text-anchor="middle">4</text></g>
-        <g class="d-num"><circle cx="104" cy="235" r="10"/><text x="104" y="239" text-anchor="middle">4</text></g>
-        <g class="d-num"><circle cx="170" cy="249" r="10"/><text x="170" y="253" text-anchor="middle">5</text></g>
-        <g class="d-num"><circle cx="236" cy="235" r="10"/><text x="236" y="239" text-anchor="middle">6</text></g>
-        <g class="d-num d-num-estado"><circle cx="170" cy="86" r="10"/><text x="170" y="90" text-anchor="middle">7</text></g>
-      </svg>
-    </figure>
-    <ol class="mce-relaciones">
-      <li><b>Profesionales y pacientes:</b> atención respetuosa, con secreto profesional, consentimiento informado y decisiones tomadas solo en el interés del paciente. <span>Códigos de los colegios profesionales.</span></li>
-      <li><b>Laboratorios y profesionales:</b> información científica veraz sobre medicamentos, sin regalos, viajes ni pagos que influyan en lo que se receta. <span>CANALAB, CIF y Principios de Ciudad de México.</span></li>
-      <li><b>Empresas de dispositivos y clínicas u hospitales:</b> capacitación y tecnología con transparencia, y compras sin incentivos indebidos. <span>ADIMECH y Principios de Kuala Lumpur.</span></li>
-      <li><b>Empresas y organizaciones de pacientes:</b> cualquier apoyo debe quedar por escrito, ser transparente y respetar la independencia de las organizaciones, sin exclusividad. <span>Estándares éticos recomendados (2021) y Decálogo de Asociaciones de Pacientes (2025).</span></li>
-      <li><b>Farmacias y pacientes:</b> entrega de medicamentos y orientación honesta, con resguardo de la información personal. <span>Código del Colegio de Químicos Farmacéuticos y Bioquímicos.</span></li>
-      <li><b>Clínicas, hospitales y pacientes:</b> el lugar donde ocurren las atenciones. El Marco orienta a los profesionales y empresas que trabajan en ellos.</li>
-      <li><b>Estado:</b> regula y fiscaliza (Ministerio de Salud, ISP), compra y distribuye medicamentos para la red pública (CENABAST) y participa en la Mesa. SUBREI coordina el trabajo conjunto.</li>
-    </ol>
 
     <hr class="divider">
     <div class="section-label" id="mce-subrei">El rol de SUBREI</div>
@@ -312,7 +247,7 @@
 
     <hr class="divider">
     <div class="section-label" id="mce-integrantes">Integrantes actuales</div>
-    <p>Hoy la Mesa reúne a más de 20 organizaciones. Según la página de SUBREI:</p>
+    <p>Hoy la Mesa reúne a más de 20 organizaciones:</p>
     <div class="mce-grupo"><h3>Estado</h3><p>Ministerio de Salud (MINSAL) · Instituto de Salud Pública (ISP) · Central de Abastecimiento (CENABAST)</p></div>
     <div class="mce-grupo"><h3>Profesionales de la salud</h3><p>Colegio Médico (COLMED) · Colegio de Enfermeras · Colegio de Matronas y Matrones (COLMAT) · Colegio de Químicos Farmacéuticos y Bioquímicos · Colegio de Cirujano Dentistas · Colegio de Kinesiólogos · Colegio de Tecnólogos Médicos (COLTO)</p></div>
     <div class="mce-grupo"><h3>Academia y sociedades científicas</h3><p>ASOCIMED · Asociación de Facultades de Medicina de Chile (ASOFAMECH) · Sociedad Científica de Dispositivos Médicos (SCDM) · Centro Nacional en Sistemas de Información en Salud (<a href="https://www.cens.cl/" target="_blank" rel="noopener">CENS</a>)</p></div>
@@ -376,7 +311,7 @@
       <li><a href="https://mcprinciples.apec.org/" target="_blank" rel="noopener">APEC — Principios de Ciudad de México</a></li>
       <li><a href="https://klprinciples.apec.org/initiatives/setting-best-practices/kuala-lumpur-principles/" target="_blank" rel="noopener">APEC — Principios de Kuala Lumpur</a></li>
     </ul>
-    <button class="cta-primary" onclick="goTo('consultar')">Hacer una consulta sobre el Marco →</button>
+    <button class="cta-primary" onclick="goTo('consultar')">Consultar</button>
   </section>
 
   <section class="screen" id="screen-contacto">
