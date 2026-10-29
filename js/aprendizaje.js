@@ -236,7 +236,7 @@
       if(u.protocol !== 'https:' && u.origin !== location.origin) return null;
       if(/(^|\.)youtube\.com$|(^|\.)youtu\.be$|youtube-nocookie\.com$/.test(u.hostname)){
         const id = u.hostname.endsWith('youtu.be') ? u.pathname.slice(1) : (u.searchParams.get('v') || u.pathname.split('/').pop());
-        return { tipo:'iframe', src:`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0&cc_load_policy=1&hl=es` };
+        return { tipo:'iframe', src:`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0&playsinline=1&hl=es` };
       }
       if(/\.(mp4|webm)$/i.test(u.pathname)) return { tipo:'archivo', src:u.href };
       return { tipo:'iframe', src:u.href };

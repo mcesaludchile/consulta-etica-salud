@@ -42,25 +42,19 @@ Todo el texto está en `data/aprendizaje.json`. No hay que tocar código. Para e
    o sobra una coma o comilla: revisa el último cambio (o pídele ayuda a Claude).
 
 ### Agregar un video real (reemplazar "Video próximamente")
-**Opción A: archivo de video propio (.mp4), como el de conflictos de interés**
-1. En GitHub, entra a la carpeta `videos`, aprieta **Add file** (arriba a la derecha) → **Upload files**,
-   arrastra el `.mp4` y aprieta **Commit changes**. GitHub acepta archivos de hasta 25 MB por esta vía.
-2. En `aprendizaje.json`, en el video que corresponde, cambia `"url_embed": null` por
-   `"url_embed": "videos/nombre-del-archivo.mp4"` y ajusta `"duracion_seg"` (segundos que dura).
-3. Para mostrarlo también dentro de un curso, agrega al inicio de sus `"pantallas"`:
-   `{ "tipo": "video", "titulo": "Para empezar: mira este video", "video": "id-del-video", "texto": "..." }`.
-
-**Opción B: YouTube**
+**Recomendado: YouTube "No listado"** (no gasta créditos de Netlify y ajusta la calidad a la conexión).
+No subas los .mp4 a GitHub: cada reproducción desde Netlify gasta créditos del plan gratuito y, si se acaban, Netlify pausa todo el sitio.
 1. Sube el video a YouTube (puede ser "No listado").
 2. Copia su dirección, por ejemplo `https://www.youtube.com/watch?v=ABC123`.
 3. En `aprendizaje.json`, busca el video (por ejemplo `"id": "video-transparencia"`) y cambia
    `"url_embed": null` por `"url_embed": "https://www.youtube.com/watch?v=ABC123"`.
    El sitio lo muestra con youtube-nocookie.com y solo lo carga cuando la persona aprieta ▶.
-4. Opcional: `"miniatura": "data/miniatura-transparencia.jpg"` (una imagen propia subida a `data/`).
-5. Subtítulos: en YouTube se agregan en YouTube Studio. Si usas un archivo de video propio
-   (`.mp4`, subido a `data/`), puedes agregar `"subtitulos_vtt": "data/video-transparencia.vtt"`.
+4. Opcional: `"miniatura": "videos/transparencia.jpg"` (una imagen propia, liviana, en `videos/`). Así la portada se ve sin contactar a YouTube hasta que la persona aprieta ▶.
+5. Subtítulos: nuestros videos ya los traen en la imagen. Si un video no los trae, se agregan en YouTube Studio.
 6. El `guion` de cada video está listo para grabar (con tiempos e imágenes sugeridas). La
    `transcripcion` se muestra bajo el video: si cambias lo que se dice, actualízala también.
+7. Para mostrarlo también dentro del curso del tema, agrega al inicio de sus `"pantallas"`:
+   `{ "tipo": "video", "titulo": "Para empezar: mira este video", "video": "id-del-video", "texto": "..." }`.
 
 ### Agregar un término al glosario
 Copia un término existente dentro de `"glosario": [ ... ]`, pégalo después de otro (separado por una coma) y cambia:
