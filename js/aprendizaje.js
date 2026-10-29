@@ -206,6 +206,7 @@
         <span class="ap-card-texto">${esc(c.objetivo)}</span>
         <span class="ap-meta">
           <span>⏱ ${c.duracion_min} min</span>
+          ${videoDelCurso(c) ? `<span>🎬 Incluye video de ${minutosVideo(videoDelCurso(c))} min</span>` : ''}
           ${progreso.cursos[c.id] ? '<span class="ap-ok">✓ Completado</span>' : ''}
           ${n ? `<span>👥 ${n} ${n === 1 ? 'persona ha' : 'personas han'} participado</span>` : ''}
         </span>
@@ -232,29 +233,35 @@
   function fuenteVideo(url){
     try{
       const u = new URL(url, location.href);
-      if(u.protocol !== 'https:') return null;
+      if(u.protocol !== 'https:' && u.origin !== location.origin) return null;
       if(/(^|\.)youtube\.com$|(^|\.)youtu\.be$|youtube-nocookie\.com$/.test(u.hostname)){
         const id = u.hostname.endsWith('youtu.be') ? u.pathname.slice(1) : (u.searchParams.get('v') || u.pathname.split('/').pop());
-        return { tipo:'iframe', src:`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0&cc_load_policy=1&hl=es` };
+        return { tipo:'iframe', src:`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0&playsinline=1&hl=es` };
       }
       if(/\.(mp4|webm)$/i.test(u.pathname)) return { tipo:'archivo', src:u.href };
       return { tipo:'iframe', src:u.href };
     }catch(e){ return null; }
   }
+  // El video no se descarga hasta que la persona aprieta ▶.
+  function portadaVideo(v){
+    const fuente = v.url_embed ? fuenteVideo(v.url_embed) : null;
+    const portada = fuente
+      ? `<button type="button" class="ap-video-portada" data-accion="reproducir" data-id="${v.id}" aria-label="Reproducir video: ${esc(v.titulo)}"
+           ${v.miniatura ? `style="background-image:url('${esc(v.miniatura)}')"` : ''}>
+           <span class="ap-play" aria-hidden="true">▶</span></button>`
+      : `<div class="ap-video-portada ap-video-pronto" role="img" aria-label="Video próximamente">
+           <span class="ap-pronto-ic" aria-hidden="true">🎬</span><span>Video próximamente</span></div>`;
+    return `<div class="ap-video-marco" id="marco-${v.id}">${portada}</div>`;
+  }
+  function minutosVideo(v){ return Math.max(1, Math.round((v.duracion_seg || 120) / 60)); }
   function listaVideos(){
     const videos = AP.datos.videos.filter(pasaFiltro);
     if(!videos.length) return vacio();
     return videos.map(v => {
       const fuente = v.url_embed ? fuenteVideo(v.url_embed) : null;
-      const mins = Math.round((v.duracion_seg || 120) / 60);
-      const portada = fuente
-        ? `<button type="button" class="ap-video-portada" data-accion="reproducir" data-id="${v.id}" aria-label="Reproducir video: ${esc(v.titulo)}"
-             ${v.miniatura ? `style="background-image:url('${esc(v.miniatura)}')"` : ''}>
-             <span class="ap-play" aria-hidden="true">▶</span></button>`
-        : `<div class="ap-video-portada ap-video-pronto" role="img" aria-label="Video próximamente">
-             <span class="ap-pronto-ic" aria-hidden="true">🎬</span><span>Video próximamente</span></div>`;
+      const mins = minutosVideo(v);
       return `<article class="ap-video" id="video-${v.id}">
-        <div class="ap-video-marco" id="marco-${v.id}">${portada}</div>
+        ${portadaVideo(v)}
         <div class="ap-video-info">
           ${etiquetaTema(v.tema)}
           <h3>${esc(v.titulo)}</h3>
@@ -273,7 +280,7 @@
     if(!fuente) return;
     const marco = $('marco-' + id);
     if(fuente.tipo === 'archivo'){
-      marco.innerHTML = `<video controls autoplay playsinline preload="metadata" src="${esc(fuente.src)}">
+      marco.innerHTML = `<video controls autoplay playsinline preload="metadata" src="${esc(fuente.src)}"${v.miniatura ? ` poster="${esc(v.miniatura)}"` : ''}>
         ${v.subtitulos_vtt ? `<track kind="subtitles" srclang="es" label="Español" src="${esc(v.subtitulos_vtt)}" default>` : ''}
       </video>`;
     }else{
@@ -299,7 +306,16 @@
     const paso = v.paso;
     let cuerpo = '', puedeSeguir = true;
 
-    if(paso < nP){
+    if(paso < nP && c.pantallas[paso].tipo === 'video'){
+      const p = c.pantallas[paso];
+      const vid = AP.datos.videos.find(x => x.id === p.video);
+      cuerpo = `
+        <span class="ap-tipo">Video${vid ? ' · ' + minutosVideo(vid) + ' min' : ''}</span>
+        <h3 class="ap-paso-titulo" tabindex="-1">${esc(p.titulo || (vid && vid.titulo) || 'Video')}</h3>
+        ${parrafos(p.texto)}
+        ${vid ? `<div class="ap-video ap-video-curso">${portadaVideo(vid)}</div>
+          <details class="ap-transcripcion"><summary>📄 Transcripción</summary>${parrafos(vid.transcripcion)}</details>` : ''}`;
+    }else if(paso < nP){
       const p = c.pantallas[paso];
       cuerpo = `
         ${p.tipo === 'ejemplo' ? '<span class="ap-tipo">Ejemplo</span>' : ''}
@@ -353,7 +369,7 @@
         <div class="ap-barra" role="progressbar" aria-label="Avance del curso" aria-valuemin="1" aria-valuemax="${total}" aria-valuenow="${paso + 1}" aria-valuetext="Paso ${paso + 1} de ${total}">
           <span style="width:${pct}%"></span>
         </div>
-        <p class="ap-paso-num">Paso ${paso + 1} de ${total} · ⏱ ${c.duracion_min} min</p>
+        <p class="ap-paso-num">Paso ${paso + 1} de ${total} · ⏱ ${c.duracion_min} min${videoDelCurso(c) ? ` + video de ${minutosVideo(videoDelCurso(c))} min` : ''}</p>
         <div class="ap-tarjeta">${cuerpo}</div>
         ${paso < total - 1 ? `<div class="ap-nav">
           <button type="button" class="ap-btn secundario" data-accion="anterior" ${paso === 0 ? 'disabled' : ''}>Anterior</button>
@@ -362,6 +378,11 @@
         ${paso < nP ? '<p class="ap-ayuda">También puedes deslizar la tarjeta con el dedo.</p>' : ''}
       </div>`;
     if(paso === total - 1) renderProgreso();
+  }
+  function videoDelCurso(c){
+    const p = c.pantallas.find(x => x.tipo === 'video');
+    const v = p && AP.datos.videos.find(x => x.id === p.video);
+    return v && v.url_embed ? v : null;
   }
   function retroalimentacion(s, k){
     const o = s.opciones[k];
@@ -649,7 +670,7 @@
   // Deslizar con el dedo para avanzar o retroceder en un curso
   let toque = null;
   $('apPanel').addEventListener('touchstart', (e) => {
-    if(!e.target.closest('.ap-visor') || !AP.vista || AP.vista.tipo !== 'curso') return;
+    if(!e.target.closest('.ap-visor') || e.target.closest('.ap-video-marco') || !AP.vista || AP.vista.tipo !== 'curso') return;
     toque = { x:e.touches[0].clientX, y:e.touches[0].clientY };
   }, { passive:true });
   $('apPanel').addEventListener('touchend', (e) => {
