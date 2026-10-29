@@ -236,7 +236,7 @@
       if(u.protocol !== 'https:' && u.origin !== location.origin) return null;
       if(/(^|\.)youtube\.com$|(^|\.)youtu\.be$|youtube-nocookie\.com$/.test(u.hostname)){
         const id = u.hostname.endsWith('youtu.be') ? u.pathname.slice(1) : (u.searchParams.get('v') || u.pathname.split('/').pop());
-        return { tipo:'iframe', src:`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0&playsinline=1&hl=es` };
+        return { tipo:'youtube', yt:id, src:`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0&playsinline=1&hl=es&cc_load_policy=0` };
       }
       if(/\.(mp4|webm)$/i.test(u.pathname)) return { tipo:'archivo', src:u.href };
       return { tipo:'iframe', src:u.href };
@@ -283,10 +283,64 @@
       marco.innerHTML = `<video controls autoplay playsinline preload="metadata" src="${esc(fuente.src)}"${v.miniatura ? ` poster="${esc(v.miniatura)}"` : ''}>
         ${v.subtitulos_vtt ? `<track kind="subtitles" srclang="es" label="Español" src="${esc(v.subtitulos_vtt)}" default>` : ''}
       </video>`;
+    }else if(fuente.tipo === 'youtube'){
+      reproducirYouTube(marco, v, fuente);
     }else{
       marco.innerHTML = `<iframe src="${esc(fuente.src)}" title="${esc(v.titulo)}" loading="lazy"
         allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
     }
+  }
+
+  /* YouTube: nuestros videos traen los subtítulos en la imagen, así que se
+     apagan los subtítulos automáticos de YouTube (que se encienden solos, por
+     ejemplo cuando el video parte en silencio en el celular). Se usa la API
+     del reproductor; si no carga, se muestra el reproductor simple. */
+  let apiYouTube = null;
+  function cargarApiYouTube(){
+    if(window.YT && window.YT.Player) return Promise.resolve();
+    if(apiYouTube) return apiYouTube;
+    apiYouTube = new Promise((ok, falla) => {
+      const anterior = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => { if(anterior) anterior(); ok(); };
+      const s = document.createElement('script');
+      s.src = 'https://www.youtube.com/iframe_api';
+      s.onerror = falla;
+      document.head.appendChild(s);
+      setTimeout(() => falla(new Error('tiempo agotado')), 8000);
+    });
+    apiYouTube.catch(() => { apiYouTube = null; });
+    return apiYouTube;
+  }
+  function quitarSubtitulos(reproductor){
+    try{ reproductor.unloadModule('captions'); }catch(e){}
+    try{ reproductor.unloadModule('cc'); }catch(e){}
+  }
+  function reproducirYouTube(marco, v, fuente){
+    const simple = () => {
+      marco.innerHTML = `<iframe src="${esc(fuente.src)}" title="${esc(v.titulo)}"
+        allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+    };
+    marco.innerHTML = `<div id="yt-${v.id}"></div>`;
+    cargarApiYouTube().then(() => {
+      if(!document.getElementById('yt-' + v.id)) return; // la persona ya cambió de pantalla
+      new YT.Player('yt-' + v.id, {
+        host: 'https://www.youtube-nocookie.com',
+        videoId: fuente.yt,
+        width: '100%', height: '100%',
+        playerVars: { autoplay: 1, rel: 0, playsinline: 1, hl: 'es', cc_load_policy: 0, iv_load_policy: 3 },
+        events: {
+          onReady: (e) => {
+            const f = e.target.getIframe();
+            f.title = v.titulo;
+            f.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+            quitarSubtitulos(e.target);
+            e.target.playVideo();
+          },
+          onApiChange: (e) => quitarSubtitulos(e.target),
+          onStateChange: (e) => { if(e.data === YT.PlayerState.PLAYING) quitarSubtitulos(e.target); },
+        },
+      });
+    }).catch(simple);
   }
 
   /* ---------- Curso: pantallas + situaciones ficticias ---------- */
