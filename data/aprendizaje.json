@@ -856,6 +856,12 @@
       "objetivo": "Al terminar sabrás qué es la inteligencia artificial, cómo se usa en salud y qué preguntas hacerte frente a ella.",
       "pantallas": [
         {
+          "tipo": "video",
+          "titulo": "Para empezar: mira este video",
+          "video": "video-ia",
+          "texto": "En menos de 2 minutos, este video explica qué es la inteligencia artificial, cómo ya se usa en salud y qué riesgos tiene. Si prefieres leer, abre la transcripción."
+        },
+        {
           "tipo": "concepto",
           "titulo": "¿Qué es la inteligencia artificial?",
           "texto": "La {{inteligencia-artificial|inteligencia artificial}} (IA) son programas computacionales que aprenden patrones a partir de muchos ejemplos y luego los usan para hacer predicciones, clasificar información o escribir textos.\n\nFuncionan con {{algoritmo|algoritmos}}: instrucciones paso a paso. Lo que la IA «sabe» depende de los {{datos-de-entrenamiento|datos con que fue entrenada}}. Si esos datos son incompletos, sus respuestas también lo serán.",
@@ -1039,6 +1045,12 @@
       "duracion_min": 5,
       "objetivo": "Al terminar conocerás tus principales derechos y deberes al atenderte en salud.",
       "pantallas": [
+        {
+          "tipo": "video",
+          "titulo": "Para empezar: mira este video",
+          "video": "video-pacientes",
+          "texto": "En menos de 2 minutos, este video resume tus principales derechos y deberes como paciente. Si prefieres leer, abre la transcripción."
+        },
         {
           "tipo": "concepto",
           "titulo": "Una ley para los pacientes",
@@ -1300,9 +1312,9 @@
       "id": "video-ia",
       "tema": "ia-salud",
       "titulo": "Cuando una máquina ayuda a tu médico",
-      "duracion_seg": 120,
-      "url_embed": null,
-      "miniatura": null,
+      "duracion_seg": 112,
+      "url_embed": "https://youtu.be/GIdtU1UwAM4",
+      "miniatura": "videos/ia-en-salud.jpg",
       "guion": "[0:00–0:10 · Gancho] (Imagen sugerida: Radiografía en una pantalla con marcas de colores.)\nQuizás tu próximo examen lo revise primero un programa de inteligencia artificial. ¿Eso es bueno o malo?\n\n[0:10–1:15 · Idea central] (Imagen sugerida: Íconos: balanza (sesgo), signo de pregunta (error), persona (supervisión).)\nLa inteligencia artificial, o IA, son programas que aprenden de muchísimos ejemplos para reconocer patrones. En salud ya ayuda a leer imágenes, ordenar listas de espera o responder preguntas. Bien usada, ahorra tiempo y puede detectar cosas que una persona pasaría por alto. Pero tiene riesgos. Puede tener sesgos: si aprendió con datos de solo algunos grupos, puede funcionar peor con otros, como personas mayores o de zonas rurales. Puede equivocarse con total seguridad, e incluso inventar información: a eso se le llama alucinación. Y una máquina no responde éticamente: responden las personas e instituciones que la usan. Por eso la clave es la supervisión humana. La IA puede sugerir, pero un profesional debe revisar, decidir y explicarte. También importa la explicabilidad, es decir, poder entender por qué la herramienta sugiere algo. Y tus datos de salud, que la IA usa para aprender o para responder, siguen siendo datos sensibles y deben protegerse.\n\n[1:15–1:45 · Ejemplo cotidiano] (Imagen sugerida: Ilustración de una señora en su centro de salud.)\nGloria tiene diabetes. En su centro de salud, un programa analiza fotos de su ojo y un especialista revisa los casos dudosos. Ella pregunta quién ve sus fotos y cómo se guardan. Le responden con claridad. Gloria entiende cómo funciona la herramienta y confía en el resultado.\n\n[1:45–2:00 · Cierre] (Imagen sugerida: Pantalla del sitio con la sección Consultar.)\nTienes derecho a preguntar si en tu atención se usa IA, para qué sirve y quién revisa sus resultados. Los principios éticos de siempre se aplican: tu bienestar primero y tu información protegida. En Chile se discute una ley sobre IA; mientras tanto, rigen tus derechos como paciente. Y si tienes dudas, pregunta en Consultar.",
       "transcripcion": "Quizás tu próximo examen lo revise primero un programa de inteligencia artificial. ¿Eso es bueno o malo?\n\nLa inteligencia artificial, o IA, son programas que aprenden de muchísimos ejemplos para reconocer patrones. En salud ya ayuda a leer imágenes, ordenar listas de espera o responder preguntas. Bien usada, ahorra tiempo y puede detectar cosas que una persona pasaría por alto. Pero tiene riesgos. Puede tener sesgos: si aprendió con datos de solo algunos grupos, puede funcionar peor con otros, como personas mayores o de zonas rurales. Puede equivocarse con total seguridad, e incluso inventar información: a eso se le llama alucinación. Y una máquina no responde éticamente: responden las personas e instituciones que la usan. Por eso la clave es la supervisión humana. La IA puede sugerir, pero un profesional debe revisar, decidir y explicarte. También importa la explicabilidad, es decir, poder entender por qué la herramienta sugiere algo. Y tus datos de salud, que la IA usa para aprender o para responder, siguen siendo datos sensibles y deben protegerse.\n\nGloria tiene diabetes. En su centro de salud, un programa analiza fotos de su ojo y un especialista revisa los casos dudosos. Ella pregunta quién ve sus fotos y cómo se guardan. Le responden con claridad. Gloria entiende cómo funciona la herramienta y confía en el resultado.\n\nTienes derecho a preguntar si en tu atención se usa IA, para qué sirve y quién revisa sus resultados. Los principios éticos de siempre se aplican: tu bienestar primero y tu información protegida. En Chile se discute una ley sobre IA; mientras tanto, rigen tus derechos como paciente. Y si tienes dudas, pregunta en Consultar.",
       "subtitulos_vtt": null,
@@ -1315,9 +1327,9 @@
       "id": "video-pacientes",
       "tema": "pacientes",
       "titulo": "Tus derechos como paciente",
-      "duracion_seg": 120,
-      "url_embed": null,
-      "miniatura": null,
+      "duracion_seg": 107,
+      "url_embed": "https://youtu.be/nHkT4sbrVzU",
+      "miniatura": "videos/derechos-paciente.jpg",
       "guion": "[0:00–0:10 · Gancho] (Imagen sugerida: Sala de espera de un consultorio.)\nCuando estás enfermo o asustado, es fácil olvidar algo importante: como paciente, tienes derechos.\n\n[0:10–1:20 · Idea central] (Imagen sugerida: Lista animada con los derechos principales.)\nEn Chile, la Ley 20.584 reconoce los derechos y deberes de las personas en su atención de salud, en el sector público y en el privado. Tienes derecho a un trato digno: que te atiendan con respeto, te llamen por tu nombre y cuiden tu privacidad. A estar acompañado por familiares o amigos, según las normas del lugar. A recibir información clara sobre tu diagnóstico y tratamiento. A que tu ficha clínica sea reservada. A decidir: aceptar o rechazar un tratamiento después de entenderlo, lo que se llama consentimiento informado. Y a reclamar si algo no funciona. También puedes pedir otra opinión: el Código del Colegio Médico obliga a entregar tus informes clínicos si decides consultar a otro médico. Y hay deberes: tratar con respeto al personal, entregar información veraz y cuidar las instalaciones. Recuerda: estos derechos valen en un consultorio, en un hospital y en una clínica privada. Y conocerlos no es para pelear con el equipo de salud, sino para conversar mejor y decidir con confianza.\n\n[1:20–1:45 · Ejemplo cotidiano] (Imagen sugerida: Ilustración de un hombre mayor acompañado por su hija.)\nDon Jorge, de 68 años, pide que su hija lo acompañe para entender las indicaciones. El equipo lo permite y le explica con calma. Él, a su vez, cuenta que toma remedios de hierbas, un dato útil para su tratamiento. Derechos y deberes, juntos.\n\n[1:45–2:00 · Cierre] (Imagen sugerida: Pantalla del sitio con la sección Consultar.)\nSi sientes que no se respetaron tus derechos, primero conversa con el equipo y, si no basta, presenta un reclamo en el establecimiento. ¿Tienes una duda sobre tu caso? Escríbela en Consultar y revisa lo que dicen los códigos de ética.",
       "transcripcion": "Cuando estás enfermo o asustado, es fácil olvidar algo importante: como paciente, tienes derechos.\n\nEn Chile, la Ley 20.584 reconoce los derechos y deberes de las personas en su atención de salud, en el sector público y en el privado. Tienes derecho a un trato digno: que te atiendan con respeto, te llamen por tu nombre y cuiden tu privacidad. A estar acompañado por familiares o amigos, según las normas del lugar. A recibir información clara sobre tu diagnóstico y tratamiento. A que tu ficha clínica sea reservada. A decidir: aceptar o rechazar un tratamiento después de entenderlo, lo que se llama consentimiento informado. Y a reclamar si algo no funciona. También puedes pedir otra opinión: el Código del Colegio Médico obliga a entregar tus informes clínicos si decides consultar a otro médico. Y hay deberes: tratar con respeto al personal, entregar información veraz y cuidar las instalaciones. Recuerda: estos derechos valen en un consultorio, en un hospital y en una clínica privada. Y conocerlos no es para pelear con el equipo de salud, sino para conversar mejor y decidir con confianza.\n\nDon Jorge, de 68 años, pide que su hija lo acompañe para entender las indicaciones. El equipo lo permite y le explica con calma. Él, a su vez, cuenta que toma remedios de hierbas, un dato útil para su tratamiento. Derechos y deberes, juntos.\n\nSi sientes que no se respetaron tus derechos, primero conversa con el equipo y, si no basta, presenta un reclamo en el establecimiento. ¿Tienes una duda sobre tu caso? Escríbela en Consultar y revisa lo que dicen los códigos de ética.",
       "subtitulos_vtt": null,
