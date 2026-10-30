@@ -748,6 +748,12 @@
       "objetivo": "Al terminar sabrás qué es la ficha clínica, quién puede verla y cómo se protege lo que cuentas en una atención.",
       "pantallas": [
         {
+          "tipo": "video",
+          "titulo": "Para empezar: mira este video",
+          "video": "video-datos",
+          "texto": "En menos de 2 minutos, este video explica qué es la ficha clínica, quién puede verla y quién no. Si prefieres leer, abre la transcripción."
+        },
+        {
           "tipo": "concepto",
           "titulo": "¿Qué es la ficha clínica?",
           "texto": "La {{ficha-clinica|ficha clínica}} es el registro de tu historia de salud: consultas, diagnósticos, exámenes, tratamientos y procedimientos. Puede estar en papel o en un sistema computacional.\n\nSirve para que el equipo de salud te atienda bien y de forma continua. Por eso debe ser completa y verídica. Y como contiene datos sensibles, debe guardarse con mucho cuidado.",
@@ -1279,9 +1285,9 @@
       "id": "video-datos",
       "tema": "proteccion-datos",
       "titulo": "¿Quién puede ver tu ficha clínica?",
-      "duracion_seg": 120,
-      "url_embed": null,
-      "miniatura": null,
+      "duracion_seg": 102,
+      "url_embed": "https://youtu.be/57sIz08Itic",
+      "miniatura": "videos/ficha-clinica.jpg",
       "guion": "[0:00–0:10 · Gancho] (Imagen sugerida: Carpeta con un candado.)\nTu ficha clínica guarda algunas de las cosas más privadas de tu vida. ¿Sabes quién puede leerla?\n\n[0:10–1:15 · Idea central] (Imagen sugerida: Esquema: tú, tu equipo de salud y, aparte, quienes la ley autoriza.)\nLa ficha clínica es el registro de tu historia de salud: consultas, diagnósticos, exámenes y tratamientos. Sirve para que el equipo que te atiende tenga la información completa. Pero es reservada. Según la Ley 20.584, pueden acceder a ella tú, quienes participan en tu atención y, en los casos que la ley indica, otras personas, como alguien con tu autorización ante notario o un tribunal. Tu jefe no puede pedirla. Un funcionario que no te atiende no puede revisarla por curiosidad. Los códigos de ética van en la misma línea. El Colegio Médico dice que el secreto profesional incluye hasta tu nombre y sigue vigente incluso después de terminada la atención. Y solo con tu autorización escrita y específica se puede revelar esa información. Hay excepciones muy específicas, como las enfermedades que la ley obliga a notificar o una orden de un tribunal. Fuera de esos casos, lo que cuentas en una consulta se queda ahí.\n\n[1:15–1:45 · Ejemplo cotidiano] (Imagen sugerida: Ilustración de una funcionaria en un mesón de admisión.)\nMartina trabaja en la admisión de un hospital. Su tía le pide que mire la ficha de una vecina que estuvo hospitalizada. Martina le explica, con cariño, que no puede: no participa en la atención de esa persona y esa información no le pertenece. Protegió a la vecina, y también su propio trabajo.\n\n[1:45–2:00 · Cierre] (Imagen sugerida: Celular con una aplicación pidiendo permisos.)\nSi crees que alguien revisó tu ficha sin motivo, puedes preguntar en el establecimiento y presentar un reclamo. Cuida también tus datos fuera del hospital: lee antes de aceptar que una aplicación comparta tu información. ¿Quieres saber más? Pregunta en Consultar.",
       "transcripcion": "Tu ficha clínica guarda algunas de las cosas más privadas de tu vida. ¿Sabes quién puede leerla?\n\nLa ficha clínica es el registro de tu historia de salud: consultas, diagnósticos, exámenes y tratamientos. Sirve para que el equipo que te atiende tenga la información completa. Pero es reservada. Según la Ley 20.584, pueden acceder a ella tú, quienes participan en tu atención y, en los casos que la ley indica, otras personas, como alguien con tu autorización ante notario o un tribunal. Tu jefe no puede pedirla. Un funcionario que no te atiende no puede revisarla por curiosidad. Los códigos de ética van en la misma línea. El Colegio Médico dice que el secreto profesional incluye hasta tu nombre y sigue vigente incluso después de terminada la atención. Y solo con tu autorización escrita y específica se puede revelar esa información. Hay excepciones muy específicas, como las enfermedades que la ley obliga a notificar o una orden de un tribunal. Fuera de esos casos, lo que cuentas en una consulta se queda ahí.\n\nMartina trabaja en la admisión de un hospital. Su tía le pide que mire la ficha de una vecina que estuvo hospitalizada. Martina le explica, con cariño, que no puede: no participa en la atención de esa persona y esa información no le pertenece. Protegió a la vecina, y también su propio trabajo.\n\nSi crees que alguien revisó tu ficha sin motivo, puedes preguntar en el establecimiento y presentar un reclamo. Cuida también tus datos fuera del hospital: lee antes de aceptar que una aplicación comparta tu información. ¿Quieres saber más? Pregunta en Consultar.",
       "subtitulos_vtt": null,
