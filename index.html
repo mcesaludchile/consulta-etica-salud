@@ -165,6 +165,22 @@
   .ley a{font-size:12.5px;font-weight:600;}
   .ley-revisado{font-size:11.5px;color:var(--ink-soft);}
   .chat-aviso{display:block;margin-top:4px;font-weight:600;}
+  /* Acciones bajo cada respuesta del chat */
+  .acciones-resp{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  .acciones-resp button{min-height:40px;background:var(--paper-raised);border:1px solid var(--line);border-radius:20px;padding:0 12px;font-size:12.5px;font-weight:600;color:var(--ink);cursor:pointer;font-family:var(--sans);}
+  .acciones-resp button:active{background:var(--teal-soft);}
+  #zonaImpresion{display:none;}
+  @media print{
+    @page{margin:18mm;}
+    body.imprimiendo > *:not(#zonaImpresion){display:none !important;}
+    body.imprimiendo{padding:0;border:none;max-width:none;background:#fff;}
+    body.imprimiendo #zonaImpresion{display:block;font-family:var(--sans);color:#000;}
+    #zonaImpresion h1{font-family:var(--serif);font-size:20px;margin:0 0 4px;}
+    #zonaImpresion .imp-meta{font-size:11px;color:#444;margin-bottom:14px;}
+    #zonaImpresion h2{font-size:13px;text-transform:uppercase;letter-spacing:.5px;margin:16px 0 4px;color:#333;}
+    #zonaImpresion p{font-size:13px;line-height:1.5;color:#000;margin:0 0 8px;}
+    #zonaImpresion .imp-nota{font-size:11px;color:#444;border-top:1px solid #999;padding-top:8px;margin-top:18px;}
+  }
 
   /* ---------- Sección Aprende (Centro de Aprendizaje) ---------- */
   #screen-aprende .disclaimer a{color:#204b48;font-weight:600;}
@@ -442,7 +458,7 @@
     <p>No vendemos ni compartimos esta información con fines comerciales, y no la usamos para publicidad.</p>
 
     <h3>Lo que queda solo en tu celular o computador</h3>
-    <p>Tu perfil elegido, tus votos en las preguntas frecuentes y tu avance en Aprende se guardan en tu propio navegador, no en nuestros servidores. Puedes borrarlos con "Reiniciar mi progreso" (en Aprende) o borrando los datos del sitio en tu navegador. Este sitio no usa cookies propias ni herramientas de publicidad.</p>
+    <p>Tu perfil elegido, tus votos en las preguntas frecuentes y tu avance en Aprende se guardan en tu propio navegador, no en nuestros servidores. Los botones para copiar, compartir o imprimir una respuesta también funcionan solo en tu dispositivo: no nos envían nada. Puedes borrarlos con "Reiniciar mi progreso" (en Aprende) o borrando los datos del sitio en tu navegador. Este sitio no usa cookies propias ni herramientas de publicidad.</p>
 
     <h3>Si usas otras secciones</h3>
     <ul>
@@ -833,17 +849,79 @@ function askQuick(el){
   document.getElementById('chatInput').value = el.textContent;
   sendMessage();
 }
-function addMsg(role, html, sources){
+function addMsg(role, html, sources, consulta){
   const wrap = document.createElement('div');
   wrap.className = 'msg ' + (role==='user'?'user':'bot');
   let inner = `<div class="msg-bubble">${html}`;
   if(sources && sources.length){
-    inner += `<div class="sources">${sources.map(s=>`<span class="source-tag">${s}</span>`).join('')}</div>`;
+    inner += `<div class="sources">${sources.map(s=>`<span class="source-tag">${escapeHtml(s)}</span>`).join('')}</div>`;
   }
   inner += `</div>`;
   wrap.innerHTML = inner;
+  if(consulta) wrap.appendChild(botonesRespuesta(consulta));
   chatLog.appendChild(wrap);
   chatLog.scrollTop = chatLog.scrollHeight;
+}
+
+/* ---------- ACCIONES SOBRE CADA RESPUESTA ----------
+   Copiar, WhatsApp, Compartir (si el celular lo permite) e Imprimir / PDF.
+   Todo ocurre en el dispositivo de la persona: no se envía nada al sitio. */
+const SITIO = 'https://eticaensalud.cl';
+function textoConsulta(c, maxRespuesta){
+  let resp = c.respuesta;
+  if(maxRespuesta && resp.length > maxRespuesta) resp = resp.slice(0, maxRespuesta).replace(/\s+\S*$/, '') + '…';
+  return `Pregunta: ${c.pregunta}\n\n${resp}` +
+    (c.fuentes.length ? `\n\nFuentes: ${c.fuentes.join(', ')}` : '') +
+    `\n\nRespuesta orientativa generada por IA a partir de códigos de ética; no reemplaza asesoría profesional. Ética en Salud Chile: ${SITIO}`;
+}
+function botonesRespuesta(c){
+  const fila = document.createElement('div');
+  fila.className = 'acciones-resp';
+  const boton = (texto, etiqueta, accion) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.textContent = texto; b.setAttribute('aria-label', etiqueta);
+    b.addEventListener('click', () => accion(b));
+    fila.appendChild(b);
+  };
+  boton('📋 Copiar', 'Copiar la respuesta con sus fuentes', (b) => copiarConsulta(c, b));
+  boton('WhatsApp', 'Enviar la respuesta por WhatsApp', () => {
+    window.open('https://wa.me/?text=' + encodeURIComponent(textoConsulta(c, 1500)), '_blank', 'noopener');
+  });
+  if(navigator.share) boton('↗ Compartir', 'Compartir la respuesta', async () => {
+    try{ await navigator.share({ title:'Ética en Salud Chile', text: textoConsulta(c) }); }catch(e){}
+  });
+  boton('🖨 Imprimir / PDF', 'Imprimir o guardar como PDF', () => imprimirConsulta(c));
+  return fila;
+}
+async function copiarConsulta(c, b){
+  const texto = textoConsulta(c);
+  let ok = false;
+  try{ await navigator.clipboard.writeText(texto); ok = true; }catch(e){
+    // Navegadores antiguos: copia con un cuadro de texto oculto
+    const t = document.createElement('textarea');
+    t.value = texto; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+    document.body.appendChild(t); t.select();
+    try{ ok = document.execCommand('copy'); }catch(e2){}
+    t.remove();
+  }
+  b.textContent = ok ? '✓ Copiado' : 'No se pudo copiar';
+  setTimeout(() => { b.textContent = '📋 Copiar'; }, 2000);
+}
+function imprimirConsulta(c){
+  let zona = document.getElementById('zonaImpresion');
+  if(!zona){ zona = document.createElement('div'); zona.id = 'zonaImpresion'; document.body.appendChild(zona); }
+  const fecha = c.fecha.toLocaleString('es-CL', { dateStyle:'long', timeStyle:'short' });
+  zona.innerHTML = `<h1>Ética en Salud Chile</h1>
+    <div class="imp-meta">Consulta del ${escapeHtml(fecha)} · ${SITIO}</div>
+    <h2>Pregunta</h2>${formatAnswer(c.pregunta)}
+    <h2>Respuesta</h2>${formatAnswer(c.respuesta)}
+    ${c.fuentes.length ? `<h2>Fuentes</h2><p>${escapeHtml(c.fuentes.join(', '))}</p>` : ''}
+    <p class="imp-nota">Respuesta orientativa generada por inteligencia artificial a partir de los códigos de ética publicados en el sitio. Puede contener errores y no reemplaza asesoría legal ni médica. Revisa siempre la fuente citada.</p>`;
+  document.body.classList.add('imprimiendo');
+  const limpiar = () => { document.body.classList.remove('imprimiendo'); window.removeEventListener('afterprint', limpiar); };
+  window.addEventListener('afterprint', limpiar);
+  window.print();
+  setTimeout(limpiar, 1000);
 }
 function addTyping(){
   const wrap = document.createElement('div');
@@ -912,7 +990,8 @@ async function sendMessage(){
       sources = sourceMatch[1].split(',').map(s=>s.trim());
       displayText = answer.replace(sourceMatch[0], '').trim();
     }
-    addMsg('bot', formatAnswer(displayText), sources);
+    addMsg('bot', formatAnswer(displayText), sources,
+      data.fuera_de_tema ? null : { pregunta:text, respuesta:displayText, fuentes:sources, fecha:new Date() });
     chatHistory.push({role:'assistant', content:answer});
 
     // La función del chat ya guardó la consulta en Supabase (las fuera de tema no se guardan).
