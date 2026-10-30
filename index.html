@@ -92,6 +92,7 @@
   .chat-log{flex:1;overflow-y:auto;padding-bottom:10px;}
   .msg{margin-bottom:16px;max-width:92%;}
   .msg.user{margin-left:auto;}
+  .msg.bot{max-width:100%;}
   .msg-bubble{padding:12px 14px;border-radius:16px;font-size:14.5px;line-height:1.5;}
   .msg.user .msg-bubble{background:var(--teal);color:#fff;border-radius:18px 18px 4px 18px;}
   .msg.bot .msg-bubble{background:#fff;border:1px solid var(--line);border-radius:18px 18px 18px 4px;box-shadow:0 1px 4px rgba(28,43,51,.05);}
@@ -1062,7 +1063,9 @@ function ajustarAlturaChat(){
   const abajo = Math.max(nav, parseFloat(getComputedStyle(document.body).paddingBottom) || 0);
   const pantalla = document.getElementById('screen-consultar');
   const relleno = parseFloat(getComputedStyle(pantalla).paddingBottom) || 0;
-  wrap.style.height = Math.max(260, Math.floor(visible - arriba - abajo - relleno)) + 'px';
+  wrap.style.height = Math.max(220, Math.floor(visible - arriba - abajo - relleno)) + 'px';
+  // Sin teclado abierto, la página no debe quedar corrida: así la caja de texto queda pegada a la barra inferior.
+  if(document.activeElement !== document.getElementById('chatInput')) window.scrollTo(0, 0);
 }
 window.addEventListener('resize', ajustarAlturaChat);
 window.addEventListener('orientationchange', ajustarAlturaChat);
@@ -1127,7 +1130,9 @@ function addMsg(role, html, sources, consulta){
   wrap.innerHTML = inner;
   if(consulta) wrap.appendChild(botonesRespuesta(consulta));
   chatLog.appendChild(wrap);
-  chatLog.scrollTop = chatLog.scrollHeight;
+  // Las respuestas se muestran desde su comienzo (no desde el final), para leerlas de arriba hacia abajo.
+  if(role === 'user') chatLog.scrollTop = chatLog.scrollHeight;
+  else chatLog.scrollTop += wrap.getBoundingClientRect().top - chatLog.getBoundingClientRect().top - 8;
 }
 
 /* ---------- ACCIONES SOBRE CADA RESPUESTA ----------
@@ -1237,6 +1242,10 @@ async function sendMessage(){
   addMsg('user', escapeHtml(text));
   document.getElementById('quickQs').hidden = true;
   alternarAjustes(false);
+  // En celulares se cierra el teclado y la página vuelve arriba, para que la respuesta use toda la pantalla.
+  if(window.matchMedia('(pointer: coarse)').matches) input.blur();
+  window.scrollTo(0, 0);
+  ajustarAlturaChat();
   chatHistory.push({role:'user', content:text});
   addTyping();
 
