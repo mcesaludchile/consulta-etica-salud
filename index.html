@@ -342,10 +342,14 @@
 
   <section class="screen" id="screen-consultar">
     <div class="chat-wrap">
-      <div class="disclaimer">Respuestas generadas por IA a partir de los códigos de ética cargados; pueden tener errores y no sustituyen asesoría profesional. Tu pregunta se guarda sin tu nombre ni tu RUT (<a href="#privacidad" onclick="goTo('privacidad');return false;">privacidad</a>).<span class="chat-aviso">No escribas tu nombre, RUT ni datos que te identifiquen.</span></div>
-      <div class="perfil-box">
+      <div class="disclaimer">Respuestas generadas por IA a partir de los códigos de ética cargados; pueden tener errores y no sustituyen asesoría profesional. Tú decides si tu pregunta se publica, sin tu nombre ni tu RUT (<a href="#privacidad" onclick="goTo('privacidad');return false;">privacidad</a>).<span class="chat-aviso">No escribas tu nombre, RUT ni datos que te identifiquen.</span></div>
+      <div class="perfil-box" id="perfilBox">
         <label class="perfil-label" for="perfilSelect">¿Quién pregunta?</label>
         <select id="perfilSelect" onchange="elegirPerfil(this.value)"></select>
+      </div>
+      <div class="perfil-box" id="publicarBox">
+        <label class="perfil-label" for="publicarSelect">¿Publicar tu pregunta?</label>
+        <select id="publicarSelect" onchange="elegirPublicar(this.value)"></select>
       </div>
       <div class="quick-qs" id="quickQs"></div>
       <div class="chat-log" id="chatLog"></div>
@@ -411,6 +415,12 @@
     <p>El responsable de este sitio y de los datos que se guardan es <b>Eticaensalud</b> (eticaensalud.cl). Para cualquier consulta sobre tus datos, escríbenos desde la sección <a href="#" onclick="goTo('contacto');return false;">Contacto</a>.</p>
 
     <h2 id="priv-guardamos">Qué guardamos cuando usas Consultar</h2>
+    <p>Antes de preguntar, eliges en "¿Publicar tu pregunta?" qué pasa con ella:</p>
+    <ul>
+      <li><b>"Sí, sin mis datos":</b> guardamos tu pregunta y la respuesta, y podrían aparecer en "Preguntas frecuentes", siempre sin nada que te identifique.</li>
+      <li><b>"No, solo contarla":</b> no guardamos tu pregunta ni la respuesta. Solo registramos la fecha y hora, para sumarla al contador de consultas del inicio. Nunca se publica.</li>
+    </ul>
+    <p>Puedes cambiar tu elección cuando quieras; vale para las preguntas siguientes. Si eliges "Sí", guardamos:</p>
     <ul>
       <li>Tu <b>pregunta</b>, la <b>respuesta</b> del asistente y los <b>códigos de ética</b> que cita.</li>
       <li>La <b>fecha y hora</b> de la consulta.</li>
@@ -418,10 +428,10 @@
       <li>Cuántas personas marcaron "De acuerdo" o "En desacuerdo" en cada pregunta frecuente.</li>
     </ul>
     <p><b>No te pedimos ni guardamos</b> tu nombre, RUT, correo ni teléfono. Tampoco guardamos tu dirección IP en nuestra base de datos. El perfil que eliges en "¿Quién pregunta?" se usa para adaptar la respuesta, pero no se guarda.</p>
-    <p><b>Importante:</b> guardamos la pregunta tal como la escribes. Por eso te pedimos no escribir tu nombre, RUT ni otros datos que te identifiquen, ni datos de otras personas. Si el sitio detecta algo así, te avisa antes de enviar y esa pregunta nunca se publica.</p>
+    <p><b>Importante:</b> si eliges "Sí", guardamos la pregunta tal como la escribes. Por eso te pedimos no escribir tu nombre, RUT ni otros datos que te identifiquen, ni datos de otras personas. Si el sitio detecta algo así, te avisa antes de enviar y esa pregunta nunca se publica.</p>
 
     <h3>Qué se publica</h3>
-    <p>Algunas preguntas aparecen en "Preguntas frecuentes" (sección Contexto). Solo se publican las que tratan de ética en salud y no contienen datos personales, y nunca se muestra nada que identifique a quien preguntó. Si ves una pregunta publicada que crees que no debería estar, escríbenos y la retiramos.</p>
+    <p>Algunas preguntas aparecen en "Preguntas frecuentes" (sección Contexto). Solo se publican las de personas que lo autorizaron, que tratan de ética en salud y que no contienen datos personales, y nunca se muestra nada que identifique a quien preguntó. Si ves una pregunta publicada que crees que no debería estar, escríbenos y la retiramos.</p>
 
     <h3>Para qué usamos esta información</h3>
     <ul>
@@ -444,7 +454,7 @@
     <p>Para funcionar, el sitio usa estos servicios. Sus servidores pueden estar fuera de Chile.</p>
     <ul>
       <li><b>Anthropic</b> (la inteligencia artificial que redacta las respuestas): recibe tu pregunta y los últimos mensajes de la conversación. Según sus condiciones vigentes, no usa estos datos para entrenar sus modelos y los borra de sus sistemas en un plazo de hasta 30 días.</li>
-      <li><b>Supabase</b> (base de datos): guarda las consultas descritas arriba.</li>
+      <li><b>Supabase</b> (base de datos): guarda las consultas descritas arriba (o solo su fecha, si elegiste no publicar).</li>
       <li><b>Netlify</b> (alojamiento del sitio): como todo sitio web, registra datos técnicos de las visitas, como la dirección IP, para funcionar y protegerse de abusos.</li>
       <li><b>YouTube</b>: solo si aprietas ▶ en un video de Aprende. Antes de eso, el sitio no se conecta con YouTube.</li>
       <li><b>Web3Forms</b>: envía por correo los mensajes del formulario de Contacto.</li>
@@ -735,13 +745,49 @@ function renderPerfiles(){
     PERFILES.map(p => `<option value="${p.id}"${p.id===perfilActual?' selected':''}>${p.texto}</option>`).join('');
   sel.classList.toggle('sin-elegir', !perfilActual);
   const input = document.getElementById('chatInput');
-  input.placeholder = perfilActual ? 'Escribe tu duda...' : 'Primero elige tu perfil ↑';
+  input.placeholder = !perfilActual ? 'Primero elige tu perfil ↑'
+    : publicarActual === null ? 'Primero elige si se publica ↑' : 'Escribe tu duda...';
+}
+
+/* ---------- PERMISO PARA PUBLICAR ----------
+   Antes de preguntar, la persona decide si su pregunta y la respuesta se pueden
+   guardar y publicar (sin datos personales) en Preguntas frecuentes. Si dice que
+   no, chat.js solo suma la consulta al contador: no guarda el texto. */
+const OPCIONES_PUBLICAR = [
+  { id:'si', texto:'Sí, sin mis datos' },
+  { id:'no', texto:'No, solo contarla' },
+];
+let publicarActual = null;
+try{ const v = localStorage.getItem('publicar'); if(v === 'si' || v === 'no') publicarActual = v; }catch(e){}
+
+function renderPublicar(){
+  const sel = document.getElementById('publicarSelect');
+  sel.innerHTML = `<option value="" disabled${publicarActual?'':' selected'}>Elige una opción…</option>` +
+    OPCIONES_PUBLICAR.map(o => `<option value="${o.id}"${o.id===publicarActual?' selected':''}>${o.texto}</option>`).join('');
+  sel.classList.toggle('sin-elegir', !publicarActual);
+}
+function elegirPublicar(id){
+  const cambio = publicarActual && publicarActual !== id;
+  publicarActual = id;
+  try{ localStorage.setItem('publicar', id); }catch(e){}
+  document.getElementById('publicarBox').classList.remove('falta');
+  renderPublicar();
+  renderPerfiles();
+  if(cambio) addMsg('bot', formatAnswer(id === 'si'
+    ? 'Listo: tus próximas preguntas y sus respuestas se podrán publicar en Preguntas frecuentes, sin tus datos.'
+    : 'Listo: tus próximas preguntas no se guardarán ni se publicarán; solo se sumarán al contador de consultas.'));
+}
+function pedirPublicar(){
+  const caja = document.getElementById('publicarBox');
+  caja.classList.add('falta');
+  caja.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  document.getElementById('publicarSelect').focus();
 }
 function elegirPerfil(id){
   const cambio = perfilActual && perfilActual !== id;
   perfilActual = id;
   try{ localStorage.setItem('perfil', id); }catch(e){}
-  document.querySelector('.perfil-box').classList.remove('falta');
+  document.getElementById('perfilBox').classList.remove('falta');
   renderPerfiles();
   if(cambio){
     const p = PERFILES.find(x => x.id === id);
@@ -749,7 +795,7 @@ function elegirPerfil(id){
   }
 }
 function pedirPerfil(){
-  const caja = document.querySelector('.perfil-box');
+  const caja = document.getElementById('perfilBox');
   caja.classList.add('falta');
   caja.scrollIntoView({ behavior:'smooth', block:'nearest' });
   document.getElementById('perfilSelect').focus();
@@ -783,6 +829,7 @@ function renderQuickQs(){
 }
 function askQuick(el){
   if(!perfilActual){ pedirPerfil(); return; }
+  if(!publicarActual){ pedirPublicar(); return; }
   document.getElementById('chatInput').value = el.textContent;
   sendMessage();
 }
@@ -824,6 +871,7 @@ async function sendMessage(){
   const text = input.value.trim();
   if(!text) return;
   if(!perfilActual){ pedirPerfil(); return; }
+  if(!publicarActual){ pedirPublicar(); return; }
   const dato = revisarDatosPersonales(text);
   if(dato && !confirm(`Parece que escribiste un dato personal (${dato}). Para cuidar tu privacidad, te recomendamos borrarlo antes de enviar.\n\n¿Quieres enviar la pregunta igual?`)){
     input.focus();
@@ -842,7 +890,7 @@ async function sendMessage(){
     const resp = await fetch("/.netlify/functions/chat", {
       method:"POST",
       headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({ messages: chatHistory, perfil: perfilActual })
+      body: JSON.stringify({ messages: chatHistory, perfil: perfilActual, publicar: publicarActual === 'si' })
     });
     const data = await resp.json().catch(() => ({}));
     removeTyping();
@@ -1093,6 +1141,7 @@ async function sendContact(e){
 /* ---------- INIT ---------- */
 loadInstituciones();
 renderQuickQs();
+renderPublicar();
 renderPerfiles();
 refreshStats();
 addMsg('bot', formatAnswer('Hola 👋 Soy tu asistente de consulta ciudadana sobre ética en salud en Chile. Pregúntame lo que necesites saber sobre tus derechos frente a médicos, enfermeras, farmacéuticos u otras instituciones de salud.'));
