@@ -734,6 +734,24 @@
     if(Math.abs(dx) > 60 && Math.abs(dy) < 50) moverCurso(dx < 0 ? 1 : -1);
   }, { passive:true });
 
+  /* ---------- Leyes de referencia (sección Contexto) ----------
+     Usa la misma lista de leyes de aprendizaje.json, para no tenerla en dos lugares.
+     Muestra el "resumen" (para el público); la "descripcion" es la nota de revisión. */
+  async function renderLegales(contenedor){
+    if(!contenedor) return;
+    await cargarDatos();
+    if(!AP.datos){ contenedor.innerHTML = '<p class="empty-note">No pudimos cargar la lista de leyes. Inténtalo más tarde.</p>'; return; }
+    const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    const fecha = (f) => { const m = /^(\d{4})-(\d{2})/.exec(f || ''); return m ? `${meses[Number(m[2]) - 1]} de ${m[1]}` : ''; };
+    contenedor.innerHTML = (AP.datos.referencias_legales || []).map(r => `<div class="ley">
+        <b>${esc(r.nombre)}</b>
+        <p>${esc(r.resumen || r.descripcion)}</p>
+        ${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">Ver el texto oficial ↗</a>` : ''}
+        ${r.revisado ? `<span class="ley-revisado">${r.url ? ' · ' : ''}Revisado en ${fecha(r.revisado)}</span>` : ''}
+      </div>`).join('');
+  }
+  window.renderLegales = renderLegales;
+
   /* ---------- Enlaces directos: #glosario/termino y #aprende ---------- */
   function leerDireccion(){
     const m = location.hash.match(/^#glosario\/([a-z0-9-]+)$/);

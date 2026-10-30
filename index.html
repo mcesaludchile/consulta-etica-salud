@@ -141,6 +141,30 @@
   .faq-apoyo.desacuerdo.marcado{background:#F4E1DF;border-color:#9B4444;color:#9B4444;}
   .stat-error{margin-top:8px;font-size:11.5px;color:#9B4444;}
   .empty-note{font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+  a.stat-card{display:block;text-decoration:none;color:inherit;}
+  .stat-num.ic{font-size:20px;}
+  /* Pie de página del Inicio */
+  .pie{margin-top:26px;padding:16px 0 4px;border-top:1px solid var(--line);text-align:center;}
+  .pie-links{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 14px;}
+  .pie-links a{display:inline-block;padding:10px 0;font-size:13px;font-weight:600;color:var(--teal);}
+  .pie p{font-size:11.5px;margin:6px 0 0;}
+  /* Privacidad y términos */
+  #screen-privacidad h2{font-size:18px;margin:22px 0 8px;scroll-margin-top:110px;}
+  #screen-privacidad h3{font-size:15px;margin:16px 0 6px;}
+  #screen-privacidad ul{padding-left:20px;margin:0 0 12px;}
+  #screen-privacidad li{font-size:14px;color:var(--ink-soft);line-height:1.55;margin-bottom:6px;}
+  #screen-privacidad p{font-size:14px;}
+  .priv-indice{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px;}
+  .priv-indice a{font-size:12.5px;color:var(--teal);background:var(--paper-raised);border:1px solid var(--line);border-radius:20px;padding:8px 12px;text-decoration:none;}
+  .priv-fecha{font-size:12px;font-style:italic;}
+  /* Leyes de referencia (Contexto) */
+  #ctx-legales{scroll-margin-top:110px;}
+  .ley{border-left:3px solid var(--teal);padding:2px 0 2px 12px;margin-bottom:14px;}
+  .ley b{display:block;font-size:14px;color:var(--ink);}
+  .ley p{font-size:13px;margin:2px 0 4px;}
+  .ley a{font-size:12.5px;font-weight:600;}
+  .ley-revisado{font-size:11.5px;color:var(--ink-soft);}
+  .chat-aviso{display:block;margin-top:4px;font-weight:600;}
 
   /* ---------- Sección Aprende (Centro de Aprendizaje) ---------- */
   #screen-aprende .disclaimer a{color:#204b48;font-weight:600;}
@@ -295,7 +319,7 @@
     <div class="stat-row">
       <div class="stat-card"><span class="stat-num" id="statInst">—</span><span class="stat-label">Instituciones</span></div>
       <div class="stat-card"><span class="stat-num" id="statConsultas">—</span><span class="stat-label">Consultas registradas</span></div>
-      <div class="stat-card"><span class="stat-num">100%</span><span class="stat-label">Anónimo</span></div>
+      <a class="stat-card" href="#privacidad" onclick="goTo('privacidad');return false;" aria-label="No pedimos tu nombre ni tu RUT. Ver política de privacidad"><span class="stat-num ic" aria-hidden="true">🔒</span><span class="stat-label">No pedimos nombre ni RUT</span></a>
     </div>
     <p class="stat-error" id="statError" hidden></p>
     <hr class="divider">
@@ -306,14 +330,26 @@
     <hr class="divider">
     <div class="section-label">Importante</div>
     <p style="font-size:13px;">Esta herramienta entrega información orientativa a partir de códigos de ética. No reemplaza asesoría legal, un reclamo formal ante un colegio profesional, ni atención médica.</p>
+    <footer class="pie">
+      <nav class="pie-links" aria-label="Información del sitio">
+        <a href="#privacidad" onclick="goTo('privacidad');return false;">Privacidad y términos de uso</a>
+        <a href="#legales" onclick="irALegales();return false;">Leyes de referencia</a>
+        <a href="#" onclick="goTo('contacto');return false;">Contacto</a>
+      </nav>
+      <p>Eticaensalud · eticaensalud.cl</p>
+    </footer>
   </section>
 
   <section class="screen" id="screen-consultar">
     <div class="chat-wrap">
-      <div class="disclaimer">Respuestas generadas por IA a partir de los códigos de ética cargados. No sustituye asesoría profesional. Tu consulta se guarda de forma <b>anónima</b> para mejorar esta herramienta.</div>
-      <div class="perfil-box">
+      <div class="disclaimer">Respuestas generadas por IA a partir de los códigos de ética cargados; pueden tener errores y no sustituyen asesoría profesional. Tú decides si tu pregunta se publica, sin tu nombre ni tu RUT (<a href="#privacidad" onclick="goTo('privacidad');return false;">privacidad</a>).<span class="chat-aviso">No escribas tu nombre, RUT ni datos que te identifiquen.</span></div>
+      <div class="perfil-box" id="perfilBox">
         <label class="perfil-label" for="perfilSelect">¿Quién pregunta?</label>
         <select id="perfilSelect" onchange="elegirPerfil(this.value)"></select>
+      </div>
+      <div class="perfil-box" id="publicarBox">
+        <label class="perfil-label" for="publicarSelect">¿Publicar tu pregunta?</label>
+        <select id="publicarSelect" onchange="elegirPublicar(this.value)"></select>
       </div>
       <div class="quick-qs" id="quickQs"></div>
       <div class="chat-log" id="chatLog"></div>
@@ -327,7 +363,7 @@
   <section class="screen" id="screen-aprende">
     <div class="hero-eyebrow">Centro de aprendizaje</div>
     <h1 style="font-size:22px;">Aprende ética en salud en pocos minutos</h1>
-    <p>Cursos breves, videos, casos prácticos y un glosario en lenguaje simple, basados en los códigos de ética de este sitio.</p>
+    <p>Cursos breves, videos, casos prácticos y un glosario en lenguaje simple, basados en los códigos de ética de este sitio y, como contexto, en <a href="#legales" onclick="irALegales();return false;">leyes chilenas</a>.</p>
     <div class="disclaimer">Este contenido es educativo y no reemplaza asesoría legal ni médica. Para tu caso particular, usa <a href="#" onclick="goTo('consultar');return false;">Consultar</a> o contacta a la institución correspondiente.</div>
     <div class="ap-progreso" id="apProgreso"></div>
     <div class="ap-tabs" id="apTabs" role="tablist" aria-label="Contenido de Aprende">
@@ -355,8 +391,92 @@
     <div class="principle"><h3>Confianza en el sistema de salud</h3><p>Conocer los principios que rigen la relación profesional-paciente fortalece la confianza y permite ejercer derechos con conocimiento.</p></div>
     <div class="principle"><h3>Un punto de entrada, no un reemplazo</h3><p>Esta herramienta no resuelve conflictos ni reemplaza a los Tribunales de Ética; ayuda a entender, en lenguaje simple, qué dice el código antes de decidir el siguiente paso.</p></div>
     <hr class="divider">
-    <div class="section-label">Preguntas frecuentes (anónimas)</div>
+    <div class="section-label" id="ctx-legales">Leyes de referencia</div>
+    <p style="font-size:13.5px;">El chat responde solo con los 15 códigos de ética del sitio. La sección Aprende, además, menciona estas leyes chilenas como contexto. Las leyes cambian: revisa siempre la versión vigente en LeyChile, de la Biblioteca del Congreso Nacional.</p>
+    <div id="legalesList"><p class="empty-note">Cargando…</p></div>
+    <hr class="divider">
+    <div class="section-label">Preguntas frecuentes (sin datos personales)</div>
     <div id="faqList"></div>
+  </section>
+
+  <section class="screen" id="screen-privacidad">
+    <div class="hero-eyebrow">Tus datos y las reglas del sitio</div>
+    <h1 style="font-size:22px;">Privacidad y términos de uso</h1>
+    <p class="priv-fecha">Actualizado en octubre de 2026.</p>
+    <nav class="priv-indice" aria-label="Partes de esta página">
+      <a href="#priv-guardamos" onclick="irAParte('priv-guardamos');return false;">Qué guardamos</a>
+      <a href="#priv-proveedores" onclick="irAParte('priv-proveedores');return false;">Quién más los recibe</a>
+      <a href="#priv-plazo" onclick="irAParte('priv-plazo');return false;">Por cuánto tiempo</a>
+      <a href="#priv-derechos" onclick="irAParte('priv-derechos');return false;">Tus derechos</a>
+      <a href="#terminos" onclick="irAParte('terminos');return false;">Términos de uso</a>
+    </nav>
+
+    <h2>Quién es responsable</h2>
+    <p>El responsable de este sitio y de los datos que se guardan es <b>Eticaensalud</b> (eticaensalud.cl). Para cualquier consulta sobre tus datos, escríbenos desde la sección <a href="#" onclick="goTo('contacto');return false;">Contacto</a>.</p>
+
+    <h2 id="priv-guardamos">Qué guardamos cuando usas Consultar</h2>
+    <p>Antes de preguntar, eliges en "¿Publicar tu pregunta?" qué pasa con ella:</p>
+    <ul>
+      <li><b>"Sí, sin mis datos":</b> guardamos tu pregunta y la respuesta, y podrían aparecer en "Preguntas frecuentes", siempre sin nada que te identifique.</li>
+      <li><b>"No":</b> no guardamos tu pregunta ni la respuesta. Solo registramos la fecha y hora, para sumarla al contador de consultas del inicio. Nunca se publica.</li>
+    </ul>
+    <p>Puedes cambiar tu elección cuando quieras; vale para las preguntas siguientes. Si eliges "Sí", guardamos:</p>
+    <ul>
+      <li>Tu <b>pregunta</b>, la <b>respuesta</b> del asistente y los <b>códigos de ética</b> que cita.</li>
+      <li>La <b>fecha y hora</b> de la consulta.</li>
+      <li>Si la pregunta se puede mostrar en "Preguntas frecuentes" y, si no, por qué.</li>
+      <li>Cuántas personas marcaron "De acuerdo" o "En desacuerdo" en cada pregunta frecuente.</li>
+    </ul>
+    <p><b>No te pedimos ni guardamos</b> tu nombre, RUT, correo ni teléfono. Tampoco guardamos tu dirección IP en nuestra base de datos. El perfil que eliges en "¿Quién pregunta?" se usa para adaptar la respuesta, pero no se guarda.</p>
+    <p><b>Importante:</b> si eliges "Sí", guardamos la pregunta tal como la escribes. Por eso te pedimos no escribir tu nombre, RUT ni otros datos que te identifiquen, ni datos de otras personas. Si el sitio detecta algo así, te avisa antes de enviar y esa pregunta nunca se publica.</p>
+
+    <h3>Qué se publica</h3>
+    <p>Algunas preguntas aparecen en "Preguntas frecuentes" (sección Contexto). Solo se publican las de personas que lo autorizaron, que tratan de ética en salud y que no contienen datos personales, y nunca se muestra nada que identifique a quien preguntó. Si ves una pregunta publicada que crees que no debería estar, escríbenos y la retiramos.</p>
+
+    <h3>Para qué usamos esta información</h3>
+    <ul>
+      <li>Para responder tu pregunta.</li>
+      <li>Para mostrar las preguntas frecuentes y el contador de consultas del inicio.</li>
+      <li>Para revisar la calidad de las respuestas y mejorar esta herramienta.</li>
+    </ul>
+    <p>No vendemos ni compartimos esta información con fines comerciales, y no la usamos para publicidad.</p>
+
+    <h3>Lo que queda solo en tu celular o computador</h3>
+    <p>Tu perfil elegido, tus votos en las preguntas frecuentes y tu avance en Aprende se guardan en tu propio navegador, no en nuestros servidores. Puedes borrarlos con "Reiniciar mi progreso" (en Aprende) o borrando los datos del sitio en tu navegador. Este sitio no usa cookies propias ni herramientas de publicidad.</p>
+
+    <h3>Si usas otras secciones</h3>
+    <ul>
+      <li><b>Aprende:</b> solo contamos cuántas personas abren cada curso, sin ningún dato de quién lo hizo.</li>
+      <li><b>Contacto:</b> el nombre, correo y mensaje que escribas se envían por correo electrónico al responsable del sitio, para poder responderte. No se guardan en la base de datos del sitio.</li>
+    </ul>
+
+    <h2 id="priv-proveedores">Quién más recibe datos</h2>
+    <p>Para funcionar, el sitio usa estos servicios. Sus servidores pueden estar fuera de Chile.</p>
+    <ul>
+      <li><b>Anthropic</b> (la inteligencia artificial que redacta las respuestas): recibe tu pregunta y los últimos mensajes de la conversación. Según sus condiciones vigentes, no usa estos datos para entrenar sus modelos y los borra de sus sistemas en un plazo de hasta 30 días.</li>
+      <li><b>Supabase</b> (base de datos): guarda las consultas descritas arriba (o solo su fecha, si elegiste no publicar).</li>
+      <li><b>Netlify</b> (alojamiento del sitio): como todo sitio web, registra datos técnicos de las visitas, como la dirección IP, para funcionar y protegerse de abusos.</li>
+      <li><b>YouTube</b>: solo si aprietas ▶ en un video de Aprende. Antes de eso, el sitio no se conecta con YouTube.</li>
+      <li><b>Web3Forms</b>: envía por correo los mensajes del formulario de Contacto.</li>
+    </ul>
+
+    <h2 id="priv-plazo">Por cuánto tiempo</h2>
+    <p>Guardamos el texto de las preguntas y respuestas por <b>2 años</b>. Después, el texto de las consultas que no se publicaron se borra automáticamente, y solo se conserva el registro numérico (fecha y códigos citados) para las estadísticas del sitio. Las preguntas frecuentes publicadas, que no tienen datos personales, se mantienen mientras sigan siendo útiles.</p>
+
+    <h2 id="priv-derechos">Tus derechos</h2>
+    <p>Según la ley chilena de protección de datos personales, puedes pedir conocer, corregir o borrar tus datos, u oponerte a su uso. Como no pedimos tu nombre ni tu RUT, no podemos buscar "tus" preguntas por tu identidad. Si nos indicas en <a href="#" onclick="goTo('contacto');return false;">Contacto</a> el texto de la pregunta y la fecha aproximada, la buscamos y la borramos.</p>
+
+    <h2 id="terminos">Términos de uso del asistente</h2>
+    <ul>
+      <li><b>Qué es:</b> una herramienta gratuita y orientativa que responde a partir de los 15 códigos de ética publicados en este sitio.</li>
+      <li><b>Puede equivocarse:</b> las respuestas las redacta una inteligencia artificial. Revisa siempre la fuente citada y, ante una decisión importante, consulta a un profesional o a la institución correspondiente.</li>
+      <li><b>No es asesoría</b> legal ni médica, ni reemplaza un reclamo formal, un tribunal de ética o una atención de salud. En una emergencia, llama al 131 (SAMU).</li>
+      <li><b>Uso adecuado:</b> no escribas datos personales tuyos ni de otras personas, y no uses el sitio para fines ilegales ni para intentar saturarlo.</li>
+      <li><b>Contenido de Aprende:</b> es educativo; las personas, clínicas y empresas de los casos son ficticias.</li>
+      <li><b>Los códigos de ética</b> pertenecen a las instituciones que los publicaron. Este sitio no representa a esas instituciones.</li>
+      <li><b>Cambios:</b> podemos actualizar estos términos y esta política; la fecha de arriba indica la última versión.</li>
+    </ul>
+    <button class="cta-primary" onclick="goTo('inicio')">Volver al inicio</button>
   </section>
 
   <section class="screen" id="screen-mce">
@@ -557,7 +677,25 @@ function goTo(screen){
   if(screen==='aprende' && window.abrirAprende) abrirAprende();
   // Los enlaces directos (#glosario/..., #aprende) solo valen dentro de Aprende
   if(screen!=='aprende' && /^#(glosario|aprende)/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search);
+  if(screen!=='privacidad' && /^#(privacidad|terminos)/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search);
+  if(screen==='contexto' && window.renderLegales) renderLegales(document.getElementById('legalesList'));
 }
+// Ir a una parte de la página actual (sin cambiar de sección)
+function irAParte(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+function irALegales(){
+  goTo('contexto');
+  setTimeout(() => irAParte('ctx-legales'), 50);
+}
+// Enlaces directos: #privacidad, #terminos y #legales
+function leerDireccionGeneral(){
+  if(location.hash === '#privacidad') goTo('privacidad');
+  else if(location.hash === '#terminos'){ goTo('privacidad'); setTimeout(() => irAParte('terminos'), 50); }
+  else if(location.hash === '#legales') irALegales();
+}
+window.addEventListener('hashchange', leerDireccionGeneral);
 
 /* ---------- INSTITUCIONES render ---------- */
 function renderInstituciones(){
@@ -607,13 +745,49 @@ function renderPerfiles(){
     PERFILES.map(p => `<option value="${p.id}"${p.id===perfilActual?' selected':''}>${p.texto}</option>`).join('');
   sel.classList.toggle('sin-elegir', !perfilActual);
   const input = document.getElementById('chatInput');
-  input.placeholder = perfilActual ? 'Escribe tu duda...' : 'Primero elige tu perfil ↑';
+  input.placeholder = !perfilActual ? 'Primero elige tu perfil ↑'
+    : publicarActual === null ? 'Primero elige si se publica ↑' : 'Escribe tu duda...';
+}
+
+/* ---------- PERMISO PARA PUBLICAR ----------
+   Antes de preguntar, la persona decide si su pregunta y la respuesta se pueden
+   guardar y publicar (sin datos personales) en Preguntas frecuentes. Si dice que
+   no, chat.js solo suma la consulta al contador: no guarda el texto. */
+const OPCIONES_PUBLICAR = [
+  { id:'si', texto:'Sí, sin mis datos' },
+  { id:'no', texto:'No' },
+];
+let publicarActual = null;
+try{ const v = localStorage.getItem('publicar'); if(v === 'si' || v === 'no') publicarActual = v; }catch(e){}
+
+function renderPublicar(){
+  const sel = document.getElementById('publicarSelect');
+  sel.innerHTML = `<option value="" disabled${publicarActual?'':' selected'}>Elige una opción…</option>` +
+    OPCIONES_PUBLICAR.map(o => `<option value="${o.id}"${o.id===publicarActual?' selected':''}>${o.texto}</option>`).join('');
+  sel.classList.toggle('sin-elegir', !publicarActual);
+}
+function elegirPublicar(id){
+  const cambio = publicarActual && publicarActual !== id;
+  publicarActual = id;
+  try{ localStorage.setItem('publicar', id); }catch(e){}
+  document.getElementById('publicarBox').classList.remove('falta');
+  renderPublicar();
+  renderPerfiles();
+  if(cambio) addMsg('bot', formatAnswer(id === 'si'
+    ? 'Listo: tus próximas preguntas y sus respuestas se podrán publicar en Preguntas frecuentes, sin tus datos.'
+    : 'Listo: tus próximas preguntas no se guardarán ni se publicarán; solo se sumarán al contador de consultas.'));
+}
+function pedirPublicar(){
+  const caja = document.getElementById('publicarBox');
+  caja.classList.add('falta');
+  caja.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  document.getElementById('publicarSelect').focus();
 }
 function elegirPerfil(id){
   const cambio = perfilActual && perfilActual !== id;
   perfilActual = id;
   try{ localStorage.setItem('perfil', id); }catch(e){}
-  document.querySelector('.perfil-box').classList.remove('falta');
+  document.getElementById('perfilBox').classList.remove('falta');
   renderPerfiles();
   if(cambio){
     const p = PERFILES.find(x => x.id === id);
@@ -621,7 +795,7 @@ function elegirPerfil(id){
   }
 }
 function pedirPerfil(){
-  const caja = document.querySelector('.perfil-box');
+  const caja = document.getElementById('perfilBox');
   caja.classList.add('falta');
   caja.scrollIntoView({ behavior:'smooth', block:'nearest' });
   document.getElementById('perfilSelect').focus();
@@ -655,6 +829,7 @@ function renderQuickQs(){
 }
 function askQuick(el){
   if(!perfilActual){ pedirPerfil(); return; }
+  if(!publicarActual){ pedirPublicar(); return; }
   document.getElementById('chatInput').value = el.textContent;
   sendMessage();
 }
@@ -678,11 +853,30 @@ function addTyping(){
 }
 function removeTyping(){ const t = document.getElementById('typingMsg'); if(t) t.remove(); }
 
+// Mismas reglas que usa chat.js para no publicar preguntas con datos personales.
+const DATOS_PERSONALES = [
+  [/\b\d{1,2}\.?\d{3}\.?\d{3}\s*-\s*[\dkK]\b/, "RUT"],
+  [/[\w.+-]+@[\w-]+\.[\w.]+/, "correo electrónico"],
+  [/(\+?56\s*)?\b9\s*\d{4}\s*\d{4}\b|\b\d{8,}\b/, "teléfono u otro número largo"],
+  [/\b(?:[Dd]r|[Dd]ra|[Dd]octora?|[Ee]nfermer[oa]|[Ss]r|[Ss]ra|[Ss]eñora?|[Dd]on|[Dd]oña|[Kk]ine|[Mm]atr[oó]na?|[Pp]aciente)\.?\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+/, "nombre de una persona"],
+  [/\b(?:[Mm]e llamo|[Mm]i nombre es)\s+[A-ZÁÉÍÓÚÑa-záéíóúñ]+/, "nombre de una persona"],
+];
+function revisarDatosPersonales(texto){
+  const encontrado = DATOS_PERSONALES.find(([regla]) => regla.test(texto));
+  return encontrado ? encontrado[1] : null;
+}
+
 async function sendMessage(){
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
   if(!text) return;
   if(!perfilActual){ pedirPerfil(); return; }
+  if(!publicarActual){ pedirPublicar(); return; }
+  const dato = revisarDatosPersonales(text);
+  if(dato && !confirm(`Parece que escribiste un dato personal (${dato}). Para cuidar tu privacidad, te recomendamos borrarlo antes de enviar.\n\n¿Quieres enviar la pregunta igual?`)){
+    input.focus();
+    return;
+  }
   const sendBtn = document.getElementById('sendBtn');
   input.value = '';
   sendBtn.disabled = true;
@@ -696,7 +890,7 @@ async function sendMessage(){
     const resp = await fetch("/.netlify/functions/chat", {
       method:"POST",
       headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({ messages: chatHistory, perfil: perfilActual })
+      body: JSON.stringify({ messages: chatHistory, perfil: perfilActual, publicar: publicarActual === 'si' })
     });
     const data = await resp.json().catch(() => ({}));
     removeTyping();
@@ -947,10 +1141,12 @@ async function sendContact(e){
 /* ---------- INIT ---------- */
 loadInstituciones();
 renderQuickQs();
+renderPublicar();
 renderPerfiles();
 refreshStats();
 addMsg('bot', formatAnswer('Hola 👋 Soy tu asistente de consulta ciudadana sobre ética en salud en Chile. Pregúntame lo que necesites saber sobre tus derechos frente a médicos, enfermeras, farmacéuticos u otras instituciones de salud.'));
 </script>
 <script src="js/aprendizaje.js"></script>
+<script>leerDireccionGeneral();</script>
 </body>
 </html>

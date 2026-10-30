@@ -99,20 +99,24 @@ function revisarDatosPersonales(texto) {
 
 // Guarda la consulta (nunca la borra). Si falla, solo se anota en el registro:
 // la respuesta al usuario no se ve afectada.
-async function guardarConsulta({ pregunta, respuesta, fuentes, publicable, motivo }) {
+// Si la persona no autorizó publicar, solo se registra la fecha (para el contador
+// de consultas): no se guarda la pregunta, la respuesta ni las fuentes.
+async function guardarConsulta({ pregunta, respuesta, fuentes, publicable, motivo, autorizada }) {
   const clave = process.env.SUPABASE_SECRET_KEY;
   if (!clave) {
     console.error("No se guardó la consulta: falta la variable SUPABASE_SECRET_KEY en Netlify");
     return;
   }
-  const fila = {
-    question: pregunta.slice(0, 1000),
-    answer_preview: respuesta.slice(0, 180),
-    respuesta: respuesta.slice(0, 6000),
-    sources: fuentes.join(", "),
-    publicable,
-    motivo_no_publica: publicable ? null : motivo,
-  };
+  const fila = autorizada
+    ? {
+        question: pregunta.slice(0, 1000),
+        answer_preview: respuesta.slice(0, 180),
+        respuesta: respuesta.slice(0, 6000),
+        sources: fuentes.join(", "),
+        publicable,
+        motivo_no_publica: publicable ? null : motivo,
+      }
+    : { question: "", publicable: false, motivo_no_publica: "la persona no autorizó guardarla ni publicarla" };
   const insertar = (datos) =>
     fetch(`${SUPABASE_URL}/rest/v1/consultas`, {
       method: "POST",
@@ -428,6 +432,7 @@ exports.handler = async function (event) {
 
   let messages;
   let perfilElegido = PERFILES[PERFIL_POR_DEFECTO];
+  let autorizada = false; // sin permiso explícito, no se guarda el texto
   try {
     // Netlify a veces entrega el body codificado en base64: hay que decodificarlo primero.
     const rawBody = event.isBase64Encoded
@@ -436,6 +441,7 @@ exports.handler = async function (event) {
     const parsed = JSON.parse(rawBody);
     messages = parsed.messages;
     perfilElegido = PERFILES[parsed.perfil] || PERFILES[PERFIL_POR_DEFECTO];
+    autorizada = parsed.publicar === true;
     if (!Array.isArray(messages) || messages.length === 0) {
       throw new Error("El campo 'messages' está vacío o no es una lista.");
     }
@@ -542,6 +548,7 @@ exports.handler = async function (event) {
         fuentes: fuente ? fuente[1].split(",").map((f) => f.trim()) : [],
         publicable: !motivo,
         motivo,
+        autorizada,
       });
     }
 

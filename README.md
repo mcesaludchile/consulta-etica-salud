@@ -15,6 +15,7 @@ data/aprendizaje.json             → todo el contenido de la sección "Aprende"
 js/aprendizaje.js                 → código de la sección "Aprende" (solo muestra lo que dice el .json)
 404.html                          → página "no encontrada" (también oculta los archivos internos)
 supabase_aprendizaje.sql          → contador anónimo de personas que participan en cada curso
+supabase_retencion.sql            → borra el texto de las consultas no publicadas con más de 2 años (plazo de la política de privacidad)
 supabase_setup.sql                → crea la tabla del registro histórico anónimo (proyecto nuevo)
 supabase_faq_privacidad.sql       → filtro de preguntas frecuentes (para una tabla ya existente)
 ```
