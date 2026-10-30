@@ -114,6 +114,7 @@
   .perfil-box select.sin-elegir{color:var(--ink-soft);}
   .perfil-box.falta select{outline:2px solid var(--gold);outline-offset:2px;}
   .quick-qs{display:flex;gap:8px;overflow-x:auto;padding:2px 0 14px;}
+  .quick-qs[hidden]{display:none;}
   .quick-q{flex-shrink:0;background:#fff;border:1px solid #C9DFDA;border-radius:999px;padding:10px 14px;font-size:13px;color:var(--ink);white-space:nowrap;cursor:pointer;}
   .inst-card{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:12px;}
   .inst-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
@@ -211,7 +212,20 @@
   .pildoras button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:700;}
   .elegir.falta .pildoras{outline:2px solid var(--gold);outline-offset:2px;border-radius:999px;}
   .chat-pie{background:#fff;border-top:1px solid #EEF1F2;padding-top:8px;}
-  .chat-pie .chat-aviso{display:flex;align-items:center;gap:6px;margin:0 0 6px;font-size:12px;font-weight:600;color:var(--gold);}
+  .chat-pie .chat-aviso{margin:6px 2px 0;font-size:11.5px;color:var(--ink-soft);text-align:center;}
+  .chat-pie .chat-aviso a{color:var(--teal);font-weight:600;}
+  .ajustes{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;border-radius:14px;background:var(--soft);margin-bottom:8px;}
+  .ajustes-linea{margin:0;font-size:12.5px;line-height:1.4;color:var(--ink-soft);}
+  .ajustes-linea b{color:var(--ink);}
+  .ajustes-cambiar{flex-shrink:0;min-height:40px;padding:0 12px;border:none;border-radius:999px;background:#fff;color:var(--teal);font-family:var(--sans);font-size:12.5px;font-weight:700;cursor:pointer;}
+  .ajustes-panel{padding:4px 0 2px;}
+  .ajustes-panel[hidden]{display:none;}
+  /* Respuestas con formato: negritas y viñetas */
+  .msg.bot .msg-bubble ul{margin:4px 0 8px;padding-left:18px;}
+  .msg.bot .msg-bubble li{margin-bottom:6px;line-height:1.5;color:var(--ink);}
+  .msg.bot .msg-bubble li:last-child{margin-bottom:0;}
+  .faq-item.contraida .faq-resp ul,.faq-item.contraida .faq-resp li{display:inline;padding:0;margin:0;}
+  .acciones-resp button svg{vertical-align:-3px;margin-right:4px;}
   /* Texto ya escrito para buscadores y navegadores sin JavaScript */
   #prerender{padding:20px 18px;}
   #prerender h1{font-size:22px;} #prerender h2{font-size:17px;margin-top:18px;}
@@ -248,8 +262,9 @@
   .ley-revisado{font-size:11.5px;color:var(--ink-soft);}
   .chat-aviso{display:block;margin-top:4px;font-weight:600;}
   /* Acciones bajo cada respuesta del chat */
-  .acciones-resp{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
-  .acciones-resp button{flex:1 1 auto;min-height:40px;background:#fff;border:1px solid #DCE3E6;border-radius:12px;padding:0 12px;font-size:12.5px;font-weight:700;color:var(--ink);cursor:pointer;font-family:var(--sans);}
+  .acciones-resp{display:flex;flex-wrap:wrap;gap:2px;margin-top:4px;}
+  .acciones-resp button{min-height:36px;background:none;border:none;border-radius:10px;padding:0 8px;font-size:12px;font-weight:600;color:var(--ink-soft);cursor:pointer;font-family:var(--sans);}
+  .acciones-resp button:hover{background:var(--soft);color:var(--ink);}
   .acciones-resp button:active{background:var(--teal-soft);}
   #zonaImpresion{display:none;}
   @media print{
@@ -459,24 +474,29 @@
 
   <section class="screen" id="screen-consultar">
     <div class="chat-wrap">
-      <p class="chat-intro">Respuestas de IA basadas en los códigos de ética, con su fuente; pueden tener errores. Tú decides si tu pregunta se publica (<a href="/privacidad/" data-link>privacidad</a>).</p>
-      <div class="elegir" id="perfilBox">
-        <span class="elegir-titulo" id="perfilTitulo">¿Quién pregunta?</span>
-        <div class="pildoras" role="group" aria-labelledby="perfilTitulo" id="perfilOpciones"></div>
+      <div class="ajustes">
+        <p class="ajustes-linea" id="ajustesResumen"></p>
+        <button type="button" class="ajustes-cambiar" id="ajustesBoton" aria-expanded="false" aria-controls="ajustesPanel" onclick="alternarAjustes()">Cambiar</button>
       </div>
-      <div class="elegir" id="publicarBox">
-        <span class="elegir-titulo" id="publicarTitulo">¿Publicar tu pregunta en preguntas frecuentes?</span>
-        <div class="pildoras" role="group" aria-labelledby="publicarTitulo" id="publicarOpciones"></div>
+      <div class="ajustes-panel" id="ajustesPanel" hidden>
+        <div class="elegir" id="perfilBox">
+          <span class="elegir-titulo" id="perfilTitulo">¿Quién pregunta?</span>
+          <div class="pildoras" role="group" aria-labelledby="perfilTitulo" id="perfilOpciones"></div>
+        </div>
+        <div class="elegir" id="publicarBox">
+          <span class="elegir-titulo" id="publicarTitulo">¿Se puede publicar tu pregunta en preguntas frecuentes, sin datos personales?</span>
+          <div class="pildoras" role="group" aria-labelledby="publicarTitulo" id="publicarOpciones"></div>
+        </div>
       </div>
       <div class="quick-qs" id="quickQs"></div>
       <div class="chat-log" id="chatLog"></div>
       <div class="chat-pie">
-        <p class="chat-aviso"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>No escribas tu nombre, RUT ni datos que te identifiquen.</p>
         <div class="chat-input-row">
           <label for="chatInput" class="solo-lector">Tu pregunta</label>
           <textarea id="chatInput" rows="1" placeholder="Escribe tu duda..."></textarea>
           <button id="sendBtn" onclick="sendMessage()" aria-label="Enviar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></button>
         </div>
+        <p class="chat-aviso">Orientativo · No escribas tu nombre, RUT ni datos personales · <a href="/privacidad/" data-link>Privacidad y términos</a></p>
       </div>
     </div>
   </section>
@@ -536,12 +556,12 @@
     <p>El responsable de este sitio y de los datos que se guardan es <b>Eticaensalud</b> (eticaensalud.cl). Para cualquier consulta sobre tus datos, escríbenos desde la sección <a href="/contacto/" data-link>Contacto</a>.</p>
 
     <h2 id="priv-guardamos">Qué guardamos cuando usas Consultar</h2>
-    <p>Antes de preguntar, eliges en "¿Publicar tu pregunta?" qué pasa con ella:</p>
+    <p>Sobre el chat, una línea indica siempre qué pasa con tu pregunta. Puedes cambiarlo con el botón "Cambiar":</p>
     <ul>
-      <li><b>"Sí, sin mis datos":</b> guardamos tu pregunta y la respuesta, y podrían aparecer en "Preguntas frecuentes", siempre sin nada que te identifique.</li>
-      <li><b>"No":</b> no guardamos tu pregunta ni la respuesta. Solo registramos la fecha y hora, para sumarla al contador de consultas del inicio. Nunca se publica.</li>
+      <li><b>Si no cambias nada</b> (o eliges "Sí, sin mis datos"): guardamos tu pregunta y la respuesta, y podrían aparecer en "Preguntas frecuentes", siempre sin nada que te identifique.</li>
+      <li><b>Si eliges "No":</b> no guardamos tu pregunta ni la respuesta. Solo registramos la fecha y hora, para sumarla al contador de consultas del inicio. Nunca se publica.</li>
     </ul>
-    <p>Puedes cambiar tu elección cuando quieras; vale para las preguntas siguientes. Si eliges "Sí", guardamos:</p>
+    <p>Tu elección vale para las preguntas siguientes y se recuerda en tu navegador. Si la pregunta puede publicarse, guardamos:</p>
     <ul>
       <li>Tu <b>pregunta</b>, la <b>respuesta</b> del asistente y los <b>códigos de ética</b> que cita.</li>
       <li>La <b>fecha y hora</b> de la consulta.</li>
@@ -552,7 +572,7 @@
     <p><b>Importante:</b> si eliges "Sí", guardamos la pregunta tal como la escribes. Por eso te pedimos no escribir tu nombre, RUT ni otros datos que te identifiquen, ni datos de otras personas. Si el sitio detecta algo así, te avisa antes de enviar y esa pregunta nunca se publica.</p>
 
     <h3>Qué se publica</h3>
-    <p>Algunas preguntas aparecen en "Preguntas frecuentes" (sección Contexto). Solo se publican las de personas que lo autorizaron, que tratan de ética en salud y que no contienen datos personales, y nunca se muestra nada que identifique a quien preguntó. Si ves una pregunta publicada que crees que no debería estar, escríbenos y la retiramos.</p>
+    <p>Algunas preguntas aparecen en "Preguntas frecuentes" (sección Contexto). Solo se publican las de personas que no eligieron "No", que tratan de ética en salud y que no contienen datos personales, y nunca se muestra nada que identifique a quien preguntó. Si ves una pregunta publicada que crees que no debería estar, escríbenos y la retiramos.</p>
 
     <h3>Para qué usamos esta información</h3>
     <ul>
@@ -563,7 +583,7 @@
     <p>No vendemos ni compartimos esta información con fines comerciales, y no la usamos para publicidad.</p>
 
     <h3>Lo que queda solo en tu celular o computador</h3>
-    <p>Tu perfil elegido, tus votos en las preguntas frecuentes y tu avance en Aprende se guardan en tu propio navegador, no en nuestros servidores. Los botones para copiar, compartir o imprimir una respuesta también funcionan solo en tu dispositivo: no nos envían nada. Puedes borrarlos con "Reiniciar mi progreso" (en Aprende) o borrando los datos del sitio en tu navegador. Este sitio no usa cookies propias ni herramientas de publicidad.</p>
+    <p>El perfil con que preguntas (por defecto, paciente), tus votos en las preguntas frecuentes y tu avance en Aprende se guardan en tu propio navegador, no en nuestros servidores. Los botones para copiar, compartir o imprimir una respuesta también funcionan solo en tu dispositivo: no nos envían nada. Puedes borrarlos con "Reiniciar mi progreso" (en Aprende) o borrando los datos del sitio en tu navegador. Este sitio no usa cookies propias ni herramientas de publicidad.</p>
 
     <h3>Si usas otras secciones</h3>
     <ul>
@@ -958,25 +978,43 @@ const PERFILES = [
 ];
 let perfilActual = null;
 try{ perfilActual = localStorage.getItem('perfil'); }catch(e){}
-if(!PERFILES.some(p => p.id === perfilActual)) perfilActual = null;
+// Por defecto se pregunta como paciente (se puede cambiar con "Cambiar")
+if(!PERFILES.some(p => p.id === perfilActual)) perfilActual = 'paciente';
 
 function renderPerfiles(){
   document.getElementById('perfilOpciones').innerHTML = PERFILES.map(p =>
     `<button type="button" aria-pressed="${p.id===perfilActual}" title="${p.largo}" onclick="elegirPerfil('${p.id}')">${p.texto}</button>`).join('');
-  const input = document.getElementById('chatInput');
-  input.placeholder = !perfilActual ? 'Primero elige tu perfil ↑'
-    : publicarActual === null ? 'Primero elige si se publica ↑' : 'Escribe tu duda...';
+  renderAjustes();
+}
+// Línea resumen sobre el chat: perfil y si la pregunta puede publicarse
+function renderAjustes(){
+  const p = PERFILES.find(x => x.id === perfilActual);
+  const linea = document.getElementById('ajustesResumen');
+  if(!linea || !p) return;
+  linea.innerHTML = `Preguntas como <b>${escapeHtml(p.texto)}</b> · ` + (publicarActual === 'no'
+    ? 'tu pregunta <b>no se guarda ni se publica</b>'
+    : 'tu pregunta puede publicarse <b>sin datos personales</b>');
+}
+function alternarAjustes(abrir){
+  const panel = document.getElementById('ajustesPanel');
+  const boton = document.getElementById('ajustesBoton');
+  const mostrar = abrir === undefined ? panel.hidden : abrir;
+  panel.hidden = !mostrar;
+  boton.setAttribute('aria-expanded', String(mostrar));
+  boton.textContent = mostrar ? 'Listo' : 'Cambiar';
+  ajustarAlturaChat();
 }
 
 /* ---------- PERMISO PARA PUBLICAR ----------
-   Antes de preguntar, la persona decide si su pregunta y la respuesta se pueden
-   guardar y publicar (sin datos personales) en Preguntas frecuentes. Si dice que
-   no, chat.js solo suma la consulta al contador: no guarda el texto. */
+   Por defecto (decisión de Vicente, octubre 2026) la pregunta y la respuesta
+   pueden guardarse y publicarse sin datos personales; la línea sobre el chat lo
+   dice siempre y "Cambiar" permite elegir "No". Con "No", chat.js solo suma la
+   consulta al contador: no guarda el texto. */
 const OPCIONES_PUBLICAR = [
   { id:'si', texto:'Sí, sin mis datos' },
   { id:'no', texto:'No' },
 ];
-let publicarActual = null;
+let publicarActual = 'si';
 try{ const v = localStorage.getItem('publicar'); if(v === 'si' || v === 'no') publicarActual = v; }catch(e){}
 
 function renderPublicar(){
@@ -984,34 +1022,27 @@ function renderPublicar(){
     `<button type="button" aria-pressed="${o.id===publicarActual}" onclick="elegirPublicar('${o.id}')">${o.texto}</button>`).join('');
 }
 function elegirPublicar(id){
-  const cambio = publicarActual && publicarActual !== id;
   publicarActual = id;
   try{ localStorage.setItem('publicar', id); }catch(e){}
   document.getElementById('publicarBox').classList.remove('falta');
   renderPublicar();
   renderPerfiles();
-  if(cambio) addMsg('bot', formatAnswer(id === 'si'
-    ? 'Listo: tus próximas preguntas y sus respuestas se podrán publicar en Preguntas frecuentes, sin tus datos.'
-    : 'Listo: tus próximas preguntas no se guardarán ni se publicarán; solo se sumarán al contador de consultas.'));
 }
 function pedirPublicar(){
+  alternarAjustes(true);
   const caja = document.getElementById('publicarBox');
   caja.classList.add('falta');
   caja.scrollIntoView({ behavior:'smooth', block:'nearest' });
   document.querySelector('#publicarOpciones button').focus({ preventScroll:true });
 }
 function elegirPerfil(id){
-  const cambio = perfilActual && perfilActual !== id;
   perfilActual = id;
   try{ localStorage.setItem('perfil', id); }catch(e){}
   document.getElementById('perfilBox').classList.remove('falta');
   renderPerfiles();
-  if(cambio){
-    const p = PERFILES.find(x => x.id === id);
-    addMsg('bot', formatAnswer(`Perfil cambiado a: ${p.largo}. Tus próximas respuestas se adaptarán a este perfil.`));
-  }
 }
 function pedirPerfil(){
+  alternarAjustes(true);
   const caja = document.getElementById('perfilBox');
   caja.classList.add('falta');
   caja.scrollIntoView({ behavior:'smooth', block:'nearest' });
@@ -1104,29 +1135,36 @@ function addMsg(role, html, sources, consulta){
    Todo ocurre en el dispositivo de la persona: no se envía nada al sitio. */
 const SITIO = 'https://eticaensalud.cl';
 function textoConsulta(c, maxRespuesta){
-  let resp = c.respuesta;
+  let resp = textoPlano(c.respuesta);
   if(maxRespuesta && resp.length > maxRespuesta) resp = resp.slice(0, maxRespuesta).replace(/\s+\S*$/, '') + '…';
   return `Pregunta: ${c.pregunta}\n\n${resp}` +
     (c.fuentes.length ? `\n\nFuentes: ${c.fuentes.join(', ')}` : '') +
     `\n\nRespuesta orientativa generada por IA a partir de códigos de ética; no reemplaza asesoría profesional. Ética en Salud Chile: ${SITIO}`;
 }
+const ICONOS_ACCION = {
+  copiar: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h8"></path></svg>',
+  whatsapp: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7L4 20z"></path></svg>',
+  compartir: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="M8 7l4-4 4 4"></path><path d="M5 13v6h14v-6"></path></svg>',
+  pdf: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"></path><rect x="4" y="9" width="16" height="8" rx="2"></rect><path d="M7 15h10v6H7z"></path></svg>',
+};
 function botonesRespuesta(c){
   const fila = document.createElement('div');
   fila.className = 'acciones-resp';
-  const boton = (texto, etiqueta, accion) => {
+  const boton = (icono, texto, etiqueta, accion) => {
     const b = document.createElement('button');
-    b.type = 'button'; b.textContent = texto; b.setAttribute('aria-label', etiqueta);
+    b.type = 'button'; b.setAttribute('aria-label', etiqueta);
+    b.innerHTML = ICONOS_ACCION[icono] + `<span>${texto}</span>`;
     b.addEventListener('click', () => accion(b));
     fila.appendChild(b);
   };
-  boton('📋 Copiar', 'Copiar la respuesta con sus fuentes', (b) => copiarConsulta(c, b));
-  boton('WhatsApp', 'Enviar la respuesta por WhatsApp', () => {
+  boton('copiar', 'Copiar', 'Copiar la respuesta con sus fuentes', (b) => copiarConsulta(c, b));
+  boton('whatsapp', 'WhatsApp', 'Enviar la respuesta por WhatsApp', () => {
     window.open('https://wa.me/?text=' + encodeURIComponent(textoConsulta(c, 1500)), '_blank', 'noopener');
   });
-  if(navigator.share) boton('↗ Compartir', 'Compartir la respuesta', async () => {
+  if(navigator.share) boton('compartir', 'Compartir', 'Compartir la respuesta', async () => {
     try{ await navigator.share({ title:'Ética en Salud Chile', text: textoConsulta(c) }); }catch(e){}
   });
-  boton('🖨 Imprimir / PDF', 'Imprimir o guardar como PDF', () => imprimirConsulta(c));
+  boton('pdf', 'PDF', 'Imprimir o guardar como PDF', () => imprimirConsulta(c));
   return fila;
 }
 async function copiarConsulta(c, b){
@@ -1140,8 +1178,9 @@ async function copiarConsulta(c, b){
     try{ ok = document.execCommand('copy'); }catch(e2){}
     t.remove();
   }
-  b.textContent = ok ? '✓ Copiado' : 'No se pudo copiar';
-  setTimeout(() => { b.textContent = '📋 Copiar'; }, 2000);
+  const etiqueta = b.querySelector('span');
+  etiqueta.textContent = ok ? 'Copiado' : 'No se pudo copiar';
+  setTimeout(() => { etiqueta.textContent = 'Copiar'; }, 2000);
 }
 function imprimirConsulta(c){
   let zona = document.getElementById('zonaImpresion');
@@ -1196,6 +1235,8 @@ async function sendMessage(){
   sendBtn.disabled = true;
 
   addMsg('user', escapeHtml(text));
+  document.getElementById('quickQs').hidden = true;
+  alternarAjustes(false);
   chatHistory.push({role:'user', content:text});
   addTyping();
 
@@ -1241,9 +1282,24 @@ async function sendMessage(){
   }
 }
 
+// Texto de la IA → HTML: párrafos, **negritas** y viñetas ("- " o "• ").
 function formatAnswer(text){
-  return escapeHtml(text).split('\n').filter(p=>p.trim()).map(p=>`<p>${p}</p>`).join('');
+  const negritas = (t) => t.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+  let html = '', lista = [];
+  const cerrarLista = () => { if(lista.length){ html += `<ul>${lista.map(li => `<li>${li}</li>`).join('')}</ul>`; lista = []; } };
+  for(const linea of escapeHtml(text).split('\n')){
+    const l = linea.trim();
+    if(!l) continue;
+    const vineta = l.match(/^(?:[-•*]|\d+[.)])\s+(.*)$/);
+    if(vineta){ lista.push(negritas(vineta[1])); continue; }
+    cerrarLista();
+    html += `<p>${negritas(l)}</p>`;
+  }
+  cerrarLista();
+  return html;
 }
+// Para copiar y compartir: sin los ** de las negritas
+function textoPlano(t){ return String(t).replace(/\*\*(.+?)\*\*/g, '$1'); }
 function escapeHtml(str){
   const d = document.createElement('div'); d.textContent = str; return d.innerHTML;
 }
@@ -1461,7 +1517,7 @@ renderPerfiles();
 renderInicioChips();
 refreshStats();
 cargarMasConsultado();
-addMsg('bot', formatAnswer('Hola 👋 Soy tu asistente de consulta ciudadana sobre ética en salud en Chile. Pregúntame lo que necesites saber sobre tus derechos frente a médicos, enfermeras, farmacéuticos u otras instituciones de salud.'));
+addMsg('bot', formatAnswer('¿En qué te ayudo? Pregunta sobre tus derechos y la ética en salud.'));
 </script>
 <script src="/js/aprendizaje.js"></script>
 <script>convertirEnlaceAntiguo(); aplicarRuta();</script>
