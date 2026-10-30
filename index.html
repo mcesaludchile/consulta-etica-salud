@@ -23,29 +23,34 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#1B2A3D">
+<meta name="theme-color" content="#FFFFFF">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
+  /* Letra Figtree guardada en el propio sitio (fonts/), sin pedirla a Google */
+  @font-face{font-family:'Figtree';font-style:normal;font-weight:400 800;font-display:swap;src:url('/fonts/figtree-latin.woff2') format('woff2');}
+  /* Estilo "Cercano" (alternativa A del mockup, octubre 2026) */
   :root{
-    --ink:#1B2A3D; --ink-soft:#4A5A6E; --paper:#F7F7F3; --paper-raised:#FFFFFF;
-    --line:#DEDCD3; --gold:#B4842A; --gold-soft:#F1E4C8; --teal:#2F6F6B; --teal-soft:#E3EFEE;
-    --radius:14px; --serif:'Source Serif 4','Lora',Georgia,serif; --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --ink:#1C2B33; --ink-soft:#51606A; --paper:#FFFFFF; --paper-raised:#FFFFFF;
+    --line:#E3E8EA; --gold:#8A5300; --gold-soft:#FFF5E1; --teal:#1F6F68; --teal-soft:#EAF4F1;
+    --soft:#F6F8F8; --lila-soft:#EEF0FB; --gris-soft:#F3F4F6;
+    --radius:18px; --sans:'Figtree',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; --serif:var(--sans);
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:var(--sans);}
   body{padding-bottom:76px;min-height:100vh;max-width:560px;margin:0 auto;position:relative;border-left:1px solid var(--line);border-right:1px solid var(--line);background:var(--paper);}
   a{color:var(--teal);}
-  h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--ink);margin:0 0 8px;}
+  h1,h2,h3{font-family:var(--sans);font-weight:800;color:var(--ink);margin:0 0 8px;letter-spacing:-0.01em;}
   p{line-height:1.55;color:var(--ink-soft);margin:0 0 12px;}
   .screen{display:none;padding:20px 18px 8px;}
   .screen.active{display:block;animation:fade .25s ease;}
   @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
-  .topbar{position:sticky;top:0;z-index:20;background:var(--ink);color:#fff;padding:14px 18px;display:flex;align-items:center;gap:10px;max-width:560px;margin:0 auto;}
-  .seal{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--gold-soft);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:13px;color:var(--gold-soft);flex-shrink:0;}
-  .topbar-title{font-family:var(--serif);font-size:15px;letter-spacing:.2px;}
-  .topbar-sub{font-size:11px;color:#C9CFD8;margin-top:1px;}
-  .topbar-link{display:inline-block;margin-top:5px;padding:3px 10px;border:1px solid var(--gold);border-radius:20px;background:none;color:var(--gold-soft);font-size:11.5px;font-weight:600;font-family:var(--sans);cursor:pointer;}
-  .topbar-link.activo{background:var(--gold);color:var(--ink);}
+  .topbar{position:sticky;top:0;z-index:20;background:#fff;color:var(--ink);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;max-width:560px;margin:0 auto;border-bottom:1px solid var(--line);}
+  .marca{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);min-height:44px;}
+  .seal{width:36px;height:36px;border-radius:12px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:19px;color:#fff;flex-shrink:0;}
+  .topbar-title{display:block;font-size:16px;font-weight:800;line-height:1.1;}
+  .topbar-sub{display:block;font-size:12px;color:var(--ink-soft);margin-top:1px;}
+  .topbar-link{flex-shrink:0;min-height:44px;padding:0 14px;border:none;border-radius:999px;background:var(--teal-soft);color:var(--teal);font-size:13px;font-weight:700;font-family:var(--sans);cursor:pointer;}
+  .topbar-link.activo{background:var(--teal);color:#fff;}
   /* Sección Marco de Consenso Ético */
   .mce-indice{display:flex;gap:6px;overflow-x:auto;padding:2px 0 4px;margin-top:4px;}
   .mce-indice a{flex-shrink:0;font-size:12px;color:var(--teal);background:var(--paper-raised);border:1px solid var(--line);border-radius:20px;padding:6px 11px;text-decoration:none;white-space:nowrap;}
@@ -88,20 +93,20 @@
   .msg{margin-bottom:16px;max-width:92%;}
   .msg.user{margin-left:auto;}
   .msg-bubble{padding:12px 14px;border-radius:16px;font-size:14.5px;line-height:1.5;}
-  .msg.user .msg-bubble{background:var(--ink);color:#fff;border-bottom-right-radius:4px;}
-  .msg.bot .msg-bubble{background:var(--paper-raised);border:1px solid var(--line);border-bottom-left-radius:4px;}
+  .msg.user .msg-bubble{background:var(--teal);color:#fff;border-radius:18px 18px 4px 18px;}
+  .msg.bot .msg-bubble{background:#fff;border:1px solid var(--line);border-radius:18px 18px 18px 4px;box-shadow:0 1px 4px rgba(28,43,51,.05);}
   .msg.bot .msg-bubble p{color:var(--ink);margin:0 0 8px;}
   .msg.bot .msg-bubble p:last-child{margin-bottom:0;}
   .error-detail{margin-top:8px;font-size:12px;color:#9B4444;}
   .sources{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;}
-  .source-tag{font-size:10.5px;background:var(--gold-soft);color:#7a5a1a;padding:4px 9px;border-radius:20px;font-weight:600;border:1px solid #e7d4a3;}
+  .source-tag{font-size:12px;background:var(--gold-soft);color:#6B4A00;padding:7px 11px;border-radius:10px;font-weight:700;}
   .typing{display:flex;gap:4px;padding:4px 0;}
   .typing span{width:6px;height:6px;border-radius:50%;background:var(--ink-soft);opacity:.5;animation:bounce 1.2s infinite;}
   .typing span:nth-child(2){animation-delay:.15s;} .typing span:nth-child(3){animation-delay:.3s;}
   @keyframes bounce{0%,60%,100%{transform:translateY(0);}30%{transform:translateY(-4px);}}
-  .chat-input-row{display:flex;gap:8px;padding:10px 0 4px;background:var(--paper);position:sticky;bottom:0;}
-  .chat-input-row textarea{flex:1;resize:none;border:1px solid var(--line);border-radius:20px;padding:11px 16px;font-family:var(--sans);font-size:14.5px;max-height:90px;background:var(--paper-raised);}
-  .chat-input-row button{background:var(--teal);color:#fff;border:none;border-radius:50%;width:44px;height:44px;flex-shrink:0;font-size:17px;cursor:pointer;}
+  .chat-input-row{display:flex;gap:8px;padding:0 0 4px;background:#fff;}
+  .chat-input-row textarea{flex:1;resize:none;border:1px solid #DCE3E6;border-radius:16px;padding:13px 16px;font-family:var(--sans);font-size:15px;max-height:90px;background:var(--soft);color:var(--ink);}
+  .chat-input-row button{background:var(--teal);color:#fff;border:none;border-radius:14px;width:50px;height:50px;flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;}
   .chat-input-row button:disabled{opacity:.4;}
   .perfil-box{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
   .perfil-label{font-size:12.5px;font-weight:600;color:var(--ink);white-space:nowrap;margin:0;}
@@ -109,7 +114,7 @@
   .perfil-box select.sin-elegir{color:var(--ink-soft);}
   .perfil-box.falta select{outline:2px solid var(--gold);outline-offset:2px;}
   .quick-qs{display:flex;gap:8px;overflow-x:auto;padding:2px 0 14px;}
-  .quick-q{flex-shrink:0;background:var(--paper-raised);border:1px solid var(--line);border-radius:20px;padding:8px 13px;font-size:12.5px;color:var(--ink-soft);white-space:nowrap;cursor:pointer;}
+  .quick-q{flex-shrink:0;background:#fff;border:1px solid #C9DFDA;border-radius:999px;padding:10px 14px;font-size:13px;color:var(--ink);white-space:nowrap;cursor:pointer;}
   .inst-card{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:12px;}
   .inst-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
   .inst-name{font-family:var(--serif);font-size:16px;margin:0 0 4px;}
@@ -144,6 +149,8 @@
   /* Celulares muy angostos: seis botones deben caber sin salirse de la pantalla */
   @media (max-width:350px){ .nav-btn{padding:10px 0 8px;} .nav-btn .lb{font-size:9px;} .stat-card{min-width:0;padding:12px 6px;} .stat-label{font-size:9.5px;letter-spacing:0;} }
   .nav-btn.active{color:var(--teal);}
+  .nav-btn.active .lb{font-weight:800;}
+  .nav-btn .ic svg{display:block;}
   .faq-item{border-bottom:1px solid var(--line);padding:12px 0;font-size:13px;color:var(--ink-soft);}
   .faq-item b{color:var(--ink);display:block;font-size:13.5px;margin-bottom:3px;}
   .faq-resp p{margin:0 0 6px;font-size:13px;}
@@ -162,6 +169,49 @@
   .stat-error{margin-top:8px;font-size:11.5px;color:#9B4444;}
   .empty-note{font-size:12.5px;color:var(--ink-soft);font-style:italic;}
   a.stat-card{display:block;text-decoration:none;color:inherit;}
+  .solo-lector{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  /* Inicio (estilo Cercano) */
+  #screen-inicio{padding:12px 16px 8px;}
+  .hero-a{background:var(--teal-soft);border-radius:24px;padding:22px 18px;}
+  .hero-hola{margin:0 0 6px;font-size:13px;font-weight:700;color:var(--teal);}
+  .hero-a h1{font-size:27px;line-height:1.15;margin:0 0 16px;}
+  .hero-form label{margin:0 0 8px;font-size:13px;}
+  .hero-caja{display:flex;gap:8px;background:#fff;border-radius:16px;padding:6px 6px 6px 14px;box-shadow:0 2px 10px rgba(28,43,51,.08);}
+  .hero-caja input{flex:1;min-width:0;border:none;padding:0;font-size:15px;background:transparent;}
+  .hero-caja input:focus{outline:none;}
+  .hero-caja:focus-within{box-shadow:0 0 0 3px var(--teal);}
+  .hero-caja button{width:48px;height:48px;flex-shrink:0;border:none;border-radius:12px;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .hero-chips button{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid #C9DFDA;background:#fff;font-family:var(--sans);font-size:13px;color:var(--ink);cursor:pointer;text-align:left;}
+  .hero-contador{margin:14px 0 0;font-size:13px;}
+  .hero-contador b{color:var(--teal);}
+  .sellos{display:flex;gap:8px;margin-top:14px;}
+  .sello{flex:1;min-width:0;display:flex;align-items:center;gap:8px;padding:12px 10px;border-radius:16px;border:1px solid var(--line);font-size:12px;line-height:1.3;color:var(--ink);text-decoration:none;}
+  .sello svg{flex-shrink:0;}
+  .sello b{display:block;font-size:15px;}
+  .titulo-bloque{font-size:18px;margin:26px 4px 12px;}
+  .opciones-inicio{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+  .opcion-inicio{display:block;padding:16px;border-radius:20px;text-decoration:none;color:var(--ink);}
+  .opcion-inicio b{display:block;font-size:16px;margin-top:10px;}
+  .opcion-inicio span{display:block;font-size:13px;color:var(--ink-soft);margin-top:2px;line-height:1.35;}
+  .opcion-inicio.amarillo{background:var(--gold-soft);} .opcion-inicio.lila{background:var(--lila-soft);}
+  .opcion-inicio.verde{background:var(--teal-soft);} .opcion-inicio.gris{background:var(--gris-soft);}
+  .mas-consultado{margin-top:22px;padding:16px 18px 6px;border-radius:20px;border:1px solid var(--line);}
+  .mas-consultado-top{display:flex;justify-content:space-between;align-items:center;}
+  .mas-consultado-top h2{font-size:16px;margin:0;}
+  .mas-consultado-top a{font-size:13px;font-weight:700;text-decoration:none;padding:10px 0;}
+  .mas-consultado-lista a,.mas-item{display:block;padding:12px 0;border-top:1px solid #EEF1F2;font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;}
+  .aviso-inicio{margin:20px 6px 0;font-size:12px;}
+  /* Consultar (estilo Cercano) */
+  .chat-intro{font-size:12.5px;margin:0 0 10px;}
+  .elegir{margin-bottom:10px;}
+  .elegir-titulo{display:block;font-size:12px;font-weight:700;color:var(--ink-soft);margin-bottom:6px;}
+  .pildoras{display:flex;gap:6px;overflow-x:auto;padding:2px;scrollbar-width:none;}
+  .pildoras button{flex-shrink:0;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid #DCE3E6;background:#fff;color:var(--ink);font-family:var(--sans);font-size:13px;cursor:pointer;}
+  .pildoras button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:700;}
+  .elegir.falta .pildoras{outline:2px solid var(--gold);outline-offset:2px;border-radius:999px;}
+  .chat-pie{background:#fff;border-top:1px solid #EEF1F2;padding-top:8px;}
+  .chat-pie .chat-aviso{display:flex;align-items:center;gap:6px;margin:0 0 6px;font-size:12px;font-weight:600;color:var(--gold);}
   /* Texto ya escrito para buscadores y navegadores sin JavaScript */
   #prerender{padding:20px 18px;}
   #prerender h1{font-size:22px;} #prerender h2{font-size:17px;margin-top:18px;}
@@ -199,7 +249,7 @@
   .chat-aviso{display:block;margin-top:4px;font-weight:600;}
   /* Acciones bajo cada respuesta del chat */
   .acciones-resp{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
-  .acciones-resp button{min-height:40px;background:var(--paper-raised);border:1px solid var(--line);border-radius:20px;padding:0 12px;font-size:12.5px;font-weight:600;color:var(--ink);cursor:pointer;font-family:var(--sans);}
+  .acciones-resp button{flex:1 1 auto;min-height:40px;background:#fff;border:1px solid #DCE3E6;border-radius:12px;padding:0 12px;font-size:12.5px;font-weight:700;color:var(--ink);cursor:pointer;font-family:var(--sans);}
   .acciones-resp button:active{background:var(--teal-soft);}
   #zonaImpresion{display:none;}
   @media print{
@@ -353,33 +403,49 @@
 <!-- PRERENDER -->
 
   <div class="topbar">
-    <div class="seal">§</div>
-    <div>
-      <div class="topbar-title">Ética en Salud Chile</div>
-      <div class="topbar-sub">Consulta ciudadana basada en códigos oficiales</div>
-      <button type="button" class="topbar-link" data-screen="mce" onclick="goTo('mce')">Marco de Consenso Ético ›</button>
-    </div>
+    <a class="marca" href="/" data-link aria-label="Ética en Salud Chile: ir al inicio">
+      <span class="seal" aria-hidden="true">§</span>
+      <span><span class="topbar-title">Ética en Salud</span><span class="topbar-sub">Chile · consulta ciudadana</span></span>
+    </a>
+    <button type="button" class="topbar-link" data-screen="mce" onclick="goTo('mce')">Marco de Consenso</button>
   </div>
 
   <section class="screen active" id="screen-inicio">
-    <div class="hero-eyebrow">Herramienta ciudadana</div>
-    <h1>Los códigos de ética de la salud, explicados para ti.</h1>
-    <p class="lead">Reúne los códigos de ética de colegios profesionales, instituciones públicas y organizaciones de salud en Chile, y te permite resolver dudas cotidianas citando siempre la fuente oficial.</p>
-    <button class="cta-primary" onclick="goTo('consultar')">Hacer una consulta →</button>
-    <div class="stat-row">
-      <div class="stat-card"><span class="stat-num" id="statInst">—</span><span class="stat-label">Instituciones</span></div>
-      <div class="stat-card"><span class="stat-num" id="statConsultas">—</span><span class="stat-label">Consultas registradas</span></div>
-      <a class="stat-card" href="/privacidad/" data-link aria-label="No pedimos tu nombre ni tu RUT. Ver política de privacidad"><span class="stat-num ic" aria-hidden="true">🔒</span><span class="stat-label">No pedimos nombre ni RUT</span></a>
+    <div class="hero-a">
+      <p class="hero-hola">Hola, ¿en qué te ayudamos?</p>
+      <h1>¿Tienes una duda sobre tu atención de salud?</h1>
+      <form class="hero-form" onsubmit="preguntarDesdeInicio(event)">
+        <label for="inicioPregunta">Escríbela como se la contarías a alguien</label>
+        <div class="hero-caja">
+          <input id="inicioPregunta" type="text" placeholder="Ej.: ¿mi médico puede negarse a atenderme?" autocomplete="off">
+          <button type="submit" aria-label="Preguntar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></button>
+        </div>
+      </form>
+      <div class="hero-chips" id="inicioChips"></div>
+      <p class="hero-contador">Ya van <b id="statConsultas">—</b> consultas respondidas</p>
+      <p class="stat-error" id="statError" hidden></p>
     </div>
-    <p class="stat-error" id="statError" hidden></p>
-    <hr class="divider">
-    <div class="section-label">Cómo funciona</div>
-    <div class="principle"><h3>1. Preguntas en lenguaje simple</h3><p>Escribe tu duda como se la contarías a alguien: "¿mi médico puede negarse a atenderme?", "¿la enfermera puede compartir mi información?"</p></div>
-    <div class="principle"><h3>2. La IA busca en los códigos validados</h3><p>La respuesta se construye solo con el contenido de los documentos oficiales cargados, nunca con opinión inventada.</p></div>
-    <div class="principle"><h3>3. Ves la fuente exacta</h3><p>Cada respuesta indica de qué institución proviene, para que puedas verificarla tú mismo/a.</p></div>
-    <hr class="divider">
-    <div class="section-label">Importante</div>
-    <p style="font-size:13px;">Esta herramienta entrega información orientativa a partir de códigos de ética. No reemplaza asesoría legal, un reclamo formal ante un colegio profesional, ni atención médica.</p>
+
+    <div class="sellos">
+      <div class="sello"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"></path><path d="M8 7h6"></path></svg><span><b id="statInst">—</b> códigos oficiales</span></div>
+      <a class="sello" href="/privacidad/" data-link><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg><span><b>Sin</b> nombre ni RUT</span></a>
+      <div class="sello"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="9"></circle></svg><span><b>Con</b> fuente citada</span></div>
+    </div>
+
+    <h2 class="titulo-bloque">¿Qué quieres hacer hoy?</h2>
+    <div class="opciones-inicio">
+      <a class="opcion-inicio amarillo" href="/aprende/" data-link><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8A5300" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10L12 5 2 10l10 5 10-5z"></path><path d="M6 12v5c3 2 9 2 12 0v-5"></path></svg><b>Aprende</b><span>Cursos de 5 minutos y videos</span></a>
+      <a class="opcion-inicio lila" href="/aprende/casos/" data-link><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3A49A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h10"></path></svg><b>Casos</b><span>Decide qué harías tú</span></a>
+      <a class="opcion-inicio verde" href="/instituciones/" data-link><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"></path><path d="M5 21V10l7-5 7 5v11"></path><path d="M9 21v-6h6v6"></path></svg><b>Instituciones</b><span>Sus códigos en PDF</span></a>
+      <a class="opcion-inicio gris" href="/glosario/" data-link><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3F4B55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4V4z"></path><path d="M9 9h6"></path><path d="M9 13h4"></path></svg><b>Glosario</b><span>Palabras difíciles, en simple</span></a>
+    </div>
+
+    <section class="mas-consultado" id="masConsultado" hidden>
+      <div class="mas-consultado-top"><h2>Lo más consultado</h2><a href="/contexto/" data-link>Ver todo</a></div>
+      <div id="masConsultadoLista"></div>
+    </section>
+
+    <p class="aviso-inicio">Información orientativa basada en códigos de ética. No reemplaza asesoría legal, un reclamo formal ante un colegio profesional, ni atención médica.</p>
     <footer class="pie">
       <nav class="pie-links" aria-label="Información del sitio">
         <a href="/privacidad/" data-link>Privacidad y términos de uso</a>
@@ -393,20 +459,24 @@
 
   <section class="screen" id="screen-consultar">
     <div class="chat-wrap">
-      <div class="disclaimer">Respuestas generadas por IA a partir de los códigos de ética cargados; pueden tener errores y no sustituyen asesoría profesional. Tú decides si tu pregunta se publica, sin tu nombre ni tu RUT (<a href="/privacidad/" data-link>privacidad</a>).<span class="chat-aviso">No escribas tu nombre, RUT ni datos que te identifiquen.</span></div>
-      <div class="perfil-box" id="perfilBox">
-        <label class="perfil-label" for="perfilSelect">¿Quién pregunta?</label>
-        <select id="perfilSelect" onchange="elegirPerfil(this.value)"></select>
+      <p class="chat-intro">Respuestas de IA basadas en los códigos de ética, con su fuente; pueden tener errores. Tú decides si tu pregunta se publica (<a href="/privacidad/" data-link>privacidad</a>).</p>
+      <div class="elegir" id="perfilBox">
+        <span class="elegir-titulo" id="perfilTitulo">¿Quién pregunta?</span>
+        <div class="pildoras" role="group" aria-labelledby="perfilTitulo" id="perfilOpciones"></div>
       </div>
-      <div class="perfil-box" id="publicarBox">
-        <label class="perfil-label" for="publicarSelect">¿Publicar tu pregunta?</label>
-        <select id="publicarSelect" onchange="elegirPublicar(this.value)"></select>
+      <div class="elegir" id="publicarBox">
+        <span class="elegir-titulo" id="publicarTitulo">¿Publicar tu pregunta en preguntas frecuentes?</span>
+        <div class="pildoras" role="group" aria-labelledby="publicarTitulo" id="publicarOpciones"></div>
       </div>
       <div class="quick-qs" id="quickQs"></div>
       <div class="chat-log" id="chatLog"></div>
-      <div class="chat-input-row">
-        <textarea id="chatInput" rows="1" placeholder="Escribe tu duda..."></textarea>
-        <button id="sendBtn" onclick="sendMessage()">➤</button>
+      <div class="chat-pie">
+        <p class="chat-aviso"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>No escribas tu nombre, RUT ni datos que te identifiquen.</p>
+        <div class="chat-input-row">
+          <label for="chatInput" class="solo-lector">Tu pregunta</label>
+          <textarea id="chatInput" rows="1" placeholder="Escribe tu duda..."></textarea>
+          <button id="sendBtn" onclick="sendMessage()" aria-label="Enviar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></button>
+        </div>
       </div>
     </div>
   </section>
@@ -667,13 +737,13 @@
     </form>
   </section>
 
-  <nav class="bottom-nav">
-    <button class="nav-btn active" data-screen="inicio" onclick="goTo('inicio')"><span class="ic">⌂</span><span class="lb">Inicio</span></button>
-    <button class="nav-btn" data-screen="consultar" onclick="goTo('consultar')"><span class="ic">💬</span><span class="lb">Consultar</span></button>
-    <button class="nav-btn" data-screen="aprende" onclick="goTo('aprende')"><span class="ic">🎓</span><span class="lb">Aprende</span></button>
-    <button class="nav-btn" data-screen="instituciones" onclick="goTo('instituciones')"><span class="ic">🏛</span><span class="lb">Instituciones</span></button>
-    <button class="nav-btn" data-screen="contexto" onclick="goTo('contexto')"><span class="ic">◈</span><span class="lb">Contexto</span></button>
-    <button class="nav-btn" data-screen="contacto" onclick="goTo('contacto')"><span class="ic">✉</span><span class="lb">Contacto</span></button>
+  <nav class="bottom-nav" aria-label="Secciones">
+    <button class="nav-btn active" data-screen="inicio" onclick="goTo('inicio')"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path></svg></span><span class="lb">Inicio</span></button>
+    <button class="nav-btn" data-screen="consultar" onclick="goTo('consultar')"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5z"></path></svg></span><span class="lb">Consultar</span></button>
+    <button class="nav-btn" data-screen="aprende" onclick="goTo('aprende')"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10L12 5 2 10l10 5 10-5z"></path><path d="M6 12v5c3 2 9 2 12 0v-5"></path></svg></span><span class="lb">Aprende</span></button>
+    <button class="nav-btn" data-screen="instituciones" onclick="goTo('instituciones')"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"></path><path d="M5 21V10l7-5 7 5v11"></path><path d="M9 21v-6h6v6"></path></svg></span><span class="lb">Instituciones</span></button>
+    <button class="nav-btn" data-screen="contexto" onclick="goTo('contexto')"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5"></path><path d="M12 8h.01"></path></svg></span><span class="lb">Contexto</span></button>
+    <button class="nav-btn" data-screen="contacto" onclick="goTo('contacto')"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></span><span class="lb">Contacto</span></button>
   </nav>
 
   <!-- Ventana pequeña con la definición de un término del glosario (sección Aprende) -->
@@ -880,21 +950,19 @@ function labelStatus(s){
    Se envía con cada consulta; chat.js usa como fuente principal los códigos
    propios del perfil y ajusta el lenguaje (simple para paciente y ciudadano). */
 const PERFILES = [
-  { id:'profesional', texto:'Profesional de la salud' },
-  { id:'industria',   texto:'Industria farmacéutica o de dispositivos médicos' },
-  { id:'paciente',    texto:'Paciente' },
-  { id:'ciudadano',   texto:'Ciudadano/a' },
-  { id:'funcionario', texto:'Funcionario/a público/a' },
+  { id:'paciente',    texto:'Paciente',                 largo:'Paciente' },
+  { id:'ciudadano',   texto:'Ciudadano/a',              largo:'Ciudadano/a' },
+  { id:'profesional', texto:'Profesional de la salud',  largo:'Profesional de la salud' },
+  { id:'industria',   texto:'Industria',                largo:'Industria farmacéutica o de dispositivos médicos' },
+  { id:'funcionario', texto:'Funcionario/a público/a',  largo:'Funcionario/a público/a' },
 ];
 let perfilActual = null;
 try{ perfilActual = localStorage.getItem('perfil'); }catch(e){}
 if(!PERFILES.some(p => p.id === perfilActual)) perfilActual = null;
 
 function renderPerfiles(){
-  const sel = document.getElementById('perfilSelect');
-  sel.innerHTML = `<option value="" disabled${perfilActual?'':' selected'}>Elige tu perfil…</option>` +
-    PERFILES.map(p => `<option value="${p.id}"${p.id===perfilActual?' selected':''}>${p.texto}</option>`).join('');
-  sel.classList.toggle('sin-elegir', !perfilActual);
+  document.getElementById('perfilOpciones').innerHTML = PERFILES.map(p =>
+    `<button type="button" aria-pressed="${p.id===perfilActual}" title="${p.largo}" onclick="elegirPerfil('${p.id}')">${p.texto}</button>`).join('');
   const input = document.getElementById('chatInput');
   input.placeholder = !perfilActual ? 'Primero elige tu perfil ↑'
     : publicarActual === null ? 'Primero elige si se publica ↑' : 'Escribe tu duda...';
@@ -912,10 +980,8 @@ let publicarActual = null;
 try{ const v = localStorage.getItem('publicar'); if(v === 'si' || v === 'no') publicarActual = v; }catch(e){}
 
 function renderPublicar(){
-  const sel = document.getElementById('publicarSelect');
-  sel.innerHTML = `<option value="" disabled${publicarActual?'':' selected'}>Elige una opción…</option>` +
-    OPCIONES_PUBLICAR.map(o => `<option value="${o.id}"${o.id===publicarActual?' selected':''}>${o.texto}</option>`).join('');
-  sel.classList.toggle('sin-elegir', !publicarActual);
+  document.getElementById('publicarOpciones').innerHTML = OPCIONES_PUBLICAR.map(o =>
+    `<button type="button" aria-pressed="${o.id===publicarActual}" onclick="elegirPublicar('${o.id}')">${o.texto}</button>`).join('');
 }
 function elegirPublicar(id){
   const cambio = publicarActual && publicarActual !== id;
@@ -932,7 +998,7 @@ function pedirPublicar(){
   const caja = document.getElementById('publicarBox');
   caja.classList.add('falta');
   caja.scrollIntoView({ behavior:'smooth', block:'nearest' });
-  document.getElementById('publicarSelect').focus();
+  document.querySelector('#publicarOpciones button').focus({ preventScroll:true });
 }
 function elegirPerfil(id){
   const cambio = perfilActual && perfilActual !== id;
@@ -942,14 +1008,14 @@ function elegirPerfil(id){
   renderPerfiles();
   if(cambio){
     const p = PERFILES.find(x => x.id === id);
-    addMsg('bot', formatAnswer(`Perfil cambiado a: ${p.texto}. Tus próximas respuestas se adaptarán a este perfil.`));
+    addMsg('bot', formatAnswer(`Perfil cambiado a: ${p.largo}. Tus próximas respuestas se adaptarán a este perfil.`));
   }
 }
 function pedirPerfil(){
   const caja = document.getElementById('perfilBox');
   caja.classList.add('falta');
   caja.scrollIntoView({ behavior:'smooth', block:'nearest' });
-  document.getElementById('perfilSelect').focus();
+  document.querySelector('#perfilOpciones button').focus({ preventScroll:true });
 }
 
 /* ---------- CHAT ---------- */
@@ -972,6 +1038,41 @@ window.addEventListener('orientationchange', ajustarAlturaChat);
 if(window.visualViewport) window.visualViewport.addEventListener('resize', ajustarAlturaChat);
 const chatLog = document.getElementById('chatLog');
 let chatHistory = [];
+
+// Pregunta escrita en el Inicio: abre Consultar con el texto y la envía si ya
+// se eligieron el perfil y si se publica; si no, pide elegirlos primero.
+function preguntarDesdeInicio(e, texto){
+  if(e) e.preventDefault();
+  const caja = document.getElementById('inicioPregunta');
+  const pregunta = (texto || caja.value).trim();
+  navegar('/consultar/');
+  const input = document.getElementById('chatInput');
+  if(pregunta) input.value = pregunta;
+  caja.value = '';
+  if(!pregunta) return input.focus();
+  if(!perfilActual) return pedirPerfil();
+  if(!publicarActual) return pedirPublicar();
+  sendMessage();
+}
+function renderInicioChips(){
+  document.getElementById('inicioChips').innerHTML = QUICK_QUESTIONS.slice(0, 3).map((q, i) =>
+    `<button type="button" onclick="preguntarDesdeInicio(null, QUICK_QUESTIONS[${i}])">${q}</button>`).join('');
+}
+// "Lo más consultado" del Inicio: las 3 preguntas frecuentes con más apoyo
+async function cargarMasConsultado(){
+  if(!supabaseClient) return;
+  try{
+    let data = null, error = null;
+    for(const consulta of CONSULTAS_FAQ){
+      ({ data, error } = await consulta(supabaseClient.from('faq_publica')).limit(3));
+      if(!error) break;
+    }
+    if(error || !data || !data.length) return;
+    document.getElementById('masConsultadoLista').innerHTML = data.map(it =>
+      `<a class="mas-item" href="/contexto/" data-link>${escapeHtml(it.question)}</a>`).join('');
+    document.getElementById('masConsultado').hidden = false;
+  }catch(e){ console.warn('Sin "Lo más consultado"', e); }
+}
 
 function renderQuickQs(){
   document.getElementById('quickQs').innerHTML = QUICK_QUESTIONS.map(q =>
@@ -1357,7 +1458,9 @@ loadInstituciones();
 renderQuickQs();
 renderPublicar();
 renderPerfiles();
+renderInicioChips();
 refreshStats();
+cargarMasConsultado();
 addMsg('bot', formatAnswer('Hola 👋 Soy tu asistente de consulta ciudadana sobre ética en salud en Chile. Pregúntame lo que necesites saber sobre tus derechos frente a médicos, enfermeras, farmacéuticos u otras instituciones de salud.'));
 </script>
 <script src="/js/aprendizaje.js"></script>
