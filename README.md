@@ -7,6 +7,8 @@ netlify.toml                      → configuración de despliegue en Netlify
 netlify/functions/chat.js         → función segura que llama a la IA (guarda la API key)
 codigos-de-etica-salud-chile.md   → texto de los 15 códigos: la fuente que usa el chat
 preparar_fragmentos.js            → arma fragmentos.json y knowledge_base.json (Netlify lo ejecuta solo)
+generar_paginas.js                → crea una página por sección, curso, caso, término e institución, y sitemap.xml (Netlify lo ejecuta solo)
+robots.txt, favicon.*, og-image.png → archivos para Google, el ícono del navegador y la imagen al compartir en redes
 netlify/functions/fragmentos.json → fragmentos del .md que usa el chat
 instituciones_config.json         → lista editable de instituciones (nombre, descripción, sitio, PDF)
 knowledge_base.json               → lista de la sección "Instituciones" (se genera sola, no editar)
@@ -73,3 +75,14 @@ Las leyes mencionadas están en `"referencias_legales"` con `"verificar": true`.
 ### Contador de participación (opcional)
 Ejecuta una vez `supabase_aprendizaje.sql` en Supabase → SQL Editor. Solo guarda cuántas personas abrieron cada curso
 (una vez por navegador), sin datos personales. Si no se ejecuta, la sección funciona igual, sin el contador.
+
+## Direcciones propias y Google
+Cada curso, caso, término e institución tiene su dirección, por ejemplo
+`https://eticaensalud.cl/glosario/conflicto-de-interes/`. Netlify crea esas páginas solo al publicar
+(`generar_paginas.js`), a partir de `index.html`, `data/aprendizaje.json` e `instituciones_config.json`:
+no hay que hacer nada extra. Si cambias el título de un curso o caso, su dirección cambia también.
+
+Para que Google conozca el sitio (una sola vez):
+1. Entra a https://search.google.com/search-console con tu cuenta de Google.
+2. Agrega la propiedad "Dominio" `eticaensalud.cl` y sigue los pasos para verificarla (se agrega un registro TXT en el DNS del dominio).
+3. En el menú de la izquierda, entra a **Sitemaps**, escribe `sitemap.xml` y aprieta **Enviar**.

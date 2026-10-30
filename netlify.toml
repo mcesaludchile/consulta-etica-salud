@@ -1,8 +1,9 @@
 [build]
   publish = "."
   functions = "netlify/functions"
-  # Divide codigos-de-etica-salud-chile.md en fragmentos para el chat
-  command = "node preparar_fragmentos.js"
+  # 1) Divide codigos-de-etica-salud-chile.md en fragmentos para el chat.
+  # 2) Crea una página por sección, curso, caso, término e institución, y sitemap.xml.
+  command = "node preparar_fragmentos.js && node generar_paginas.js"
 
 [[redirects]]
   from = "/api/chat"
@@ -26,6 +27,18 @@
 
 [[redirects]]
   from = "/netlify.toml"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/generar_paginas.js"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.gitignore"
   to = "/404.html"
   status = 404
   force = true
