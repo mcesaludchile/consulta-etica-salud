@@ -2741,56 +2741,72 @@
       "nombre": "Ley 20.584",
       "descripcion": "Derechos y deberes de las personas en relación con su atención de salud (2012); desde 2023 (Ley 21.541) incluye la telemedicina. Revisado: art. 5 (trato digno), art. 6 (compañía y asistencia espiritual), art. 13 (ficha clínica reservada; acceso del titular, terceros con poder notarial y tribunales), arts. 33, 35 y 36 (deberes: reglamento interno, cuidar instalaciones, trato respetuoso, informar con veracidad) y el reclamo: primero ante el establecimiento y luego ante la Superintendencia de Salud.",
       "verificar": true,
-      "revisado": "2026-10-28"
+      "revisado": "2026-10-28",
+      "url": "https://www.bcn.cl/leychile/navegar?idLey=20584",
+      "resumen": "Ley de derechos y deberes de los pacientes: trato digno, compañía, información clara, ficha clínica reservada, decidir sobre tu tratamiento y reclamar. Rige en salud pública y privada, también en telemedicina."
     },
     {
       "id": "ley-19628",
       "nombre": "Ley 19.628",
       "descripcion": "Protección de la vida privada y de los datos personales (1999). Su art. 2 letra g) considera datos sensibles, entre otros, los estados de salud físicos o psíquicos, la vida sexual y las creencias. Será modificada por la Ley 21.719.",
       "verificar": true,
-      "revisado": "2026-10-28"
+      "revisado": "2026-10-28",
+      "url": "https://www.bcn.cl/leychile/navegar?idLey=19628",
+      "resumen": "Ley de protección de datos personales vigente: considera \"datos sensibles\" la información sobre tu salud."
     },
     {
       "id": "ley-21719",
       "nombre": "Ley 21.719",
       "descripcion": "Nueva ley de protección de datos personales (publicada el 13 de diciembre de 2024); crea la Agencia de Protección de Datos Personales. Entra en vigencia el 1 de diciembre de 2026. Ojo: un proyecto (boletín 18.623-07) propone postergarla al 1 de diciembre de 2027; en octubre de 2026 seguía en primer trámite en el Senado. Si se aprueba, actualizar este texto.",
       "verificar": true,
-      "revisado": "2026-10-28"
+      "revisado": "2026-10-28",
+      "url": "https://www.bcn.cl/leychile/navegar?idLey=21719",
+      "resumen": "Nueva ley de protección de datos personales, que reemplaza gran parte de la anterior y crea una agencia que la fiscaliza. Entra en vigencia el 1 de diciembre de 2026."
     },
     {
       "id": "ley-20285",
       "nombre": "Ley 20.285",
       "descripcion": "Acceso a la información pública (\"Ley de Transparencia\", 2008): cualquier persona puede pedir información a los organismos del Estado, salvo la que la ley protege, como los datos personales.",
       "verificar": true,
-      "revisado": "2026-10-28"
+      "revisado": "2026-10-28",
+      "url": "https://www.bcn.cl/leychile/navegar?idLey=20285",
+      "resumen": "Ley de Transparencia: cualquier persona puede pedir información a los organismos públicos, como los hospitales, salvo los datos personales de otras personas."
     },
     {
       "id": "ley-20730",
       "nombre": "Ley 20.730",
       "descripcion": "Regula el lobby (2014). Las audiencias de lobby con autoridades se registran y se publican en InfoLobby, a cargo del Consejo para la Transparencia.",
       "verificar": true,
-      "revisado": "2026-10-28"
+      "revisado": "2026-10-28",
+      "url": "https://www.bcn.cl/leychile/navegar?idLey=20730",
+      "resumen": "Ley del Lobby: las reuniones en que se busca influir en las decisiones de autoridades quedan registradas y son públicas."
     },
     {
       "id": "ley-20393",
       "nombre": "Ley 20.393",
       "descripcion": "Responsabilidad penal de las personas jurídicas (empresas) por ciertos delitos (2009). Modificada en 2023 por la Ley 21.595.",
       "verificar": true,
-      "revisado": "2026-10-28"
+      "revisado": "2026-10-28",
+      "url": "https://www.bcn.cl/leychile/navegar?idLey=20393",
+      "resumen": "Ley que permite sancionar penalmente a las empresas por ciertos delitos, como el soborno."
     },
     {
       "id": "ley-21595",
       "nombre": "Ley 21.595",
       "descripcion": "Ley de Delitos Económicos (2023): amplió los delitos y las empresas que pueden responder penalmente, y reforzó la importancia de un modelo de prevención de delitos adecuado y efectivo.",
       "verificar": true,
-      "revisado": "2026-10-28"
+      "revisado": "2026-10-28",
+      "url": "https://www.bcn.cl/leychile/navegar?idLey=21595",
+      "resumen": "Ley de Delitos Económicos: amplió los delitos por los que pueden responder las empresas, por lo que es más importante que tengan programas para prevenirlos."
     },
     {
       "id": "proyecto-ia",
       "nombre": "Proyecto de ley sobre inteligencia artificial",
       "descripcion": "Proyecto de ley que regula los sistemas de inteligencia artificial (boletín 16.821-19). La Cámara lo aprobó en octubre de 2025; en octubre de 2026 está en segundo trámite en el Senado, y el Gobierno anunció que lo reemplazará por una ley marco. Revisar su estado antes de cambiar el texto.",
       "verificar": true,
-      "revisado": "2026-10-28"
+      "revisado": "2026-10-28",
+      "url": "https://www.camara.cl/legislacion/proyectosdeley/tramitacion.aspx?prmID=17429&prmBOLETIN=16821-19",
+      "resumen": "Proyecto de ley para regular la inteligencia artificial. Todavía no es ley: sigue en discusión en el Congreso."
     }
   ],
   "revision": {
