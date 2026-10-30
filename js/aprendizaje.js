@@ -72,7 +72,7 @@
     if(AP.datos) return Promise.resolve(AP.datos);
     if(AP.cargando) return AP.cargando;
     AP.error = false;
-    AP.cargando = fetch('data/aprendizaje.json')
+    AP.cargando = fetch('/data/aprendizaje.json')
       .then(r => { if(!r.ok) throw new Error('código ' + r.status); return r.json(); })
       .then(d => { AP.datos = d; cargarParticipaciones(); return d; })
       .catch(e => { console.error('No se pudo cargar aprendizaje.json', e); AP.error = true; return null; })
@@ -173,10 +173,50 @@
     $('apChips').innerHTML = opciones.map(o =>
       `<button type="button" class="ap-chip" data-accion="tema" data-id="${o.id}" aria-pressed="${AP.tema === o.id}">${esc(o.nombre)}</button>`).join('');
   }
+  /* ---------- Direcciones propias (ver aplicarRuta en index.html) ---------- */
+  const RUTA_TAB = { cursos:'/aprende/', videos:'/aprende/videos/', casos:'/aprende/casos/', glosario:'/glosario/' };
+  const TITULO_TAB = { cursos:'Aprende', videos:'Videos', casos:'Casos prácticos', glosario:'Glosario' };
+  const nombreSitio = ' · Ética en Salud Chile';
+  function rutaAprende(){
+    const v = AP.vista;
+    if(v && AP.datos && v.tipo === 'curso'){ const c = AP.datos.cursos.find(x => x.id === v.id); if(c) return `/aprende/cursos/${slugTexto(c.titulo)}/`; }
+    if(v && AP.datos && v.tipo === 'caso'){ const c = AP.datos.casos.find(x => x.id === v.id); if(c) return `/aprende/casos/${slugTexto(c.titulo)}/`; }
+    return RUTA_TAB[AP.tab];
+  }
+  window.rutaAprende = rutaAprende;
+  window.APRENDE = {
+    datos: async () => { await cargarDatos(); return AP.datos; },
+    async irATab(tab){
+      await cargarDatos();
+      AP.tab = TABS.includes(tab) ? tab : 'cursos';
+      AP.vista = null;
+      goTo('aprende', false);
+      cambiarTab(AP.tab);
+    },
+    async abrirCursoSlug(s){
+      await cargarDatos();
+      const c = AP.datos && AP.datos.cursos.find(x => slugTexto(x.titulo) === s);
+      if(!c) return this.irATab('cursos');
+      AP.tab = 'cursos'; AP.vista = null;
+      goTo('aprende', false);
+      abrirCurso(c.id);
+    },
+    async abrirCasoSlug(s){
+      await cargarDatos();
+      const c = AP.datos && AP.datos.casos.find(x => slugTexto(x.titulo) === s);
+      if(!c) return this.irATab('casos');
+      AP.vista = null;
+      goTo('aprende', false);
+      abrirCaso(c.id);
+    },
+    irAGlosario: (id) => irAGlosario(id),
+  };
+
   function cambiarTab(tab, enfocar){
     if(!TABS.includes(tab)) return;
     AP.tab = tab;
     AP.vista = null;
+    fijarRuta(RUTA_TAB[tab], TITULO_TAB[tab] + nombreSitio);
     renderTabs();
     renderPanel();
     if(enfocar) $('apTab-' + tab).focus();
@@ -242,12 +282,13 @@
       return { tipo:'iframe', src:u.href };
     }catch(e){ return null; }
   }
+  const desdeRaiz = (u) => !u || /^(https?:)?\/\//.test(u) || u.startsWith('/') ? u : '/' + u;
   // El video no se descarga hasta que la persona aprieta ▶.
   function portadaVideo(v){
     const fuente = v.url_embed ? fuenteVideo(v.url_embed) : null;
     const portada = fuente
       ? `<button type="button" class="ap-video-portada" data-accion="reproducir" data-id="${v.id}" aria-label="Reproducir video: ${esc(v.titulo)}"
-           ${v.miniatura ? `style="background-image:url('${esc(v.miniatura)}')"` : ''}>
+           ${v.miniatura ? `style="background-image:url('${esc(desdeRaiz(v.miniatura))}')"` : ''}>
            <span class="ap-play" aria-hidden="true">▶</span></button>`
       : `<div class="ap-video-portada ap-video-pronto" role="img" aria-label="Video próximamente">
            <span class="ap-pronto-ic" aria-hidden="true">🎬</span><span>Video próximamente</span></div>`;
@@ -280,7 +321,7 @@
     if(!fuente) return;
     const marco = $('marco-' + id);
     if(fuente.tipo === 'archivo'){
-      marco.innerHTML = `<video controls autoplay playsinline preload="metadata" src="${esc(fuente.src)}"${v.miniatura ? ` poster="${esc(v.miniatura)}"` : ''}>
+      marco.innerHTML = `<video controls autoplay playsinline preload="metadata" src="${esc(fuente.src)}"${v.miniatura ? ` poster="${esc(desdeRaiz(v.miniatura))}"` : ''}>
         ${v.subtitulos_vtt ? `<track kind="subtitles" srclang="es" label="Español" src="${esc(v.subtitulos_vtt)}" default>` : ''}
       </video>`;
     }else if(fuente.tipo === 'youtube'){
@@ -348,6 +389,7 @@
     const curso = AP.datos.cursos.find(c => c.id === id);
     if(!curso) return;
     AP.vista = { tipo:'curso', id, paso:0, respuestas:{} };
+    fijarRuta(`/aprende/cursos/${slugTexto(curso.titulo)}/`, curso.titulo + ' · Curso' + nombreSitio);
     registrarParticipacion(id);
     renderTabs();
     renderCurso();
@@ -417,7 +459,8 @@
     const pct = Math.round(((paso + 1) / total) * 100);
     $('apPanel').innerHTML = `
       <div class="ap-visor" id="apVisor">
-        <button type="button" class="ap-volver" data-accion="volver">← Volver a cursos</button>
+        <div class="ap-visor-top"><button type="button" class="ap-volver" data-accion="volver">← Volver a cursos</button>
+          <button type="button" class="ap-volver" data-accion="copiar-ruta">🔗 Copiar enlace</button></div>
         ${etiquetaTema(c.tema)}
         <h2 class="ap-visor-titulo">${esc(c.titulo)}</h2>
         <div class="ap-barra" role="progressbar" aria-label="Avance del curso" aria-valuemin="1" aria-valuemax="${total}" aria-valuenow="${paso + 1}" aria-valuetext="Paso ${paso + 1} de ${total}">
@@ -473,6 +516,7 @@
     if(!caso) return;
     AP.tab = 'casos';
     AP.vista = { tipo:'caso', id, actual:caso.pasos[0].id, camino:[] };
+    fijarRuta(`/aprende/casos/${slugTexto(caso.titulo)}/`, caso.titulo + ' · Caso práctico' + nombreSitio);
     renderTabs();
     renderCaso();
     window.scrollTo(0, 0);
@@ -530,7 +574,8 @@
 
     $('apPanel').innerHTML = `
       <div class="ap-visor" id="apVisor">
-        <button type="button" class="ap-volver" data-accion="volver">← Volver a casos</button>
+        <div class="ap-visor-top"><button type="button" class="ap-volver" data-accion="volver">← Volver a casos</button>
+          <button type="button" class="ap-volver" data-accion="copiar-ruta">🔗 Copiar enlace</button></div>
         ${etiquetaTema(c.tema)}
         <h2 class="ap-visor-titulo">${esc(c.titulo)}</h2>
         <span class="ap-ficticia">Situación ficticia · nivel ${esc(c.nivel)}</span>
@@ -595,15 +640,17 @@
         <p>${esc(g.definicion)}</p>
         <p class="ap-ejemplo"><b>Ejemplo:</b> ${esc(g.ejemplo)}</p>
         <p class="ap-fuente">Fuente: ${textoFuente(g.fuente)}</p>
-        ${ver.length ? `<p class="ap-ver">Ver también: ${ver.map(t => `<a href="#glosario/${t.id}">${esc(t.termino)}</a>`).join(', ')}</p>` : ''}
+        ${ver.length ? `<p class="ap-ver">Ver también: ${ver.map(t => `<a href="/glosario/${t.id}/" data-link>${esc(t.termino)}</a>`).join(', ')}</p>` : ''}
         <button type="button" class="ap-copiar" data-accion="copiar" data-id="${g.id}">🔗 Copiar enlace</button>
       </article>`;
     }).join('') : '<p class="empty-note">No encontramos ese término. Prueba con otra palabra o pregúntalo en Consultar.</p>';
   }
   async function irAGlosario(id){
     AP.tab = 'glosario'; AP.vista = null; AP.tema = 'todos'; AP.busqueda = '';
-    if(!$('screen-aprende').classList.contains('active')) goTo('aprende');
     await cargarDatos();
+    const g = id && termino(id);
+    if(!$('screen-aprende').classList.contains('active')) goTo('aprende', false);
+    fijarRuta(g ? `/glosario/${id}/` : '/glosario/', (g ? g.termino + ' · Glosario' : 'Glosario') + nombreSitio);
     renderTodo();
     const el = id && $('glos-' + id);
     if(el){
@@ -612,14 +659,6 @@
       el.focus({ preventScroll:true });
       setTimeout(() => el.classList.remove('resaltado'), 2500);
     }
-  }
-  async function copiarEnlace(id, boton){
-    const url = location.origin + location.pathname + '#glosario/' + id;
-    let ok = false;
-    try{ await navigator.clipboard.writeText(url); ok = true; }catch(e){}
-    if(!ok){ history.replaceState(null, '', '#glosario/' + id); }
-    boton.textContent = ok ? '✓ Enlace copiado' : 'Copia la dirección desde la barra del navegador';
-    setTimeout(() => { boton.textContent = '🔗 Copiar enlace'; }, 2500);
   }
 
   /* ---------- Ventana pequeña con la definición de un término ---------- */
@@ -630,7 +669,7 @@
     focoPrevio = origen || document.activeElement;
     $('apDialogoTitulo').textContent = g.termino;
     $('apDialogoCuerpo').innerHTML = `<p>${esc(g.definicion)}</p><p class="ap-ejemplo"><b>Ejemplo:</b> ${esc(g.ejemplo)}</p>
-      <a class="ap-btn secundario" href="#glosario/${g.id}" data-accion="cerrar-dialogo">Ver en el glosario</a>`;
+      <a class="ap-btn secundario" href="/glosario/${g.id}/" data-link data-accion="cerrar-dialogo">Ver en el glosario</a>`;
     $('apDialogo').hidden = false;
     document.body.classList.add('ap-sin-scroll');
     $('apDialogoCerrar').focus();
@@ -644,14 +683,6 @@
 
   /* ---------- Eventos (un solo escuchador para toda la sección) ---------- */
   document.addEventListener('click', (e) => {
-    // Un enlace al glosario igual a la dirección actual no dispara "hashchange": se abre aquí.
-    const enlace = e.target.closest('a[href^="#glosario/"]');
-    if(enlace && enlace.getAttribute('href') === location.hash){
-      e.preventDefault();
-      cerrarTermino();
-      irAGlosario(location.hash.split('/')[1]);
-      return;
-    }
     const b = e.target.closest('[data-accion]');
     if(!b || !b.closest('#screen-aprende, #apDialogo')) return;
     const id = b.dataset.id;
@@ -672,7 +703,8 @@
         break;
       case 'curso': abrirCurso(id); break;
       case 'caso': abrirCaso(id); break;
-      case 'volver': AP.vista = null; renderTodo(); window.scrollTo(0, 0); break;
+      case 'volver': AP.vista = null; fijarRuta(RUTA_TAB[AP.tab], TITULO_TAB[AP.tab] + nombreSitio); renderTodo(); window.scrollTo(0, 0); break;
+      case 'copiar-ruta': copiarEnlace(location.pathname, b); break;
       case 'anterior': moverCurso(-1); break;
       case 'siguiente': moverCurso(1); break;
       case 'responder':
@@ -686,7 +718,7 @@
       case 'preguntar-ia': preguntarIA(); break;
       case 'reproducir': reproducir(id); break;
       case 'letra': { const el = $('glos-letra-' + id); if(el) el.scrollIntoView({ behavior:RAPIDO, block:'start' }); break; }
-      case 'copiar': copiarEnlace(id, b); break;
+      case 'copiar': copiarEnlace(`/glosario/${id}/`, b); break;
       case 'termino': abrirTermino(id, b); break;
       case 'cerrar-dialogo': cerrarTermino(); break;
     }
@@ -752,13 +784,5 @@
   }
   window.renderLegales = renderLegales;
 
-  /* ---------- Enlaces directos: #glosario/termino y #aprende ---------- */
-  function leerDireccion(){
-    const m = location.hash.match(/^#glosario\/([a-z0-9-]+)$/);
-    if(m){ irAGlosario(m[1]); return; }
-    if(location.hash === '#glosario') irAGlosario(null);
-    else if(location.hash === '#aprende') goTo('aprende');
-  }
-  window.addEventListener('hashchange', () => { cerrarTermino(); leerDireccion(); });
-  if(location.hash) leerDireccion();
+  window.addEventListener('popstate', cerrarTermino);
 })();

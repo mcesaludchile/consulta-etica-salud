@@ -1,0 +1,13 @@
+# Páginas que genera generar_paginas.js en cada publicación de Netlify (no se suben a GitHub)
+/consultar/
+/aprende/
+/glosario/
+/instituciones/
+/contexto/
+/contacto/
+/marco-de-consenso/
+/privacidad/
+/terminos/
+/leyes/
+/mapa-del-sitio/
+/sitemap.xml

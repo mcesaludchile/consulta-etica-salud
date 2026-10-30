@@ -3,7 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+<script>document.documentElement.className += ' js';</script>
+<!-- SEO -->
 <title>Ética en Salud Chile · Consulta ciudadana</title>
+<meta name="description" content="Los códigos de ética de la salud en Chile, explicados en lenguaje simple: consulta con IA citando la fuente oficial, cursos breves, casos prácticos y glosario.">
+<link rel="canonical" href="https://eticaensalud.cl/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ética en Salud Chile">
+<meta property="og:locale" content="es_CL">
+<meta property="og:title" content="Ética en Salud Chile · Consulta ciudadana">
+<meta property="og:description" content="Los códigos de ética de la salud en Chile, explicados en lenguaje simple: consulta con IA citando la fuente oficial, cursos breves, casos prácticos y glosario.">
+<meta property="og:url" content="https://eticaensalud.cl/">
+<meta property="og:image" content="https://eticaensalud.cl/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ética en Salud Chile","url":"https://eticaensalud.cl/","inLanguage":"es-CL","publisher":{"@type":"Organization","name":"Eticaensalud","url":"https://eticaensalud.cl"}}</script>
+<!-- /SEO -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#1B2A3D">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   :root{
@@ -142,6 +162,18 @@
   .stat-error{margin-top:8px;font-size:11.5px;color:#9B4444;}
   .empty-note{font-size:12.5px;color:var(--ink-soft);font-style:italic;}
   a.stat-card{display:block;text-decoration:none;color:inherit;}
+  /* Texto ya escrito para buscadores y navegadores sin JavaScript */
+  #prerender{padding:20px 18px;}
+  #prerender h1{font-size:22px;} #prerender h2{font-size:17px;margin-top:18px;}
+  #prerender li{margin-bottom:6px;}
+  .js #prerender{display:none;}
+  .inst-card{scroll-margin-top:110px;}
+  .inst-card.resaltado{box-shadow:0 0 0 3px var(--teal);}
+  .inst-enlace{background:none;border:none;padding:5px 4px;font-size:12px;font-weight:600;color:var(--teal);cursor:pointer;font-family:var(--sans);}
+  /* Mapa del sitio */
+  .mapa h2{font-size:16px;margin:18px 0 6px;}
+  .mapa ul{padding-left:20px;margin:0;columns:1;}
+  .mapa li{font-size:14px;line-height:1.5;margin-bottom:6px;}
   .stat-num.ic{font-size:20px;}
   /* Pie de página del Inicio */
   .pie{margin-top:26px;padding:16px 0 4px;border-top:1px solid var(--line);text-align:center;}
@@ -211,6 +243,7 @@
   .ap-meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11.5px;color:var(--ink-soft);}
   .ap-ok{color:#1F7A3C;font-weight:700;}
   .ap-visor h2.ap-visor-titulo{font-size:20px;line-height:1.25;margin:4px 0 10px;}
+  .ap-visor-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;}
   .ap-volver{min-height:44px;background:none;border:none;padding:0;color:var(--teal);font-size:13.5px;font-weight:600;cursor:pointer;font-family:var(--sans);display:block;}
   .ap-barra{height:8px;background:var(--line);border-radius:8px;overflow:hidden;}
   .ap-barra span{display:block;height:100%;background:var(--teal);border-radius:8px;transition:width .25s ease;}
@@ -317,6 +350,7 @@
 </style>
 </head>
 <body>
+<!-- PRERENDER -->
 
   <div class="topbar">
     <div class="seal">§</div>
@@ -335,7 +369,7 @@
     <div class="stat-row">
       <div class="stat-card"><span class="stat-num" id="statInst">—</span><span class="stat-label">Instituciones</span></div>
       <div class="stat-card"><span class="stat-num" id="statConsultas">—</span><span class="stat-label">Consultas registradas</span></div>
-      <a class="stat-card" href="#privacidad" onclick="goTo('privacidad');return false;" aria-label="No pedimos tu nombre ni tu RUT. Ver política de privacidad"><span class="stat-num ic" aria-hidden="true">🔒</span><span class="stat-label">No pedimos nombre ni RUT</span></a>
+      <a class="stat-card" href="/privacidad/" data-link aria-label="No pedimos tu nombre ni tu RUT. Ver política de privacidad"><span class="stat-num ic" aria-hidden="true">🔒</span><span class="stat-label">No pedimos nombre ni RUT</span></a>
     </div>
     <p class="stat-error" id="statError" hidden></p>
     <hr class="divider">
@@ -348,9 +382,10 @@
     <p style="font-size:13px;">Esta herramienta entrega información orientativa a partir de códigos de ética. No reemplaza asesoría legal, un reclamo formal ante un colegio profesional, ni atención médica.</p>
     <footer class="pie">
       <nav class="pie-links" aria-label="Información del sitio">
-        <a href="#privacidad" onclick="goTo('privacidad');return false;">Privacidad y términos de uso</a>
-        <a href="#legales" onclick="irALegales();return false;">Leyes de referencia</a>
-        <a href="#" onclick="goTo('contacto');return false;">Contacto</a>
+        <a href="/privacidad/" data-link>Privacidad y términos de uso</a>
+        <a href="/leyes/" data-link>Leyes de referencia</a>
+        <a href="/contacto/" data-link>Contacto</a>
+        <a href="/mapa-del-sitio/" data-link>Mapa del sitio</a>
       </nav>
       <p>Eticaensalud · eticaensalud.cl</p>
     </footer>
@@ -358,7 +393,7 @@
 
   <section class="screen" id="screen-consultar">
     <div class="chat-wrap">
-      <div class="disclaimer">Respuestas generadas por IA a partir de los códigos de ética cargados; pueden tener errores y no sustituyen asesoría profesional. Tú decides si tu pregunta se publica, sin tu nombre ni tu RUT (<a href="#privacidad" onclick="goTo('privacidad');return false;">privacidad</a>).<span class="chat-aviso">No escribas tu nombre, RUT ni datos que te identifiquen.</span></div>
+      <div class="disclaimer">Respuestas generadas por IA a partir de los códigos de ética cargados; pueden tener errores y no sustituyen asesoría profesional. Tú decides si tu pregunta se publica, sin tu nombre ni tu RUT (<a href="/privacidad/" data-link>privacidad</a>).<span class="chat-aviso">No escribas tu nombre, RUT ni datos que te identifiquen.</span></div>
       <div class="perfil-box" id="perfilBox">
         <label class="perfil-label" for="perfilSelect">¿Quién pregunta?</label>
         <select id="perfilSelect" onchange="elegirPerfil(this.value)"></select>
@@ -379,8 +414,8 @@
   <section class="screen" id="screen-aprende">
     <div class="hero-eyebrow">Centro de aprendizaje</div>
     <h1 style="font-size:22px;">Aprende ética en salud en pocos minutos</h1>
-    <p>Cursos breves, videos, casos prácticos y un glosario en lenguaje simple, basados en los códigos de ética de este sitio y, como contexto, en <a href="#legales" onclick="irALegales();return false;">leyes chilenas</a>.</p>
-    <div class="disclaimer">Este contenido es educativo y no reemplaza asesoría legal ni médica. Para tu caso particular, usa <a href="#" onclick="goTo('consultar');return false;">Consultar</a> o contacta a la institución correspondiente.</div>
+    <p>Cursos breves, videos, casos prácticos y un glosario en lenguaje simple, basados en los códigos de ética de este sitio y, como contexto, en <a href="/leyes/" data-link>leyes chilenas</a>.</p>
+    <div class="disclaimer">Este contenido es educativo y no reemplaza asesoría legal ni médica. Para tu caso particular, usa <a href="/consultar/" data-link>Consultar</a> o contacta a la institución correspondiente.</div>
     <div class="ap-progreso" id="apProgreso"></div>
     <div class="ap-tabs" id="apTabs" role="tablist" aria-label="Contenido de Aprende">
       <button type="button" role="tab" id="apTab-cursos" data-accion="tab" data-tab="cursos" aria-controls="apPanel" aria-selected="true">Cursos</button>
@@ -424,11 +459,11 @@
       <a href="#priv-proveedores" onclick="irAParte('priv-proveedores');return false;">Quién más los recibe</a>
       <a href="#priv-plazo" onclick="irAParte('priv-plazo');return false;">Por cuánto tiempo</a>
       <a href="#priv-derechos" onclick="irAParte('priv-derechos');return false;">Tus derechos</a>
-      <a href="#terminos" onclick="irAParte('terminos');return false;">Términos de uso</a>
+      <a href="/terminos/" data-link>Términos de uso</a>
     </nav>
 
     <h2>Quién es responsable</h2>
-    <p>El responsable de este sitio y de los datos que se guardan es <b>Eticaensalud</b> (eticaensalud.cl). Para cualquier consulta sobre tus datos, escríbenos desde la sección <a href="#" onclick="goTo('contacto');return false;">Contacto</a>.</p>
+    <p>El responsable de este sitio y de los datos que se guardan es <b>Eticaensalud</b> (eticaensalud.cl). Para cualquier consulta sobre tus datos, escríbenos desde la sección <a href="/contacto/" data-link>Contacto</a>.</p>
 
     <h2 id="priv-guardamos">Qué guardamos cuando usas Consultar</h2>
     <p>Antes de preguntar, eliges en "¿Publicar tu pregunta?" qué pasa con ella:</p>
@@ -480,7 +515,7 @@
     <p>Guardamos el texto de las preguntas y respuestas por <b>2 años</b>. Después, el texto de las consultas que no se publicaron se borra automáticamente, y solo se conserva el registro numérico (fecha y códigos citados) para las estadísticas del sitio. Las preguntas frecuentes publicadas, que no tienen datos personales, se mantienen mientras sigan siendo útiles.</p>
 
     <h2 id="priv-derechos">Tus derechos</h2>
-    <p>Según la ley chilena de protección de datos personales, puedes pedir conocer, corregir o borrar tus datos, u oponerte a su uso. Como no pedimos tu nombre ni tu RUT, no podemos buscar "tus" preguntas por tu identidad. Si nos indicas en <a href="#" onclick="goTo('contacto');return false;">Contacto</a> el texto de la pregunta y la fecha aproximada, la buscamos y la borramos.</p>
+    <p>Según la ley chilena de protección de datos personales, puedes pedir conocer, corregir o borrar tus datos, u oponerte a su uso. Como no pedimos tu nombre ni tu RUT, no podemos buscar "tus" preguntas por tu identidad. Si nos indicas en <a href="/contacto/" data-link>Contacto</a> el texto de la pregunta y la fecha aproximada, la buscamos y la borramos.</p>
 
     <h2 id="terminos">Términos de uso del asistente</h2>
     <ul>
@@ -493,6 +528,12 @@
       <li><b>Cambios:</b> podemos actualizar estos términos y esta política; la fecha de arriba indica la última versión.</li>
     </ul>
     <button class="cta-primary" onclick="goTo('inicio')">Volver al inicio</button>
+  </section>
+
+  <section class="screen" id="screen-mapa">
+    <div class="hero-eyebrow">Todo el sitio en una página</div>
+    <h1 style="font-size:22px;">Mapa del sitio</h1>
+    <div class="mapa" id="mapaLista"><p class="empty-note">Cargando…</p></div>
   </section>
 
   <section class="screen" id="screen-mce">
@@ -662,9 +703,14 @@ const supabaseClient = (SUPABASE_URL.includes("TU-PROYECTO") || !window.supabase
 /* ---------- Instituciones (se cargan desde knowledge_base.json) ---------- */
 let INSTITUCIONES = [];
 
-async function loadInstituciones(){
+let institucionesListas = null;
+function loadInstituciones(){
+  if(!institucionesListas) institucionesListas = cargarInstituciones();
+  return institucionesListas;
+}
+async function cargarInstituciones(){
   try{
-    const res = await fetch('knowledge_base.json');
+    const res = await fetch('/knowledge_base.json');
     const data = await res.json();
     INSTITUCIONES = data;
   }catch(e){
@@ -682,7 +728,9 @@ const QUICK_QUESTIONS = [
 ];
 
 /* ---------- NAV ---------- */
-function goTo(screen){
+function goTo(screen, conRuta = true){
+  if(conRuta) fijarRuta(screen === 'aprende' && window.rutaAprende ? rutaAprende() : RUTAS[screen], TITULOS[screen]);
+  else if(TITULOS[screen]) document.title = TITULOS[screen];
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen-'+screen).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active', b.dataset.screen===screen));
@@ -691,33 +739,119 @@ function goTo(screen){
   if(screen==='contexto') loadFAQ();
   if(screen==='consultar') ajustarAlturaChat();
   if(screen==='aprende' && window.abrirAprende) abrirAprende();
-  // Los enlaces directos (#glosario/..., #aprende) solo valen dentro de Aprende
-  if(screen!=='aprende' && /^#(glosario|aprende)/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search);
-  if(screen!=='privacidad' && /^#(privacidad|terminos)/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search);
   if(screen==='contexto' && window.renderLegales) renderLegales(document.getElementById('legalesList'));
+  if(screen==='mapa') renderMapa();
 }
 // Ir a una parte de la página actual (sin cambiar de sección)
 function irAParte(id){
   const el = document.getElementById(id);
   if(el) el.scrollIntoView({ behavior:'smooth', block:'start' });
 }
-function irALegales(){
-  goTo('contexto');
-  setTimeout(() => irAParte('ctx-legales'), 50);
+function irALegales(){ navegar('/leyes/'); }
+
+/* ---------- DIRECCIONES PROPIAS ----------
+   Cada sección, curso, caso, término e institución tiene su dirección (por
+   ejemplo /glosario/conflicto-de-interes/), que se puede compartir. Netlify
+   publica una página por cada una (generar_paginas.js); al abrirla, aplicarRuta()
+   muestra lo que corresponde. Al navegar, fijarRuta() cambia la dirección sin
+   recargar, y el botón "atrás" del navegador funciona. */
+const RUTAS = { inicio:'/', consultar:'/consultar/', aprende:'/aprende/', instituciones:'/instituciones/',
+  contexto:'/contexto/', contacto:'/contacto/', mce:'/marco-de-consenso/', privacidad:'/privacidad/', mapa:'/mapa-del-sitio/' };
+const NOMBRE_SITIO = 'Ética en Salud Chile';
+const TITULOS = { inicio:`${NOMBRE_SITIO} · Consulta ciudadana`, consultar:`Consultar · ${NOMBRE_SITIO}`, aprende:`Aprende · ${NOMBRE_SITIO}`,
+  instituciones:`Instituciones · ${NOMBRE_SITIO}`, contexto:`Contexto · ${NOMBRE_SITIO}`, contacto:`Contacto · ${NOMBRE_SITIO}`,
+  mce:`Marco de Consenso Ético · ${NOMBRE_SITIO}`, privacidad:`Privacidad y términos de uso · ${NOMBRE_SITIO}`, mapa:`Mapa del sitio · ${NOMBRE_SITIO}` };
+// Misma regla que generar_paginas.js: "Ficha clínica: ¿quién?" → "ficha-clinica-quien"
+function slugTexto(t){
+  return String(t).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
-// Enlaces directos: #privacidad, #terminos y #legales
-function leerDireccionGeneral(){
-  if(location.hash === '#privacidad') goTo('privacidad');
-  else if(location.hash === '#terminos'){ goTo('privacidad'); setTimeout(() => irAParte('terminos'), 50); }
-  else if(location.hash === '#legales') irALegales();
+function fijarRuta(ruta, titulo){
+  if(titulo) document.title = titulo;
+  if(ruta && location.pathname !== ruta) history.pushState(null, '', ruta);
 }
-window.addEventListener('hashchange', leerDireccionGeneral);
+function navegar(ruta){
+  if(location.pathname + location.hash !== ruta) history.pushState(null, '', ruta);
+  aplicarRuta();
+}
+async function aplicarRuta(){
+  let r = location.pathname.replace(/index\.html$/, '');
+  if(!r.endsWith('/')) r += '/';
+  const [a, b, c] = r.split('/').filter(Boolean);
+  const seccion = Object.keys(RUTAS).find(k => RUTAS[k] === r);
+  if(window.APRENDE && a === 'aprende'){
+    if(!b) return APRENDE.irATab('cursos');
+    if(b === 'videos' || b === 'casos' || b === 'cursos'){
+      if(!c) return APRENDE.irATab(b);
+      return b === 'casos' ? APRENDE.abrirCasoSlug(c) : b === 'cursos' ? APRENDE.abrirCursoSlug(c) : APRENDE.irATab('videos');
+    }
+  }
+  if(window.APRENDE && a === 'glosario') return APRENDE.irAGlosario(b || null);
+  if(a === 'instituciones' && b){
+    goTo('instituciones', false);
+    await loadInstituciones();
+    const inst = INSTITUCIONES.find(i => i.slug === b);
+    const el = document.getElementById('inst-' + b);
+    if(inst) document.title = `${inst.nombre} · ${NOMBRE_SITIO}`;
+    if(el){
+      el.classList.add('resaltado');
+      setTimeout(() => el.scrollIntoView({ behavior:'smooth', block:'start' }), 50);
+      setTimeout(() => el.classList.remove('resaltado'), 2500);
+    }
+    return;
+  }
+  if(a === 'leyes'){ goTo('contexto', false); document.title = `Leyes de referencia · ${NOMBRE_SITIO}`; setTimeout(() => irAParte('ctx-legales'), 100); return; }
+  if(a === 'terminos'){ goTo('privacidad', false); setTimeout(() => irAParte('terminos'), 100); return; }
+  goTo(seccion || 'inicio', false);
+}
+window.addEventListener('popstate', aplicarRuta);
+// Enlaces internos (<a data-link href="/...">): cambian de sección sin recargar la página
+document.addEventListener('click', (e) => {
+  const enlace = e.target.closest('a[data-link]');
+  if(!enlace || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  e.preventDefault();
+  navegar(enlace.getAttribute('href'));
+});
+// Enlaces antiguos con # (por ejemplo #glosario/conflicto-de-interes): se pasan a la dirección nueva
+function convertirEnlaceAntiguo(){
+  const h = location.hash;
+  const m = h.match(/^#glosario\/([a-z0-9-]+)$/);
+  const nueva = m ? `/glosario/${m[1]}/` : { '#glosario':'/glosario/', '#aprende':'/aprende/', '#privacidad':'/privacidad/',
+    '#terminos':'/terminos/', '#legales':'/leyes/' }[h];
+  if(nueva){ history.replaceState(null, '', nueva); return true; }
+  return false;
+}
+window.addEventListener('hashchange', () => { if(convertirEnlaceAntiguo()) aplicarRuta(); });
+// Copia la dirección completa de una página del sitio
+async function copiarEnlace(ruta, boton){
+  const url = location.origin + ruta;
+  const original = boton.textContent;
+  let ok = false;
+  try{ await navigator.clipboard.writeText(url); ok = true; }catch(e){}
+  boton.textContent = ok ? '✓ Enlace copiado' : url;
+  setTimeout(() => { boton.textContent = original; }, ok ? 2000 : 6000);
+}
+
+/* ---------- MAPA DEL SITIO ---------- */
+async function renderMapa(){
+  const cont = document.getElementById('mapaLista');
+  await loadInstituciones();
+  const datos = window.APRENDE ? await APRENDE.datos() : null;
+  const enlaces = (items) => `<ul>${items.map(([href, txt]) => `<li><a href="${href}" data-link>${escapeHtml(txt)}</a></li>`).join('')}</ul>`;
+  const secciones = [['/', 'Inicio'], ['/consultar/', 'Consultar'], ['/aprende/', 'Aprende'], ['/aprende/videos/', 'Videos'],
+    ['/aprende/casos/', 'Casos prácticos'], ['/glosario/', 'Glosario'], ['/instituciones/', 'Instituciones'], ['/contexto/', 'Contexto'],
+    ['/leyes/', 'Leyes de referencia'], ['/marco-de-consenso/', 'Marco de Consenso Ético'], ['/contacto/', 'Contacto'], ['/privacidad/', 'Privacidad y términos de uso']];
+  cont.innerHTML = `<h2>Secciones</h2>${enlaces(secciones)}` + (datos ? `
+    <h2>Cursos</h2>${enlaces(datos.cursos.map(c => [`/aprende/cursos/${slugTexto(c.titulo)}/`, c.titulo]))}
+    <h2>Casos prácticos</h2>${enlaces(datos.casos.map(c => [`/aprende/casos/${slugTexto(c.titulo)}/`, c.titulo]))}
+    <h2>Glosario</h2>${enlaces([...datos.glosario].sort((x, y) => x.termino.localeCompare(y.termino, 'es')).map(g => [`/glosario/${g.id}/`, g.termino]))}` : '') +
+    `<h2>Instituciones</h2>${enlaces(INSTITUCIONES.map(i => [`/instituciones/${i.slug}/`, i.nombre]))}`;
+}
 
 /* ---------- INSTITUCIONES render ---------- */
 function renderInstituciones(){
   const list = document.getElementById('instList');
   list.innerHTML = INSTITUCIONES.map(i => `
-    <div class="inst-card">
+    <div class="inst-card" id="inst-${i.slug}">
       <div class="inst-top">
         <div>
           <div class="inst-tag">${i.tag}</div>
@@ -730,7 +864,8 @@ function renderInstituciones(){
         <span class="status-pill status-${i.status}">${labelStatus(i.status)}</span>
         <div class="inst-links">
           ${i.website ? `<a class="site-link" href="${i.website}" target="_blank" rel="noopener">🌐 Sitio oficial</a>` : ''}
-          ${i.pdf_file ? `<a class="download-link" href="${encodeURI(i.pdf_file)}" download target="_blank" rel="noopener">⬇ Descargar PDF</a>` : ''}
+          ${i.pdf_file ? `<a class="download-link" href="/${encodeURI(i.pdf_file)}" download target="_blank" rel="noopener">⬇ Descargar PDF</a>` : ''}
+          <button type="button" class="inst-enlace" onclick="copiarEnlace('/instituciones/${i.slug}/', this)" aria-label="Copiar el enlace a ${i.nombre}">🔗 Enlace</button>
         </div>
       </div>
     </div>
@@ -1225,7 +1360,7 @@ renderPerfiles();
 refreshStats();
 addMsg('bot', formatAnswer('Hola 👋 Soy tu asistente de consulta ciudadana sobre ética en salud en Chile. Pregúntame lo que necesites saber sobre tus derechos frente a médicos, enfermeras, farmacéuticos u otras instituciones de salud.'));
 </script>
-<script src="js/aprendizaje.js"></script>
-<script>leerDireccionGeneral();</script>
+<script src="/js/aprendizaje.js"></script>
+<script>convertirEnlaceAntiguo(); aplicarRuta();</script>
 </body>
 </html>

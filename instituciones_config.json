@@ -1,6 +1,7 @@
 [
   {
     "id": "colmed",
+    "slug": "colegio-medico",
     "nombre": "Colegio Médico de Chile A.G.",
     "tag": "Gremial · Médicos",
     "year": "2022",
@@ -11,6 +12,7 @@
   },
   {
     "id": "enferm",
+    "slug": "colegio-de-enfermeras",
     "nombre": "Colegio de Enfermeras de Chile A.G.",
     "tag": "Gremial · Enfermería",
     "year": "2008",
@@ -21,6 +23,7 @@
   },
   {
     "id": "qfb",
+    "slug": "colegio-de-quimicos-farmaceuticos",
     "nombre": "Colegio de Químicos Farmacéuticos y Bioquímicos de Chile A.G.",
     "tag": "Gremial · Farmacia",
     "year": "2015",
@@ -31,6 +34,7 @@
   },
   {
     "id": "ckch",
+    "slug": "colegio-de-kinesiologos",
     "nombre": "Colegio de Kinesiólogos de Chile",
     "tag": "Gremial · Kinesiología",
     "year": "—",
@@ -41,6 +45,7 @@
   },
   {
     "id": "asocimed",
+    "slug": "asocimed",
     "nombre": "Asociación de Sociedades Científicas Médicas de Chile (ASOCIMED)",
     "tag": "Sociedades científicas",
     "year": "2023",
@@ -51,6 +56,7 @@
   },
   {
     "id": "isp",
+    "slug": "isp",
     "nombre": "Instituto de Salud Pública de Chile (ISP)",
     "tag": "Institución pública",
     "year": "2018",
@@ -61,6 +67,7 @@
   },
   {
     "id": "laboratorios",
+    "slug": "canalab",
     "nombre": "Cámara Nacional de Laboratorios (CANALAB)",
     "tag": "Industria farmacéutica",
     "year": "2019",
@@ -71,6 +78,7 @@
   },
   {
     "id": "cif",
+    "slug": "cif",
     "nombre": "Cámara de la Innovación Farmacéutica (CIF Chile)",
     "tag": "Industria farmacéutica",
     "year": "2022",
@@ -81,6 +89,7 @@
   },
   {
     "id": "adimec",
+    "slug": "adimech",
     "nombre": "ADIMECH A.G. (Asociación Gremial de Dispositivos Médicos de Chile)",
     "tag": "Industria · Dispositivos médicos",
     "year": "2022",
@@ -91,6 +100,7 @@
   },
   {
     "id": "fenpof",
+    "slug": "fenpof",
     "nombre": "FENPOF Chile (Federación de Enfermedades Poco Frecuentes)",
     "tag": "Organización de pacientes",
     "year": "—",
@@ -101,6 +111,7 @@
   },
   {
     "id": "achago",
+    "slug": "achago",
     "nombre": "ACHAGO (Asociación Chilena de Agrupaciones de Pacientes Oncológicos)",
     "tag": "Organización de pacientes",
     "year": "—",
@@ -111,6 +122,7 @@
   },
   {
     "id": "estandares",
+    "slug": "marco-de-consenso-apec-chile",
     "nombre": "Estándares éticos recomendados (Marco de Consenso Ético APEC — Chile)",
     "tag": "Referencia complementaria",
     "year": "2019",
@@ -121,6 +133,7 @@
   },
   {
     "id": "asoc_pacientes",
+    "slug": "asociaciones-de-pacientes",
     "nombre": "Asociaciones de Pacientes",
     "tag": "Organización de pacientes",
     "year": "2025",
@@ -131,6 +144,7 @@
   },
   {
     "id": "apec_kl",
+    "slug": "principios-de-kuala-lumpur",
     "nombre": "APEC — Principios de Kuala Lumpur (tecnología médica)",
     "tag": "Referencia complementaria",
     "year": "2021",
@@ -141,6 +155,7 @@
   },
   {
     "id": "apec_mc",
+    "slug": "principios-de-ciudad-de-mexico",
     "nombre": "APEC — Principios de Ciudad de México (sector biofarmacéutico)",
     "tag": "Referencia complementaria",
     "year": "2021",
