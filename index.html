@@ -418,7 +418,7 @@
     <p>Antes de preguntar, eliges en "¿Publicar tu pregunta?" qué pasa con ella:</p>
     <ul>
       <li><b>"Sí, sin mis datos":</b> guardamos tu pregunta y la respuesta, y podrían aparecer en "Preguntas frecuentes", siempre sin nada que te identifique.</li>
-      <li><b>"No, solo contarla":</b> no guardamos tu pregunta ni la respuesta. Solo registramos la fecha y hora, para sumarla al contador de consultas del inicio. Nunca se publica.</li>
+      <li><b>"No":</b> no guardamos tu pregunta ni la respuesta. Solo registramos la fecha y hora, para sumarla al contador de consultas del inicio. Nunca se publica.</li>
     </ul>
     <p>Puedes cambiar tu elección cuando quieras; vale para las preguntas siguientes. Si eliges "Sí", guardamos:</p>
     <ul>
@@ -755,7 +755,7 @@ function renderPerfiles(){
    no, chat.js solo suma la consulta al contador: no guarda el texto. */
 const OPCIONES_PUBLICAR = [
   { id:'si', texto:'Sí, sin mis datos' },
-  { id:'no', texto:'No, solo contarla' },
+  { id:'no', texto:'No' },
 ];
 let publicarActual = null;
 try{ const v = localStorage.getItem('publicar'); if(v === 'si' || v === 'no') publicarActual = v; }catch(e){}
