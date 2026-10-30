@@ -1,0 +1,3 @@
+Figtree (fonts/figtree-latin.woff2)
+Copyright 2022 The Figtree Project Authors (https://github.com/erikdkennedy/figtree)
+Se distribuye bajo la SIL Open Font License, versión 1.1: https://openfontlicense.org
