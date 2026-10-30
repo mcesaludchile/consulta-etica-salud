@@ -1046,6 +1046,12 @@
       "objetivo": "Al terminar conocerás tus principales derechos y deberes al atenderte en salud.",
       "pantallas": [
         {
+          "tipo": "video",
+          "titulo": "Para empezar: mira este video",
+          "video": "video-pacientes",
+          "texto": "En menos de 2 minutos, este video resume tus principales derechos y deberes como paciente. Si prefieres leer, abre la transcripción."
+        },
+        {
           "tipo": "concepto",
           "titulo": "Una ley para los pacientes",
           "texto": "En Chile, la Ley 20.584 regula los derechos y deberes de las personas en su atención de salud. Aplica en el sector público y en el privado, y desde 2023 también en la atención a distancia o por telemedicina.\n\nEntre tus derechos están: recibir un {{trato-digno|trato digno}}, estar acompañado, recibir información clara, que tu ficha clínica sea reservada, decidir sobre tu tratamiento y presentar un {{reclamo|reclamo}}.",
@@ -1321,9 +1327,9 @@
       "id": "video-pacientes",
       "tema": "pacientes",
       "titulo": "Tus derechos como paciente",
-      "duracion_seg": 120,
-      "url_embed": null,
-      "miniatura": null,
+      "duracion_seg": 107,
+      "url_embed": "https://youtu.be/nHkT4sbrVzU",
+      "miniatura": "videos/derechos-paciente.jpg",
       "guion": "[0:00–0:10 · Gancho] (Imagen sugerida: Sala de espera de un consultorio.)\nCuando estás enfermo o asustado, es fácil olvidar algo importante: como paciente, tienes derechos.\n\n[0:10–1:20 · Idea central] (Imagen sugerida: Lista animada con los derechos principales.)\nEn Chile, la Ley 20.584 reconoce los derechos y deberes de las personas en su atención de salud, en el sector público y en el privado. Tienes derecho a un trato digno: que te atiendan con respeto, te llamen por tu nombre y cuiden tu privacidad. A estar acompañado por familiares o amigos, según las normas del lugar. A recibir información clara sobre tu diagnóstico y tratamiento. A que tu ficha clínica sea reservada. A decidir: aceptar o rechazar un tratamiento después de entenderlo, lo que se llama consentimiento informado. Y a reclamar si algo no funciona. También puedes pedir otra opinión: el Código del Colegio Médico obliga a entregar tus informes clínicos si decides consultar a otro médico. Y hay deberes: tratar con respeto al personal, entregar información veraz y cuidar las instalaciones. Recuerda: estos derechos valen en un consultorio, en un hospital y en una clínica privada. Y conocerlos no es para pelear con el equipo de salud, sino para conversar mejor y decidir con confianza.\n\n[1:20–1:45 · Ejemplo cotidiano] (Imagen sugerida: Ilustración de un hombre mayor acompañado por su hija.)\nDon Jorge, de 68 años, pide que su hija lo acompañe para entender las indicaciones. El equipo lo permite y le explica con calma. Él, a su vez, cuenta que toma remedios de hierbas, un dato útil para su tratamiento. Derechos y deberes, juntos.\n\n[1:45–2:00 · Cierre] (Imagen sugerida: Pantalla del sitio con la sección Consultar.)\nSi sientes que no se respetaron tus derechos, primero conversa con el equipo y, si no basta, presenta un reclamo en el establecimiento. ¿Tienes una duda sobre tu caso? Escríbela en Consultar y revisa lo que dicen los códigos de ética.",
       "transcripcion": "Cuando estás enfermo o asustado, es fácil olvidar algo importante: como paciente, tienes derechos.\n\nEn Chile, la Ley 20.584 reconoce los derechos y deberes de las personas en su atención de salud, en el sector público y en el privado. Tienes derecho a un trato digno: que te atiendan con respeto, te llamen por tu nombre y cuiden tu privacidad. A estar acompañado por familiares o amigos, según las normas del lugar. A recibir información clara sobre tu diagnóstico y tratamiento. A que tu ficha clínica sea reservada. A decidir: aceptar o rechazar un tratamiento después de entenderlo, lo que se llama consentimiento informado. Y a reclamar si algo no funciona. También puedes pedir otra opinión: el Código del Colegio Médico obliga a entregar tus informes clínicos si decides consultar a otro médico. Y hay deberes: tratar con respeto al personal, entregar información veraz y cuidar las instalaciones. Recuerda: estos derechos valen en un consultorio, en un hospital y en una clínica privada. Y conocerlos no es para pelear con el equipo de salud, sino para conversar mejor y decidir con confianza.\n\nDon Jorge, de 68 años, pide que su hija lo acompañe para entender las indicaciones. El equipo lo permite y le explica con calma. Él, a su vez, cuenta que toma remedios de hierbas, un dato útil para su tratamiento. Derechos y deberes, juntos.\n\nSi sientes que no se respetaron tus derechos, primero conversa con el equipo y, si no basta, presenta un reclamo en el establecimiento. ¿Tienes una duda sobre tu caso? Escríbela en Consultar y revisa lo que dicen los códigos de ética.",
       "subtitulos_vtt": null,
